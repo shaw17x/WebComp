@@ -2,6 +2,8 @@
 const privacyCSS = `
 body{margin:0!important;padding:0!important}
 .pp{max-width:900px;margin:80px auto;padding:20px;position:relative;z-index:999}
+.pp-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#a5b4fc;text-transform:uppercase;letter-spacing:1px;animation:badgeEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both;position:relative;z-index:1000}
+.pp-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6366f1;animation:spin 3s linear infinite}
 .pp-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000}
 .pp-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center;position:relative;z-index:1000}
 .pp-section{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:20px;padding:30px;margin-bottom:30px;transition:all 0.3s ease;position:relative;z-index:1000}
@@ -18,10 +20,18 @@ body{margin:0!important;padding:0!important}
 .pp-contact{background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(236,72,153,0.05));border:1px solid rgba(139,92,246,0.2)}
 .pp-contact li::before{color:#ec4899}
 @media(max-width:768px){.pp{padding:15px;margin:60px auto}.pp-title{font-size:2rem}.pp-section{padding:20px}}
+@keyframes badgeEntry{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
 const privacyHTML = `
 <div class="pp">
+  <div style="text-align: center;">
+    <div class="pp-badge">
+      <div class="pp-badge-dot"></div>
+      Ghost Pilot Privacy
+    </div>
+  </div>
   <h1 class="pp-title">Privacy Policy</h1>
   <p class="pp-subtitle">Effective Date: January 15, 2025 | Last Updated: January 15, 2025</p>
   
