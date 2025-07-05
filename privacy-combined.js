@@ -161,22 +161,45 @@ const privacyHTML = `
   style.textContent = privacyCSS;
   document.head.appendChild(style);
   
-  // Add HTML when DOM is ready - insert after header
+  // Add HTML when DOM is ready - find main content area
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      const header = document.querySelector('header') || document.querySelector('nav') || document.body.firstElementChild;
-      if (header && header.nextSibling) {
+      // Try to find main content area, otherwise use body
+      const mainContent = document.querySelector('main') || 
+                         document.querySelector('.main-content') || 
+                         document.querySelector('[data-framer-name="Content"]') ||
+                         document.querySelector('.framer-page-content') ||
+                         document.body;
+      
+      // Clear existing content in main area and add privacy policy
+      if (mainContent !== document.body) {
+        mainContent.innerHTML = privacyHTML;
+      } else {
+        // If we're using body, insert at the beginning but after header
+        const header = document.querySelector('header') || document.querySelector('nav');
+        if (header) {
+          header.insertAdjacentHTML('afterend', privacyHTML);
+        } else {
+          document.body.insertAdjacentHTML('afterbegin', privacyHTML);
+        }
+      }
+    });
+  } else {
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = privacyHTML;
+    } else {
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
         header.insertAdjacentHTML('afterend', privacyHTML);
       } else {
         document.body.insertAdjacentHTML('afterbegin', privacyHTML);
       }
-    });
-  } else {
-    const header = document.querySelector('header') || document.querySelector('nav') || document.body.firstElementChild;
-    if (header && header.nextSibling) {
-      header.insertAdjacentHTML('afterend', privacyHTML);
-    } else {
-      document.body.insertAdjacentHTML('afterbegin', privacyHTML);
     }
   }
 })(); 
