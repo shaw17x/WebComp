@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;overflow-x:hidden}
+.bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;background:radial-gradient(ellipse at center,#1a1a2e 0%,#0a0a0a 70%)}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.4;z-index:-1;animation:float 8s ease-in-out infinite}
+.orb1{width:400px;height:400px;background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);top:15%;left:10%}
+.orb2{width:300px;height:300px;background:linear-gradient(135deg,#8b5cf6,#ec4899,#f59e0b);top:60%;right:15%;animation-delay:-3s}
+.grid{position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(99,102,241,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.03) 1px,transparent 1px);background-size:80px 80px;z-index:-1}
+.container{position:relative;max-width:1200px;margin:0 auto;padding:80px 40px;z-index:1}
+.header{text-align:center;margin-bottom:80px;position:relative}
+.header::before{content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:100px;height:4px;background:linear-gradient(90deg,#6366f1,#8b5cf6,#ec4899);border-radius:2px}
+.title{font-size:4rem;font-weight:800;margin:30px 0 20px 0;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em}
+.subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;opacity:0.8}
+.content{max-width:900px;margin:0 auto}
+.section{margin-bottom:50px;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.3) 100%);backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:20px;padding:40px;position:relative;overflow:hidden;transition:all 0.3s ease}
+.section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#6366f1,transparent)}
+.section:hover{transform:translateY(-5px);border-color:rgba(99,102,241,0.3);box-shadow:0 20px 40px rgba(99,102,241,0.1)}
+.section h2{color:#fff;font-size:1.8rem;font-weight:700;margin:0 0 25px 0;position:relative;padding-left:20px}
+.section h2::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:20px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:2px}
+.section h3{color:#8b5cf6;font-size:1.3rem;font-weight:600;margin:30px 0 15px 0}
+.section p{color:#cbd5e1;font-size:1.05rem;line-height:1.8;margin-bottom:20px}
+.section ul{list-style:none;padding:0;margin:20px 0}
+.section li{color:#cbd5e1;font-size:1.05rem;margin-bottom:12px;padding-left:25px;position:relative;line-height:1.7}
+.section li::before{content:'→';position:absolute;left:0;color:#6366f1;font-weight:bold;font-size:1.1rem}
+.section strong{color:#fff;font-weight:600;background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg)}33%{transform:translateY(-30px) rotate(120deg)}66%{transform:translateY(15px) rotate(240deg)}}
+@media (max-width:768px){.container{padding:40px 20px}.title{font-size:2.5rem}.section{padding:25px;margin-bottom:30px}.orb1,.orb2{width:200px;height:200px}}
+.intro{background:linear-gradient(135deg,rgba(99,102,241,0.1) 0%,rgba(139,92,246,0.05) 100%);border:1px solid rgba(99,102,241,0.2);text-align:center}
+.intro p{font-size:1.15rem;color:#e2e8f0;margin:0}
+.contact{background:linear-gradient(135deg,rgba(139,92,246,0.1) 0%,rgba(236,72,153,0.05) 100%);border:1px solid rgba(139,92,246,0.2)}
+.contact h3{color:#ec4899}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="grid"></div>
+
+<div class="container">
+<div class="header">
+<h1 class="title">Privacy Policy</h1>
+<p class="subtitle">Effective Date: January 15, 2025 | Last Updated: January 15, 2025</p>
+</div>
+
+<div class="content">
+<div class="section intro">
+<p>At Ghost Pilot, Inc., we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use our AI-powered interview assistance platform, in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).</p>
+</div>
+
+<div class="section">
+<h2>1. Information We Collect</h2>
+<p>We may collect the following categories of information:</p>
+<h3>a. Personal Information</h3>
+<ul>
+<li>Full name and contact details (e.g., email address)</li>
+<li>Login credentials and account settings</li>
+<li>Billing and payment information</li>
+<li>Communication and marketing preferences</li>
+</ul>
+<h3>b. Usage and Technical Data</h3>
+<ul>
+<li>Screenshots, images, or documents submitted for AI analysis</li>
+<li>Query history and AI-generated responses</li>
+<li>Browser type, device identifiers, operating system</li>
+<li>IP address, access logs, and usage statistics</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>2. Legal Basis for Processing</h2>
+<p>We process your personal data based on the following lawful grounds (where applicable under GDPR):</p>
+<ul>
+<li><strong>Consent</strong> (e.g., for marketing communications)</li>
+<li><strong>Contractual necessity</strong> (e.g., to provide our services)</li>
+<li><strong>Legal obligations</strong></li>
+<li><strong>Legitimate interests,</strong> such as product improvement, fraud prevention, and securing our platform</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>3. How We Use Your Information</h2>
+<p>Your data may be used for the following purposes:</p>
+<ul>
+<li>To provide and enhance our AI-driven services</li>
+<li>To manage user accounts and subscriptions</li>
+<li>To process payments securely</li>
+<li>To send service-related updates and administrative messages</li>
+<li>To respond to inquiries and provide customer support</li>
+<li>To analyze usage trends and improve platform performance</li>
+<li>To detect, prevent, and address technical or security issues</li>
+<li>To comply with legal obligations</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>4. Data Sharing and Disclosure</h2>
+<p>We do not sell, rent, or trade your personal information. However, we may share your information in the following situations:</p>
+<ul>
+<li><strong>Third-party processors:</strong> With service providers (e.g., OpenAI, Anthropic, Google, Stripe) under contractual obligations for processing queries and payments</li>
+<li><strong>Legal compliance:</strong> When required to comply with applicable laws or legal processes</li>
+<li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets</li>
+<li><strong>With your consent:</strong> Where you have explicitly agreed to data sharing</li>
+</ul>
+<p>All third-party providers are required to maintain confidentiality and data protection standards.</p>
+</div>
+
+<div class="section">
+<h2>5. Data Retention</h2>
+<p>We retain your personal data only for as long as necessary to fulfill the purposes outlined in this policy or as required by law. When data is no longer required, it is securely deleted or anonymized. You may request deletion of your data at any time (see Section 7).</p>
+</div>
+
+<div class="section">
+<h2>6. Data Security</h2>
+<p>We implement industry-standard technical and organizational safeguards to protect your data, including:</p>
+<ul>
+<li>End-to-end encryption for sensitive submissions</li>
+<li>Secure cloud infrastructure with role-based access controls</li>
+<li>Regular security audits and vulnerability testing</li>
+<li>Staff training on data protection protocols</li>
+</ul>
+<p>Despite these efforts, no system is 100% secure, and we cannot guarantee absolute data security.</p>
+</div>
+
+<div class="section">
+<h2>7. Your Rights</h2>
+<p>Depending on your jurisdiction, you may have the following rights:</p>
+<ul>
+<li><strong>Access</strong> – Request a copy of your personal data</li>
+<li><strong>Rectification</strong> – Request correction of inaccurate or incomplete data</li>
+<li><strong>Erasure</strong> – Request deletion of your data ("right to be forgotten")</li>
+<li><strong>Restriction</strong> – Limit processing of your data under certain conditions</li>
+<li><strong>Data Portability</strong> – Obtain your data in a structured, machine-readable format</li>
+<li><strong>Objection</strong> – Object to processing based on legitimate interests or direct marketing</li>
+<li><strong>Withdraw Consent</strong> – Revoke consent at any time without affecting prior lawful processing</li>
+</ul>
+<p>To exercise these rights, please contact us using the details in Section 12.</p>
+</div>
+
+<div class="section">
+<h2>8. Children's Privacy</h2>
+<p>Our services are not intended for individuals under the age of 13 (or 16 in certain jurisdictions). We do not knowingly collect personal information from children. If we become aware that we have collected such information, we will delete it immediately.</p>
+</div>
+
+<div class="section">
+<h2>9. Cookies and Tracking Technologies</h2>
+<p>We may use cookies and similar technologies to enhance your experience, track usage patterns, and personalize content. By using our website, you consent to the use of cookies. You can manage your cookie preferences via your browser settings.</p>
+</div>
+
+<div class="section">
+<h2>10. International Data Transfers</h2>
+<p>If you are accessing our services from outside the United States, be aware that your data may be transferred to and processed in the U.S. We implement appropriate safeguards (such as Standard Contractual Clauses) to ensure that international data transfers comply with applicable law.</p>
+</div>
+
+<div class="section">
+<h2>11. Changes to This Privacy Policy</h2>
+<p>We may update this Privacy Policy from time to time. When changes are made, we will revise the "Last Updated" date above. If the changes are material, we will notify you via email or in-app notifications. Continued use of our platform after changes constitutes your acknowledgment and agreement.</p>
+</div>
+
+<div class="section contact">
+<h2>12. Contact Us</h2>
+<p>For questions about this Privacy Policy or to exercise your rights, please contact:</p>
+<ul>
+<li><strong>Email:</strong> privacy@ghostpilot.ai</li>
+<li><strong>Data Protection Officer (DPO):</strong> dpo@ghostpilot.ai</li>
+</ul>
+<h3>Mailing Address:</h3>
+<p>Ghost Pilot, Inc.<br>
+123 AI Street<br>
+Tech City, TC 12345<br>
+United States</p>
+</div>
+</div>
+</div>
+</body>
+</html>
