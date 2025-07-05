@@ -10,413 +10,312 @@ html,body{background:#0a0a0a!important;color:#fff!important;font-family:-apple-s
 .orb{position:absolute!important;border-radius:50%!important;filter:blur(60px)!important;opacity:0.4!important;z-index:-1!important;animation:float 8s ease-in-out infinite!important}
 .orb1{width:400px!important;height:400px!important;background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899)!important;top:15%!important;left:10%!important}
 .orb2{width:300px!important;height:300px!important;background:linear-gradient(135deg,#8b5cf6,#ec4899,#f59e0b)!important;top:60%!important;right:15%!important;animation-delay:-3s!important}
-.orb3{width:250px!important;height:250px!important;background:linear-gradient(135deg,#3b82f6,#6366f1)!important;bottom:20%!important;left:20%!important;animation-delay:-6s!important}
 .grid{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:100%!important;background-image:linear-gradient(rgba(99,102,241,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.03) 1px,transparent 1px)!important;background-size:80px 80px!important;z-index:-1!important}
-.container{position:relative!important;max-width:1600px!important;margin:0 auto!important;padding:80px 40px!important;z-index:1!important}
+.container{position:relative!important;max-width:1200px!important;margin:0 auto!important;padding:80px 40px!important;z-index:1!important}
 .header{text-align:center!important;margin-bottom:80px!important;position:relative!important}
 .header::before{content:''!important;position:absolute!important;top:-20px!important;left:50%!important;transform:translateX(-50%)!important;width:100px!important;height:4px!important;background:linear-gradient(90deg,#6366f1,#8b5cf6,#ec4899)!important;border-radius:2px!important}
 .title{font-size:4rem!important;font-weight:800!important;margin:30px 0 20px 0!important;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;letter-spacing:-0.02em!important}
 .subtitle{font-size:1.2rem!important;color:#94a3b8!important;font-weight:400!important;margin:0!important;opacity:0.8!important}
-.badge{display:inline-flex!important;align-items:center!important;gap:8px!important;background:rgba(99,102,241,0.1)!important;border:1px solid rgba(99,102,241,0.3)!important;border-radius:20px!important;padding:6px 16px!important;margin-bottom:16px!important;font-size:12px!important;font-weight:500!important;color:#a5b4fc!important;text-transform:uppercase!important;letter-spacing:1px!important}
-.badge-dot{width:6px!important;height:6px!important;border-radius:50%!important;background:#6366f1!important;animation:spin 3s linear infinite!important}
-.description{font-size:18px!important;color:rgba(255,255,255,0.7)!important;line-height:1.6!important;max-width:600px!important;margin:0 auto 50px auto!important}
-.plans-grid{display:flex!important;justify-content:center!important;align-items:flex-end!important;gap:32px!important;margin-bottom:50px!important;flex-wrap:wrap!important;max-width:1400px!important;margin:0 auto 50px auto!important}
-.plan-card{position:relative!important;background:rgba(15,23,42,0.6)!important;border:1px solid rgba(99,102,241,0.1)!important;border-radius:24px!important;padding:30px!important;backdrop-filter:blur(20px)!important;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)!important;cursor:pointer!important;width:360px!important;min-height:520px!important;display:flex!important;flex-direction:column!important}
-.plan-card.popular{background:linear-gradient(135deg,rgba(168,85,247,0.1) 0%,rgba(168,85,247,0.15) 100%)!important;border:2px solid #a855f7!important;transform:scale(1.02)!important;box-shadow:0 25px 50px rgba(168,85,247,0.3),0 0 0 1px rgba(168,85,247,0.2)!important;filter:drop-shadow(0 0 20px rgba(168,85,247,0.3))!important;min-height:600px!important;padding:25px 30px 35px 30px!important}
-.plan-card:hover{transform:scale(1.03)!important;box-shadow:0 20px 40px rgba(99,102,241,0.25)!important}
-.plan-card.popular:hover{transform:scale(1.05)!important;box-shadow:0 30px 60px rgba(168,85,247,0.4),0 0 0 1px rgba(168,85,247,0.3)!important;filter:drop-shadow(0 0 30px rgba(168,85,247,0.5))!important}
-.popular-badge{position:absolute!important;top:16px!important;right:16px!important;background:#a855f7!important;color:#fff!important;padding:8px 16px!important;border-radius:20px!important;font-size:11px!important;font-weight:700!important;text-transform:uppercase!important;letter-spacing:1px!important;box-shadow:0 4px 12px rgba(168,85,247,0.4)!important;animation:popularPulse 2s ease-in-out infinite!important}
-.plan-header{text-align:center!important;margin-bottom:16px!important}
-.plan-name{font-size:28px!important;font-weight:700!important;color:#fff!important;margin-bottom:8px!important;letter-spacing:-0.01em!important}
-.plan-desc{font-size:14px!important;color:rgba(255,255,255,0.6)!important;margin-bottom:16px!important;line-height:1.4!important;min-height:36px!important;display:flex!important;align-items:center!important;justify-content:center!important}
-.plan-price{display:flex!important;align-items:baseline!important;justify-content:center!important;gap:2px!important}
-.price-amount{font-size:56px!important;font-weight:800!important;line-height:1!important;letter-spacing:-0.02em!important}
-.price-period{font-size:18px!important;color:rgba(255,255,255,0.5)!important;font-weight:500!important;margin-left:4px!important}
-.features-list{margin-bottom:16px!important;flex:1!important;padding-top:8px!important}
-.feature-item{display:flex!important;align-items:center!important;gap:12px!important;margin-bottom:10px!important}
-.feature-check{width:18px!important;height:18px!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-shrink:0!important}
-.feature-text{font-size:14px!important;color:rgba(255,255,255,0.85)!important;font-weight:500!important;line-height:1.3!important}
-.plan-button{width:100%!important;color:#fff!important;border:2px solid!important;border-radius:14px!important;padding:16px 24px!important;font-size:15px!important;font-weight:700!important;cursor:pointer!important;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)!important;position:relative!important;overflow:hidden!important;letter-spacing:0.5px!important;text-transform:uppercase!important;display:flex!important;align-items:center!important;justify-content:center!important;line-height:1!important;min-height:52px!important;text-decoration:none!important}
-.plan-button:hover{opacity:0.9!important;transform:translateY(-2px)!important}
-.shimmer{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)!important;pointer-events:none!important;transform:translateX(-100%)!important;animation:shimmer 3s ease-in-out infinite!important}
-.footer-info{text-align:center!important;padding-top:30px!important;border-top:1px solid rgba(255,255,255,0.1)!important}
-.footer-text{font-size:14px!important;color:rgba(255,255,255,0.5)!important;margin-bottom:12px!important}
-.trust-badges{display:flex!important;justify-content:center!important;gap:30px!important;flex-wrap:wrap!important}
-.trust-badge{display:flex!important;align-items:center!important;gap:8px!important}
-.trust-dot{width:16px!important;height:16px!important;border-radius:50%!important}
-.trust-text{font-size:12px!important;color:rgba(255,255,255,0.6)!important}
-.faq-section{margin-top:80px!important;max-width:800px!important;margin-left:auto!important;margin-right:auto!important}
+.content{max-width:900px!important;margin:0 auto!important}
+.plans-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))!important;gap:30px!important;margin-bottom:80px!important}
+.plan-card{background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.3) 100%)!important;backdrop-filter:blur(10px)!important;border:1px solid rgba(99,102,241,0.1)!important;border-radius:20px!important;padding:40px!important;position:relative!important;overflow:hidden!important;transition:all 0.3s ease!important}
+.plan-card:hover{transform:translateY(-5px)!important;border-color:rgba(99,102,241,0.3)!important;box-shadow:0 20px 40px rgba(99,102,241,0.1)!important}
+.plan-card.popular{border-color:rgba(139,92,246,0.5)!important;box-shadow:0 0 30px rgba(139,92,246,0.3)!important}
+.plan-card::before{content:''!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:1px!important;background:linear-gradient(90deg,transparent,#6366f1,transparent)!important}
+.popular-badge{position:absolute!important;top:-1px!important;left:50%!important;transform:translateX(-50%)!important;background:linear-gradient(135deg,#8b5cf6,#ec4899)!important;color:#fff!important;padding:8px 20px!important;border-radius:0 0 12px 12px!important;font-size:0.8rem!important;font-weight:600!important}
+.plan-name{font-size:1.5rem!important;font-weight:700!important;color:#fff!important;margin-bottom:10px!important}
+.plan-price{font-size:3rem!important;font-weight:800!important;color:#fff!important;margin-bottom:5px!important}
+.plan-period{color:#94a3b8!important;font-size:1rem!important;margin-bottom:20px!important}
+.plan-description{color:#cbd5e1!important;font-size:1rem!important;margin-bottom:30px!important;line-height:1.6!important}
+.plan-features{list-style:none!important;margin-bottom:40px!important}
+.plan-features li{color:#cbd5e1!important;margin-bottom:12px!important;padding-left:25px!important;position:relative!important;line-height:1.5!important}
+.plan-features li::before{content:'✓'!important;position:absolute!important;left:0!important;color:#10b981!important;font-weight:bold!important}
+.plan-button{width:100%!important;padding:15px 30px!important;border:none!important;border-radius:12px!important;font-size:1rem!important;font-weight:600!important;cursor:pointer!important;transition:all 0.3s ease!important;text-decoration:none!important;display:inline-block!important;text-align:center!important}
+.plan-button.primary{background:linear-gradient(135deg,#6366f1,#8b5cf6)!important;color:#fff!important}
+.plan-button.primary:hover{background:linear-gradient(135deg,#5855eb,#7c3aed)!important;transform:translateY(-2px)!important}
+.plan-button.secondary{background:transparent!important;color:#6366f1!important;border:2px solid #6366f1!important}
+.plan-button.secondary:hover{background:#6366f1!important;color:#fff!important}
+.faq-section{margin-top:80px!important}
 .faq-title{font-size:2.5rem!important;font-weight:700!important;text-align:center!important;margin-bottom:50px!important;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important}
-.faq-item{background:rgba(15,23,42,0.6)!important;border:1px solid rgba(99,102,241,0.1)!important;border-radius:16px!important;margin-bottom:16px!important;overflow:hidden!important;transition:all 0.3s ease!important}
-.faq-question{padding:20px 24px!important;cursor:pointer!important;display:flex!important;justify-content:space-between!important;align-items:center!important;font-weight:600!important;font-size:16px!important;color:#fff!important;background:transparent!important;border:none!important;width:100%!important;text-align:left!important}
-.faq-answer{padding:0 24px 20px 24px!important;color:rgba(255,255,255,0.7)!important;line-height:1.6!important;display:none!important}
-.faq-icon{transition:transform 0.3s ease!important}
-.faq-item.active .faq-answer{display:block!important}
-.faq-item.active .faq-icon{transform:rotate(180deg)!important}
-@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg)}33%{transform:translateY(-30px) rotate(120deg)}66%{transform:translateY(15px) rotate(240deg)}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes popularPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-@media (max-width:768px){.container{padding:40px 20px!important}.title{font-size:2.5rem!important}.plans-grid{flex-direction:column!important;align-items:center!important}.plan-card{width:100%!important;max-width:400px!important}.orb1,.orb2,.orb3{width:200px!important;height:200px!important}}
-body[data-framer-hydrate]{background:#0a0a0a!important;color:#fff!important}
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.1)!important}
+.faq-button{width:100%!important;padding:32px 0!important;background:transparent!important;border:none!important;display:flex!important;justify-content:space-between!important;align-items:center!important;cursor:pointer!important;transition:all 0.3s ease!important;color:#fff!important;font-size:1.2rem!important;font-weight:500!important;text-align:left!important}
+.faq-button:hover{transform:translateX(8px)!important}
+.faq-question{padding-right:20px!important;line-height:1.4!important}
+.faq-icon{width:24px!important;height:24px!important;display:flex!important;align-items:center!important;justify-content:center!important;transition:transform 0.3s ease!important;flex-shrink:0!important}
+.faq-icon.open{transform:rotate(45deg)!important}
+.faq-answer{overflow:hidden!important;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94)!important;max-height:0!important;opacity:0!important}
+.faq-answer.open{max-height:500px!important;opacity:1!important}
+.faq-answer-content{padding-bottom:32px!important;padding-right:44px!important}
+.faq-answer-text{font-size:1rem!important;color:rgba(255,255,255,0.7)!important;line-height:1.6!important;margin:0!important}
+@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-20px)}}
 </style>
 </head>
 <body>
 <div class="bg"></div>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-<div class="orb orb3"></div>
 <div class="grid"></div>
 
 <div class="container">
 <div class="header">
-<div class="badge">
-<div class="badge-dot"></div>
-Ghost Pilot Membership
-</div>
-<h1 class="title">Choose Your Plan</h1>
-<p class="subtitle">Effective Date: January 15, 2025</p>
-<p class="description">Unlock the full potential of AI-powered interview assistance with our flexible membership plans designed for every career stage.</p>
+<h1 class="title">Pricing Plans</h1>
+<p class="subtitle">Choose the perfect plan for your interview success</p>
 </div>
 
+<div class="content">
+<!-- Pricing Plans -->
 <div class="plans-grid">
 <!-- Free Plan -->
 <div class="plan-card">
-<div class="plan-header">
 <h3 class="plan-name">Free</h3>
-<p class="plan-desc">Get started with basic AI assistance</p>
-<div class="plan-price">
-<span class="price-amount" style="color:#6366f1">$0</span>
-<span class="price-period">/month</span>
-</div>
-</div>
-<div class="features-list">
-<div class="feature-item">
-<div class="feature-check" style="background:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">10 AI queries per month</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Basic screenshot analysis</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Standard response time</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Community support</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Basic templates</span>
-</div>
-</div>
-<a href="#" class="plan-button" style="background:#6366f1;border-color:#6366f1">
-<div class="shimmer"></div>
-Get Started
-</a>
+<div class="plan-price">$0</div>
+<div class="plan-period">/month</div>
+<p class="plan-description">Get started with basic AI assistance</p>
+<ul class="plan-features">
+<li>10 AI queries per month</li>
+<li>Basic screenshot analysis</li>
+<li>Standard response time</li>
+<li>Community support</li>
+<li>Basic templates</li>
+</ul>
+<a href="#" class="plan-button secondary">Get Started</a>
 </div>
 
 <!-- Pro Plan -->
 <div class="plan-card popular">
-<div class="popular-badge">Popular</div>
-<div class="plan-header" style="padding-top:20px">
+<div class="popular-badge">Most Popular</div>
 <h3 class="plan-name">Pro</h3>
-<p class="plan-desc">Advanced features for professional interviews</p>
-<div class="plan-price">
-<span class="price-amount" style="color:#a855f7">$29</span>
-<span class="price-period">/month</span>
-</div>
-</div>
-<div class="features-list">
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Unlimited AI queries</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Advanced screenshot analysis</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Priority response time</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">24/7 chat support</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Premium templates</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Custom AI models</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Advanced analytics</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#a855f7;box-shadow:0 2px 8px rgba(168,85,247,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Interview recording</span>
-</div>
-</div>
-<a href="#" class="plan-button" style="background:#a855f7;border-color:#a855f7">
-<div class="shimmer"></div>
-Upgrade to Pro
-</a>
+<div class="plan-price">$29</div>
+<div class="plan-period">/month</div>
+<p class="plan-description">Unlimited AI power for serious interview prep</p>
+<ul class="plan-features">
+<li>Unlimited AI queries</li>
+<li>Advanced screenshot analysis</li>
+<li>Priority response time</li>
+<li>24/7 chat support</li>
+<li>Premium templates</li>
+<li>Custom AI models</li>
+<li>Advanced analytics</li>
+<li>Interview recording</li>
+</ul>
+<a href="#" class="plan-button primary">Start Pro Trial</a>
 </div>
 
 <!-- Ultra Plan -->
 <div class="plan-card">
-<div class="plan-header">
 <h3 class="plan-name">Ultra</h3>
-<p class="plan-desc">Ultimate solution for teams and power users</p>
-<div class="plan-price">
-<span class="price-amount" style="color:#10b981">$99</span>
-<span class="price-period">/month</span>
-</div>
-</div>
-<div class="features-list">
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Everything in Pro</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Team collaboration</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Custom integrations</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Dedicated account manager</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">Advanced security</span>
-</div>
-<div class="feature-item">
-<div class="feature-check" style="background:#10b981;box-shadow:0 2px 8px rgba(16,185,129,0.4)">
-<svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-<path d="M10 3L4.5 8.5L2 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="feature-text">SLA guarantee</span>
-</div>
-</div>
-<a href="#" class="plan-button" style="background:#10b981;border-color:#10b981">
-<div class="shimmer"></div>
-Get Ultra
-</a>
-</div>
-</div>
-
-<div class="footer-info">
-<p class="footer-text">All plans include 14-day free trial • Cancel anytime • No setup fees</p>
-<div class="trust-badges">
-<div class="trust-badge">
-<div class="trust-dot" style="background:#10b981"></div>
-<span class="trust-text">99.9% Uptime</span>
-</div>
-<div class="trust-badge">
-<div class="trust-dot" style="background:#6366f1"></div>
-<span class="trust-text">SSL Encrypted</span>
-</div>
-<div class="trust-badge">
-<div class="trust-dot" style="background:#f59e0b"></div>
-<span class="trust-text">24/7 Support</span>
-</div>
+<div class="plan-price">$99</div>
+<div class="plan-period">/month</div>
+<p class="plan-description">Enterprise-grade features for teams</p>
+<ul class="plan-features">
+<li>Everything in Pro</li>
+<li>Team collaboration</li>
+<li>Custom integrations</li>
+<li>Dedicated account manager</li>
+<li>Advanced security</li>
+<li>Priority support</li>
+<li>Custom deployment</li>
+</ul>
+<a href="#" class="plan-button secondary">Contact Sales</a>
 </div>
 </div>
 
 <!-- FAQ Section -->
 <div class="faq-section">
 <h2 class="faq-title">Frequently Asked Questions</h2>
+<div class="faq-list">
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-What's included in the free plan?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(0)">
+<span class="faq-question">What's included in the free plan?</span>
+<div class="faq-icon" id="icon-0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-The free plan includes 10 AI queries per month, basic screenshot analysis, standard response time, community support, and access to basic templates. Perfect for trying out Ghost Pilot's core features.
+<div class="faq-answer" id="answer-0">
+<div class="faq-answer-content">
+<p class="faq-answer-text">The Free plan includes 10 AI queries per month, basic screenshot analysis, standard response time, community support, and basic templates. It's perfect for getting started with Ghost Pilot and testing our platform.</p>
 </div>
-</div>
-
-<div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-Can I upgrade or downgrade my plan anytime?
-<span class="faq-icon">▼</span>
-</button>
-<div class="faq-answer">
-Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately for upgrades, or at the end of your current billing cycle for downgrades.
-</div>
-</div>
-
-<div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-How does the 14-day free trial work?
-<span class="faq-icon">▼</span>
-</button>
-<div class="faq-answer">
-All paid plans come with a 14-day free trial. You'll have full access to all features during this period. If you cancel before the trial ends, you won't be charged.
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-Is my data secure with Ghost Pilot?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(1)">
+<span class="faq-question">Can I upgrade or downgrade my plan anytime?</span>
+<div class="faq-icon" id="icon-1">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-Absolutely. We use enterprise-grade security with SSL encryption, screenshots are automatically deleted within 24 hours, and we never use your data to train AI models. Your privacy is our priority.
+<div class="faq-answer" id="answer-1">
+<div class="faq-answer-content">
+<p class="faq-answer-text">Yes, you can upgrade or downgrade your subscription at any time. Changes take effect immediately for upgrades, and at the end of your current billing cycle for downgrades. However, please note that all sales are final and we do not offer refunds.</p>
+</div>
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-What payment methods do you accept?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(2)">
+<span class="faq-question">How does the 14-day free trial work?</span>
+<div class="faq-icon" id="icon-2">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers. All payments are processed securely through Stripe.
+<div class="faq-answer" id="answer-2">
+<div class="faq-answer-content">
+<p class="faq-answer-text">The Pro plan comes with a 14-day free trial that gives you full access to all Pro features. No credit card required to start. After the trial period, you'll be automatically subscribed to the Pro plan unless you cancel before the trial ends.</p>
+</div>
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-Can I use Ghost Pilot for team interviews?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(3)">
+<span class="faq-question">Is my data secure with Ghost Pilot?</span>
+<div class="faq-icon" id="icon-3">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-Yes! The Ultra plan includes team collaboration features, allowing multiple team members to share insights and prepare together for interviews. Perfect for coordinated interview strategies.
+<div class="faq-answer" id="answer-3">
+<div class="faq-answer-content">
+<p class="faq-answer-text">Absolutely. Ghost Pilot employs enterprise-grade security including SSL encryption, secure data storage, advanced security protocols, and compliance with industry standards. Screenshots are processed temporarily and automatically deleted within 24 hours. We never use your data to train AI models.</p>
+</div>
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-Do you offer refunds?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(4)">
+<span class="faq-question">What payment methods do you accept?</span>
+<div class="faq-icon" id="icon-4">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-We offer a 14-day free trial to ensure Ghost Pilot meets your needs. After that, refunds are provided on a case-by-case basis within 30 days of purchase. Contact our support team for assistance.
+<div class="faq-answer" id="answer-4">
+<div class="faq-answer-content">
+<p class="faq-answer-text">We accept all major credit cards including Visa, Mastercard, American Express, and Discover. All payments are processed securely through our encrypted payment system with SSL protection and PCI compliance.</p>
+</div>
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-How does Stealth Mode work?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(5)">
+<span class="faq-question">Can I use Ghost Pilot for team interviews?</span>
+<div class="faq-icon" id="icon-5">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-Stealth Mode makes Ghost Pilot completely invisible during screen sharing and video calls. It operates in the background without any visible interface, ensuring complete discretion during interviews.
+<div class="faq-answer" id="answer-5">
+<div class="faq-answer-content">
+<p class="faq-answer-text">Yes! Our Ultra plan ($99/month) includes team collaboration features, custom integrations, dedicated account management, and advanced security perfect for organizations conducting team interviews or training programs.</p>
+</div>
 </div>
 </div>
 
 <div class="faq-item">
-<button class="faq-question" onclick="toggleFAQ(this)">
-What kind of support do you provide?
-<span class="faq-icon">▼</span>
+<button class="faq-button" onclick="toggleFAQ(6)">
+<span class="faq-question">Do you offer refunds?</span>
+<div class="faq-icon" id="icon-6">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
 </button>
-<div class="faq-answer">
-Free users get community support, Pro users get 24/7 chat support, and Ultra users get dedicated account managers plus priority support with guaranteed response times.
+<div class="faq-answer" id="answer-6">
+<div class="faq-answer-content">
+<p class="faq-answer-text">No, all sales are final. Ghost Pilot does not offer refunds for any subscription plans (Free, Pro, or Ultra). We recommend starting with our Free plan to test the platform before upgrading to a paid subscription.</p>
+</div>
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-button" onclick="toggleFAQ(7)">
+<span class="faq-question">How does Stealth Mode work?</span>
+<div class="faq-icon" id="icon-7">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
+</button>
+<div class="faq-answer" id="answer-7">
+<div class="faq-answer-content">
+<p class="faq-answer-text">Stealth Mode operates with enhanced privacy protections, minimizing data collection and ensuring interview confidentiality. It includes features like invisible window modes, secure data handling, and advanced privacy protocols to keep your interview assistance completely undetectable.</p>
+</div>
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-button" onclick="toggleFAQ(8)">
+<span class="faq-question">What kind of support do you provide?</span>
+<div class="faq-icon" id="icon-8">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="5" x2="12" y2="19"></line>
+<line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+</div>
+</button>
+<div class="faq-answer" id="answer-8">
+<div class="faq-answer-content">
+<p class="faq-answer-text">Free plan users get community support, Pro plan users receive 24/7 chat support with priority response times, and Ultra plan users get dedicated account management with priority support and custom assistance.</p>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
 </div>
 
 <script>
-function toggleFAQ(button) {
-    const faqItem = button.parentElement;
-    const isActive = faqItem.classList.contains('active');
-    
-    // Close all other FAQ items
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    // Toggle current item
-    if (!isActive) {
-        faqItem.classList.add('active');
-    }
+let openFAQ = null;
+
+function toggleFAQ(index) {
+  const answer = document.getElementById(`answer-${index}`);
+  const icon = document.getElementById(`icon-${index}`);
+  
+  // Close currently open FAQ if it's different from clicked one
+  if (openFAQ !== null && openFAQ !== index) {
+    const prevAnswer = document.getElementById(`answer-${openFAQ}`);
+    const prevIcon = document.getElementById(`icon-${openFAQ}`);
+    prevAnswer.classList.remove('open');
+    prevIcon.classList.remove('open');
+  }
+  
+  // Toggle clicked FAQ
+  if (openFAQ === index) {
+    // Close if already open
+    answer.classList.remove('open');
+    icon.classList.remove('open');
+    openFAQ = null;
+  } else {
+    // Open if closed
+    answer.classList.add('open');
+    icon.classList.add('open');
+    openFAQ = index;
+  }
 }
+
+// Open first FAQ by default
+document.addEventListener('DOMContentLoaded', function() {
+  toggleFAQ(0);
+});
 </script>
 </body>
 </html>
