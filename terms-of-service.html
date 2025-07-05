@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0!important;padding:0!important;box-sizing:border-box!important}
+html,body{background:#0a0a0a!important;color:#fff!important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important;line-height:1.6!important;overflow-x:hidden!important;min-height:100vh!important}
+.bg{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:100%!important;z-index:-2!important;background:radial-gradient(ellipse at center,#1a1a2e 0%,#0a0a0a 70%)!important}
+.orb{position:absolute!important;border-radius:50%!important;filter:blur(60px)!important;opacity:0.4!important;z-index:-1!important;animation:float 8s ease-in-out infinite!important}
+.orb1{width:400px!important;height:400px!important;background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899)!important;top:15%!important;left:10%!important}
+.orb2{width:300px!important;height:300px!important;background:linear-gradient(135deg,#8b5cf6,#ec4899,#f59e0b)!important;top:60%!important;right:15%!important;animation-delay:-3s!important}
+.grid{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:100%!important;background-image:linear-gradient(rgba(99,102,241,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.03) 1px,transparent 1px)!important;background-size:80px 80px!important;z-index:-1!important}
+.container{position:relative!important;max-width:1200px!important;margin:0 auto!important;padding:80px 40px!important;z-index:1!important}
+.header{text-align:center!important;margin-bottom:80px!important;position:relative!important}
+.header::before{content:''!important;position:absolute!important;top:-20px!important;left:50%!important;transform:translateX(-50%)!important;width:100px!important;height:4px!important;background:linear-gradient(90deg,#6366f1,#8b5cf6,#ec4899)!important;border-radius:2px!important}
+.title{font-size:4rem!important;font-weight:800!important;margin:30px 0 20px 0!important;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;letter-spacing:-0.02em!important}
+.subtitle{font-size:1.2rem!important;color:#94a3b8!important;font-weight:400!important;margin:0!important;opacity:0.8!important}
+.content{max-width:900px!important;margin:0 auto!important}
+.section{margin-bottom:50px!important;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.3) 100%)!important;backdrop-filter:blur(10px)!important;border:1px solid rgba(99,102,241,0.1)!important;border-radius:20px!important;padding:40px!important;position:relative!important;overflow:hidden!important;transition:all 0.3s ease!important}
+.section::before{content:''!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:1px!important;background:linear-gradient(90deg,transparent,#6366f1,transparent)!important}
+.section:hover{transform:translateY(-5px)!important;border-color:rgba(99,102,241,0.3)!important;box-shadow:0 20px 40px rgba(99,102,241,0.1)!important}
+.section h2{color:#fff!important;font-size:1.8rem!important;font-weight:700!important;margin:0 0 25px 0!important;position:relative!important;padding-left:20px!important}
+.section h2::before{content:''!important;position:absolute!important;left:0!important;top:50%!important;transform:translateY(-50%)!important;width:4px!important;height:20px!important;background:linear-gradient(135deg,#6366f1,#8b5cf6)!important;border-radius:2px!important}
+.section h3{color:#8b5cf6!important;font-size:1.3rem!important;font-weight:600!important;margin:30px 0 15px 0!important}
+.section p{color:#cbd5e1!important;font-size:1.05rem!important;line-height:1.8!important;margin-bottom:20px!important}
+.section ul{list-style:none!important;padding:0!important;margin:20px 0!important}
+.section li{color:#cbd5e1!important;font-size:1.05rem!important;margin-bottom:12px!important;padding-left:25px!important;position:relative!important;line-height:1.7!important}
+.section li::before{content:'→'!important;position:absolute!important;left:0!important;color:#6366f1!important;font-weight:bold!important;font-size:1.1rem!important}
+.section strong{color:#fff!important;font-weight:600!important;background:linear-gradient(135deg,#6366f1,#8b5cf6)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important}
+@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg)!important}33%{transform:translateY(-30px) rotate(120deg)!important}66%{transform:translateY(15px) rotate(240deg)!important}}
+@media (max-width:768px){.container{padding:40px 20px!important}.title{font-size:2.5rem!important}.section{padding:25px!important;margin-bottom:30px!important}.orb1,.orb2{width:200px!important;height:200px!important}}
+.intro{background:linear-gradient(135deg,rgba(99,102,241,0.1) 0%,rgba(139,92,246,0.05) 100%)!important;border:1px solid rgba(99,102,241,0.2)!important;text-align:center!important}
+.intro p{font-size:1.15rem!important;color:#e2e8f0!important;margin:0!important}
+.contact{background:linear-gradient(135deg,rgba(139,92,246,0.1) 0%,rgba(236,72,153,0.05) 100%)!important;border:1px solid rgba(139,92,246,0.2)!important}
+.contact h3{color:#ec4899!important}
+
+/* Force override Framer's body styles */
+body[data-framer-hydrate] {
+    background: #0a0a0a !important;
+    color: #fff !important;
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="grid"></div>
+
+<div class="container">
+<div class="header">
+<h1 class="title">Terms of Service</h1>
+<p class="subtitle">Effective Date: January 15, 2025 | Last Updated: January 15, 2025</p>
+</div>
+
+<div class="content">
+<div class="section intro">
+<p>Welcome to Ghost Pilot. These Terms of Service ("Terms") govern your use of our AI-powered interview assistance platform and services. By accessing or using Ghost Pilot, you agree to be bound by these Terms and our Privacy Policy.</p>
+</div>
+
+<div class="section">
+<h2>1. Acceptance of Terms</h2>
+<p>By creating an account, accessing, or using any part of Ghost Pilot's services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you may not use our services.</p>
+</div>
+
+<div class="section">
+<h2>2. Description of Service</h2>
+<p>Ghost Pilot provides AI-powered interview assistance tools designed to help users prepare for and excel in job interviews. Our services include:</p>
+<ul>
+<li>Real-time AI analysis of interview questions and scenarios</li>
+<li>Screenshot-based question interpretation and response suggestions</li>
+<li>Stealth Mode for discreet interview assistance</li>
+<li>Interview preparation resources and practice tools</li>
+<li>Performance analytics and improvement recommendations</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>3. User Accounts and Registration</h2>
+<h3>Account Creation</h3>
+<ul>
+<li>You must provide accurate and complete information when creating an account</li>
+<li>You are responsible for maintaining the confidentiality of your account credentials</li>
+<li>You must be at least 18 years old to create an account</li>
+<li>One person may not maintain multiple accounts</li>
+</ul>
+<h3>Account Security</h3>
+<ul>
+<li>You are responsible for all activities that occur under your account</li>
+<li>You must notify us immediately of any unauthorized use of your account</li>
+<li>We reserve the right to suspend or terminate accounts that violate these Terms</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>4. Acceptable Use Policy</h2>
+<p>You agree to use Ghost Pilot's services responsibly and in accordance with applicable laws. You may NOT:</p>
+<ul>
+<li>Use the service for any illegal or unauthorized purpose</li>
+<li>Violate any laws in your jurisdiction (including but not limited to copyright laws)</li>
+<li>Transmit any viruses, malware, or other malicious code</li>
+<li>Attempt to gain unauthorized access to our systems or other users' accounts</li>
+<li>Use the service to harass, abuse, or harm another person</li>
+<li>Share your account credentials with others</li>
+<li>Reverse engineer, decompile, or disassemble our software</li>
+<li>Use automated scripts or bots to access our services</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>5. Interview Ethics and Compliance</h2>
+<p><strong>Important Notice:</strong> While Ghost Pilot provides interview assistance, users are responsible for ensuring their use complies with:</p>
+<ul>
+<li>Company policies and interview guidelines of prospective employers</li>
+<li>Local laws and regulations regarding interview conduct</li>
+<li>Professional ethics and standards in their industry</li>
+<li>Academic integrity policies (for academic interviews or assessments)</li>
+</ul>
+<p>Ghost Pilot does not endorse or encourage any form of cheating, deception, or violation of interview protocols.</p>
+</div>
+
+<div class="section">
+<h2>6. Subscription and Payment Terms</h2>
+<h3>Subscription Plans</h3>
+<ul>
+<li>Ghost Pilot offers various subscription tiers with different features and usage limits</li>
+<li>Subscription fees are billed in advance on a monthly or annual basis</li>
+<li>All fees are non-refundable except as required by law</li>
+</ul>
+<h3>Payment Processing</h3>
+<ul>
+<li>Payments are processed through secure third-party payment processors</li>
+<li>You authorize us to charge your payment method for all applicable fees</li>
+<li>You are responsible for keeping your payment information current</li>
+</ul>
+<h3>Cancellation and Refunds</h3>
+<ul>
+<li>You may cancel your subscription at any time through your account settings</li>
+<li>Cancellation takes effect at the end of your current billing period</li>
+<li>Refunds are provided only as required by applicable law</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>7. Intellectual Property Rights</h2>
+<h3>Our Rights</h3>
+<ul>
+<li>Ghost Pilot and all related trademarks, logos, and content are our property</li>
+<li>Our AI models, algorithms, and software are protected by intellectual property laws</li>
+<li>You may not use our intellectual property without explicit written permission</li>
+</ul>
+<h3>Your Content</h3>
+<ul>
+<li>You retain ownership of any content you submit to our platform</li>
+<li>You grant us a limited license to process your content to provide our services</li>
+<li>We do not claim ownership of your screenshots, questions, or personal data</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>8. Privacy and Data Protection</h2>
+<p>Your privacy is important to us. Our data collection and processing practices are governed by our Privacy Policy, which forms part of these Terms. Key points include:</p>
+<ul>
+<li>Screenshots are automatically deleted within 24 hours</li>
+<li>We do not use your data to train AI models</li>
+<li>Stealth Mode provides enhanced privacy protections</li>
+<li>We comply with GDPR, CCPA, and other applicable privacy laws</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>9. Service Availability and Modifications</h2>
+<h3>Service Availability</h3>
+<ul>
+<li>We strive to maintain high service availability but cannot guarantee 100% uptime</li>
+<li>Scheduled maintenance may temporarily interrupt service</li>
+<li>We are not liable for service interruptions beyond our control</li>
+</ul>
+<h3>Service Modifications</h3>
+<ul>
+<li>We reserve the right to modify or discontinue features at any time</li>
+<li>We will provide reasonable notice of material changes to our services</li>
+<li>Continued use after modifications constitutes acceptance of changes</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>10. Limitation of Liability</h2>
+<p>To the maximum extent permitted by law:</p>
+<ul>
+<li>Ghost Pilot is provided "as is" without warranties of any kind</li>
+<li>We are not liable for any indirect, incidental, or consequential damages</li>
+<li>Our total liability shall not exceed the amount you paid for our services in the 12 months preceding the claim</li>
+<li>We are not responsible for the outcomes of interviews or job applications</li>
+<li>Users assume all risks associated with using our interview assistance tools</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>11. Indemnification</h2>
+<p>You agree to indemnify and hold harmless Ghost Pilot, its officers, directors, employees, and agents from any claims, damages, or expenses arising from:</p>
+<ul>
+<li>Your use of our services</li>
+<li>Your violation of these Terms</li>
+<li>Your violation of any rights of another party</li>
+<li>Your violation of applicable laws or regulations</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>12. Termination</h2>
+<h3>Termination by You</h3>
+<ul>
+<li>You may terminate your account at any time by contacting support</li>
+<li>Upon termination, your access to paid features will cease at the end of your billing period</li>
+</ul>
+<h3>Termination by Us</h3>
+<ul>
+<li>We may suspend or terminate your account for violation of these Terms</li>
+<li>We may terminate accounts for extended periods of inactivity</li>
+<li>We will provide reasonable notice except in cases of serious violations</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>13. Governing Law and Dispute Resolution</h2>
+<ul>
+<li>These Terms are governed by the laws of the United States and the State of California</li>
+<li>Any disputes will be resolved through binding arbitration in accordance with the rules of the American Arbitration Association</li>
+<li>You waive any right to participate in class action lawsuits</li>
+<li>If arbitration is deemed unenforceable, disputes will be resolved in the courts of California</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>14. Changes to Terms</h2>
+<p>We may update these Terms from time to time. When we make changes:</p>
+<ul>
+<li>We will update the "Last Updated" date at the top of this document</li>
+<li>We will notify users of material changes via email or in-app notification</li>
+<li>Continued use of our services after changes constitutes acceptance</li>
+<li>If you disagree with changes, you may terminate your account</li>
+</ul>
+</div>
+
+<div class="section contact">
+<h2>15. Contact Information</h2>
+<p>If you have questions about these Terms of Service, please contact us:</p>
+<ul>
+<li><strong>Email:</strong> legal@ghostpilot.ai</li>
+<li><strong>Support:</strong> support@ghostpilot.ai</li>
+</ul>
+<h3>Mailing Address:</h3>
+<p>Ghost Pilot, Inc.<br>
+123 AI Street<br>
+Tech City, TC 12345<br>
+United States</p>
+</div>
+</div>
+</div>
+</body>
+</html>
