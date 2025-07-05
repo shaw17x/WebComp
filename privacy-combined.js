@@ -1,6 +1,7 @@
 // Privacy Policy Combined - CSS + HTML Content
 const privacyCSS = `
-.pp{max-width:900px;margin:0 auto;padding:20px}
+body{margin:0!important;padding:0!important}
+.pp{max-width:900px;margin:80px auto;padding:20px}
 .pp-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px}
 .pp-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center}
 .pp-section{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:20px;padding:30px;margin-bottom:30px;transition:all 0.3s ease}
@@ -16,7 +17,7 @@ const privacyCSS = `
 .pp-intro{background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.2);text-align:center}
 .pp-contact{background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(236,72,153,0.05));border:1px solid rgba(139,92,246,0.2)}
 .pp-contact li::before{color:#ec4899}
-@media(max-width:768px){.pp{padding:15px}.pp-title{font-size:2rem}.pp-section{padding:20px}}
+@media(max-width:768px){.pp{padding:15px;margin:60px auto}.pp-title{font-size:2rem}.pp-section{padding:20px}}
 `;
 
 const privacyHTML = `
@@ -160,12 +161,22 @@ const privacyHTML = `
   style.textContent = privacyCSS;
   document.head.appendChild(style);
   
-  // Add HTML when DOM is ready
+  // Add HTML when DOM is ready - insert after header
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      document.body.insertAdjacentHTML('beforeend', privacyHTML);
+      const header = document.querySelector('header') || document.querySelector('nav') || document.body.firstElementChild;
+      if (header && header.nextSibling) {
+        header.insertAdjacentHTML('afterend', privacyHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', privacyHTML);
+      }
     });
   } else {
-    document.body.insertAdjacentHTML('beforeend', privacyHTML);
+    const header = document.querySelector('header') || document.querySelector('nav') || document.body.firstElementChild;
+    if (header && header.nextSibling) {
+      header.insertAdjacentHTML('afterend', privacyHTML);
+    } else {
+      document.body.insertAdjacentHTML('afterbegin', privacyHTML);
+    }
   }
-})();
+})(); 
