@@ -31,29 +31,40 @@ body{margin:0!important;padding:0!important}
 
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
-.footer-content{max-width:1200px;margin:0 auto;padding:32px 40px}
-.footer-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;gap:60px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
-.footer-copyright{display:flex;align-items:center;flex:0 0 auto}
+.footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
+.footer-row{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;gap:40px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
+.footer-copyright{display:flex;align-items:center;white-space:nowrap}
 .footer-copyright span{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:-0.01em}
-.footer-nav{display:flex;gap:32px;align-items:center;flex-wrap:wrap;justify-content:center;flex:1 1 auto;padding:0 40px}
+.footer-nav{display:flex;gap:32px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
 .footer-nav a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer}
 .footer-nav a:hover{color:#ffffff}
-.footer-right{display:flex;align-items:center;gap:48px;flex:0 0 auto}
-.footer-legal{display:flex;gap:24px;align-items:center}
+.footer-right{display:flex;align-items:center;gap:32px}
+.footer-legal{display:flex;gap:24px;align-items:center;white-space:nowrap}
 .footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
 .footer-legal a:hover{color:#ffffff}
 .footer-social{display:flex;gap:12px;align-items:center}
 .footer-social a{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer}
 .footer-social a:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
 .footer-social svg{width:16px;height:16px}
+.footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
+
+@media(max-width:1200px){
+  .footer-nav{gap:24px}
+  .footer-row{gap:30px}
+}
+
+@media(max-width:1000px){
+  .footer-nav{display:none}
+}
 
 @media(max-width:768px){
   .pp{padding:15px;margin:60px auto}
   .pp-title{font-size:2rem}
   .pp-section{padding:20px}
-  .footer-row{flex-direction:column;text-align:center}
-  .footer-nav{justify-content:center}
+  .footer-row{flex-direction:column;text-align:center;gap:20px}
+  .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
   .footer-right{flex-direction:column;gap:20px}
+  .footer-separator{display:none}
   .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
@@ -221,6 +232,8 @@ const privacyHTML = `
         <span>© Ghost Pilot 2025</span>
       </div>
 
+      <span class="footer-separator">·</span>
+
       <!-- Center - Navigation Links -->
       <div class="footer-nav">
         <a href="#features">Features</a>
@@ -231,6 +244,8 @@ const privacyHTML = `
         <a href="#community">Community</a>
       </div>
 
+      <span class="footer-separator">·</span>
+
       <!-- Right Side - Legal & Social -->
       <div class="footer-right">
         <!-- Legal Links -->
@@ -238,6 +253,8 @@ const privacyHTML = `
           <a href="/privacy-policy">Privacy</a>
           <a href="/terms-of-service">Terms</a>
         </div>
+
+        <span class="footer-separator">·</span>
 
         <!-- Social Links -->
         <div class="footer-social">
