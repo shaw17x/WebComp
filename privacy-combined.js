@@ -32,13 +32,13 @@ body{margin:0!important;padding:0!important}
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
 .footer-content{max-width:1200px;margin:0 auto;padding:32px 40px}
-.footer-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;gap:30px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
+.footer-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;gap:60px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
 .footer-copyright{display:flex;align-items:center;flex:0 0 auto}
 .footer-copyright span{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:-0.01em}
-.footer-nav{display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center;flex:1 1 auto}
+.footer-nav{display:flex;gap:32px;align-items:center;flex-wrap:wrap;justify-content:center;flex:1 1 auto;padding:0 40px}
 .footer-nav a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer}
 .footer-nav a:hover{color:#ffffff}
-.footer-right{display:flex;align-items:center;gap:24px;flex:0 0 auto}
+.footer-right{display:flex;align-items:center;gap:48px;flex:0 0 auto}
 .footer-legal{display:flex;gap:24px;align-items:center}
 .footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
 .footer-legal a:hover{color:#ffffff}
