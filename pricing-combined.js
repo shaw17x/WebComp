@@ -40,20 +40,14 @@ body{margin:0!important;padding:0!important}
 .faq-answer-content{padding-bottom:32px!important;padding-right:44px!important}
 .faq-answer-text{font-size:1rem!important;color:rgba(255,255,255,0.7)!important;line-height:1.6!important;margin:0!important}
 
-/* Back to Home Button */
 .back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000}
 .back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.3);border-radius:50px;padding:14px 28px;font-size:16px;font-weight:600;color:#fff;text-decoration:none;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
 .back-home-btn:hover{transform:translateY(-2px);border-color:rgba(99,102,241,0.6);box-shadow:0 10px 30px rgba(99,102,241,0.3);background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.1))}
-.back-home-btn::before{content:'';position:absolute;top:50%;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(-50%);transition:left 0.6s ease}
-.back-home-btn:hover::before{left:100%}
-.back-home-btn svg{width:20px;height:20px;transition:transform 0.3s ease}
-.back-home-btn:hover svg{transform:translateX(-3px)}
 
 @media(max-width:768px){
   .pricing-page{padding:15px;margin:60px auto}
   .pricing-title{font-size:2rem}
   .plan-card{padding:20px}
-  .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes badgeEntry{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
@@ -143,7 +137,7 @@ const pricingHTML = `
           </button>
           <div class="faq-answer" id="answer-0">
             <div class="faq-answer-content">
-              <p class="faq-answer-text">The Free plan includes 10 AI queries per month, basic screenshot analysis, standard response time, community support, and basic templates. It's perfect for getting started with Ghost Pilot and testing our platform.</p>
+              <p class="faq-answer-text">The Free plan includes 10 AI queries per month, basic screenshot analysis, standard response time, community support, and basic templates.</p>
             </div>
           </div>
         </div>
@@ -160,41 +154,7 @@ const pricingHTML = `
           </button>
           <div class="faq-answer" id="answer-1">
             <div class="faq-answer-content">
-              <p class="faq-answer-text">Yes, you can upgrade or downgrade your subscription at any time. Changes take effect immediately for upgrades, and at the end of your current billing cycle for downgrades. However, please note that all sales are final and we do not offer refunds.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-button" onclick="toggleFAQ(2)">
-            <span class="faq-question">How does the 14-day free trial work?</span>
-            <div class="faq-icon" id="icon-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </div>
-          </button>
-          <div class="faq-answer" id="answer-2">
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">The Pro plan comes with a 14-day free trial that gives you full access to all Pro features. No credit card required to start. After the trial period, you'll be automatically subscribed to the Pro plan unless you cancel before the trial ends.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-button" onclick="toggleFAQ(3)">
-            <span class="faq-question">Is my data secure with Ghost Pilot?</span>
-            <div class="faq-icon" id="icon-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </div>
-          </button>
-          <div class="faq-answer" id="answer-3">
-            <div class="faq-answer-content">
-              <p class="faq-answer-text">Absolutely. Ghost Pilot employs enterprise-grade security including SSL encryption, secure data storage, advanced security protocols, and compliance with industry standards. Screenshots are processed temporarily and automatically deleted within 24 hours. We never use your data to train AI models.</p>
+              <p class="faq-answer-text">Yes, you can upgrade or downgrade your subscription at any time. Changes take effect immediately for upgrades.</p>
             </div>
           </div>
         </div>
@@ -215,35 +175,35 @@ const pricingHTML = `
 
 // FAQ functionality
 let openFAQ = null;
-
 window.toggleFAQ = function(index) {
   const answer = document.getElementById('answer-' + index);
   const icon = document.getElementById('icon-' + index);
-  
-  // Close currently open FAQ if it's different from clicked one
   if (openFAQ !== null && openFAQ !== index) {
     const prevAnswer = document.getElementById('answer-' + openFAQ);
     const prevIcon = document.getElementById('icon-' + openFAQ);
     if (prevAnswer) prevAnswer.classList.remove('open');
     if (prevIcon) prevIcon.classList.remove('open');
   }
-  
-  // Toggle clicked FAQ
   if (openFAQ === index) {
-    // Close if already open
     if (answer) answer.classList.remove('open');
     if (icon) icon.classList.remove('open');
     openFAQ = null;
   } else {
-    // Open if closed
     if (answer) answer.classList.add('open');
     if (icon) icon.classList.add('open');
     openFAQ = index;
   }
 };
 
-// Auto-execute function to inject CSS and HTML
+// SINGLE EXECUTION - Auto-execute function to inject CSS and HTML
 (function() {
+  // PREVENT MULTIPLE EXECUTIONS
+  if (window.pricingPageLoaded) {
+    console.log('⏭️ Pricing already loaded, skipping...');
+    return;
+  }
+  window.pricingPageLoaded = true;
+  
   console.log('🚀 Pricing script starting...');
   
   // Add CSS
@@ -252,68 +212,46 @@ window.toggleFAQ = function(index) {
   document.head.appendChild(style);
   console.log('✅ CSS added');
   
-  // Add HTML when DOM is ready
-  function initializePricingPage() {
-    console.log('🔧 Initializing pricing page...');
+  // Remove any existing test content
+  const existingContent = document.querySelectorAll('.pricing-test, .pricing-page');
+  existingContent.forEach(el => el.remove());
+  
+  // Find content area - Try main content areas first
+  let mainContent = document.querySelector('main') || 
+                   document.querySelector('[data-framer-name="Content"]') || 
+                   document.querySelector('.main-content') ||
+                   document.querySelector('[role="main"]');
+  
+  if (mainContent) {
+    console.log('📍 Found main content area, replacing content...');
+    mainContent.innerHTML = pricingHTML;
+  } else {
+    console.log('📍 Using body insertion method...');
+    // Find header and insert AFTER it, not before
+    const header = document.querySelector('header') || 
+                  document.querySelector('nav') || 
+                  document.querySelector('.header');
     
-    // Try multiple strategies to find content area
-    const selectors = [
-      'main',
-      '.main-content', 
-      '[data-framer-name="Content"]',
-      '.framer-page-content',
-      '[role="main"]',
-      '.content',
-      '#main'
-    ];
-    
-    let mainContent = null;
-    for (const selector of selectors) {
-      mainContent = document.querySelector(selector);
-      if (mainContent) {
-        console.log('📍 Found content area:', selector);
-        break;
-      }
-    }
-    
-    // Fallback to body
-    if (!mainContent) {
-      mainContent = document.body;
-      console.log('📍 Using body as fallback');
-    }
-    
-    // Clear and inject content
-    if (mainContent !== document.body) {
-      mainContent.innerHTML = pricingHTML;
+    if (header) {
+      // Insert AFTER header
+      header.insertAdjacentHTML('afterend', pricingHTML);
+      console.log('✅ Inserted after header');
     } else {
-      // If using body, find header and insert after it
-      const header = document.querySelector('header') || document.querySelector('nav') || document.querySelector('.header');
-      if (header) {
-        header.insertAdjacentHTML('afterend', pricingHTML);
-        console.log('📍 Inserted after header');
-      } else {
-        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
-        console.log('📍 Inserted at body beginning');
-      }
+      // Insert at beginning of body
+      document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+      console.log('✅ Inserted at body start');
     }
-    
-    console.log('✅ HTML content added');
-    
-    // Initialize first FAQ as open
-    setTimeout(() => {
-      if (typeof window.toggleFAQ === 'function') {
-        window.toggleFAQ(0);
-        console.log('✅ FAQ initialized');
-      }
-    }, 500);
   }
   
-  // Initialize when ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePricingPage);
-  } else {
-    initializePricingPage();
-  }
+  console.log('✅ HTML content added');
+  
+  // Initialize FAQ
+  setTimeout(() => {
+    if (typeof window.toggleFAQ === 'function') {
+      window.toggleFAQ(0);
+      console.log('✅ FAQ initialized');
+    }
+  }, 500);
   
   console.log('✅ Pricing script completed');
 })();
