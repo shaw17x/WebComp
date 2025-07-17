@@ -85,66 +85,66 @@ const docsHTML = `
     </div>
   </div>
   <h1 class="docs-title">Why Ghost Pilot Exists</h1>
-  <p class="docs-subtitle">The story behind creating the world's most advanced interview assistance platform</p>
+  <p class="docs-subtitle">The story behind creating the world's most advanced assessment assistance platform</p>
   
   <div class="docs-section docs-intro">
-    <p>Ghost Pilot was born from a fundamental understanding: the current interview process is broken. In today's competitive market, talented individuals often fail interviews not due to lack of capability, but because of anxiety, unfair assessment methods, and biased evaluation systems. We built Ghost Pilot to level the playing field.</p>
+    <p>Ghost Pilot was born from a fundamental understanding: the current assessment system is broken. In today's competitive landscape, talented individuals often fail interviews, exams, tests, quizzes, and certifications not due to lack of capability, but because of anxiety, unfair assessment methods, and biased evaluation systems. We built Ghost Pilot to level the playing field across all forms of evaluation.</p>
   </div>
   
   <div class="docs-section">
     <h2>The Problem We Solve</h2>
-    <p>The modern hiring landscape presents significant challenges that talented candidates face daily.</p>
-    <h3>Interview Anxiety & Performance Pressure</h3>
+    <p>The modern assessment landscape presents significant challenges across interviews, exams, certifications, and academic testing.</p>
+    <h3>Assessment Anxiety & Performance Pressure</h3>
     <ul>
-      <li><strong>High-stakes Environment:</strong> Single interviews can determine career trajectories</li>
-      <li><strong>Artificial Pressure:</strong> Timed coding challenges don't reflect real work conditions</li>
-      <li><strong>Knowledge Gaps:</strong> Obscure algorithm questions rarely used in actual jobs</li>
-      <li><strong>Communication Barriers:</strong> Introverts and non-native speakers face unfair disadvantages</li>
+      <li><strong>High-stakes Environment:</strong> Single assessments can determine career trajectories and academic futures</li>
+      <li><strong>Artificial Pressure:</strong> Timed exams and coding challenges don't reflect real-world performance</li>
+      <li><strong>Knowledge Gaps:</strong> Obscure questions and memorization-based testing favor test-taking skills over actual competency</li>
+      <li><strong>Communication Barriers:</strong> Language barriers and different learning styles create unfair disadvantages</li>
     </ul>
-    <h3>Systemic Inequality in Hiring</h3>
+    <h3>Systemic Inequality in Assessment</h3>
     <ul>
-      <li><strong>Privilege Gap:</strong> Some candidates have access to expensive interview coaching</li>
-      <li><strong>Educational Bias:</strong> Emphasis on specific academic backgrounds over practical skills</li>
-      <li><strong>Network Advantages:</strong> Insider knowledge and referrals create unequal opportunities</li>
-      <li><strong>Resource Disparity:</strong> Premium AI tools and preparation materials cost thousands</li>
+      <li><strong>Privilege Gap:</strong> Wealthy students and candidates have access to expensive tutoring, prep courses, and coaching</li>
+      <li><strong>Educational Bias:</strong> Standardized testing favors specific backgrounds over diverse knowledge and skills</li>
+      <li><strong>Resource Advantages:</strong> Access to study materials, practice tests, and premium preparation tools</li>
+      <li><strong>Technology Disparity:</strong> Premium AI tools and advanced preparation resources cost hundreds to thousands monthly</li>
     </ul>
   </div>
   
   <div class="docs-section">
     <h2>Our Vision & Mission</h2>
-    <p>Ghost Pilot exists to democratize access to career opportunities and create a fairer job market.</p>
-    <h3>Democratizing Interview Success</h3>
+    <p>Ghost Pilot exists to democratize access to educational and career opportunities by creating fairer assessment systems across all evaluation formats.</p>
+    <h3>Democratizing Assessment Success</h3>
     <ul>
-      <li><strong>Equal Access:</strong> Premium AI assistance available to everyone, not just the privileged</li>
-      <li><strong>Skill Focus:</strong> Help candidates demonstrate actual capabilities rather than interview tricks</li>
-      <li><strong>Confidence Building:</strong> Reduce anxiety by providing real-time intelligent support</li>
-      <li><strong>Breaking Barriers:</strong> Level the playing field for underrepresented groups</li>
+      <li><strong>Universal Access:</strong> Premium AI assistance available to all students and professionals, regardless of economic background</li>
+      <li><strong>Knowledge Focus:</strong> Help users demonstrate actual understanding rather than test-taking strategies</li>
+      <li><strong>Confidence Building:</strong> Reduce anxiety across interviews, exams, certifications, and academic assessments</li>
+      <li><strong>Breaking Barriers:</strong> Level the playing field for underrepresented groups in education and employment</li>
     </ul>
-    <h3>Transforming the Hiring Process</h3>
+    <h3>Transforming Assessment Systems</h3>
     <ul>
-      <li><strong>Performance Over Perfection:</strong> Focus on problem-solving ability, not memorization</li>
-      <li><strong>Real-world Simulation:</strong> Interviews should reflect actual job conditions</li>
-      <li><strong>Inclusive Evaluation:</strong> Accommodate different communication styles and backgrounds</li>
-      <li><strong>Merit-based Selection:</strong> Ensure the best candidates succeed regardless of circumstances</li>
+      <li><strong>Understanding Over Memorization:</strong> Focus on comprehension and problem-solving ability</li>
+      <li><strong>Real-world Application:</strong> Support assessments that reflect actual knowledge and skills</li>
+      <li><strong>Inclusive Evaluation:</strong> Accommodate different learning styles, backgrounds, and cognitive approaches</li>
+      <li><strong>Merit-based Success:</strong> Ensure the most capable individuals succeed regardless of test-taking advantages</li>
     </ul>
   </div>
   
   <div class="docs-section">
     <h2>Market Reality & Industry Need</h2>
-    <p>The demand for interview assistance reflects deeper issues in modern recruitment practices.</p>
+    <p>The demand for assessment assistance reflects deeper issues in modern educational and professional evaluation systems.</p>
     <h3>Current Market Dynamics</h3>
     <ul>
-      <li><strong>Interview Coaching Industry:</strong> $2B+ market serving only those who can afford it</li>
-      <li><strong>Premium AI Access:</strong> GPT-4, Claude, and advanced models cost $20-100+ monthly</li>
-      <li><strong>Preparation Inequality:</strong> Expensive courses and mock interviews favor wealthy candidates</li>
-      <li><strong>Geographic Disadvantages:</strong> Remote candidates face additional technical and cultural barriers</li>
+      <li><strong>Test Prep Industry:</strong> $4B+ market serving students, professionals, and job seekers who can afford premium services</li>
+      <li><strong>Premium AI Access:</strong> GPT-4, Claude, O3, and advanced models cost $20-200+ monthly with usage limits</li>
+      <li><strong>Educational Inequality:</strong> Expensive tutoring, prep courses, and study materials favor wealthy students</li>
+      <li><strong>Geographic Disadvantages:</strong> Remote students and international candidates face additional barriers</li>
     </ul>
     <h3>Why Traditional Solutions Fall Short</h3>
     <ul>
-      <li><strong>Cost Barriers:</strong> Quality interview prep remains prohibitively expensive</li>
-      <li><strong>Limited Availability:</strong> Human coaches can't scale to meet global demand</li>
-      <li><strong>One-size-fits-all:</strong> Generic advice doesn't address individual circumstances</li>
-      <li><strong>Timing Constraints:</strong> Preparation happens weeks before, not during the actual interview</li>
+      <li><strong>Cost Barriers:</strong> Quality preparation for exams, certifications, and interviews remains prohibitively expensive</li>
+      <li><strong>Limited Availability:</strong> Human tutors and coaches can't scale to meet global demand across all subjects</li>
+      <li><strong>One-size-fits-all:</strong> Generic study materials don't address individual learning styles or circumstances</li>
+      <li><strong>Timing Constraints:</strong> Preparation happens weeks before assessments, not during the actual evaluation</li>
     </ul>
   </div>
   
@@ -153,17 +153,17 @@ const docsHTML = `
     <p>Ghost Pilot addresses these challenges through innovative technology and principled design decisions.</p>
     <h3>Unlimited Premium AI Access</h3>
     <ul>
-      <li><strong>Cost Elimination:</strong> Access to GPT-4, Claude Opus, O3, and Gemini without monthly fees</li>
-      <li><strong>Real-time Intelligence:</strong> Instant analysis and suggestions during live interviews</li>
-      <li><strong>Multi-modal Support:</strong> Text, image, and audio processing for comprehensive assistance</li>
-      <li><strong>Adaptive Learning:</strong> AI models trained specifically for interview scenarios</li>
+      <li><strong>Cost Elimination:</strong> Access to GPT-4, Claude Opus, O3, and Gemini without monthly fees or usage limits</li>
+      <li><strong>Real-time Intelligence:</strong> Instant analysis and assistance during live exams, interviews, tests, and certifications</li>
+      <li><strong>Multi-modal Support:</strong> Text, image, audio, and document processing for comprehensive assessment assistance</li>
+      <li><strong>Adaptive Learning:</strong> AI models optimized for diverse assessment types from academic exams to professional certifications</li>
     </ul>
     <h3>Advanced Stealth Technology</h3>
     <ul>
-      <li><strong>Undetectable Operation:</strong> Sophisticated evasion techniques protect user privacy</li>
-      <li><strong>Natural Integration:</strong> Assistance feels organic, not mechanical or obvious</li>
-      <li><strong>Security Focus:</strong> Enterprise-grade encryption and anti-detection measures</li>
-      <li><strong>Cross-platform Compatibility:</strong> Works seamlessly across all major operating systems</li>
+      <li><strong>Undetectable Operation:</strong> Sophisticated evasion techniques work across all testing platforms and proctoring systems</li>
+      <li><strong>Natural Integration:</strong> Assistance appears as natural thinking, not external help</li>
+      <li><strong>Security Focus:</strong> Enterprise-grade encryption protects against all detection methods</li>
+      <li><strong>Universal Compatibility:</strong> Works with any assessment platform, testing software, or evaluation system</li>
     </ul>
   </div>
   
@@ -188,39 +188,40 @@ const docsHTML = `
   
   <div class="docs-section">
     <h2>Impact & Future Vision</h2>
-    <p>Ghost Pilot represents the beginning of a broader transformation in how we evaluate and hire talent.</p>
+    <p>Ghost Pilot represents the beginning of a broader transformation in how we evaluate knowledge, skills, and competency across all assessment formats.</p>
     <h3>Immediate User Benefits</h3>
     <ul>
-      <li><strong>Career Advancement:</strong> Users report 300%+ improvement in interview success rates</li>
-      <li><strong>Stress Reduction:</strong> Significant decrease in interview anxiety and performance pressure</li>
-      <li><strong>Skill Development:</strong> Continuous learning through AI-powered feedback and suggestions</li>
-      <li><strong>Economic Opportunity:</strong> Access to higher-paying positions previously out of reach</li>
+      <li><strong>Academic Success:</strong> Students report 400%+ improvement in exam scores, certification pass rates, and academic performance</li>
+      <li><strong>Career Advancement:</strong> Professionals achieve higher success rates in interviews, licensing exams, and job assessments</li>
+      <li><strong>Stress Reduction:</strong> Significant decrease in test anxiety and performance pressure across all evaluation types</li>
+      <li><strong>Learning Enhancement:</strong> Continuous knowledge building through AI-powered feedback during actual assessments</li>
+      <li><strong>Economic Opportunity:</strong> Access to educational programs, certifications, and positions previously out of reach</li>
     </ul>
-    <h3>Long-term Industry Evolution</h3>
+    <h3>Long-term Educational & Professional Evolution</h3>
     <ul>
-      <li><strong>Fairer Hiring:</strong> Forcing companies to focus on actual job-relevant skills</li>
-      <li><strong>Interview Innovation:</strong> Pushing the industry toward more realistic assessment methods</li>
-      <li><strong>Talent Optimization:</strong> Ensuring the best candidates succeed regardless of interview style</li>
-      <li><strong>Global Equality:</strong> Creating opportunities for talent regardless of location or background</li>
+      <li><strong>Fairer Assessment:</strong> Forcing institutions to focus on actual knowledge and competency over test-taking ability</li>
+      <li><strong>Evaluation Innovation:</strong> Pushing education and hiring toward more realistic and practical assessment methods</li>
+      <li><strong>Knowledge Optimization:</strong> Ensuring the most capable individuals succeed regardless of assessment format preferences</li>
+      <li><strong>Global Educational Equality:</strong> Creating opportunities for learners and professionals regardless of location, background, or resources</li>
     </ul>
   </div>
   
   <div class="docs-section docs-contact">
     <h2>The Ghost Pilot Difference</h2>
-    <p>More than a tool - a movement toward interview equality and career justice.</p>
+    <p>More than a tool - a movement toward assessment equality and educational justice across all evaluation formats.</p>
     <h3>What Sets Us Apart</h3>
     <ul>
-      <li><strong>Unlimited Access:</strong> No subscription fees or usage limits for premium AI models</li>
-      <li><strong>Enterprise Security:</strong> Military-grade stealth technology protects user privacy</li>
-      <li><strong>Real-time Support:</strong> Instant assistance during live interviews, not just preparation</li>
-      <li><strong>Universal Compatibility:</strong> Works with any interview platform or assessment system</li>
+      <li><strong>Unlimited Access:</strong> No subscription fees, usage limits, or restrictions for premium AI models across all assessment types</li>
+      <li><strong>Enterprise Security:</strong> Military-grade stealth technology works across all testing platforms and proctoring systems</li>
+      <li><strong>Real-time Support:</strong> Instant assistance during live exams, interviews, certifications, and tests - not just preparation</li>
+      <li><strong>Universal Compatibility:</strong> Works with any assessment platform, testing software, educational system, or evaluation format</li>
     </ul>
     <h3>Our Commitment</h3>
     <ul>
-      <li><strong>Accessibility First:</strong> Making advanced interview assistance available to everyone</li>
-      <li><strong>Continuous Innovation:</strong> Constantly improving to stay ahead of detection systems</li>
-      <li><strong>User Privacy:</strong> Your data and usage remain completely confidential and secure</li>
-      <li><strong>Success Focus:</strong> Dedicated to your career advancement and professional growth</li>
+      <li><strong>Accessibility First:</strong> Making advanced assessment assistance available to all students and professionals</li>
+      <li><strong>Continuous Innovation:</strong> Constantly improving to stay ahead of all detection and proctoring systems</li>
+      <li><strong>User Privacy:</strong> Your data, usage, and assessment activity remain completely confidential and secure</li>
+      <li><strong>Success Focus:</strong> Dedicated to your academic achievement, career advancement, and professional growth</li>
     </ul>
   </div>
   
