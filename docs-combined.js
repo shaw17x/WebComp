@@ -13,13 +13,13 @@ body{margin:0!important;padding:0!important}
 .docs-section h3{color:#9ca3af;font-size:1.2rem;font-weight:600;margin:20px 0 10px 0;position:relative;z-index:1001}
 .docs-section p{color:#cbd5e1;font-size:1rem;line-height:1.6;margin-bottom:15px;position:relative;z-index:1001}
 .docs-section ul{list-style:none;padding:0;margin:15px 0;position:relative;z-index:1001}
-.docs-section li{color:#cbd5e1;font-size:1rem;margin-bottom:8px;padding-left:20px;position:relative;line-height:1.5;z-index:1001}
-.docs-section li::before{content:'→';position:absolute;left:0;color:#6b7280;font-weight:bold;z-index:1002}
+.docs-section li{color:#cbd5e1;font-size:1rem;margin-bottom:8px;padding-left:0px;position:relative;line-height:1.5;z-index:1001}
+.docs-section li::before{content:'';position:absolute;left:0;color:#6b7280;font-weight:bold;z-index:1002}
 .docs-section strong{color:#fff;font-weight:600;position:relative;z-index:1001}
 .docs-section code{background:rgba(107,114,128,0.1);color:#9ca3af;padding:2px 6px;border-radius:4px;font-family:'Fira Code',monospace;font-size:0.9rem}
 .docs-intro{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);text-align:center}
 .docs-contact{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1)}
-.docs-contact li::before{color:#6b7280}
+.docs-contact li::before{content:'';color:#6b7280}
 
 /* Back to Home Button */
 .back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000}
@@ -92,7 +92,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>🎯 The Problem We Solve</h2>
+    <h2>The Problem We Solve</h2>
     <p>The modern hiring landscape presents significant challenges that talented candidates face daily.</p>
     <h3>Interview Anxiety & Performance Pressure</h3>
     <ul>
@@ -111,7 +111,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>💡 Our Vision & Mission</h2>
+    <h2>Our Vision & Mission</h2>
     <p>Ghost Pilot exists to democratize access to career opportunities and create a fairer job market.</p>
     <h3>Democratizing Interview Success</h3>
     <ul>
@@ -130,7 +130,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>🌍 Market Reality & Industry Need</h2>
+    <h2>Market Reality & Industry Need</h2>
     <p>The demand for interview assistance reflects deeper issues in modern recruitment practices.</p>
     <h3>Current Market Dynamics</h3>
     <ul>
@@ -149,7 +149,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>🎯 Our Unique Approach</h2>
+    <h2>Our Unique Approach</h2>
     <p>Ghost Pilot addresses these challenges through innovative technology and principled design decisions.</p>
     <h3>Unlimited Premium AI Access</h3>
     <ul>
@@ -168,7 +168,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>🤝 Ethical Framework & Values</h2>
+    <h2>Ethical Framework & Values</h2>
     <p>Our product philosophy is built on creating opportunities, not exploitation.</p>
     <h3>Empowerment Over Deception</h3>
     <ul>
@@ -187,7 +187,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section">
-    <h2>🚀 Impact & Future Vision</h2>
+    <h2>Impact & Future Vision</h2>
     <p>Ghost Pilot represents the beginning of a broader transformation in how we evaluate and hire talent.</p>
     <h3>Immediate User Benefits</h3>
     <ul>
@@ -206,7 +206,7 @@ const docsHTML = `
   </div>
   
   <div class="docs-section docs-contact">
-    <h2>🌟 The Ghost Pilot Difference</h2>
+    <h2>The Ghost Pilot Difference</h2>
     <p>More than a tool - a movement toward interview equality and career justice.</p>
     <h3>What Sets Us Apart</h3>
     <ul>
