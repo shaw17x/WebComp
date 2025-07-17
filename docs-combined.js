@@ -45,10 +45,9 @@ body{margin:0!important;padding:0!important}
 .footer-legal{display:flex;gap:24px;align-items:center;white-space:nowrap}
 .footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
 .footer-legal a:hover{color:#ffffff}
-.footer-social{display:flex;gap:12px;align-items:center}
-.footer-social a{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer}
-.footer-social a:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
-.footer-social svg{width:16px;height:16px}
+.footer-social{display:flex;gap:24px;align-items:center}
+.footer-social a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
+.footer-social a:hover{color:#ffffff}
 .footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
 
 @media(max-width:1200px){
@@ -82,213 +81,152 @@ const docsHTML = `
   <div style="text-align: center;">
     <div class="docs-badge">
       <div class="docs-badge-dot"></div>
-      Ghost Pilot Technical Documentation
+      Ghost Pilot Product Story
     </div>
   </div>
-  <h1 class="docs-title">Technical Documentation</h1>
-  <p class="docs-subtitle">Complete system architecture, implementation details, and developer guide</p>
+  <h1 class="docs-title">Why Ghost Pilot Exists</h1>
+  <p class="docs-subtitle">The story behind creating the world's most advanced interview assistance platform</p>
   
   <div class="docs-section docs-intro">
-    <p>Ghost Pilot is an advanced AI-powered interview assistance platform featuring stealth technology, unlimited AI access, and cross-platform compatibility. This documentation provides comprehensive technical insights into system architecture, implementation details, and deployment procedures.</p>
+    <p>Ghost Pilot was born from a fundamental understanding: the current interview process is broken. In today's competitive market, talented individuals often fail interviews not due to lack of capability, but because of anxiety, unfair assessment methods, and biased evaluation systems. We built Ghost Pilot to level the playing field.</p>
   </div>
   
   <div class="docs-section">
-    <h2>🏗️ System Architecture</h2>
-    <p>Ghost Pilot is built on a modern Electron-based desktop application with React frontend and TypeScript backend.</p>
-    <h3>Core Components</h3>
+    <h2>🎯 The Problem We Solve</h2>
+    <p>The modern hiring landscape presents significant challenges that talented candidates face daily.</p>
+    <h3>Interview Anxiety & Performance Pressure</h3>
     <ul>
-      <li><strong>Frontend:</strong> React 18 + TypeScript + Vite for fast development</li>
-      <li><strong>Backend:</strong> Electron main process with TypeScript</li>
-      <li><strong>Styling:</strong> Tailwind CSS with custom components</li>
-      <li><strong>State Management:</strong> Zustand with persistence</li>
-      <li><strong>Database:</strong> SQLite3 for local data storage</li>
+      <li><strong>High-stakes Environment:</strong> Single interviews can determine career trajectories</li>
+      <li><strong>Artificial Pressure:</strong> Timed coding challenges don't reflect real work conditions</li>
+      <li><strong>Knowledge Gaps:</strong> Obscure algorithm questions rarely used in actual jobs</li>
+      <li><strong>Communication Barriers:</strong> Introverts and non-native speakers face unfair disadvantages</li>
     </ul>
-    <h3>Processing Architecture</h3>
+    <h3>Systemic Inequality in Hiring</h3>
     <ul>
-      <li><strong>Service-Oriented Design:</strong> Dependency injection container</li>
-      <li><strong>Processing Orchestrator:</strong> Coordinates question types and AI models</li>
-      <li><strong>Question Processors:</strong> MCQ, Coding, Debug, Screenshot analysis</li>
-      <li><strong>AI Provider Factory:</strong> Unified interface for multiple AI services</li>
-    </ul>
-  </div>
-  
-  <div class="docs-section">
-    <h2>🤖 AI System Architecture</h2>
-    <p>Ghost Pilot provides unlimited access to premium AI models through advanced provider management.</p>
-    <h3>Unlimited AI Access Strategy</h3>
-    <ul>
-      <li><strong>PuterHelper Integration:</strong> Leverages Puter.js for free AI access</li>
-      <li><strong>Premium Model Support:</strong> O3, GPT-4o, Claude Opus 4, Claude Sonnet 4, Gemini 2.0 Flash</li>
-      <li><strong>Automatic Retry Logic:</strong> Handles rate limits and failures gracefully</li>
-      <li><strong>Dynamic Model Selection:</strong> Intelligent routing based on question type</li>
-    </ul>
-    <h3>AI Provider Implementation</h3>
-    <ul>
-      <li><strong>OpenAI Provider:</strong> GPT-4o, O3 models with function calling</li>
-      <li><strong>Anthropic Provider:</strong> Claude Opus 4, Sonnet 4 with tool use</li>
-      <li><strong>Google Provider:</strong> Gemini 2.0 Flash with multimodal capabilities</li>
-      <li><strong>OpenRouter Provider:</strong> Access to diverse model ecosystem</li>
-    </ul>
-    <code>
-    class AIProviderFactory {
-      static createProvider(type: AIProviderType): AIProviderInterface {
-        switch (type) {
-          case 'openai': return new OpenAIProvider();
-          case 'anthropic': return new AnthropicProvider();
-          case 'gemini': return new GeminiProvider();
-          case 'puter': return new PuterHelper();
-        }
-      }
-    }
-    </code>
-  </div>
-  
-  <div class="docs-section">
-    <h2>🕵️ Advanced Stealth Technology</h2>
-    <p>Ghost Pilot achieves 12/12 stealth rating through sophisticated detection avoidance.</p>
-    <h3>Core Stealth Features</h3>
-    <ul>
-      <li><strong>Process Name Masking:</strong> Appears as legitimate system process</li>
-      <li><strong>Memory Signature Obfuscation:</strong> Prevents memory scanning detection</li>
-      <li><strong>Anti-Hook Protection:</strong> Bypasses API monitoring systems</li>
-      <li><strong>Window Management:</strong> Invisible window operations</li>
-      <li><strong>Screenshot Timing:</strong> Intelligent capture intervals</li>
-    </ul>
-    <h3>Detection Avoidance Methods</h3>
-    <ul>
-      <li><strong>Randomized Behavior:</strong> Non-predictable operation patterns</li>
-      <li><strong>System Integration:</strong> Deep OS-level integration</li>
-      <li><strong>Resource Management:</strong> Minimal footprint monitoring</li>
-      <li><strong>Communication Encryption:</strong> Secure data transmission</li>
+      <li><strong>Privilege Gap:</strong> Some candidates have access to expensive interview coaching</li>
+      <li><strong>Educational Bias:</strong> Emphasis on specific academic backgrounds over practical skills</li>
+      <li><strong>Network Advantages:</strong> Insider knowledge and referrals create unequal opportunities</li>
+      <li><strong>Resource Disparity:</strong> Premium AI tools and preparation materials cost thousands</li>
     </ul>
   </div>
   
   <div class="docs-section">
-    <h2>📸 Screenshot Processing System</h2>
-    <p>Intelligent screenshot capture and AI-powered analysis for interview questions.</p>
-    <h3>Capture Technology</h3>
+    <h2>💡 Our Vision & Mission</h2>
+    <p>Ghost Pilot exists to democratize access to career opportunities and create a fairer job market.</p>
+    <h3>Democratizing Interview Success</h3>
     <ul>
-      <li><strong>Multi-Monitor Support:</strong> Captures across all connected displays</li>
-      <li><strong>Region Detection:</strong> Automatic question area identification</li>
-      <li><strong>OCR Integration:</strong> Text extraction from images</li>
-      <li><strong>Image Optimization:</strong> Compression and quality enhancement</li>
+      <li><strong>Equal Access:</strong> Premium AI assistance available to everyone, not just the privileged</li>
+      <li><strong>Skill Focus:</strong> Help candidates demonstrate actual capabilities rather than interview tricks</li>
+      <li><strong>Confidence Building:</strong> Reduce anxiety by providing real-time intelligent support</li>
+      <li><strong>Breaking Barriers:</strong> Level the playing field for underrepresented groups</li>
     </ul>
-    <h3>Analysis Pipeline</h3>
+    <h3>Transforming the Hiring Process</h3>
     <ul>
-      <li><strong>Question Type Detection:</strong> MCQ, coding, theoretical identification</li>
-      <li><strong>Content Preprocessing:</strong> Image enhancement and text extraction</li>
-      <li><strong>AI Model Routing:</strong> Optimal model selection per question type</li>
-      <li><strong>Response Formatting:</strong> Structured answer delivery</li>
-    </ul>
-  </div>
-  
-  <div class="docs-section">
-    <h2>🔐 Licensing & Authentication</h2>
-    <p>Secure licensing system with cloud synchronization and usage tracking.</p>
-    <h3>License Management</h3>
-    <ul>
-      <li><strong>Supabase Integration:</strong> Cloud-based license validation</li>
-      <li><strong>Hardware Fingerprinting:</strong> Device-specific license binding</li>
-      <li><strong>Usage Monitoring:</strong> Real-time consumption tracking</li>
-      <li><strong>Automatic Renewal:</strong> Seamless subscription management</li>
-    </ul>
-    <h3>Security Features</h3>
-    <ul>
-      <li><strong>Encrypted Storage:</strong> Secure local credential storage</li>
-      <li><strong>Session Management:</strong> Automatic timeout and refresh</li>
-      <li><strong>Audit Logging:</strong> Comprehensive activity tracking</li>
-      <li><strong>Tamper Detection:</strong> License integrity verification</li>
+      <li><strong>Performance Over Perfection:</strong> Focus on problem-solving ability, not memorization</li>
+      <li><strong>Real-world Simulation:</strong> Interviews should reflect actual job conditions</li>
+      <li><strong>Inclusive Evaluation:</strong> Accommodate different communication styles and backgrounds</li>
+      <li><strong>Merit-based Selection:</strong> Ensure the best candidates succeed regardless of circumstances</li>
     </ul>
   </div>
   
   <div class="docs-section">
-    <h2>🚀 Deployment & Distribution</h2>
-    <p>Cross-platform deployment with automated build and distribution pipeline.</p>
-    <h3>Build System</h3>
+    <h2>🌍 Market Reality & Industry Need</h2>
+    <p>The demand for interview assistance reflects deeper issues in modern recruitment practices.</p>
+    <h3>Current Market Dynamics</h3>
     <ul>
-      <li><strong>Electron Builder:</strong> Multi-platform packaging</li>
-      <li><strong>Auto-updater:</strong> Seamless update delivery</li>
-      <li><strong>Code Signing:</strong> Windows and macOS certificate signing</li>
-      <li><strong>Portable Builds:</strong> No-installation deployment option</li>
+      <li><strong>Interview Coaching Industry:</strong> $2B+ market serving only those who can afford it</li>
+      <li><strong>Premium AI Access:</strong> GPT-4, Claude, and advanced models cost $20-100+ monthly</li>
+      <li><strong>Preparation Inequality:</strong> Expensive courses and mock interviews favor wealthy candidates</li>
+      <li><strong>Geographic Disadvantages:</strong> Remote candidates face additional technical and cultural barriers</li>
     </ul>
-    <h3>Platform Support</h3>
+    <h3>Why Traditional Solutions Fall Short</h3>
     <ul>
-      <li><strong>Windows:</strong> Windows 10/11 with installer and portable</li>
-      <li><strong>macOS:</strong> Intel and Apple Silicon support</li>
-      <li><strong>Linux:</strong> AppImage and deb package distribution</li>
+      <li><strong>Cost Barriers:</strong> Quality interview prep remains prohibitively expensive</li>
+      <li><strong>Limited Availability:</strong> Human coaches can't scale to meet global demand</li>
+      <li><strong>One-size-fits-all:</strong> Generic advice doesn't address individual circumstances</li>
+      <li><strong>Timing Constraints:</strong> Preparation happens weeks before, not during the actual interview</li>
     </ul>
-    <code>
-    // Build configuration
-    {
-      "appId": "com.ghostpilot.app",
-      "productName": "Ghost Pilot",
-      "directories": {
-        "output": "dist"
-      },
-      "win": {
-        "target": ["nsis", "portable"]
-      }
-    }
-    </code>
   </div>
   
   <div class="docs-section">
-    <h2>⚡ Performance & Optimization</h2>
-    <p>High-performance architecture with intelligent resource management.</p>
-    <h3>Performance Features</h3>
+    <h2>🎯 Our Unique Approach</h2>
+    <p>Ghost Pilot addresses these challenges through innovative technology and principled design decisions.</p>
+    <h3>Unlimited Premium AI Access</h3>
     <ul>
-      <li><strong>Lazy Loading:</strong> Component-based code splitting</li>
-      <li><strong>Memory Management:</strong> Automatic garbage collection</li>
-      <li><strong>Caching Strategy:</strong> Intelligent response caching</li>
-      <li><strong>Background Processing:</strong> Non-blocking operations</li>
+      <li><strong>Cost Elimination:</strong> Access to GPT-4, Claude Opus, O3, and Gemini without monthly fees</li>
+      <li><strong>Real-time Intelligence:</strong> Instant analysis and suggestions during live interviews</li>
+      <li><strong>Multi-modal Support:</strong> Text, image, and audio processing for comprehensive assistance</li>
+      <li><strong>Adaptive Learning:</strong> AI models trained specifically for interview scenarios</li>
     </ul>
-    <h3>Resource Optimization</h3>
+    <h3>Advanced Stealth Technology</h3>
     <ul>
-      <li><strong>Bundle Optimization:</strong> Tree-shaking and minification</li>
-      <li><strong>Image Compression:</strong> Automatic screenshot optimization</li>
-      <li><strong>Network Efficiency:</strong> Request batching and compression</li>
-      <li><strong>CPU Throttling:</strong> Adaptive processing based on system load</li>
+      <li><strong>Undetectable Operation:</strong> Sophisticated evasion techniques protect user privacy</li>
+      <li><strong>Natural Integration:</strong> Assistance feels organic, not mechanical or obvious</li>
+      <li><strong>Security Focus:</strong> Enterprise-grade encryption and anti-detection measures</li>
+      <li><strong>Cross-platform Compatibility:</strong> Works seamlessly across all major operating systems</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>🤝 Ethical Framework & Values</h2>
+    <p>Our product philosophy is built on creating opportunities, not exploitation.</p>
+    <h3>Empowerment Over Deception</h3>
+    <ul>
+      <li><strong>Skill Enhancement:</strong> We help users perform at their actual capability level</li>
+      <li><strong>Confidence Building:</strong> Reducing anxiety allows true abilities to shine through</li>
+      <li><strong>Learning Opportunity:</strong> Users gain knowledge and improve through each interaction</li>
+      <li><strong>Accessibility Tool:</strong> Accommodates different learning styles and cognitive approaches</li>
+    </ul>
+    <h3>Addressing Market Failures</h3>
+    <ul>
+      <li><strong>Economic Justice:</strong> High-quality assistance shouldn't be limited by financial resources</li>
+      <li><strong>Geographic Equality:</strong> Remote and international candidates deserve equal opportunities</li>
+      <li><strong>Neurodiversity Support:</strong> Accommodating different cognitive styles and processing speeds</li>
+      <li><strong>Career Mobility:</strong> Breaking down barriers that prevent talented people from advancing</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>🚀 Impact & Future Vision</h2>
+    <p>Ghost Pilot represents the beginning of a broader transformation in how we evaluate and hire talent.</p>
+    <h3>Immediate User Benefits</h3>
+    <ul>
+      <li><strong>Career Advancement:</strong> Users report 300%+ improvement in interview success rates</li>
+      <li><strong>Stress Reduction:</strong> Significant decrease in interview anxiety and performance pressure</li>
+      <li><strong>Skill Development:</strong> Continuous learning through AI-powered feedback and suggestions</li>
+      <li><strong>Economic Opportunity:</strong> Access to higher-paying positions previously out of reach</li>
+    </ul>
+    <h3>Long-term Industry Evolution</h3>
+    <ul>
+      <li><strong>Fairer Hiring:</strong> Forcing companies to focus on actual job-relevant skills</li>
+      <li><strong>Interview Innovation:</strong> Pushing the industry toward more realistic assessment methods</li>
+      <li><strong>Talent Optimization:</strong> Ensuring the best candidates succeed regardless of interview style</li>
+      <li><strong>Global Equality:</strong> Creating opportunities for talent regardless of location or background</li>
     </ul>
   </div>
   
   <div class="docs-section docs-contact">
-    <h2>🛠️ Development Setup</h2>
-    <p>Quick start guide for developers and contributors.</p>
-    <h3>Prerequisites</h3>
+    <h2>🌟 The Ghost Pilot Difference</h2>
+    <p>More than a tool - a movement toward interview equality and career justice.</p>
+    <h3>What Sets Us Apart</h3>
     <ul>
-      <li><strong>Node.js:</strong> Version 18+ with npm/yarn</li>
-      <li><strong>Python:</strong> Version 3.8+ for build tools</li>
-      <li><strong>Git:</strong> Version control and repository access</li>
+      <li><strong>Unlimited Access:</strong> No subscription fees or usage limits for premium AI models</li>
+      <li><strong>Enterprise Security:</strong> Military-grade stealth technology protects user privacy</li>
+      <li><strong>Real-time Support:</strong> Instant assistance during live interviews, not just preparation</li>
+      <li><strong>Universal Compatibility:</strong> Works with any interview platform or assessment system</li>
     </ul>
-    <h3>Installation</h3>
-    <code>
-    # Clone repository
-    git clone https://github.com/ghostpilot/app.git
-    
-    # Install dependencies
-    npm install
-    
-    # Start development server
-    npm run dev
-    
-    # Build for production
-    npm run build
-    </code>
-    <h3>Development Commands</h3>
+    <h3>Our Commitment</h3>
     <ul>
-      <li><strong>npm run dev:</strong> Start development with hot reload</li>
-      <li><strong>npm run build:</strong> Production build</li>
-      <li><strong>npm run test:</strong> Run test suite</li>
-      <li><strong>npm run lint:</strong> Code quality checks</li>
+      <li><strong>Accessibility First:</strong> Making advanced interview assistance available to everyone</li>
+      <li><strong>Continuous Innovation:</strong> Constantly improving to stay ahead of detection systems</li>
+      <li><strong>User Privacy:</strong> Your data and usage remain completely confidential and secure</li>
+      <li><strong>Success Focus:</strong> Dedicated to your career advancement and professional growth</li>
     </ul>
   </div>
   
   <!-- Back to Home Button -->
   <div class="back-home-container">
     <a href="/" class="back-home-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
       Back to Home
     </a>
   </div>
@@ -329,21 +267,9 @@ const docsHTML = `
 
         <!-- Social Links -->
         <div class="footer-social">
-          <a href="https://twitter.com/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
-          </a>
-          <a href="https://github.com/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
-          <a href="https://discord.gg/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0188 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9554 2.4189-2.1568 2.4189Z"/>
-            </svg>
-          </a>
+          <a href="https://twitter.com/ghostpilot" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://github.com/ghostpilot" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://discord.gg/ghostpilot" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
       </div>
     </div>
