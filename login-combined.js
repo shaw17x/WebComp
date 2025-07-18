@@ -136,7 +136,7 @@ const loginHTML = `
 
     <!-- Toggle Auth Mode -->
     <div class="auth-toggle">
-      <button type="button" class="auth-toggle-button" onclick="window.location.href='/signup'">
+      <button type="button" class="auth-toggle-button" onclick="window.location.href='/sign-up'">
         Don't have an account? Create one
       </button>
     </div>
