@@ -297,14 +297,32 @@ const loginHTML = `
     
     console.log('✅ Login HTML added');
     
-    // Initialize interactions after a short delay to ensure DOM is ready
+    // Initialize interactions with multiple attempts to ensure success
     setTimeout(() => {
       initializeLoginInteractions();
-    }, 100);
+    }, 50);
+    setTimeout(() => {
+      initializeLoginInteractions();
+    }, 200);
+    setTimeout(() => {
+      initializeLoginInteractions();
+    }, 500);
   }
   
   function initializeLoginInteractions() {
+    // Prevent multiple initialization
+    if (window.loginInteractionsInitialized) {
+      return;
+    }
+    
     console.log('🔧 Initializing login interactions...');
+    
+    // Check if elements exist before proceeding
+    const loginFormCheck = document.getElementById('loginForm');
+    if (!loginFormCheck) {
+      console.log('⏳ Login form not ready yet, will retry...');
+      return;
+    }
     
     // Remember me checkbox
     const checkbox = document.getElementById('rememberCheckbox');
@@ -355,5 +373,6 @@ const loginHTML = `
     }
     
     console.log('✅ Login interactions initialized');
+    window.loginInteractionsInitialized = true;
   }
 })(); 
