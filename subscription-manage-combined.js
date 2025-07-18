@@ -3,7 +3,7 @@ const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
 /* Subscription Management Container */
-.subscription-manage-component{max-width:1200px;width:100%;margin:40px auto;padding:20px;position:relative;z-index:999}
+.subscription-manage-component{max-width:1200px;width:100%;margin:80px auto 40px auto;padding:20px;position:relative;z-index:999}
 
 /* Page Header */
 .subscription-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1000}
@@ -396,25 +396,57 @@ const subscriptionHTML = `
   function initializeSubscriptionPage() {
     console.log('🔧 Initializing subscription page...');
     
-    // 🎯 TARGET FRAMER'S CONTENT AREA SPECIFICALLY
-    const mainContent = document.querySelector('main') || 
-                       document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.main-content') ||
-                       document.querySelector('.framer-page-content');
-    
-    console.log('📍 Main content element:', mainContent?.tagName || 'body');
-    
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
       console.log('✅ Subscription component already loaded');
       return;
     }
     
-    // 🚀 REPLACE CONTENT COMPLETELY - THIS PUTS IT AT TOP
-    if (mainContent) {
-      mainContent.innerHTML = subscriptionHTML;  // ✅ REPLACES CONTENT = TOP PLACEMENT
+    // 🎯 FIND CONTENT INSERTION POINT MORE CAREFULLY
+    let insertionPoint = null;
+    
+    // Try different content containers in order of preference
+    const contentSelectors = [
+      '[data-framer-name="Content"]',
+      '.framer-page-content', 
+      '.main-content',
+      'main > div:last-child',
+      'main'
+    ];
+    
+    for (const selector of contentSelectors) {
+      const element = document.querySelector(selector);
+      if (element) {
+        insertionPoint = element;
+        console.log('📍 Found content container:', selector);
+        break;
+      }
+    }
+    
+    // 🚀 SMART CONTENT INJECTION
+    if (insertionPoint) {
+      // If it's the main element itself, be more careful
+      if (insertionPoint.tagName === 'MAIN') {
+        // Look for existing content wrapper or create one
+        const existingWrapper = insertionPoint.querySelector('.framer-content-wrapper, .page-content, .content-wrapper');
+        if (existingWrapper) {
+          existingWrapper.innerHTML = subscriptionHTML;
+        } else {
+          // Insert after any header/nav elements
+          const header = insertionPoint.querySelector('header, nav, .header, .nav');
+          if (header) {
+            header.insertAdjacentHTML('afterend', subscriptionHTML);
+          } else {
+            insertionPoint.innerHTML = subscriptionHTML;
+          }
+        }
+      } else {
+        // Safe to replace content of non-main containers
+        insertionPoint.innerHTML = subscriptionHTML;
+      }
     } else {
-      // Fallback only if no main content found
+      // Ultimate fallback
+      console.log('📍 Using body fallback');
       document.body.insertAdjacentHTML('afterbegin', subscriptionHTML);
     }
     
