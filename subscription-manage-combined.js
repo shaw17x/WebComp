@@ -405,8 +405,22 @@ const subscriptionHTML = `
     
     console.log('📍 Main content element:', mainContent.tagName);
     
-    // Clear existing content and add subscription management
-    mainContent.innerHTML = subscriptionHTML;
+    // Check if subscription content already exists
+    if (document.querySelector('.subscription-manage-component')) {
+      console.log('✅ Subscription component already loaded');
+      return;
+    }
+    
+    // Add subscription management without clearing existing content
+    const subscriptionDiv = document.createElement('div');
+    subscriptionDiv.innerHTML = subscriptionHTML;
+    
+    // Insert after any existing content or at the beginning
+    if (mainContent.children.length > 0) {
+      mainContent.appendChild(subscriptionDiv.firstElementChild);
+    } else {
+      mainContent.appendChild(subscriptionDiv.firstElementChild);
+    }
     console.log('✅ Subscription HTML added');
     
     // Initialize subscription functionality
