@@ -236,6 +236,19 @@ const loginHTML = `
 (function() {
   console.log('🚀 Login component starting...');
   
+  // Check if we should show login page
+  function shouldShowLogin() {
+    const currentHash = window.location.hash;
+    const currentPath = window.location.pathname;
+    return currentHash.includes('login') || currentPath.includes('login') || currentPath.includes('signin');
+  }
+  
+  // Only proceed if we should show login
+  if (!shouldShowLogin()) {
+    console.log('🚫 Login component loaded but not showing (wrong page/hash)');
+    return;
+  }
+  
   // Add CSS
   const style = document.createElement('style');
   style.textContent = loginCSS;
