@@ -345,10 +345,9 @@ const loginHTML = `
         
         // Simulate login process
         setTimeout(() => {
-          alert('Login functionality would be implemented here');
-          if (submitText) {
-            submitText.textContent = 'Sign In';
-          }
+          // After successful login, redirect to subscription management
+          console.log('✅ Login successful, redirecting to subscription management...');
+          window.location.href = '/subscription';
         }, 2000);
       });
     } else {
