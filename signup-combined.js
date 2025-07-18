@@ -1,15 +1,6 @@
 // Ghost Pilot Sign Up Page Combined - CSS + HTML Content (Component Only)
 const signupCSS = `
-/* Ensure proper background when Framer background is cleared */
-html, body {
-  background: #0a0b0f !important;
-  background-image: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent),
-                    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1), transparent),
-                    radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.2), transparent) !important;
-  min-height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+/* NO BODY STYLING - Let Framer handle the background */
 
 /* Signup Component Container */
 .auth-signup-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
@@ -304,7 +295,23 @@ const signupHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
+  // Check if we should load signup (pathname OR hash)
+  const isSignupPage = location.pathname.includes('signup') || 
+                       location.pathname.includes('sign-up') || 
+                       location.hash.includes('signup') ||
+                       location.hash.includes('sign-up');
+  
   console.log('🚀 Signup component starting...');
+  console.log('📍 Current URL:', location.href);
+  console.log('📍 Pathname:', location.pathname);
+  console.log('📍 Hash:', location.hash);
+  console.log('📍 Is signup page?', isSignupPage);
+  
+  // Only load if this is actually a signup page
+  if (!isSignupPage) {
+    console.log('❌ Not a signup page, skipping...');
+    return;
+  }
   
   // Add CSS
   const style = document.createElement('style');
@@ -333,36 +340,12 @@ const signupHTML = `
     
     console.log('📍 Main content element:', mainContent.tagName);
     
-    // Always clear existing content to prevent mixing
+    // Clear existing content in main area and add signup page
     if (mainContent !== document.body) {
       mainContent.innerHTML = signupHTML;
     } else {
-      // For body, selectively clear homepage content while preserving background
-      console.log('🧹 Clearing homepage content while preserving background...');
-      
-      // Keep header/nav and Framer background elements
+      // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
-      const elementsToRemove = [];
-      
-      // Find all direct children of body that aren't essential
-      Array.from(document.body.children).forEach(child => {
-        if (child !== header && 
-            !child.classList.contains('auth-signup-component') &&
-            child.tagName !== 'SCRIPT' &&
-            child.tagName !== 'STYLE' &&
-            child.tagName !== 'HEAD' &&
-            !child.hasAttribute('data-framer-name') &&
-            !child.classList.contains('framer-') &&
-            !child.style.position === 'fixed' &&
-            !child.style.position === 'absolute') {
-          elementsToRemove.push(child);
-        }
-      });
-      
-      // Remove only non-essential homepage content
-      elementsToRemove.forEach(element => element.remove());
-      
-      // Add signup content
       if (header) {
         header.insertAdjacentHTML('afterend', signupHTML);
       } else {
