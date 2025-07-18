@@ -297,6 +297,19 @@ const signupHTML = `
 (function() {
   console.log('🚀 Signup component starting...');
   
+  // Check if we should show signup page
+  function shouldShowSignup() {
+    const currentHash = window.location.hash;
+    const currentPath = window.location.pathname;
+    return currentHash.includes('signup') || currentPath.includes('signup') || currentPath.includes('sign-up') || currentPath.includes('register');
+  }
+  
+  // Only proceed if we should show signup
+  if (!shouldShowSignup()) {
+    console.log('🚫 Signup component loaded but not showing (wrong page/hash)');
+    return;
+  }
+  
   // Add CSS
   const style = document.createElement('style');
   style.textContent = signupCSS;
