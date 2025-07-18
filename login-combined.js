@@ -154,7 +154,7 @@ const loginHTML = `
 
     <!-- Toggle Auth Mode -->
     <div class="auth-toggle">
-              <button type="button" class="auth-toggle-button" onclick="window.location.hash='signup'">
+      <button type="button" class="auth-toggle-button" onclick="window.location.href='/sign-up'">
         Don't have an account? Create one
       </button>
     </div>
@@ -235,19 +235,6 @@ const loginHTML = `
 // Auto-execute function to inject CSS and HTML
 (function() {
   console.log('🚀 Login component starting...');
-  
-  // Check if we should show login page
-  function shouldShowLogin() {
-    const currentHash = window.location.hash;
-    const currentPath = window.location.pathname;
-    return currentHash.includes('login') || currentPath.includes('login') || currentPath.includes('signin');
-  }
-  
-  // Only proceed if we should show login
-  if (!shouldShowLogin()) {
-    console.log('🚫 Login component loaded but not showing (wrong page/hash)');
-    return;
-  }
   
   // Add CSS
   const style = document.createElement('style');
