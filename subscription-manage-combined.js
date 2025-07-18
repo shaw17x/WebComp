@@ -402,51 +402,19 @@ const subscriptionHTML = `
       return;
     }
     
-    // 🎯 FIND CONTENT INSERTION POINT MORE CAREFULLY
-    let insertionPoint = null;
+    // 🎯 SIMPLE AND RELIABLE CONTENT INJECTION
+    const mainContent = document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') || 
+                       document.querySelector('.main-content') ||
+                       document.querySelector('main');
     
-    // Try different content containers in order of preference
-    const contentSelectors = [
-      '[data-framer-name="Content"]',
-      '.framer-page-content', 
-      '.main-content',
-      'main > div:last-child',
-      'main'
-    ];
+    console.log('📍 Main content element:', mainContent?.tagName || 'body');
     
-    for (const selector of contentSelectors) {
-      const element = document.querySelector(selector);
-      if (element) {
-        insertionPoint = element;
-        console.log('📍 Found content container:', selector);
-        break;
-      }
-    }
-    
-    // 🚀 SMART CONTENT INJECTION
-    if (insertionPoint) {
-      // If it's the main element itself, be more careful
-      if (insertionPoint.tagName === 'MAIN') {
-        // Look for existing content wrapper or create one
-        const existingWrapper = insertionPoint.querySelector('.framer-content-wrapper, .page-content, .content-wrapper');
-        if (existingWrapper) {
-          existingWrapper.innerHTML = subscriptionHTML;
-        } else {
-          // Insert after any header/nav elements
-          const header = insertionPoint.querySelector('header, nav, .header, .nav');
-          if (header) {
-            header.insertAdjacentHTML('afterend', subscriptionHTML);
-          } else {
-            insertionPoint.innerHTML = subscriptionHTML;
-          }
-        }
-      } else {
-        // Safe to replace content of non-main containers
-        insertionPoint.innerHTML = subscriptionHTML;
-      }
+    if (mainContent) {
+      // Simple innerHTML replacement - this preserves the complete HTML structure
+      mainContent.innerHTML = subscriptionHTML;
     } else {
-      // Ultimate fallback
-      console.log('📍 Using body fallback');
+      // Fallback to body insertion
       document.body.insertAdjacentHTML('afterbegin', subscriptionHTML);
     }
     
