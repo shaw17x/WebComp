@@ -3,7 +3,7 @@ const signupCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
 /* Signup Component Container */
-.signup-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
+.auth-signup-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
 /* Floating Card */
 .auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);animation:cardFloat 6s ease-in-out infinite}
@@ -23,7 +23,7 @@ const signupCSS = `
 .auth-form{space-y:1rem}
 .auth-field-group{margin-bottom:1rem}
 .auth-label{display:block;color:rgba(255,255,255,0.7);font-size:0.75rem;font-weight:500;margin-bottom:0.5rem}
-.auth-input{width:100%;padding:0.5rem 0.75rem;font-size:0.875rem;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:0.375rem;color:white;transition:all 0.2s}
+.auth-input{width:100%;padding:0.5rem 0.75rem;font-size:0.875rem;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);border-radius:0.375rem;color:white;transition:all 0.2s;box-sizing:border-box}
 .auth-input::placeholder{color:rgba(255,255,255,0.3)}
 .auth-input:focus{outline:none;border-color:rgba(255,255,255,0.2);box-shadow:0 0 0 1px rgba(255,255,255,0.2)}
 .auth-input:hover{border-color:rgba(255,255,255,0.1)}
@@ -75,11 +75,11 @@ const signupCSS = `
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Responsive */
-@media(max-width:768px){.signup-login-component{padding:15px;margin:60px auto}.auth-screen-card{max-width:28rem}}
+@media(max-width:768px){.auth-signup-component{padding:15px;margin:60px auto}.auth-screen-card{max-width:28rem}}
 `;
 
 const signupHTML = `
-<div class="signup-login-component">
+<div class="auth-signup-component">
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
@@ -217,10 +217,13 @@ const signupHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
+  console.log('🚀 Signup component starting...');
+  
   // Add CSS
   const style = document.createElement('style');
   style.textContent = signupCSS;
   document.head.appendChild(style);
+  console.log('✅ Signup CSS added');
   
   // Add HTML when DOM is ready
   if (document.readyState === 'loading') {
@@ -232,12 +235,16 @@ const signupHTML = `
   }
   
   function initializeSignupPage() {
+    console.log('🔧 Initializing signup page...');
+    
     // Try to find main content area, otherwise use body
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
+    
+    console.log('📍 Main content element:', mainContent.tagName);
     
     // Clear existing content in main area and add signup page
     if (mainContent !== document.body) {
@@ -252,16 +259,41 @@ const signupHTML = `
       }
     }
     
-    // Initialize interactions
-    initializeSignupInteractions();
+    console.log('✅ Signup HTML added');
+    
+    // Initialize interactions after a short delay to ensure DOM is ready
+    setTimeout(() => {
+      initializeSignupInteractions();
+    }, 100);
   }
   
   function initializeSignupInteractions() {
+    console.log('🔧 Initializing signup interactions...');
+    
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const passwordStrength = document.getElementById('passwordStrength');
     const strengthFill = document.getElementById('strengthFill');
     const strengthBadge = document.getElementById('strengthBadge');
+    
+    // Check if elements exist
+    if (passwordInput) {
+      console.log('✅ Password input found');
+    } else {
+      console.log('❌ Password input not found');
+    }
+    
+    if (confirmPasswordInput) {
+      console.log('✅ Confirm password input found');
+    } else {
+      console.log('❌ Confirm password input not found');
+    }
+    
+    if (passwordStrength) {
+      console.log('✅ Password strength indicator found');
+    } else {
+      console.log('❌ Password strength indicator not found');
+    }
     
     // Password strength validation
     function validatePassword(password) {
@@ -284,33 +316,43 @@ const signupHTML = `
     
     function updatePasswordStrength(password) {
       if (!password) {
-        passwordStrength.style.display = 'none';
+        if (passwordStrength) {
+          passwordStrength.style.display = 'none';
+        }
         return;
       }
       
-      passwordStrength.style.display = 'block';
-      const validation = validatePassword(password);
-      
-      // Update strength indicator
-      strengthFill.className = `strength-fill strength-${validation.strength}`;
-      strengthBadge.className = `strength-badge badge-${validation.strength}`;
-      strengthBadge.textContent = validation.strength.charAt(0).toUpperCase() + validation.strength.slice(1);
-      
-      // Update requirements
-      validation.requirements.forEach(req => {
-        const icon = document.getElementById(`req-${req.id}`);
-        const text = document.getElementById(`req-${req.id}-text`);
+      if (passwordStrength) {
+        passwordStrength.style.display = 'block';
+        const validation = validatePassword(password);
         
-        if (req.test) {
-          icon.className = 'requirement-icon icon-valid';
-          icon.innerHTML = `<svg style="width:8px;height:8px;color:#86efac;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`;
-          text.className = 'requirement-text text-valid';
-        } else {
-          icon.className = 'requirement-icon icon-invalid';
-          icon.innerHTML = `<svg style="width:8px;height:8px;color:#fca5a5;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-          text.className = 'requirement-text text-invalid';
+        // Update strength indicator
+        if (strengthFill) {
+          strengthFill.className = `strength-fill strength-${validation.strength}`;
         }
-      });
+        if (strengthBadge) {
+          strengthBadge.className = `strength-badge badge-${validation.strength}`;
+          strengthBadge.textContent = validation.strength.charAt(0).toUpperCase() + validation.strength.slice(1);
+        }
+        
+        // Update requirements
+        validation.requirements.forEach(req => {
+          const icon = document.getElementById(`req-${req.id}`);
+          const text = document.getElementById(`req-${req.id}-text`);
+          
+          if (icon && text) {
+            if (req.test) {
+              icon.className = 'requirement-icon icon-valid';
+              icon.innerHTML = `<svg style="width:8px;height:8px;color:#86efac;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`;
+              text.className = 'requirement-text text-valid';
+            } else {
+              icon.className = 'requirement-icon icon-invalid';
+              icon.innerHTML = `<svg style="width:8px;height:8px;color:#fca5a5;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+              text.className = 'requirement-text text-invalid';
+            }
+          }
+        });
+      }
     }
     
     // Password input event listener
@@ -318,6 +360,7 @@ const signupHTML = `
       passwordInput.addEventListener('input', function() {
         updatePasswordStrength(this.value);
       });
+      console.log('✅ Password input event listener added');
     }
     
     // Form submission
@@ -325,8 +368,14 @@ const signupHTML = `
     const submitText = document.getElementById('submitText');
     
     if (form) {
+      console.log('✅ Signup form found');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        if (!passwordInput || !confirmPasswordInput) {
+          console.log('❌ Password inputs not found during form submission');
+          return;
+        }
         
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
@@ -343,19 +392,27 @@ const signupHTML = `
         }
         
         // Show loading state
-        submitText.innerHTML = `
-          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-            <div class="loading-spinner"></div>
-            Creating Account...
-          </div>
-        `;
+        if (submitText) {
+          submitText.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+              <div class="loading-spinner"></div>
+              Creating Account...
+            </div>
+          `;
+        }
         
         // Simulate signup process
         setTimeout(() => {
           alert('Sign up functionality would be implemented here');
-          submitText.textContent = 'Create Account';
+          if (submitText) {
+            submitText.textContent = 'Create Account';
+          }
         }, 2000);
       });
+    } else {
+      console.log('❌ Signup form not found');
     }
+    
+    console.log('✅ Signup interactions initialized');
   }
 })(); 
