@@ -1,9 +1,9 @@
-// Ghost Pilot Login Page Combined - CSS + HTML Content
+// Ghost Pilot Login Page Combined - CSS + HTML Content (Component Only)
 const loginCSS = `
-body{margin:0!important;padding:0!important;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+/* NO BODY STYLING - Let Framer handle the background */
 
-/* Main Container */
-.auth-screen-container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,0,0,0.95) 0%,rgba(20,20,20,0.98) 100%);opacity:0;animation:authScreenEntrance 1.2s cubic-bezier(0.2,0.0,0.2,1.0) forwards}
+/* Login Component Container */
+.auth-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
 /* Floating Card */
 .auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);animation:cardFloat 6s ease-in-out infinite}
@@ -57,52 +57,19 @@ body{margin:0!important;padding:0!important;font-family:'Inter',-apple-system,Bl
 .auth-skip-button{color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer}
 .auth-skip-button:hover{color:rgba(255,255,255,0.8)}
 
-/* Floating Orbs */
-.floating-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.floating-orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.05) 50%,transparent 100%);animation:floatOrb 8s ease-in-out infinite}
-.floating-orb-1{width:120px;height:120px;top:10%;left:10%;animation-delay:0s}
-.floating-orb-2{width:80px;height:80px;top:60%;right:15%;animation-delay:2s}
-.floating-orb-3{width:100px;height:100px;bottom:20%;left:20%;animation-delay:4s}
-
 /* Loading Spinner */
 .loading-spinner{width:1rem;height:1rem;border:2px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-right:0.5rem}
 
 /* Animations */
-@keyframes authScreenEntrance{0%{opacity:0;transform:scale(0.95) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes cardFloat{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-10px) rotate(0.5deg)}}
-@keyframes floatOrb{0%,100%{transform:translateY(0px) translateX(0px) scale(1);opacity:0.3}33%{transform:translateY(-20px) translateX(10px) scale(1.1);opacity:0.6}66%{transform:translateY(10px) translateX(-10px) scale(0.9);opacity:0.4}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Responsive */
-@media(max-width:768px){.auth-screen-container{padding:1rem}.auth-screen-card{max-width:28rem}}
-
-/* Back to Home Button */
-.back-home-container{position:fixed;top:2rem;left:2rem;z-index:1000}
-.back-home-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:8px;padding:12px 24px;font-size:16px;font-weight:600;color:#1f2937;text-decoration:none;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
-.back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
-.back-home-btn svg{width:16px;height:16px;transition:transform 0.3s ease}
-.back-home-btn:hover svg{transform:translateX(-4px)}
+@media(max-width:768px){.auth-login-component{padding:15px;margin:60px auto}.auth-screen-card{max-width:28rem}}
 `;
 
 const loginHTML = `
-<!-- Back to Home Button -->
-<div class="back-home-container">
-  <a href="/" class="back-home-btn">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-    </svg>
-    Back to Home
-  </a>
-</div>
-
-<div class="auth-screen-container">
-  <!-- Animated background elements -->
-  <div class="floating-orbs">
-    <div class="floating-orb floating-orb-1"></div>
-    <div class="floating-orb floating-orb-2"></div>
-    <div class="floating-orb floating-orb-3"></div>
-  </div>
-
+<div class="auth-login-component">
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
@@ -215,8 +182,13 @@ const loginHTML = `
     if (mainContent !== document.body) {
       mainContent.innerHTML = loginHTML;
     } else {
-      // If we're using body, clear everything and add login
-      document.body.innerHTML = loginHTML;
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', loginHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', loginHTML);
+      }
     }
     
     // Initialize interactions
@@ -266,4 +238,4 @@ const loginHTML = `
       });
     }
   }
-})();
+})(); 
