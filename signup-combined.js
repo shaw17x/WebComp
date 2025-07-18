@@ -215,7 +215,7 @@ const signupHTML = `
 
     <!-- Toggle Auth Mode -->
     <div class="auth-toggle">
-              <button type="button" class="auth-toggle-button" onclick="window.location.hash='login'">
+      <button type="button" class="auth-toggle-button" onclick="window.location.href='/login'">
         Already have an account? Sign in
       </button>
     </div>
@@ -296,19 +296,6 @@ const signupHTML = `
 // Auto-execute function to inject CSS and HTML
 (function() {
   console.log('🚀 Signup component starting...');
-  
-  // Check if we should show signup page
-  function shouldShowSignup() {
-    const currentHash = window.location.hash;
-    const currentPath = window.location.pathname;
-    return currentHash.includes('signup') || currentPath.includes('signup') || currentPath.includes('sign-up') || currentPath.includes('register');
-  }
-  
-  // Only proceed if we should show signup
-  if (!shouldShowSignup()) {
-    console.log('🚫 Signup component loaded but not showing (wrong page/hash)');
-    return;
-  }
   
   // Add CSS
   const style = document.createElement('style');
