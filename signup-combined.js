@@ -295,7 +295,23 @@ const signupHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
+  // Check if we should load signup (pathname OR hash)
+  const isSignupPage = location.pathname.includes('signup') || 
+                       location.pathname.includes('sign-up') || 
+                       location.hash.includes('signup') ||
+                       location.hash.includes('sign-up');
+  
   console.log('🚀 Signup component starting...');
+  console.log('📍 Current URL:', location.href);
+  console.log('📍 Pathname:', location.pathname);
+  console.log('📍 Hash:', location.hash);
+  console.log('📍 Is signup page?', isSignupPage);
+  
+  // Only load if this is actually a signup page
+  if (!isSignupPage) {
+    console.log('❌ Not a signup page, skipping...');
+    return;
+  }
   
   // Add CSS
   const style = document.createElement('style');
