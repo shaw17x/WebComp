@@ -396,14 +396,13 @@ const subscriptionHTML = `
   function initializeSubscriptionPage() {
     console.log('🔧 Initializing subscription page...');
     
-    // Try to find main content area, otherwise use body
+    // 🎯 TARGET FRAMER'S CONTENT AREA SPECIFICALLY
     const mainContent = document.querySelector('main') || 
-                       document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') ||
-                       document.body;
+                       document.querySelector('.main-content') ||
+                       document.querySelector('.framer-page-content');
     
-    console.log('📍 Main content element:', mainContent.tagName);
+    console.log('📍 Main content element:', mainContent?.tagName || 'body');
     
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
@@ -411,16 +410,14 @@ const subscriptionHTML = `
       return;
     }
     
-    // Add subscription management without clearing existing content
-    const subscriptionDiv = document.createElement('div');
-    subscriptionDiv.innerHTML = subscriptionHTML;
-    
-    // Insert after any existing content or at the beginning
-    if (mainContent.children.length > 0) {
-      mainContent.appendChild(subscriptionDiv.firstElementChild);
+    // 🚀 REPLACE CONTENT COMPLETELY - THIS PUTS IT AT TOP
+    if (mainContent) {
+      mainContent.innerHTML = subscriptionHTML;  // ✅ REPLACES CONTENT = TOP PLACEMENT
     } else {
-      mainContent.appendChild(subscriptionDiv.firstElementChild);
+      // Fallback only if no main content found
+      document.body.insertAdjacentHTML('afterbegin', subscriptionHTML);
     }
+    
     console.log('✅ Subscription HTML added');
     
     // Initialize subscription functionality
