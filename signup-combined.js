@@ -324,12 +324,31 @@ const signupHTML = `
     
     console.log('📍 Main content element:', mainContent.tagName);
     
-    // Clear existing content in main area and add signup page
+    // Always clear existing content to prevent mixing
     if (mainContent !== document.body) {
       mainContent.innerHTML = signupHTML;
     } else {
-      // If we're using body, insert at the beginning but after header
+      // For body, aggressively clear all homepage content
+      console.log('🧹 Clearing all homepage content...');
+      
+      // Keep header/nav but clear everything else
       const header = document.querySelector('header') || document.querySelector('nav');
+      const elementsToRemove = [];
+      
+      // Find all direct children of body that aren't header/nav
+      Array.from(document.body.children).forEach(child => {
+        if (child !== header && 
+            !child.classList.contains('auth-signup-component') &&
+            child.tagName !== 'SCRIPT' &&
+            child.tagName !== 'STYLE') {
+          elementsToRemove.push(child);
+        }
+      });
+      
+      // Remove homepage content
+      elementsToRemove.forEach(element => element.remove());
+      
+      // Add signup content
       if (header) {
         header.insertAdjacentHTML('afterend', signupHTML);
       } else {
