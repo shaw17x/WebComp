@@ -2,8 +2,8 @@
 const signupCSS = `
 body{margin:0!important;padding:0!important;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 
-/* Main Container */
-.auth-screen-container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,0,0,0.95) 0%,rgba(20,20,20,0.98) 100%);opacity:0;animation:authScreenEntrance 1.2s cubic-bezier(0.2,0.0,0.2,1.0) forwards}
+/* Main Container - CHANGED TO UNIQUE CLASS */
+.signup-screen-container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,0,0,0.95) 0%,rgba(20,20,20,0.98) 100%);opacity:0;animation:authScreenEntrance 1.2s cubic-bezier(0.2,0.0,0.2,1.0) forwards}
 
 /* Floating Card */
 .auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);animation:cardFloat 6s ease-in-out infinite}
@@ -83,8 +83,8 @@ body{margin:0!important;padding:0!important;font-family:'Inter',-apple-system,Bl
 @keyframes floatOrb{0%,100%{transform:translateY(0px) translateX(0px) scale(1);opacity:0.3}33%{transform:translateY(-20px) translateX(10px) scale(1.1);opacity:0.6}66%{transform:translateY(10px) translateX(-10px) scale(0.9);opacity:0.4}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Responsive */
-@media(max-width:768px){.auth-screen-container{padding:1rem}.auth-screen-card{max-width:28rem}}
+/* Responsive - CHANGED TO UNIQUE CLASS */
+@media(max-width:768px){.signup-screen-container{padding:1rem}.auth-screen-card{max-width:28rem}}
 
 /* Back to Home Button */
 .back-home-container{position:fixed;top:2rem;left:2rem;z-index:1000}
@@ -105,7 +105,7 @@ const signupHTML = `
   </a>
 </div>
 
-<div class="auth-screen-container">
+<div class="signup-screen-container">
   <!-- Animated background elements -->
   <div class="floating-orbs">
     <div class="floating-orb floating-orb-1"></div>
@@ -386,4 +386,4 @@ const signupHTML = `
       });
     }
   }
-})();
+})(); 
