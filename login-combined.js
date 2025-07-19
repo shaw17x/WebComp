@@ -330,8 +330,24 @@ const loginHTML = `
     
     if (form) {
       console.log('✅ Login form found');
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        
+        if (!emailInput || !passwordInput) {
+          console.log('❌ Email or password input not found');
+          return;
+        }
+        
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        
+        if (!email || !password) {
+          alert('Please enter both email and password');
+          return;
+        }
         
         // Show loading state
         if (submitText) {
@@ -343,12 +359,72 @@ const loginHTML = `
           `;
         }
         
-        // Simulate login process
-        setTimeout(() => {
-          // After successful login, redirect to subscription management
-          console.log('✅ Login successful, redirecting to subscription management...');
-          window.location.href = '/subscription';
-        }, 2000);
+        try {
+          // Initialize auth client if needed
+          if (!window.ghostPilotAuth) {
+            // Load auth client if not already loaded
+            const authScript = document.createElement('script');
+            authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
+            document.head.appendChild(authScript);
+            
+            // Wait for script to load
+            await new Promise(resolve => {
+              authScript.onload = resolve;
+            });
+          }
+          
+          // Perform real login
+          const result = await window.ghostPilotAuth.signIn(email, password);
+          
+          if (result.success) {
+            console.log('✅ Login successful, redirecting to subscription management...');
+            
+            // Show success message briefly
+            if (submitText) {
+              submitText.innerHTML = `
+                <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                  ✅ Welcome back!
+                </div>
+              `;
+            }
+            
+            // Redirect after short delay
+            setTimeout(() => {
+              window.location.href = '/subscription';
+            }, 1500);
+            
+          } else {
+            // Handle login error
+            console.error('❌ Login failed:', result.error);
+            
+            if (submitText) {
+              submitText.textContent = 'Sign In';
+            }
+            
+            // Show user-friendly error message
+            let errorMessage = 'Failed to sign in. ';
+            if (result.error.includes('Invalid login credentials')) {
+              errorMessage += 'Invalid email or password.';
+            } else if (result.error.includes('Email not confirmed')) {
+              errorMessage += 'Please check your email and confirm your account.';
+            } else if (result.error.includes('Too many requests')) {
+              errorMessage += 'Too many attempts. Please try again later.';
+            } else {
+              errorMessage += 'Please check your credentials and try again.';
+            }
+            
+            alert(errorMessage);
+          }
+          
+        } catch (error) {
+          console.error('❌ Login error:', error);
+          
+          if (submitText) {
+            submitText.textContent = 'Sign In';
+          }
+          
+          alert('Failed to sign in. Please check your internet connection and try again.');
+        }
       });
     } else {
       console.log('❌ Login form not found');
