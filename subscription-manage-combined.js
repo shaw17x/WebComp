@@ -457,40 +457,45 @@ const subscriptionHTML = `
         });
       }
       
-      // Initialize auth
-      await window.ghostPilotAuth.initialize();
-      
-      // Check if user is authenticated
-      if (!window.ghostPilotAuth.isAuthenticated()) {
-        console.log('❌ User not authenticated, redirecting to login');
+      // Get real user data from Supabase
+      const token = localStorage.getItem('supabase_token');
+      if (!token) {
+        console.log('❌ No token found, redirecting to login');
         window.location.href = '/login';
         return;
       }
       
-      // Get real user data from Supabase
-      const [subscriptionData, usageData] = await Promise.all([
-        window.ghostPilotAuth.getUserSubscription(),
-        window.ghostPilotAuth.getUserUsage()
-      ]);
+      const user = await window.ghostPilotAuth.getUser(token);
+      if (!user?.id) {
+        console.log('❌ Invalid user, redirecting to login');
+        window.location.href = '/login';
+        return;
+      }
       
-      // Prepare user data object
+       // Get license data (contains usage info)
+       const licenseData = await window.ghostPilotAuth.getLicenseData(user.id);
+       const license = licenseData[0] || {};
+       
+      // Prepare real user data
       const userData = {
-        currentPlan: subscriptionData?.tier || 'FREE',
-        isActive: subscriptionData?.status === 'active',
+        currentPlan: license.tier || 'FREE',
+        isActive: license.status === 'active',
         usage: {
           screenshots: { 
-            used: usageData?.screenshots_used || 0, 
-            limit: usageData?.screenshots_limit || 10 
+            used: license.daily_screenshots_used || 0, 
+            limit: license.daily_screenshot_limit || 3 
           },
           aiRequests: { 
-            used: usageData?.ai_requests_used || 0, 
-            limit: usageData?.ai_requests_limit || 10 
+            used: license.daily_ai_requests_used || 0, 
+            limit: license.daily_ai_request_limit || 3 
           }
         },
-        resetTime: usageData?.usage_reset_time ? new Date(usageData.usage_reset_time) : new Date(Date.now() + 24 * 60 * 60 * 1000)
+        resetTime: license.usage_reset_time ? new Date(license.usage_reset_time) : new Date(Date.now() + 24 * 60 * 60 * 1000),
+        user: user,
+        license: license
       };
       
-      console.log('📊 User data loaded:', userData);
+      console.log('📊 Real user data loaded:', userData);
       
       // Update current status
       updateCurrentStatus(userData);
