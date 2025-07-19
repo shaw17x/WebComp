@@ -359,17 +359,27 @@ const subscriptionHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  // Check if we should load subscription management page
-  const isSubscriptionPage = location.pathname.includes('subscription') || 
-                            location.pathname.includes('manage') || 
-                            location.pathname.includes('account') ||
-                            location.hash.includes('subscription') ||
-                            location.hash.includes('manage');
+  // 🎯 STRICT URL DETECTION - Only load on specific subscription URLs
+  const pathname = location.pathname.toLowerCase();
+  const hash = location.hash.toLowerCase();
+  
+  const isSubscriptionPage = pathname === '/subscription' || 
+                            pathname === '/subscription/' ||
+                            pathname === '/manage' || 
+                            pathname === '/manage/' ||
+                            pathname === '/account' ||
+                            pathname === '/account/' ||
+                            pathname.endsWith('/subscription') ||
+                            pathname.endsWith('/manage') ||
+                            pathname.endsWith('/account') ||
+                            hash === '#subscription' ||
+                            hash === '#manage' ||
+                            hash === '#account';
   
   console.log('🚀 Subscription management component starting...');
   console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', location.pathname);
-  console.log('📍 Hash:', location.hash);
+  console.log('📍 Pathname:', pathname);
+  console.log('📍 Hash:', hash);
   console.log('📍 Is subscription page?', isSubscriptionPage);
   
   // Only load if this is actually a subscription management page
@@ -402,20 +412,26 @@ const subscriptionHTML = `
       return;
     }
     
-    // 🎯 SIMPLE AND RELIABLE CONTENT INJECTION
-    const mainContent = document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') || 
-                       document.querySelector('.main-content') ||
-                       document.querySelector('main');
+    // 🎯 USE EXACT SAME LOGIC AS WORKING SIGNUP PAGE
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
     
-    console.log('📍 Main content element:', mainContent?.tagName || 'body');
+    console.log('📍 Main content element:', mainContent.tagName);
     
-    if (mainContent) {
-      // Simple innerHTML replacement - this preserves the complete HTML structure
+    // 🚀 EXACT SAME INJECTION LOGIC AS SIGNUP
+    if (mainContent !== document.body) {
       mainContent.innerHTML = subscriptionHTML;
     } else {
-      // Fallback to body insertion
-      document.body.insertAdjacentHTML('afterbegin', subscriptionHTML);
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', subscriptionHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', subscriptionHTML);
+      }
     }
     
     console.log('✅ Subscription HTML added');
