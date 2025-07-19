@@ -440,30 +440,93 @@ const subscriptionHTML = `
     initializeSubscriptionLogic();
   }
   
-  function initializeSubscriptionLogic() {
+  async function initializeSubscriptionLogic() {
     console.log('🔧 Initializing subscription logic...');
     
-    // Mock subscription data - in real app this would come from your license manager
-    const mockUserData = {
-      currentPlan: 'FREE',
-      isActive: true,
-      usage: {
-        screenshots: { used: 3, limit: 10 },
-        aiRequests: { used: 7, limit: 10 }
-      },
-      resetTime: new Date(Date.now() + 6 * 60 * 60 * 1000) // 6 hours from now
-    };
-    
-    // Update current status
-    updateCurrentStatus(mockUserData);
-    
-    // Setup plan buttons
-    setupPlanButtons(mockUserData);
-    
-    // Setup account management buttons
-    setupAccountButtons();
-    
-    console.log('✅ Subscription functionality initialized');
+    try {
+      // Initialize auth client if needed
+      if (!window.ghostPilotAuth) {
+        // Load auth client if not already loaded
+        const authScript = document.createElement('script');
+        authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
+        document.head.appendChild(authScript);
+        
+        // Wait for script to load
+        await new Promise(resolve => {
+          authScript.onload = resolve;
+        });
+      }
+      
+      // Initialize auth
+      await window.ghostPilotAuth.initialize();
+      
+      // Check if user is authenticated
+      if (!window.ghostPilotAuth.isAuthenticated()) {
+        console.log('❌ User not authenticated, redirecting to login');
+        window.location.href = '/login';
+        return;
+      }
+      
+      // Get real user data from Supabase
+      const [subscriptionData, usageData] = await Promise.all([
+        window.ghostPilotAuth.getUserSubscription(),
+        window.ghostPilotAuth.getUserUsage()
+      ]);
+      
+      // Prepare user data object
+      const userData = {
+        currentPlan: subscriptionData?.tier || 'FREE',
+        isActive: subscriptionData?.status === 'active',
+        usage: {
+          screenshots: { 
+            used: usageData?.screenshots_used || 0, 
+            limit: usageData?.screenshots_limit || 10 
+          },
+          aiRequests: { 
+            used: usageData?.ai_requests_used || 0, 
+            limit: usageData?.ai_requests_limit || 10 
+          }
+        },
+        resetTime: usageData?.usage_reset_time ? new Date(usageData.usage_reset_time) : new Date(Date.now() + 24 * 60 * 60 * 1000)
+      };
+      
+      console.log('📊 User data loaded:', userData);
+      
+      // Update current status
+      updateCurrentStatus(userData);
+      
+      // Setup plan buttons
+      setupPlanButtons(userData);
+      
+      // Setup account management buttons
+      setupAccountButtons();
+      
+      console.log('✅ Subscription functionality initialized');
+      
+    } catch (error) {
+      console.error('❌ Failed to initialize subscription logic:', error);
+      
+      // Show error state or fallback to mock data
+      const fallbackData = {
+        currentPlan: 'FREE',
+        isActive: false,
+        usage: {
+          screenshots: { used: 0, limit: 10 },
+          aiRequests: { used: 0, limit: 10 }
+        },
+        resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      };
+      
+      updateCurrentStatus(fallbackData);
+      setupPlanButtons(fallbackData);
+      setupAccountButtons();
+      
+      // Show error message to user
+      const statusTitle = document.getElementById('currentPlanName');
+      if (statusTitle) {
+        statusTitle.textContent = 'Unable to load data';
+      }
+    }
   }
   
   function updateCurrentStatus(userData) {
@@ -586,27 +649,89 @@ const subscriptionHTML = `
     });
   }
   
-  function handlePlanUpgrade(planType) {
+  async function handlePlanUpgrade(planType) {
     console.log(`🚀 Upgrade to ${planType} clicked`);
     
     // Show loading state
     const button = document.getElementById(`${planType.toLowerCase()}Button`);
-    if (button) {
-      const originalText = button.innerHTML;
-      button.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-          <div class="loading-spinner"></div>
-          Processing...
-        </div>
-      `;
-      button.disabled = true;
+    if (!button) return;
+    
+    const originalText = button.innerHTML;
+    button.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+        <div class="loading-spinner"></div>
+        Processing...
+      </div>
+    `;
+    button.disabled = true;
+    
+    try {
+      // Check if user is authenticated
+      if (!window.ghostPilotAuth?.isAuthenticated()) {
+        alert('Please sign in to upgrade your plan');
+        window.location.href = '/login';
+        return;
+      }
       
-      // Simulate upgrade process
-      setTimeout(() => {
-        alert(`${planType} upgrade functionality would be implemented here!`);
-        button.innerHTML = originalText;
-        button.disabled = false;
-      }, 2000);
+      // For FREE tier, handle downgrade
+      if (planType === 'FREE') {
+        const confirmDowngrade = confirm('Are you sure you want to downgrade to the FREE plan? You will lose access to premium features.');
+        if (!confirmDowngrade) {
+          button.innerHTML = originalText;
+          button.disabled = false;
+          return;
+        }
+      }
+      
+      // For PRO/ULTRA, simulate payment process
+      if (planType === 'PRO' || planType === 'ULTRA') {
+        const prices = { PRO: '$19.99', ULTRA: '$99.99' };
+        const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
+        
+        if (!confirmUpgrade) {
+          button.innerHTML = originalText;
+          button.disabled = false;
+          return;
+        }
+      }
+      
+      // Update subscription tier in database
+      const result = await window.ghostPilotAuth.updateSubscriptionTier(planType);
+      
+      if (result.success) {
+        // Show success message
+        button.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            ✅ ${planType === 'FREE' ? 'Downgraded' : 'Upgraded'}!
+          </div>
+        `;
+        
+        // Wait a moment then reload page to show updated data
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+        
+      } else {
+        throw new Error(result.error || 'Failed to update subscription');
+      }
+      
+    } catch (error) {
+      console.error('❌ Plan upgrade failed:', error);
+      
+      // Show error message
+      button.innerHTML = originalText;
+      button.disabled = false;
+      
+      let errorMessage = 'Failed to update subscription. ';
+      if (error.message.includes('not authenticated')) {
+        errorMessage += 'Please sign in and try again.';
+      } else if (error.message.includes('network')) {
+        errorMessage += 'Please check your internet connection.';
+      } else {
+        errorMessage += 'Please try again later.';
+      }
+      
+      alert(errorMessage);
     }
   }
   
