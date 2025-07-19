@@ -388,9 +388,19 @@ const loginHTML = `
               `;
             }
             
+            // Store user data and create profile dropdown
+            localStorage.setItem('supabase_token', result.token);
+            localStorage.setItem('supabase_user', JSON.stringify(result.user));
+            
+            // Add profile dropdown and hide auth buttons
+            setTimeout(() => {
+              addGlobalProfile();
+              hideFramerAuthButtons();
+            }, 500);
+            
             // Redirect after short delay
             setTimeout(() => {
-              window.location.href = '/subscription';
+              window.location.href = '/';
             }, 1500);
             
           } else {
@@ -431,5 +441,90 @@ const loginHTML = `
     }
     
     console.log('✅ Login interactions initialized');
+  }
+
+  // Add global profile dropdown functionality
+  function addGlobalProfile() {
+    if (document.querySelector('#globalProfile')) return;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      #globalProfile{position:fixed;top:20px;right:20px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+      .profile-trigger{background:rgba(31,41,55,0.95);backdrop-filter:blur(20px);border:1px solid rgba(75,85,99,0.3);border-radius:16px;padding:12px 16px;color:white;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.3s ease;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+      .profile-trigger:hover{background:rgba(55,65,81,0.95);border-color:rgba(107,114,128,0.4);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+      .profile-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+      .profile-name{font-weight:500;font-size:14px}
+      .profile-menu{position:absolute;top:calc(100% + 8px);right:0;background:rgba(31,41,55,0.98);backdrop-filter:blur(24px);border:1px solid rgba(75,85,99,0.3);border-radius:16px;min-width:220px;padding:8px;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:menuSlide 0.2s ease-out}
+      .profile-menu.show{display:block}
+      .profile-header{padding:16px 12px 12px 12px;border-bottom:1px solid rgba(75,85,99,0.3);margin-bottom:8px}
+      .profile-user-name{color:white;font-weight:600;font-size:14px;margin-bottom:4px}
+      .profile-user-email{color:rgba(156,163,175,0.9);font-size:12px}
+      .profile-item{padding:12px;color:rgba(229,231,235,0.95);cursor:pointer;border-radius:12px;transition:all 0.2s ease;display:flex;align-items:center;gap:12px;font-size:14px;margin:2px 0}
+      .profile-item:hover{background:rgba(55,65,81,0.8);color:white}
+      .profile-logout{color:#ef4444!important}
+      .profile-logout:hover{background:rgba(239,68,68,0.1)!important}
+      @keyframes menuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+      .hidden-auth{display:none!important}
+    `;
+    document.head.appendChild(style);
+    
+    const user = JSON.parse(localStorage.getItem('supabase_user') || '{}');
+    const initials = (user.email || 'U').split('@')[0].slice(0, 2).toUpperCase();
+    const name = user.email?.split('@')[0] || 'User';
+    
+    const dropdown = document.createElement('div');
+    dropdown.id = 'globalProfile';
+    dropdown.innerHTML = `
+      <div class="profile-trigger" onclick="document.querySelector('.profile-menu').classList.toggle('show')">
+        <div class="profile-avatar">${initials}</div>
+        <span class="profile-name">${name}</span>
+      </div>
+      <div class="profile-menu">
+        <div class="profile-header">
+          <div class="profile-user-name">${name}</div>
+          <div class="profile-user-email">${user.email}</div>
+        </div>
+        <div class="profile-item" onclick="location.href='/subscription'">
+          <span>📊</span> Account Dashboard
+        </div>
+        <div class="profile-item profile-logout" onclick="localStorage.clear();location.href='/'">
+          <span>🚪</span> Log Out
+        </div>
+      </div>
+    `;
+    document.body.appendChild(dropdown);
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) {
+        document.querySelector('.profile-menu').classList.remove('show');
+      }
+    });
+  }
+  
+  // Hide Framer auth buttons
+  function hideFramerAuthButtons() {
+    const selectors = [
+      '[href*="login"]', '[href*="signin"]', '[href*="signup"]', '[href*="sign-up"]',
+      'button[onclick*="login"]', 'a[onclick*="signin"]', 'a[data-framer-name*="login"]',
+      'a[data-framer-name*="signin"]', 'a[data-framer-name*="signup"]'
+    ];
+    
+    selectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(element => {
+        const text = element.textContent.toLowerCase();
+        if ((text.includes('sign') || text.includes('log')) && !element.closest('#globalProfile')) {
+          element.style.display = 'none';
+        }
+      });
+    });
+  }
+  
+  // Check if user is already logged in on page load
+  if (localStorage.getItem('supabase_token')) {
+    setTimeout(() => {
+      addGlobalProfile();
+      hideFramerAuthButtons();
+    }, 1000);
   }
 })(); 
