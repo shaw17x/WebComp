@@ -1,4 +1,4 @@
-// Pricing Page Combined - CSS + HTML Content
+// Pricing Page Combined - CSS + HTML Content - ENHANCED VERSION
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
@@ -350,85 +350,141 @@ window.toggleFAQ = function(index) {
   }
 };
 
-// Auto-execute function to inject CSS and HTML
-(function() {
-  // Add CSS
+// ENHANCED initialization function with proper timing
+function initializePricingPage() {
+  console.log('🚀 Initializing pricing page...');
+  
+  // Clear existing pricing content first
+  const existingPricing = document.querySelector('.pricing-page');
+  if (existingPricing) {
+    existingPricing.remove();
+    console.log('🧹 Removed existing pricing content');
+  }
+  
+  // Remove existing pricing CSS
+  const existingStyles = document.querySelectorAll('style[data-pricing-styles]');
+  existingStyles.forEach(style => style.remove());
+  
+  // Add CSS with proper attribution and priority
   const style = document.createElement('style');
+  style.setAttribute('data-pricing-styles', 'true');
   style.textContent = pricingCSS;
   document.head.appendChild(style);
+  console.log('✅ CSS injected');
   
-  // Add HTML when DOM is ready - find main content area
+  // Force style calculation
+  document.head.offsetHeight;
+  
+  // Find main content area with multiple fallbacks
+  const mainContent = document.querySelector('main') || 
+                     document.querySelector('.main-content') || 
+                     document.querySelector('[data-framer-name="Content"]') ||
+                     document.querySelector('.framer-page-content') ||
+                     document.querySelector('#root') ||
+                     document.body;
+  
+  console.log('📍 Target container:', mainContent.tagName);
+  
+  // Clear and inject content
+  if (mainContent !== document.body) {
+    mainContent.innerHTML = pricingHTML;
+  } else {
+    // If using body, insert after header
+    const header = document.querySelector('header') || document.querySelector('nav');
+    if (header) {
+      header.insertAdjacentHTML('afterend', pricingHTML);
+    } else {
+      document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+    }
+  }
+  
+  console.log('✅ HTML injected');
+  
+  // Force reflow and repaint
+  const pricingElement = document.querySelector('.pricing-page');
+  if (pricingElement) {
+    pricingElement.offsetHeight;
+    pricingElement.style.visibility = 'visible';
+    pricingElement.style.opacity = '1';
+    console.log('✅ Pricing page visible and styled');
+  }
+  
+  // Initialize animations after a brief delay
+  setTimeout(initializeFooterAnimation, 100);
+}
+
+function initializeFooterAnimation() {
+  const handleScroll = () => {
+    const cards = document.querySelectorAll("[data-card-stack]");
+    
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const cardTop = rect.top;
+      const cardHeight = rect.height;
+      
+      // Calculate progress based on scroll position
+      const progress = Math.max(
+        0,
+        Math.min(
+          1,
+          (windowHeight - cardTop) / (windowHeight + cardHeight)
+        )
+      );
+      
+      // Apply stacking effect
+      if (progress > 0 && progress < 1) {
+        const scale = 0.95 + progress * 0.05;
+        const translateY = (1 - progress) * 20;
+        const opacity = 0.3 + progress * 0.7;
+        
+        card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        card.style.opacity = opacity.toString();
+      } else if (progress >= 1) {
+        card.style.transform = "scale(1) translateY(0px)";
+        card.style.opacity = "1";
+      } else {
+        card.style.transform = "scale(0.95) translateY(20px)";
+        card.style.opacity = "0.3";
+      }
+    });
+  };
+  
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // Initial call
+  console.log('✅ Footer animation initialized');
+}
+
+// ENHANCED Auto-execute with multiple initialization strategies
+(function() {
+  console.log('💰 Pricing script loaded, DOM state:', document.readyState);
+  
+  // Strategy 1: Immediate execution if DOM is ready
+  if (document.readyState !== 'loading') {
+    setTimeout(initializePricingPage, 50);
+  }
+  
+  // Strategy 2: Wait for DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      initializePricingPage();
+      setTimeout(initializePricingPage, 50);
     });
-  } else {
-    initializePricingPage();
   }
   
-  function initializePricingPage() {
-    // Try to find main content area, otherwise use body
-    const mainContent = document.querySelector('main') || 
-                       document.querySelector('.main-content') || 
-                       document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') ||
-                       document.body;
-    
-    // Clear existing content in main area and add pricing page
-    if (mainContent !== document.body) {
-      mainContent.innerHTML = pricingHTML;
-    } else {
-      // If we're using body, insert at the beginning but after header
-      const header = document.querySelector('header') || document.querySelector('nav');
-      if (header) {
-        header.insertAdjacentHTML('afterend', pricingHTML);
-      } else {
-        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+  // Strategy 3: Backup timing-based initialization
+  setTimeout(initializePricingPage, 200);
+  setTimeout(initializePricingPage, 500);
+  
+  // Strategy 4: Watch for viewport changes (SPA navigation)
+  let lastURL = location.href;
+  new MutationObserver(() => {
+    const currentURL = location.href;
+    if (currentURL !== lastURL) {
+      lastURL = currentURL;
+      if (currentURL.includes('/pricing')) {
+        setTimeout(initializePricingPage, 100);
       }
     }
-    
-    // Initialize footer scroll animation
-    initializeFooterAnimation();
-  }
+  }).observe(document, {subtree: true, childList: true});
   
-  function initializeFooterAnimation() {
-    const handleScroll = () => {
-      const cards = document.querySelectorAll("[data-card-stack]");
-      
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const cardTop = rect.top;
-        const cardHeight = rect.height;
-        
-        // Calculate progress based on scroll position
-        const progress = Math.max(
-          0,
-          Math.min(
-            1,
-            (windowHeight - cardTop) / (windowHeight + cardHeight)
-          )
-        );
-        
-        // Apply stacking effect
-        if (progress > 0 && progress < 1) {
-          const scale = 0.95 + progress * 0.05;
-          const translateY = (1 - progress) * 20;
-          const opacity = 0.3 + progress * 0.7;
-          
-          card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-          card.style.opacity = opacity.toString();
-        } else if (progress >= 1) {
-          card.style.transform = "scale(1) translateY(0px)";
-          card.style.opacity = "1";
-        } else {
-          card.style.transform = "scale(0.95) translateY(20px)";
-          card.style.opacity = "0.3";
-        }
-      });
-    };
-    
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial call
-  }
 })(); 
