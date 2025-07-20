@@ -506,7 +506,7 @@ const signupHTML = `
             if (submitText) {
               submitText.innerHTML = `
                 <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-                  ✅ Account Created!
+                  ✅ Account Created! Logging you in...
                 </div>
               `;
               console.log('🎉 Success message displayed');
@@ -517,19 +517,33 @@ const signupHTML = `
               localStorage.setItem('supabase_user', JSON.stringify(result.user));
               console.log('💾 User data stored in localStorage');
               
+              // Set session data to keep user logged in
+              localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
+              console.log('🔐 Session data stored');
+              
               // Trigger storage event for React components
               window.dispatchEvent(new StorageEvent('storage', {
                 key: 'supabase_user',
                 newValue: JSON.stringify(result.user)
               }));
               console.log('📡 Storage event dispatched');
+              
+              // Trigger auth state change event
+              window.dispatchEvent(new CustomEvent('authStateChanged', {
+                detail: { 
+                  event: 'SIGNED_IN', 
+                  session: result.data.session, 
+                  user: result.user 
+                }
+              }));
+              console.log('🔄 Auth state change event dispatched');
             }
             
-            // Redirect after brief delay
-            console.log('🔄 Redirecting to login in 2 seconds...');
+            // Redirect to home page (logged in) instead of login page
+            console.log('🔄 Redirecting to home page in 2 seconds...');
             setTimeout(() => {
-              console.log('➡️ Redirecting to /login');
-              window.location.href = '/login';
+              console.log('➡️ Redirecting to / (home)');
+              window.location.href = '/';
             }, 2000);
             
           } else {
