@@ -1,4 +1,4 @@
-// Ghost Pilot Authentication Client - Shared Supabase Integration
+// Ghost Pilot Authentication Client - Shared Supabase Integration (FIXED VERSION)
 // This module provides authentication functionality for all website components
 
 class GhostPilotAuth {
@@ -12,6 +12,10 @@ class GhostPilotAuth {
       url: 'https://hmzpsbeeeqldffajfckh.supabase.co',
       anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhtenBzYmVlZXFsZGZmYWpmY2toIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzMzY5NjUsImV4cCI6MjA2NDkxMjk2NX0.suyzPHjjw7t27tCS8e_hNjjAOaGCU8mdOWOL6kxEVvM'
     };
+
+    // Expose config for debugging
+    this.supabaseUrl = this.config.url;
+    this.supabaseKey = this.config.anonKey;
   }
 
   // Initialize Supabase client
@@ -19,6 +23,8 @@ class GhostPilotAuth {
     if (this.initialized) return;
 
     try {
+      console.log('🔄 Initializing Supabase auth client...');
+      
       // Load Supabase from CDN
       await this.loadSupabaseScript();
       
@@ -28,9 +34,13 @@ class GhostPilotAuth {
         this.config.anonKey
       );
 
+      console.log('✅ Supabase client created');
+
       // Check current session
       const { data: { session } } = await this.supabase.auth.getSession();
       this.currentUser = session?.user || null;
+      
+      console.log('👤 Current session user:', this.currentUser?.email || 'None');
 
       // Listen for auth changes
       this.supabase.auth.onAuthStateChange((event, session) => {
@@ -39,7 +49,7 @@ class GhostPilotAuth {
       });
 
       this.initialized = true;
-      console.log('✅ Ghost Pilot Auth initialized');
+      console.log('✅ Ghost Pilot Auth initialized successfully');
       
     } catch (error) {
       console.error('❌ Auth initialization failed:', error);
@@ -51,14 +61,22 @@ class GhostPilotAuth {
   loadSupabaseScript() {
     return new Promise((resolve, reject) => {
       if (window.supabase) {
+        console.log('✅ Supabase already loaded');
         resolve();
         return;
       }
 
+      console.log('📥 Loading Supabase from CDN...');
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-      script.onload = resolve;
-      script.onerror = reject;
+      script.onload = () => {
+        console.log('✅ Supabase script loaded');
+        resolve();
+      };
+      script.onerror = (error) => {
+        console.error('❌ Supabase script failed to load:', error);
+        reject(error);
+      };
       document.head.appendChild(script);
     });
   }
@@ -73,11 +91,18 @@ class GhostPilotAuth {
     }));
   }
 
-  // Sign up new user
+  // Sign up new user (FIXED VERSION)
   async signUp(email, password, additionalData = {}) {
-    if (!this.initialized) await this.initialize();
+    console.log('🚀 Starting signup process with email:', email);
+    
+    if (!this.initialized) {
+      console.log('⏳ Auth not initialized, initializing now...');
+      await this.initialize();
+    }
 
     try {
+      console.log('📝 Calling Supabase signUp...');
+      
       const { data, error } = await this.supabase.auth.signUp({
         email,
         password,
@@ -89,38 +114,90 @@ class GhostPilotAuth {
         }
       });
 
-      if (error) throw error;
+      console.log('📥 Supabase signup response:');
+      console.log('📥 Data:', data);
+      console.log('📥 Error:', error);
+      console.log('📥 User created:', !!data?.user);
+      console.log('📥 User ID:', data?.user?.id);
 
-      // Create initial license record for new user
-      if (data.user) {
-        await this.createInitialLicense(data.user.id);
+      if (error) {
+        console.error('❌ Supabase signup error:', error);
+        return { success: false, error: error.message, details: error };
       }
 
-      return { success: true, data };
+      // Check if user was created
+      if (!data?.user) {
+        console.error('❌ No user returned from signup');
+        return { success: false, error: 'No user data returned from signup' };
+      }
+
+      console.log('✅ User signup successful, user ID:', data.user.id);
+
+      // Try to create initial license record (NON-BLOCKING)
+      if (data.user) {
+        console.log('🔧 Creating initial license...');
+        try {
+          await this.createInitialLicense(data.user.id);
+          console.log('✅ Initial license created successfully');
+        } catch (licenseError) {
+          console.warn('⚠️ License creation failed (non-blocking):', licenseError);
+          // Don't fail the whole signup if license creation fails
+        }
+      }
+
+      console.log('🎉 Signup process completed successfully');
+      return { success: true, data, user: data.user };
       
     } catch (error) {
-      console.error('❌ Signup failed:', error);
-      return { success: false, error: error.message };
+      console.error('💥 Signup process failed with error:');
+      console.error('💥 Error type:', error.constructor.name);
+      console.error('💥 Error message:', error.message);
+      console.error('💥 Error stack:', error.stack);
+      
+      return { 
+        success: false, 
+        error: error.message || 'Unknown signup error',
+        details: error 
+      };
     }
   }
 
   // Sign in existing user
   async signIn(email, password) {
-    if (!this.initialized) await this.initialize();
+    console.log('🔑 Starting signin process with email:', email);
+    
+    if (!this.initialized) {
+      console.log('⏳ Auth not initialized, initializing now...');
+      await this.initialize();
+    }
 
     try {
+      console.log('📝 Calling Supabase signIn...');
+      
       const { data, error } = await this.supabase.auth.signInWithPassword({
         email,
         password
       });
 
-      if (error) throw error;
+      console.log('📥 Supabase signin response:');
+      console.log('📥 Data:', data);
+      console.log('📥 Error:', error);
 
-      return { success: true, data };
+      if (error) {
+        console.error('❌ Supabase signin error:', error);
+        return { success: false, error: error.message, details: error };
+      }
+
+      console.log('✅ Signin successful');
+      return { success: true, data, user: data?.user };
       
     } catch (error) {
-      console.error('❌ Login failed:', error);
-      return { success: false, error: error.message };
+      console.error('💥 Signin process failed:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Unknown signin error',
+        details: error 
+      };
     }
   }
 
@@ -140,9 +217,22 @@ class GhostPilotAuth {
     }
   }
 
-  // Create initial FREE license for new user
+  // Create initial FREE license for new user (IMPROVED)
   async createInitialLicense(userId) {
     try {
+      console.log('🎫 Creating initial license for user:', userId);
+      
+      // Check if license table exists
+      const { error: tableError } = await this.supabase
+        .from('license_records')
+        .select('id')
+        .limit(1);
+
+      if (tableError) {
+        console.warn('⚠️ License table might not exist:', tableError.message);
+        throw new Error(`License table error: ${tableError.message}`);
+      }
+
       // Generate a machine ID for website users (different from desktop)
       const websiteMachineId = `website-${userId.substring(0, 8)}`;
       
@@ -161,18 +251,28 @@ class GhostPilotAuth {
         max_devices: 1
       };
 
-      const { error } = await this.supabase
+      console.log('📋 License data to insert:', licenseData);
+
+      const { data, error } = await this.supabase
         .from('license_records')
-        .insert(licenseData);
+        .insert(licenseData)
+        .select()
+        .single();
 
       if (error) {
         console.error('❌ Failed to create initial license:', error);
+        throw error;
       } else {
-        console.log('✅ Initial FREE license created for user');
+        console.log('✅ Initial FREE license created:', data);
+        return data;
       }
       
     } catch (error) {
-      console.error('❌ License creation error:', error);
+      console.error('💥 License creation error details:');
+      console.error('💥 Error type:', error.constructor.name);
+      console.error('💥 Error message:', error.message);
+      console.error('💥 Error code:', error.code);
+      throw error; // Re-throw so caller can handle
     }
   }
 
