@@ -360,21 +360,26 @@ const signupHTML = `
             const authScript = document.createElement('script');
             authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
             
-            authScript.onload = function() {
-              console.log('✅ Auth client script loaded successfully');
-            };
-            
-            authScript.onerror = function() {
-              console.error('❌ Auth client script failed to load');
-            };
-            
             document.head.appendChild(authScript);
+            console.log('📤 Auth script tag added to head');
             
-            // Wait for script to load
+            // Wait for script to load with proper error handling
             await new Promise((resolve, reject) => {
-              authScript.onload = resolve;
-              authScript.onerror = reject;
-              setTimeout(() => reject(new Error('Auth client load timeout')), 10000);
+              authScript.onload = function() {
+                console.log('✅ Auth client script loaded successfully');
+                resolve();
+              };
+              
+              authScript.onerror = function(error) {
+                console.error('❌ Auth client script failed to load:', error);
+                reject(new Error('Failed to load auth client script'));
+              };
+              
+              // Timeout after 10 seconds
+              setTimeout(() => {
+                console.error('⏰ Auth client script load timeout');
+                reject(new Error('Auth client load timeout after 10 seconds'));
+              }, 10000);
             });
             
             console.log('⏳ Waiting for auth client to initialize...');
@@ -473,16 +478,18 @@ const signupHTML = `
           }
         } catch (error) {
           console.error('💥 Signup process error:');
-          console.error('💥 Error type:', error.name);
-          console.error('💥 Error message:', error.message);
-          console.error('💥 Error stack:', error.stack);
+          console.error('💥 Full error object:', error);
+          console.error('💥 Error type:', error?.name || 'Unknown');
+          console.error('💥 Error message:', error?.message || 'Unknown error');
+          console.error('💥 Error stack:', error?.stack || 'No stack trace');
           
           if (submitText) {
             submitText.textContent = 'Create Account';
             console.log('🔄 Button reset after error');
           }
           
-          alert('Failed to create account. Error: ' + error.message);
+          const errorMessage = error?.message || 'Unknown error occurred';
+          alert('Failed to create account. Error: ' + errorMessage);
         }
       });
     } else {
