@@ -46,6 +46,25 @@ const signupCSS = `
 /* Loading Spinner */
 .loading-spinner{width:1rem;height:1rem;border:2px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-right:0.5rem}
 
+/* Verification Code Input */
+.verification-container{display:none;padding:0 1.5rem 1rem}
+.verification-container.show{display:block}
+.verification-title{font-size:1.125rem;font-weight:600;color:rgba(255,255,255,0.9);text-align:center;margin-bottom:0.5rem}
+.verification-subtitle{font-size:0.75rem;color:rgba(255,255,255,0.6);text-align:center;margin-bottom:1.5rem;line-height:1.4}
+.verification-code-inputs{display:flex;justify-content:center;gap:0.75rem;margin-bottom:1rem}
+.verification-digit{width:3rem;height:3rem;text-align:center;font-size:1.25rem;font-weight:bold;border-radius:0.5rem;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;backdrop-filter:blur(10px);transition:all 0.2s}
+.verification-digit:focus{outline:none;border-color:rgba(255,255,255,0.4);box-shadow:0 0 0 2px rgba(255,255,255,0.1)}
+.verification-digit:disabled{opacity:0.5;cursor:not-allowed}
+.verification-buttons{display:flex;flex-direction:column;gap:0.75rem}
+.verification-verify{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer}
+.verification-verify:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
+.verification-verify:disabled{opacity:0.5;cursor:not-allowed}
+.verification-resend{background:none;border:none;color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:underline;cursor:pointer;transition:color 0.2s}
+.verification-resend:hover{color:rgba(255,255,255,0.8)}
+.verification-resend:disabled{opacity:0.5;cursor:not-allowed}
+.verification-back{background:none;border:none;color:rgba(255,255,255,0.6);font-size:0.75rem;cursor:pointer;transition:color 0.2s}
+.verification-back:hover{color:rgba(255,255,255,0.8)}
+
 /* Footer Styles */
 .auth-footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);margin-top:80px;animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
 .auth-footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
@@ -145,6 +164,47 @@ const signupHTML = `
       <p style="font-size:0.625rem;color:rgba(255,255,255,0.4);margin-top:0.5rem;">
         Once signed in, use to start capturing screenshots
       </p>
+    </div>
+
+    <!-- Email Verification Section (Initially Hidden) -->
+    <div id="verificationContainer" class="verification-container">
+      <div class="auth-form-card">
+        <h3 class="verification-title">Check Your Email</h3>
+        <p class="verification-subtitle">
+          We sent a 6-digit verification code to<br>
+          <span id="verificationEmail" style="color:rgba(255,255,255,0.8);font-weight:500;"></span>
+        </p>
+        
+        <div class="verification-code-inputs">
+          <input type="text" class="verification-digit" maxlength="1" data-index="0" inputmode="numeric">
+          <input type="text" class="verification-digit" maxlength="1" data-index="1" inputmode="numeric">
+          <input type="text" class="verification-digit" maxlength="1" data-index="2" inputmode="numeric">
+          <input type="text" class="verification-digit" maxlength="1" data-index="3" inputmode="numeric">
+          <input type="text" class="verification-digit" maxlength="1" data-index="4" inputmode="numeric">
+          <input type="text" class="verification-digit" maxlength="1" data-index="5" inputmode="numeric">
+        </div>
+        
+        <div class="verification-buttons">
+          <button id="verifyButton" class="verification-verify" disabled>
+            <span id="verifyButtonText">Verify Email</span>
+          </button>
+          
+          <div style="text-align:center;">
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:0.5rem;">
+              Didn't receive the code?
+            </p>
+            <button id="resendButton" class="verification-resend">
+              <span id="resendButtonText">Resend Code</span>
+            </button>
+          </div>
+          
+          <div style="text-align:center;">
+            <button id="backToSignupButton" class="verification-back">
+              ← Back to sign up
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -424,52 +484,117 @@ const signupHTML = `
               }));
             }
 
-            async signUp(email, password, additionalData = {}) {
-              console.log('🚀 Starting signup process with email:', email);
-              if (!this.initialized) {
-                console.log('⏳ Auth not initialized, initializing now...');
-                await this.initialize();
-              }
-              try {
-                console.log('📝 Calling Supabase signUp...');
-                const { data, error } = await this.supabase.auth.signUp({
-                  email,
-                  password,
-                  options: {
-                    data: {
-                      created_via: 'website',
-                      ...additionalData
+                          async signUp(email, password, additionalData = {}) {
+                console.log('🚀 Starting signup process with email:', email);
+                if (!this.initialized) {
+                  console.log('⏳ Auth not initialized, initializing now...');
+                  await this.initialize();
+                }
+                try {
+                  console.log('📝 Calling Supabase signUp with OTP verification...');
+                  const { data, error } = await this.supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                      emailRedirectTo: undefined, // Use OTP instead of links
+                      data: {
+                        created_via: 'website',
+                        verification_method: 'otp',
+                        ...additionalData
+                      }
                     }
+                  });
+                  console.log('📥 Supabase signup response:');
+                  console.log('📥 Data:', data);
+                  console.log('📥 Error:', error);
+                  console.log('📥 User created:', !!data?.user);
+                  console.log('📥 User ID:', data?.user?.id);
+                  
+                  if (error) {
+                    console.error('❌ Supabase signup error:', error);
+                    return { success: false, error: error.message, details: error };
                   }
-                });
-                console.log('📥 Supabase signup response:');
-                console.log('📥 Data:', data);
-                console.log('📥 Error:', error);
-                console.log('📥 User created:', !!data?.user);
-                console.log('📥 User ID:', data?.user?.id);
-                if (error) {
-                  console.error('❌ Supabase signup error:', error);
-                  return { success: false, error: error.message, details: error };
+                  if (!data?.user) {
+                    console.error('❌ No user returned from signup');
+                    return { success: false, error: 'No user data returned from signup' };
+                  }
+                  
+                  // Check if email verification is needed (no session = needs verification)
+                  if (data.user && !data.session) {
+                    console.log('📧 Email verification required');
+                    return { 
+                      success: true, 
+                      data, 
+                      user: data.user, 
+                      needsVerification: true 
+                    };
+                  }
+                  
+                  console.log('✅ User signup successful with immediate session, user ID:', data.user.id);
+                  console.log('🎉 Signup process completed successfully');
+                  return { success: true, data, user: data.user };
+                } catch (error) {
+                  console.error('💥 Signup process failed with error:');
+                  console.error('💥 Error type:', error.constructor.name);
+                  console.error('💥 Error message:', error.message);
+                  console.error('💥 Error stack:', error.stack);
+                  return { 
+                    success: false, 
+                    error: error.message || 'Unknown signup error',
+                    details: error 
+                  };
                 }
-                if (!data?.user) {
-                  console.error('❌ No user returned from signup');
-                  return { success: false, error: 'No user data returned from signup' };
-                }
-                console.log('✅ User signup successful, user ID:', data.user.id);
-                console.log('🎉 Signup process completed successfully');
-                return { success: true, data, user: data.user };
-              } catch (error) {
-                console.error('💥 Signup process failed with error:');
-                console.error('💥 Error type:', error.constructor.name);
-                console.error('💥 Error message:', error.message);
-                console.error('💥 Error stack:', error.stack);
-                return { 
-                  success: false, 
-                  error: error.message || 'Unknown signup error',
-                  details: error 
-                };
               }
-            }
+
+              async verifyEmailOTP(email, token) {
+                console.log('🔐 Starting email verification with OTP:', email);
+                if (!this.initialized) {
+                  await this.initialize();
+                }
+                try {
+                  console.log('📝 Calling Supabase verifyOtp...');
+                  const { data, error } = await this.supabase.auth.verifyOtp({
+                    email,
+                    token,
+                    type: 'email'
+                  });
+                  console.log('📥 Verification response:', { data, error });
+                  if (error) {
+                    console.error('❌ Verification error:', error);
+                    return { success: false, error: error.message };
+                  }
+                  console.log('✅ Email verification successful');
+                  return { success: true, data, user: data.user };
+                } catch (error) {
+                  console.error('💥 Verification failed:', error);
+                  return { success: false, error: error.message || 'Verification failed' };
+                }
+              }
+
+              async resendVerificationCode(email) {
+                console.log('📧 Resending verification code to:', email);
+                if (!this.initialized) {
+                  await this.initialize();
+                }
+                try {
+                  const { error } = await this.supabase.auth.resend({
+                    type: 'signup',
+                    email,
+                    options: {
+                      emailRedirectTo: undefined // Use OTP instead of links
+                    }
+                  });
+                  if (error) {
+                    console.error('❌ Resend error:', error);
+                    return { success: false, error: error.message };
+                  }
+                  console.log('✅ Verification code resent successfully');
+                  return { success: true };
+                } catch (error) {
+                  console.error('💥 Resend failed:', error);
+                  return { success: false, error: error.message || 'Failed to resend code' };
+                }
+              }
           }
 
           // Create the global auth instance
@@ -502,6 +627,23 @@ const signupHTML = `
           if (result && result.success) {
             console.log('✅ Signup successful!');
             
+            // Check if email verification is needed
+            if (result.needsVerification) {
+              console.log('📧 Email verification required, showing verification screen');
+              
+              // Reset submit button
+              if (submitText) {
+                submitText.textContent = 'Create Account';
+              }
+              
+              // Show verification screen
+              showVerificationScreen(email);
+              return;
+            }
+            
+            // Account created successfully with immediate access
+            console.log('🎉 Account created with immediate access');
+            
             // Show success message briefly
             if (submitText) {
               submitText.innerHTML = `
@@ -518,8 +660,10 @@ const signupHTML = `
               console.log('💾 User data stored in localStorage');
               
               // Set session data to keep user logged in
-              localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
-              console.log('🔐 Session data stored');
+              if (result.data.session) {
+                localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
+                console.log('🔐 Session data stored');
+              }
               
               // Trigger storage event for React components
               window.dispatchEvent(new StorageEvent('storage', {
@@ -593,6 +737,335 @@ const signupHTML = `
     }
     
     console.log('✅ Signup interactions initialized');
+  }
+
+  // Show verification screen
+  function showVerificationScreen(email) {
+    console.log('📧 Showing verification screen for:', email);
+    
+    // Hide main signup form
+    const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
+    const toggleSection = document.querySelector('.auth-toggle');
+    const skipSection = document.querySelector('.auth-skip');
+    
+    if (signupForm) signupForm.style.display = 'none';
+    if (toggleSection) toggleSection.style.display = 'none';
+    if (skipSection) skipSection.style.display = 'none';
+    
+    // Show verification container
+    const verificationContainer = document.getElementById('verificationContainer');
+    const verificationEmail = document.getElementById('verificationEmail');
+    
+    if (verificationContainer) {
+      verificationContainer.classList.add('show');
+    }
+    if (verificationEmail) {
+      verificationEmail.textContent = email;
+    }
+    
+    // Initialize verification code inputs
+    initializeVerificationInputs(email);
+  }
+
+  // Initialize verification code inputs with auto-focus and validation
+  function initializeVerificationInputs(email) {
+    const inputs = document.querySelectorAll('.verification-digit');
+    const verifyButton = document.getElementById('verifyButton');
+    const resendButton = document.getElementById('resendButton');
+    const backButton = document.getElementById('backToSignupButton');
+    
+    let resendCooldown = 0;
+    
+    // Auto-focus and validation
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', function(e) {
+        // Only allow digits
+        const value = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = value;
+        
+        // Auto-focus next input
+        if (value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+        
+        // Check if all fields are filled
+        const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
+        if (verifyButton) {
+          verifyButton.disabled = !allFilled;
+        }
+        
+        // Auto-submit when all 6 digits are entered
+        if (allFilled) {
+          const code = Array.from(inputs).map(inp => inp.value).join('');
+          console.log('🔢 Auto-submitting verification code:', code);
+          setTimeout(() => verifyCode(email, code), 100);
+        }
+      });
+      
+      // Handle backspace
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+      
+      // Handle paste
+      input.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+        if (pastedData.length === 6) {
+          pastedData.split('').forEach((digit, i) => {
+            if (inputs[i]) inputs[i].value = digit;
+          });
+          if (verifyButton) verifyButton.disabled = false;
+          verifyCode(email, pastedData);
+        }
+      });
+    });
+    
+    // Verify button click
+    if (verifyButton) {
+      verifyButton.addEventListener('click', function() {
+        const code = Array.from(inputs).map(inp => inp.value).join('');
+        if (code.length === 6) {
+          verifyCode(email, code);
+        }
+      });
+    }
+    
+    // Resend button click
+    if (resendButton) {
+      resendButton.addEventListener('click', function() {
+        if (resendCooldown > 0) return;
+        resendVerificationCode(email);
+      });
+    }
+    
+    // Back button click
+    if (backButton) {
+      backButton.addEventListener('click', function() {
+        hideVerificationScreen();
+      });
+    }
+    
+    // Focus first input
+    if (inputs[0]) inputs[0].focus();
+    
+    // Resend cooldown timer
+    function startResendCooldown() {
+      resendCooldown = 60;
+      const resendText = document.getElementById('resendButtonText');
+      
+      const updateCooldown = () => {
+        if (resendText) {
+          resendText.textContent = `Resend in ${resendCooldown}s`;
+        }
+        if (resendButton) {
+          resendButton.disabled = true;
+        }
+        
+        resendCooldown--;
+        if (resendCooldown >= 0) {
+          setTimeout(updateCooldown, 1000);
+        } else {
+          if (resendText) resendText.textContent = 'Resend Code';
+          if (resendButton) resendButton.disabled = false;
+        }
+      };
+      updateCooldown();
+    }
+    
+    // Start initial cooldown
+    startResendCooldown();
+  }
+
+  // Verify the entered code
+  async function verifyCode(email, code) {
+    console.log('🔐 Verifying code for:', email);
+    
+    const verifyButton = document.getElementById('verifyButton');
+    const verifyButtonText = document.getElementById('verifyButtonText');
+    const inputs = document.querySelectorAll('.verification-digit');
+    
+    // Show loading state
+    if (verifyButtonText) {
+      verifyButtonText.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+          <div class="loading-spinner"></div>
+          Verifying...
+        </div>
+      `;
+    }
+    
+    // Disable inputs
+    inputs.forEach(input => input.disabled = true);
+    if (verifyButton) verifyButton.disabled = true;
+    
+    try {
+      const result = await window.ghostPilotAuth.verifyEmailOTP(email, code);
+      
+      if (result.success) {
+        console.log('✅ Email verification successful!');
+        
+        // Show success
+        if (verifyButtonText) {
+          verifyButtonText.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+              ✅ Email Verified!
+            </div>
+          `;
+        }
+        
+        // Store user data and session
+        if (result.user) {
+          localStorage.setItem('supabase_user', JSON.stringify(result.user));
+          console.log('💾 User data stored after verification');
+          
+          if (result.data.session) {
+            localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
+            console.log('🔐 Session data stored after verification');
+          }
+          
+          // Trigger auth events
+          window.dispatchEvent(new StorageEvent('storage', {
+            key: 'supabase_user',
+            newValue: JSON.stringify(result.user)
+          }));
+          
+          window.dispatchEvent(new CustomEvent('authStateChanged', {
+            detail: { 
+              event: 'SIGNED_IN', 
+              session: result.data.session, 
+              user: result.user 
+            }
+          }));
+        }
+        
+        // Redirect to home
+        setTimeout(() => {
+          console.log('➡️ Redirecting to home after verification');
+          window.location.href = '/';
+        }, 2000);
+        
+      } else {
+        console.error('❌ Email verification failed:', result.error);
+        
+        // Show error
+        if (verifyButtonText) {
+          verifyButtonText.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+              ❌ ${result.error || 'Invalid code'}
+            </div>
+          `;
+        }
+        
+                 // Reset after 3 seconds
+         setTimeout(() => {
+           if (verifyButtonText) verifyButtonText.textContent = 'Verify Email';
+           inputs.forEach((input) => {
+             input.disabled = false;
+             input.value = '';
+           });
+           if (inputs[0]) inputs[0].focus();
+           if (verifyButton) verifyButton.disabled = true;
+         }, 3000);
+      }
+    } catch (error) {
+      console.error('💥 Verification error:', error);
+      
+      // Show error
+      if (verifyButtonText) {
+        verifyButtonText.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            ❌ Verification failed
+          </div>
+        `;
+      }
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        if (verifyButtonText) verifyButtonText.textContent = 'Verify Email';
+        inputs.forEach(input => {
+          input.disabled = false;
+          input.value = '';
+        });
+        if (inputs[0]) inputs[0].focus();
+        if (verifyButton) verifyButton.disabled = true;
+      }, 3000);
+    }
+  }
+
+  // Resend verification code
+  async function resendVerificationCode(email) {
+    console.log('📧 Resending verification code to:', email);
+    
+    const resendButtonText = document.getElementById('resendButtonText');
+    
+    if (resendButtonText) {
+      resendButtonText.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+          <div class="loading-spinner"></div>
+          Sending...
+        </div>
+      `;
+    }
+    
+    try {
+      const result = await window.ghostPilotAuth.resendVerificationCode(email);
+      
+      if (result.success) {
+        console.log('✅ Verification code resent successfully');
+        if (resendButtonText) {
+          resendButtonText.textContent = 'Code sent!';
+          setTimeout(() => {
+            resendButtonText.textContent = 'Resend in 60s';
+          }, 2000);
+        }
+      } else {
+        console.error('❌ Failed to resend code:', result.error);
+        if (resendButtonText) {
+          resendButtonText.textContent = 'Failed to send';
+          setTimeout(() => {
+            resendButtonText.textContent = 'Resend Code';
+          }, 3000);
+        }
+      }
+    } catch (error) {
+      console.error('💥 Resend error:', error);
+      if (resendButtonText) {
+        resendButtonText.textContent = 'Failed to send';
+        setTimeout(() => {
+          resendButtonText.textContent = 'Resend Code';
+        }, 3000);
+      }
+    }
+  }
+
+  // Hide verification screen and show signup form
+  function hideVerificationScreen() {
+    console.log('🔙 Hiding verification screen');
+    
+    // Show main signup form
+    const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
+    const toggleSection = document.querySelector('.auth-toggle');
+    const skipSection = document.querySelector('.auth-skip');
+    
+    if (signupForm) signupForm.style.display = 'block';
+    if (toggleSection) toggleSection.style.display = 'block';
+    if (skipSection) skipSection.style.display = 'block';
+    
+    // Hide verification container
+    const verificationContainer = document.getElementById('verificationContainer');
+    if (verificationContainer) {
+      verificationContainer.classList.remove('show');
+    }
+    
+    // Clear verification inputs
+    const inputs = document.querySelectorAll('.verification-digit');
+    inputs.forEach(input => {
+      input.value = '';
+      input.disabled = false;
+    });
   }
 
   // Clean up - removed profile dropdown functionality to prevent duplicates
