@@ -262,84 +262,41 @@ window.toggleFAQ = function(index) {
   }
 };
 
-// FIXED: Auto-execute function with better content injection
+// Auto-execute function to inject CSS and HTML
 (function() {
-  console.log('💰 Pricing script loaded, initializing...');
-  
-  // STEP 1: Add CSS first (critical for preventing blank page)
+  // Add CSS
   const style = document.createElement('style');
   style.textContent = pricingCSS;
   document.head.appendChild(style);
-  console.log('✅ Pricing CSS injected');
   
-  // STEP 2: Add HTML after CSS is loaded
-  function initializePricingPage() {
-    console.log('🏗️ Initializing pricing page content...');
-    
-    // IMPROVED: Better content container detection for Framer
-    const possibleContainers = [
-      'main',
-      '.main-content',
-      '[data-framer-name="Content"]',
-      '[data-framer-name="content"]',
-      '.framer-page-content',
-      '[role="main"]',
-      '#main-content',
-      '.page-content'
-    ];
-    
-    let mainContent = null;
-    for (const selector of possibleContainers) {
-      mainContent = document.querySelector(selector);
-      if (mainContent) {
-        console.log('✅ Found content container:', selector);
-        break;
-      }
-    }
-    
-    // FALLBACK: If no main content found, create one
-    if (!mainContent) {
-      console.log('⚠️ No main content found, creating container');
-      mainContent = document.createElement('main');
-      mainContent.style.cssText = 'min-height: 100vh; width: 100%;';
-      
-      // Insert after header or at beginning of body
-      const header = document.querySelector('header') || 
-                    document.querySelector('nav') || 
-                    document.querySelector('[role="banner"]');
-      
-      if (header) {
-        header.parentNode.insertBefore(mainContent, header.nextSibling);
-      } else {
-        document.body.insertBefore(mainContent, document.body.firstChild);
-      }
-    }
-    
-    // CLEAR existing content and inject pricing HTML
-    mainContent.innerHTML = pricingHTML;
-    console.log('✅ Pricing content injected');
-    
-    // STEP 3: Clean up any duplicate elements that might have been created
-    setTimeout(() => {
-      // Remove any extra footer elements (keep only the React one)
-      const footers = document.querySelectorAll('footer');
-      if (footers.length > 1) {
-        footers.forEach((footer, index) => {
-          // Keep the first footer (React footer), remove others
-          if (index > 0) {
-            footer.remove();
-            console.log('🧹 Removed duplicate footer');
-          }
-        });
-      }
-    }, 100);
+  // Add HTML when DOM is ready - find main content area
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePricingPage();
+    });
+  } else {
+    initializePricingPage();
   }
   
-  // STEP 4: Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePricingPage);
-  } else {
-    // DOM already loaded, initialize immediately
-    setTimeout(initializePricingPage, 50);
+  function initializePricingPage() {
+    // Try to find main content area, otherwise use body
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    // Clear existing content in main area and add pricing page
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = pricingHTML;
+    } else {
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', pricingHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+      }
+    }
   }
 })(); 
