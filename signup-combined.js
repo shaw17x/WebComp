@@ -904,48 +904,89 @@ const signupHTML = `
     try {
       const result = await window.ghostPilotAuth.verifyEmailOTP(email, code);
       
-      if (result.success) {
-        console.log('✅ Email verification successful!');
-        
-        // Show success
-        if (verifyButtonText) {
-          verifyButtonText.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-              ✅ Email Verified!
-            </div>
-          `;
-        }
-        
-        // Store user data and session
-        if (result.user) {
-          localStorage.setItem('supabase_user', JSON.stringify(result.user));
-          console.log('💾 User data stored after verification');
-          
-          if (result.data.session) {
-            localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
-            console.log('🔐 Session data stored after verification');
-          }
-          
-          // Trigger auth events
-          window.dispatchEvent(new StorageEvent('storage', {
-            key: 'supabase_user',
-            newValue: JSON.stringify(result.user)
-          }));
-          
-          window.dispatchEvent(new CustomEvent('authStateChanged', {
-            detail: { 
-              event: 'SIGNED_IN', 
-              session: result.data.session, 
-              user: result.user 
-            }
-          }));
-        }
-        
-        // Redirect to home
-        setTimeout(() => {
-          console.log('➡️ Redirecting to home after verification');
-          window.location.href = '/';
-        }, 2000);
+             if (result.success) {
+         console.log('✅ Email verification successful!');
+         
+         // Show success
+         if (verifyButtonText) {
+           verifyButtonText.innerHTML = `
+             <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+               ✅ Email Verified! Logging you in...
+             </div>
+           `;
+         }
+         
+         // Store user data and session
+         if (result.user) {
+           localStorage.setItem('supabase_user', JSON.stringify(result.user));
+           console.log('💾 User data stored after verification');
+           
+           if (result.data.session) {
+             localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
+             console.log('🔐 Session data stored after verification');
+             
+             // Update auth client with new session
+             if (window.ghostPilotAuth && window.ghostPilotAuth.supabase) {
+               console.log('🔄 Updating auth client session...');
+               window.ghostPilotAuth.supabase.auth.setSession(result.data.session);
+               window.ghostPilotAuth.currentUser = result.user;
+               console.log('✅ Auth client updated with verified user session');
+             }
+           }
+           
+           // Set auth tokens in localStorage for persistence across page loads
+           if (result.data.session) {
+             const tokenData = {
+               access_token: result.data.session.access_token,
+               refresh_token: result.data.session.refresh_token,
+               expires_at: result.data.session.expires_at,
+               user: result.user
+             };
+             localStorage.setItem('supabase.auth.token', JSON.stringify(tokenData));
+             console.log('🔑 Auth tokens stored for persistence');
+           }
+           
+           // Trigger auth events
+           window.dispatchEvent(new StorageEvent('storage', {
+             key: 'supabase_user',
+             newValue: JSON.stringify(result.user)
+           }));
+           
+           window.dispatchEvent(new CustomEvent('authStateChanged', {
+             detail: { 
+               event: 'SIGNED_IN', 
+               session: result.data.session, 
+               user: result.user 
+             }
+           }));
+           
+           // Trigger a more specific login success event
+           window.dispatchEvent(new CustomEvent('userLoggedIn', {
+             detail: { 
+               user: result.user,
+               session: result.data.session,
+               method: 'email_verification'
+             }
+           }));
+           console.log('📡 All auth events dispatched');
+         }
+         
+         // Show logged in message
+         setTimeout(() => {
+           if (verifyButtonText) {
+             verifyButtonText.innerHTML = `
+               <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                 🎉 Welcome! Redirecting...
+               </div>
+             `;
+           }
+         }, 1000);
+         
+         // Redirect to home with longer delay to ensure auth state is set
+         setTimeout(() => {
+           console.log('➡️ Redirecting to home after verification (user should be logged in)');
+           window.location.href = '/';
+         }, 3000);
         
       } else {
         console.error('❌ Email verification failed:', result.error);
