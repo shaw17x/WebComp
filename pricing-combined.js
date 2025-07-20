@@ -1,14 +1,17 @@
-// Pricing Page Combined - CSS + HTML Content
+// Pricing Page Combined - CSS + HTML Content with Documentation-Style Animations
+// Added: Fade-in animations matching documentation page
+// Added: Staggered section animations for smooth loading experience
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
-.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#a5b4fc;text-transform:uppercase;letter-spacing:1px;animation:badgeEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both;position:relative;z-index:1000}
+.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#a5b4fc;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
 .pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6366f1;animation:spin 3s linear infinite}
-.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000}
-.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center;position:relative;z-index:1000}
+.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
+.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
 
 /* Pricing Cards */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:20px;padding:30px;transition:all 0.3s ease;position:relative;overflow:hidden}
 .pricing-card:hover{transform:translateY(-5px);border-color:rgba(99,102,241,0.3);box-shadow:0 20px 40px rgba(99,102,241,0.1)}
 .pricing-card.featured{border-color:rgba(99,102,241,0.4);background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05))}
@@ -29,7 +32,8 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary:hover{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.6)}
 
 /* FAQ Section */
-.faq-section{margin:80px 0;position:relative;z-index:1000}
+.faq-section{margin:80px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{font-size:2.5rem;font-weight:700;color:#fff;text-align:center;margin-bottom:50px}
 .faq-container{max-width:800px;margin:0 auto}
 .faq-item{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:16px;margin-bottom:16px;overflow:hidden;transition:all 0.3s ease}
@@ -44,7 +48,7 @@ body{margin:0!important;padding:0!important}
 .faq-answer-content{padding:0 24px 24px 24px;color:#cbd5e1;font-size:1rem;line-height:1.6}
 
 /* Back to Home Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000}
+.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
 .back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.3);border-radius:50px;padding:14px 28px;font-size:16px;font-weight:600;color:#fff;text-decoration:none;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
 .back-home-btn:hover{transform:translateY(-2px);border-color:rgba(99,102,241,0.6);box-shadow:0 10px 30px rgba(99,102,241,0.3);background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.1))}
 .back-home-btn::before{content:'';position:absolute;top:50%;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(-50%);transition:left 0.6s ease}
@@ -298,5 +302,43 @@ window.toggleFAQ = function(index) {
         document.body.insertAdjacentHTML('afterbegin', pricingHTML);
       }
     }
+    
+    // Initialize pricing section animations
+    initializePricingSectionAnimations();
+  }
+  
+  function initializePricingSectionAnimations() {
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+      const pricingGrid = document.querySelector('.pricing-grid');
+      const faqSection = document.querySelector('.faq-section');
+      const backHomeContainer = document.querySelector('.back-home-container');
+      
+      // Animate pricing grid
+      if (pricingGrid) {
+        setTimeout(() => {
+          pricingGrid.style.opacity = '1';
+          pricingGrid.style.transform = 'translateY(0) scale(1)';
+          pricingGrid.classList.add('pricing-animated');
+        }, 400);
+      }
+      
+      // Animate FAQ section
+      if (faqSection) {
+        setTimeout(() => {
+          faqSection.style.opacity = '1';
+          faqSection.style.transform = 'translateY(0) scale(1)';
+          faqSection.classList.add('pricing-animated');
+        }, 600);
+      }
+      
+      // Animate back home button
+      if (backHomeContainer) {
+        setTimeout(() => {
+          backHomeContainer.style.opacity = '1';
+          backHomeContainer.style.transform = 'translateY(0) scale(1)';
+        }, 800);
+      }
+    }, 100);
   }
 })(); 
