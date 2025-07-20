@@ -2,7 +2,6 @@
 // Added: Fade-in animations matching documentation page
 // Added: Staggered section animations for smooth loading experience
 const pricingCSS = `
-body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
 .pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#a5b4fc;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
 .pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6366f1;animation:spin 3s linear infinite}
@@ -314,13 +313,12 @@ window.toggleFAQ = function(index) {
         console.log('🆕 Creating new main container');
         mainContent = document.createElement('main');
         mainContent.setAttribute('data-pricing-injected', 'true');
-        mainContent.style.cssText = `
-          position: relative;
-          z-index: 9999;
-          min-height: 100vh;
-          width: 100%;
-          background: #0a0e1a;
-        `;
+                 mainContent.style.cssText = `
+           position: relative;
+           z-index: 9999;
+           min-height: 100vh;
+           width: 100%;
+         `;
         
         // Insert after header or at body start
         const header = document.querySelector('header') || 
