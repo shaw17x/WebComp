@@ -349,51 +349,134 @@ const signupHTML = `
           console.log('🔍 Checking for existing auth client...');
           console.log('🌐 window.ghostPilotAuth exists:', !!window.ghostPilotAuth);
           
-          // Force reload auth client for debugging
-          console.log('🔄 Force reloading auth client for debugging...');
-          window.ghostPilotAuth = null; // Clear existing
+          // Initialize auth client directly (no external loading)
+          console.log('🔄 Initializing auth client directly...');
           
-          if (!window.ghostPilotAuth) {
-            console.log('📥 Loading auth client from GitHub...');
+          if (!window.ghostPilotAuth || typeof window.ghostPilotAuth.signUp !== 'function') {
+            console.log('🔧 Creating new auth client instance...');
             
-            // Load auth client if not already loaded
-            const authScript = document.createElement('script');
-            authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
-            
-            document.head.appendChild(authScript);
-            console.log('📤 Auth script tag added to head');
-            
-            // Wait for script to load with proper error handling
-            await new Promise((resolve, reject) => {
-              authScript.onload = function() {
-                console.log('✅ Auth client script loaded successfully');
-                resolve();
-              };
-              
-              authScript.onerror = function(error) {
-                console.error('❌ Auth client script failed to load:', error);
-                reject(new Error('Failed to load auth client script'));
-              };
-              
-              // Timeout after 10 seconds
-              setTimeout(() => {
-                console.error('⏰ Auth client script load timeout');
-                reject(new Error('Auth client load timeout after 10 seconds'));
-              }, 10000);
-            });
-            
-            console.log('⏳ Waiting for auth client to initialize...');
-            // Give it a moment to initialize
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            console.log('🔍 Auth client after loading:', !!window.ghostPilotAuth);
-            if (window.ghostPilotAuth) {
-              console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
+            // Initialize auth client directly - no external script loading
+            class GhostPilotAuth {
+              constructor() {
+                this.supabase = null;
+                this.currentUser = null;
+                this.initialized = false;
+                
+                this.config = {
+                  url: 'https://hmzpsbeeeqldffajfckh.supabase.co',
+                  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhtenBzYmVlZXFsZGZmYWpmY2toIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzMzY5NjUsImV4cCI6MjA2NDkxMjk2NX0.suyzPHjjw7t27tCS8e_hNjjAOaGCU8mdOWOL6kxEVvM'
+                };
+                this.supabaseUrl = this.config.url;
+                this.supabaseKey = this.config.anonKey;
+              }
+
+              async initialize() {
+                if (this.initialized) return;
+                try {
+                  console.log('🔄 Initializing Supabase auth client...');
+                  await this.loadSupabaseScript();
+                  this.supabase = window.supabase.createClient(this.config.url, this.config.anonKey);
+                  console.log('✅ Supabase client created');
+                  const { data: { session } } = await this.supabase.auth.getSession();
+                  this.currentUser = session?.user || null;
+                  console.log('👤 Current session user:', this.currentUser?.email || 'None');
+                  this.supabase.auth.onAuthStateChange((event, session) => {
+                    this.currentUser = session?.user || null;
+                    this.onAuthStateChange(event, session);
+                  });
+                  this.initialized = true;
+                  console.log('✅ Ghost Pilot Auth initialized successfully');
+                } catch (error) {
+                  console.error('❌ Auth initialization failed:', error);
+                  throw error;
+                }
+              }
+
+              loadSupabaseScript() {
+                return new Promise((resolve, reject) => {
+                  if (window.supabase) {
+                    console.log('✅ Supabase already loaded');
+                    resolve();
+                    return;
+                  }
+                  console.log('📥 Loading Supabase from CDN...');
+                  const script = document.createElement('script');
+                  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+                  script.onload = () => {
+                    console.log('✅ Supabase script loaded');
+                    resolve();
+                  };
+                  script.onerror = (error) => {
+                    console.error('❌ Supabase script failed to load:', error);
+                    reject(error);
+                  };
+                  document.head.appendChild(script);
+                });
+              }
+
+              onAuthStateChange(event, session) {
+                console.log('🔄 Auth state changed:', event, session?.user?.email);
+                window.dispatchEvent(new CustomEvent('authStateChanged', {
+                  detail: { event, session, user: session?.user }
+                }));
+              }
+
+              async signUp(email, password, additionalData = {}) {
+                console.log('🚀 Starting signup process with email:', email);
+                if (!this.initialized) {
+                  console.log('⏳ Auth not initialized, initializing now...');
+                  await this.initialize();
+                }
+                try {
+                  console.log('📝 Calling Supabase signUp...');
+                  const { data, error } = await this.supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                      data: {
+                        created_via: 'website',
+                        ...additionalData
+                      }
+                    }
+                  });
+                  console.log('📥 Supabase signup response:');
+                  console.log('📥 Data:', data);
+                  console.log('📥 Error:', error);
+                  console.log('📥 User created:', !!data?.user);
+                  console.log('📥 User ID:', data?.user?.id);
+                  if (error) {
+                    console.error('❌ Supabase signup error:', error);
+                    return { success: false, error: error.message, details: error };
+                  }
+                  if (!data?.user) {
+                    console.error('❌ No user returned from signup');
+                    return { success: false, error: 'No user data returned from signup' };
+                  }
+                  console.log('✅ User signup successful, user ID:', data.user.id);
+                  console.log('🎉 Signup process completed successfully');
+                  return { success: true, data, user: data.user };
+                } catch (error) {
+                  console.error('💥 Signup process failed with error:');
+                  console.error('💥 Error type:', error.constructor.name);
+                  console.error('💥 Error message:', error.message);
+                  console.error('💥 Error stack:', error.stack);
+                  return { 
+                    success: false, 
+                    error: error.message || 'Unknown signup error',
+                    details: error 
+                  };
+                }
+              }
             }
+
+            // Create the global auth instance
+            window.ghostPilotAuth = new GhostPilotAuth();
+            console.log('✅ Auth client created directly');
           } else {
             console.log('✅ Auth client already exists');
-            console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
           }
+          
+          console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
           
           // Check if auth client is properly loaded
           if (!window.ghostPilotAuth) {
