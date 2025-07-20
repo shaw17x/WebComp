@@ -352,130 +352,129 @@ const signupHTML = `
           // Initialize auth client directly (no external loading)
           console.log('🔄 Initializing auth client directly...');
           
-          if (!window.ghostPilotAuth || typeof window.ghostPilotAuth.signUp !== 'function') {
-            console.log('🔧 Creating new auth client instance...');
-            
-            // Initialize auth client directly - no external script loading
-            class GhostPilotAuth {
-              constructor() {
-                this.supabase = null;
-                this.currentUser = null;
-                this.initialized = false;
-                
-                this.config = {
-                  url: 'https://hmzpsbeeeqldffajfckh.supabase.co',
-                  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhtenBzYmVlZXFsZGZmYWpmY2toIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzMzY5NjUsImV4cCI6MjA2NDkxMjk2NX0.suyzPHjjw7t27tCS8e_hNjjAOaGCU8mdOWOL6kxEVvM'
-                };
-                this.supabaseUrl = this.config.url;
-                this.supabaseKey = this.config.anonKey;
-              }
+          // Force clear old auth client and create new one
+          console.log('🧹 Clearing existing auth client...');
+          window.ghostPilotAuth = null;
+          
+          console.log('🔧 Creating new auth client instance...');
+          
+          // Initialize auth client directly - no external script loading
+          class GhostPilotAuth {
+            constructor() {
+              this.supabase = null;
+              this.currentUser = null;
+              this.initialized = false;
+              
+              this.config = {
+                url: 'https://hmzpsbeeeqldffajfckh.supabase.co',
+                anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhtenBzYmVlZXFsZGZmYWpmY2toIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzMzY5NjUsImV4cCI6MjA2NDkxMjk2NX0.suyzPHjjw7t27tCS8e_hNjjAOaGCU8mdOWOL6kxEVvM'
+              };
+              this.supabaseUrl = this.config.url;
+              this.supabaseKey = this.config.anonKey;
+            }
 
-              async initialize() {
-                if (this.initialized) return;
-                try {
-                  console.log('🔄 Initializing Supabase auth client...');
-                  await this.loadSupabaseScript();
-                  this.supabase = window.supabase.createClient(this.config.url, this.config.anonKey);
-                  console.log('✅ Supabase client created');
-                  const { data: { session } } = await this.supabase.auth.getSession();
+            async initialize() {
+              if (this.initialized) return;
+              try {
+                console.log('🔄 Initializing Supabase auth client...');
+                await this.loadSupabaseScript();
+                this.supabase = window.supabase.createClient(this.config.url, this.config.anonKey);
+                console.log('✅ Supabase client created');
+                const { data: { session } } = await this.supabase.auth.getSession();
+                this.currentUser = session?.user || null;
+                console.log('👤 Current session user:', this.currentUser?.email || 'None');
+                this.supabase.auth.onAuthStateChange((event, session) => {
                   this.currentUser = session?.user || null;
-                  console.log('👤 Current session user:', this.currentUser?.email || 'None');
-                  this.supabase.auth.onAuthStateChange((event, session) => {
-                    this.currentUser = session?.user || null;
-                    this.onAuthStateChange(event, session);
-                  });
-                  this.initialized = true;
-                  console.log('✅ Ghost Pilot Auth initialized successfully');
-                } catch (error) {
-                  console.error('❌ Auth initialization failed:', error);
-                  throw error;
-                }
-              }
-
-              loadSupabaseScript() {
-                return new Promise((resolve, reject) => {
-                  if (window.supabase) {
-                    console.log('✅ Supabase already loaded');
-                    resolve();
-                    return;
-                  }
-                  console.log('📥 Loading Supabase from CDN...');
-                  const script = document.createElement('script');
-                  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-                  script.onload = () => {
-                    console.log('✅ Supabase script loaded');
-                    resolve();
-                  };
-                  script.onerror = (error) => {
-                    console.error('❌ Supabase script failed to load:', error);
-                    reject(error);
-                  };
-                  document.head.appendChild(script);
+                  this.onAuthStateChange(event, session);
                 });
-              }
-
-              onAuthStateChange(event, session) {
-                console.log('🔄 Auth state changed:', event, session?.user?.email);
-                window.dispatchEvent(new CustomEvent('authStateChanged', {
-                  detail: { event, session, user: session?.user }
-                }));
-              }
-
-              async signUp(email, password, additionalData = {}) {
-                console.log('🚀 Starting signup process with email:', email);
-                if (!this.initialized) {
-                  console.log('⏳ Auth not initialized, initializing now...');
-                  await this.initialize();
-                }
-                try {
-                  console.log('📝 Calling Supabase signUp...');
-                  const { data, error } = await this.supabase.auth.signUp({
-                    email,
-                    password,
-                    options: {
-                      data: {
-                        created_via: 'website',
-                        ...additionalData
-                      }
-                    }
-                  });
-                  console.log('📥 Supabase signup response:');
-                  console.log('📥 Data:', data);
-                  console.log('📥 Error:', error);
-                  console.log('📥 User created:', !!data?.user);
-                  console.log('📥 User ID:', data?.user?.id);
-                  if (error) {
-                    console.error('❌ Supabase signup error:', error);
-                    return { success: false, error: error.message, details: error };
-                  }
-                  if (!data?.user) {
-                    console.error('❌ No user returned from signup');
-                    return { success: false, error: 'No user data returned from signup' };
-                  }
-                  console.log('✅ User signup successful, user ID:', data.user.id);
-                  console.log('🎉 Signup process completed successfully');
-                  return { success: true, data, user: data.user };
-                } catch (error) {
-                  console.error('💥 Signup process failed with error:');
-                  console.error('💥 Error type:', error.constructor.name);
-                  console.error('💥 Error message:', error.message);
-                  console.error('💥 Error stack:', error.stack);
-                  return { 
-                    success: false, 
-                    error: error.message || 'Unknown signup error',
-                    details: error 
-                  };
-                }
+                this.initialized = true;
+                console.log('✅ Ghost Pilot Auth initialized successfully');
+              } catch (error) {
+                console.error('❌ Auth initialization failed:', error);
+                throw error;
               }
             }
 
-            // Create the global auth instance
-            window.ghostPilotAuth = new GhostPilotAuth();
-            console.log('✅ Auth client created directly');
-          } else {
-            console.log('✅ Auth client already exists');
+            loadSupabaseScript() {
+              return new Promise((resolve, reject) => {
+                if (window.supabase) {
+                  console.log('✅ Supabase already loaded');
+                  resolve();
+                  return;
+                }
+                console.log('📥 Loading Supabase from CDN...');
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+                script.onload = () => {
+                  console.log('✅ Supabase script loaded');
+                  resolve();
+                };
+                script.onerror = (error) => {
+                  console.error('❌ Supabase script failed to load:', error);
+                  reject(error);
+                };
+                document.head.appendChild(script);
+              });
+            }
+
+            onAuthStateChange(event, session) {
+              console.log('🔄 Auth state changed:', event, session?.user?.email);
+              window.dispatchEvent(new CustomEvent('authStateChanged', {
+                detail: { event, session, user: session?.user }
+              }));
+            }
+
+            async signUp(email, password, additionalData = {}) {
+              console.log('🚀 Starting signup process with email:', email);
+              if (!this.initialized) {
+                console.log('⏳ Auth not initialized, initializing now...');
+                await this.initialize();
+              }
+              try {
+                console.log('📝 Calling Supabase signUp...');
+                const { data, error } = await this.supabase.auth.signUp({
+                  email,
+                  password,
+                  options: {
+                    data: {
+                      created_via: 'website',
+                      ...additionalData
+                    }
+                  }
+                });
+                console.log('📥 Supabase signup response:');
+                console.log('📥 Data:', data);
+                console.log('📥 Error:', error);
+                console.log('📥 User created:', !!data?.user);
+                console.log('📥 User ID:', data?.user?.id);
+                if (error) {
+                  console.error('❌ Supabase signup error:', error);
+                  return { success: false, error: error.message, details: error };
+                }
+                if (!data?.user) {
+                  console.error('❌ No user returned from signup');
+                  return { success: false, error: 'No user data returned from signup' };
+                }
+                console.log('✅ User signup successful, user ID:', data.user.id);
+                console.log('🎉 Signup process completed successfully');
+                return { success: true, data, user: data.user };
+              } catch (error) {
+                console.error('💥 Signup process failed with error:');
+                console.error('💥 Error type:', error.constructor.name);
+                console.error('💥 Error message:', error.message);
+                console.error('💥 Error stack:', error.stack);
+                return { 
+                  success: false, 
+                  error: error.message || 'Unknown signup error',
+                  details: error 
+                };
+              }
+            }
           }
-          
+
+          // Create the global auth instance
+          window.ghostPilotAuth = new GhostPilotAuth();
+          console.log('✅ Auth client created directly');
           console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
           
           // Check if auth client is properly loaded
