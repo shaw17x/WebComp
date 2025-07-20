@@ -1,4 +1,4 @@
-// Ghost Pilot Sign Up Page Combined - CSS + HTML Content (Component Only)
+// Ghost Pilot Sign Up Page Combined - CSS + HTML Content (Component Only) - DEBUG VERSION
 const signupCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -218,7 +218,7 @@ const signupHTML = `
                        location.hash.includes('signup') ||
                        location.hash.includes('sign-up');
   
-  console.log('🚀 Signup component starting...');
+  console.log('🚀 Signup component starting... [DEBUG VERSION]');
   console.log('📍 Current URL:', location.href);
   console.log('📍 Pathname:', location.pathname);
   console.log('📍 Hash:', location.hash);
@@ -279,7 +279,7 @@ const signupHTML = `
   }
   
   function initializeSignupInteractions() {
-    console.log('🔧 Initializing signup interactions...');
+    console.log('🔧 Initializing signup interactions... [DEBUG]');
     
     // Form submission
     const form = document.getElementById('signupForm');
@@ -289,13 +289,19 @@ const signupHTML = `
       console.log('✅ Signup form found');
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        console.log('📝 Form submission started [DEBUG]');
         
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirmPassword');
         
+        console.log('🔍 Checking form inputs...');
+        console.log('📧 Email input found:', !!emailInput);
+        console.log('🔒 Password input found:', !!passwordInput);
+        console.log('🔒 Confirm password input found:', !!confirmPasswordInput);
+        
         if (!emailInput || !passwordInput || !confirmPasswordInput) {
-          console.log('❌ Required inputs not found');
+          console.error('❌ Required inputs not found');
           return;
         }
         
@@ -303,20 +309,30 @@ const signupHTML = `
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
         
+        console.log('📋 Form data collected:');
+        console.log('📧 Email:', email ? 'PROVIDED' : 'EMPTY');
+        console.log('🔒 Password:', password ? `${password.length} chars` : 'EMPTY');
+        console.log('🔒 Confirm Password:', confirmPassword ? `${confirmPassword.length} chars` : 'EMPTY');
+        
         if (!email || !password || !confirmPassword) {
+          console.error('❌ Empty fields detected');
           alert('Please fill in all fields');
           return;
         }
         
         if (password !== confirmPassword) {
+          console.error('❌ Passwords do not match');
           alert('Passwords do not match');
           return;
         }
         
         if (password.length < 6) {
+          console.error('❌ Password too short');
           alert('Password must be at least 6 characters');
           return;
         }
+        
+        console.log('✅ Form validation passed');
         
         // Show loading state
         if (submitText) {
@@ -326,27 +342,75 @@ const signupHTML = `
               Creating Account...
             </div>
           `;
+          console.log('🔄 Loading state displayed');
         }
         
         try {
+          console.log('🔍 Checking for existing auth client...');
+          console.log('🌐 window.ghostPilotAuth exists:', !!window.ghostPilotAuth);
+          
           // Initialize auth client if needed
           if (!window.ghostPilotAuth) {
+            console.log('📥 Loading auth client from GitHub...');
+            
             // Load auth client if not already loaded
             const authScript = document.createElement('script');
             authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
+            
+            authScript.onload = function() {
+              console.log('✅ Auth client script loaded successfully');
+            };
+            
+            authScript.onerror = function() {
+              console.error('❌ Auth client script failed to load');
+            };
+            
             document.head.appendChild(authScript);
             
             // Wait for script to load
-            await new Promise(resolve => {
+            await new Promise((resolve, reject) => {
               authScript.onload = resolve;
+              authScript.onerror = reject;
+              setTimeout(() => reject(new Error('Auth client load timeout')), 10000);
             });
+            
+            console.log('⏳ Waiting for auth client to initialize...');
+            // Give it a moment to initialize
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            console.log('🔍 Auth client after loading:', !!window.ghostPilotAuth);
+            if (window.ghostPilotAuth) {
+              console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
+            }
+          } else {
+            console.log('✅ Auth client already exists');
+            console.log('🔍 Auth client methods:', Object.keys(window.ghostPilotAuth));
           }
+          
+          // Check if auth client is properly loaded
+          if (!window.ghostPilotAuth) {
+            throw new Error('Auth client failed to load');
+          }
+          
+          if (!window.ghostPilotAuth.signUp) {
+            throw new Error('Auth client signUp method not found');
+          }
+          
+          console.log('🚀 Starting signup process...');
+          console.log('📧 Email for signup:', email);
+          console.log('🔒 Password length:', password.length);
           
           // Perform real signup
           const result = await window.ghostPilotAuth.signUp(email, password);
           
-          if (result.success) {
-            console.log('✅ Signup successful, redirecting to login...');
+          console.log('📥 Signup result received:');
+          console.log('📥 Result object:', result);
+          console.log('📥 Success:', result?.success);
+          console.log('📥 Error:', result?.error);
+          console.log('📥 User:', result?.user ? 'USER DATA RECEIVED' : 'NO USER DATA');
+          
+          if (result && result.success) {
+            console.log('✅ Signup successful!');
             
             // Show success message briefly
             if (submitText) {
@@ -355,59 +419,74 @@ const signupHTML = `
                   ✅ Account Created!
                 </div>
               `;
+              console.log('🎉 Success message displayed');
             }
             
             // Store user data for React components to detect
-            localStorage.setItem('supabase_user', JSON.stringify(result.user));
-            
-            // Trigger storage event for React components
-            window.dispatchEvent(new StorageEvent('storage', {
-              key: 'supabase_user',
-              newValue: JSON.stringify(result.user)
-            }));
+            if (result.user) {
+              localStorage.setItem('supabase_user', JSON.stringify(result.user));
+              console.log('💾 User data stored in localStorage');
+              
+              // Trigger storage event for React components
+              window.dispatchEvent(new StorageEvent('storage', {
+                key: 'supabase_user',
+                newValue: JSON.stringify(result.user)
+              }));
+              console.log('📡 Storage event dispatched');
+            }
             
             // Redirect after brief delay
+            console.log('🔄 Redirecting to login in 2 seconds...');
             setTimeout(() => {
+              console.log('➡️ Redirecting to /login');
               window.location.href = '/login';
             }, 2000);
             
           } else {
-            console.error('❌ Signup failed:', result.error);
+            console.error('❌ Signup failed');
+            console.error('❌ Error details:', result?.error || 'Unknown error');
             
             if (submitText) {
               submitText.innerHTML = `
                 <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-                  ❌ ${result.error}
+                  ❌ ${result?.error || 'Signup failed'}
                 </div>
               `;
+              console.log('⚠️ Error message displayed');
             }
             
             // Reset button after 3 seconds
             setTimeout(() => {
               if (submitText) {
                 submitText.textContent = 'Create Account';
+                console.log('🔄 Button reset to normal state');
               }
               const submitButton = document.querySelector('.auth-submit');
               if (submitButton) {
                 submitButton.disabled = false;
+                console.log('🔄 Button re-enabled');
               }
             }, 3000);
           }
         } catch (error) {
-          console.error('❌ Signup error:', error);
+          console.error('💥 Signup process error:');
+          console.error('💥 Error type:', error.name);
+          console.error('💥 Error message:', error.message);
+          console.error('💥 Error stack:', error.stack);
           
           if (submitText) {
             submitText.textContent = 'Create Account';
+            console.log('🔄 Button reset after error');
           }
           
-          alert('Failed to create account. Please check your internet connection and try again.');
+          alert('Failed to create account. Error: ' + error.message);
         }
       });
     } else {
-      console.log('❌ Signup form not found');
+      console.error('❌ Signup form not found');
     }
     
-    console.log('✅ Signup interactions initialized');
+    console.log('✅ Signup interactions initialized [DEBUG]');
   }
 
   // Clean up - removed profile dropdown functionality to prevent duplicates
