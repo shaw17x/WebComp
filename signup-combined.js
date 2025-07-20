@@ -1,4 +1,4 @@
-// Ghost Pilot Sign Up Page Combined - CSS + HTML Content (Component Only) - DEBUG VERSION
+// Ghost Pilot Sign Up Page Combined - CSS + HTML Content (Component Only) - WITH DEBUG
 const signupCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -218,7 +218,7 @@ const signupHTML = `
                        location.hash.includes('signup') ||
                        location.hash.includes('sign-up');
   
-  console.log('🚀 Signup component starting... [DEBUG VERSION]');
+  console.log('🚀 Signup component starting...');
   console.log('📍 Current URL:', location.href);
   console.log('📍 Pathname:', location.pathname);
   console.log('📍 Hash:', location.hash);
@@ -279,7 +279,7 @@ const signupHTML = `
   }
   
   function initializeSignupInteractions() {
-    console.log('🔧 Initializing signup interactions... [DEBUG]');
+    console.log('🔧 Initializing signup interactions...');
     
     // Form submission
     const form = document.getElementById('signupForm');
@@ -289,7 +289,7 @@ const signupHTML = `
       console.log('✅ Signup form found');
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        console.log('📝 Form submission started [DEBUG]');
+        console.log('📝 Form submission started');
         
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
@@ -349,7 +349,10 @@ const signupHTML = `
           console.log('🔍 Checking for existing auth client...');
           console.log('🌐 window.ghostPilotAuth exists:', !!window.ghostPilotAuth);
           
-          // Initialize auth client if needed
+          // Force reload auth client for debugging
+          console.log('🔄 Force reloading auth client for debugging...');
+          window.ghostPilotAuth = null; // Clear existing
+          
           if (!window.ghostPilotAuth) {
             console.log('📥 Loading auth client from GitHub...');
             
@@ -486,7 +489,7 @@ const signupHTML = `
       console.error('❌ Signup form not found');
     }
     
-    console.log('✅ Signup interactions initialized [DEBUG]');
+    console.log('✅ Signup interactions initialized');
   }
 
   // Clean up - removed profile dropdown functionality to prevent duplicates
