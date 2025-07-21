@@ -82,7 +82,7 @@ const aiModelsHTML = `
   <div style="text-align: center;">
     <div class="ai-models-badge">
       <div class="ai-models-badge-dot"></div>
-      Ghost Pilot AI Models
+      Steley AI Models
     </div>
   </div>
   <h1 class="ai-models-title">Unlimited AI Access</h1>
@@ -94,7 +94,7 @@ const aiModelsHTML = `
     <!-- OpenAI O3 - Flagship -->
     <div class="ai-model-card flagship">
       <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">🧠</div>
+        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
         <div>
           <div class="model-provider">OpenAI</div>
           <h3 class="model-name">O3</h3>
@@ -235,7 +235,7 @@ const aiModelsHTML = `
     <!-- Gemini 2.0 Flash -->
     <div class="ai-model-card">
       <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">⚡</div>
+        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
         <div>
           <div class="model-provider">Google</div>
           <h3 class="model-name">Gemini 2.0 Flash</h3>
@@ -282,7 +282,7 @@ const aiModelsHTML = `
     <!-- Qwen 2.5 VL 72B -->
     <div class="ai-model-card">
       <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🔍</div>
+        <div class="model-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;"></div>
         <div>
           <div class="model-provider">Alibaba</div>
           <h3 class="model-name">Qwen 2.5 VL 72B</h3>
@@ -329,7 +329,7 @@ const aiModelsHTML = `
     <!-- O1 Pro -->
     <div class="ai-model-card">
       <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">🔬</div>
+        <div class="model-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;"></div>
         <div>
           <div class="model-provider">OpenAI</div>
           <h3 class="model-name">O1 Pro</h3>
@@ -517,7 +517,7 @@ const aiModelsHTML = `
     <!-- InternVL3 14B -->
     <div class="ai-model-card">
       <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">🔬</div>
+        <div class="model-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;"></div>
         <div>
           <div class="model-provider">OpenGVLab</div>
           <h3 class="model-name">InternVL3 14B</h3>
@@ -565,45 +565,45 @@ const aiModelsHTML = `
 
   <!-- Scaling & Unlimited Access Section -->
   <div class="scaling-section">
-    <h2 class="scaling-title">How Ghost Pilot Scales Unlimited Access</h2>
+    <h2 class="scaling-title">How Steley Scales Unlimited Access</h2>
     <p class="scaling-subtitle">Discover how we provide unlimited access to premium AI models worth $200+/month, completely free through advanced technology integration.</p>
     
     <div class="scaling-features">
       
       <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">🚀</div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
         <h3 class="feature-title">Puter.js Integration</h3>
-        <p class="feature-description">Ghost Pilot leverages Puter.js to provide direct access to OpenRouter's premium AI models without API costs. This revolutionary approach eliminates the $20-200/month subscription fees while maintaining full access to O3, GPT-4o, Claude Opus 4, and more.</p>
+        <p class="feature-description">Steley leverages Puter.js to provide direct access to OpenRouter's premium AI models without API costs. This revolutionary approach eliminates the $20-200/month subscription fees while maintaining full access to O3, GPT-4o, Claude Opus 4, and more.</p>
       </div>
 
       <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">⚡</div>
+        <div class="feature-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;"></div>
         <h3 class="feature-title">Zero Token Limits</h3>
-        <p class="feature-description">Unlike traditional AI services that throttle usage with token limits and rate restrictions, Ghost Pilot provides truly unlimited access. Process thousands of screenshots, generate extensive code solutions, and handle unlimited conversations during your assessments.</p>
+        <p class="feature-description">Unlike traditional AI services that throttle usage with token limits and rate restrictions, Steley provides truly unlimited access. Process thousands of screenshots, generate extensive code solutions, and handle unlimited conversations during your assessments.</p>
       </div>
 
       <div class="scaling-feature">
         <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🔄</div>
         <h3 class="feature-title">Intelligent Model Routing</h3>
-        <p class="feature-description">Ghost Pilot automatically selects the optimal AI model for each task. Screenshot analysis uses vision models like GPT-4o and Qwen VL, coding problems leverage O3 and DeepSeek V3, while essay questions utilize Claude Opus 4's superior writing capabilities.</p>
+        <p class="feature-description">Steley automatically selects the optimal AI model for each task. Screenshot analysis uses vision models like GPT-4o and Qwen VL, coding problems leverage O3 and DeepSeek V3, while essay questions utilize Claude Opus 4's superior writing capabilities.</p>
       </div>
 
       <div class="scaling-feature">
         <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">🛡️</div>
         <h3 class="feature-title">Stealth Technology</h3>
-        <p class="feature-description">Our advanced stealth system ensures AI assistance remains undetectable across all platforms. From Zoom interviews to proctored exams like HonorLock and Proctorio, Ghost Pilot operates invisibly while providing full access to all premium models.</p>
+        <p class="feature-description">Our advanced stealth system ensures AI assistance remains undetectable across all platforms. From Zoom interviews to proctored exams like HonorLock and Proctorio, Steley operates invisibly while providing full access to all premium models.</p>
       </div>
 
       <div class="scaling-feature">
         <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">📊</div>
         <h3 class="feature-title">Real-time Performance</h3>
-        <p class="feature-description">Access multiple AI models simultaneously during live assessments. Ghost Pilot can process screenshots with vision models, generate code solutions with reasoning models, and provide explanations with language models - all in parallel for maximum efficiency.</p>
+        <p class="feature-description">Access multiple AI models simultaneously during live assessments. Steley can process screenshots with vision models, generate code solutions with reasoning models, and provide explanations with language models - all in parallel for maximum efficiency.</p>
       </div>
 
       <div class="scaling-feature">
         <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">🌍</div>
         <h3 class="feature-title">Global Accessibility</h3>
-        <p class="feature-description">Ghost Pilot democratizes access to premium AI models worldwide. Students and professionals in any country can access the same cutting-edge AI capabilities that were previously limited to those who could afford expensive subscriptions and enterprise accounts.</p>
+        <p class="feature-description">Steley democratizes access to premium AI models worldwide. Students and professionals in any country can access the same cutting-edge AI capabilities that were previously limited to those who could afford expensive subscriptions and enterprise accounts.</p>
       </div>
 
     </div>
