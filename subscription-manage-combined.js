@@ -1,4 +1,4 @@
-// Ghost Pilot Subscription Management Page Combined - CSS + HTML Content (Component Only)
+// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only)
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -121,7 +121,7 @@ const subscriptionHTML = `
       Subscription Management
     </div>
     <h1 class="subscription-title">Manage Your Plan</h1>
-    <p class="subscription-subtitle">Control your Ghost Pilot subscription and usage</p>
+    <p class="subscription-subtitle">Control your Steley subscription and usage</p>
   </div>
 
   <!-- Current Status Card -->
@@ -176,7 +176,7 @@ const subscriptionHTML = `
             <span class="icon-free">🛡️</span>
             FREE
           </h3>
-          <p class="plan-description">Perfect for trying out Ghost Pilot</p>
+          <p class="plan-description">Perfect for trying out Steley</p>
           <div class="plan-price">
             <span class="price-amount">$0</span>
             <span class="price-period">/month</span>
@@ -445,7 +445,7 @@ const subscriptionHTML = `
     
     try {
       // Initialize auth client if needed
-      if (!window.ghostPilotAuth) {
+      if (!window.steleyAuth) {
         // Load auth client if not already loaded
         const authScript = document.createElement('script');
         authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
@@ -465,7 +465,7 @@ const subscriptionHTML = `
         return;
       }
       
-      const user = await window.ghostPilotAuth.getUser(token);
+      const user = await window.steleyAuth.getUser(token);
       if (!user?.id) {
         console.log('❌ Invalid user, redirecting to login');
         window.location.href = '/login';
@@ -473,7 +473,7 @@ const subscriptionHTML = `
       }
       
        // Get license data (contains usage info)
-       const licenseData = await window.ghostPilotAuth.getLicenseData(user.id);
+       const licenseData = await window.steleyAuth.getLicenseData(user.id);
        const license = licenseData[0] || {};
        
       // Prepare real user data
@@ -672,7 +672,7 @@ const subscriptionHTML = `
     
     try {
       // Check if user is authenticated
-      if (!window.ghostPilotAuth?.isAuthenticated()) {
+      if (!window.steleyAuth?.isAuthenticated()) {
         alert('Please sign in to upgrade your plan');
         window.location.href = '/login';
         return;
@@ -701,7 +701,7 @@ const subscriptionHTML = `
       }
       
       // Update subscription tier in database
-      const result = await window.ghostPilotAuth.updateSubscriptionTier(planType);
+      const result = await window.steleyAuth.updateSubscriptionTier(planType);
       
       if (result.success) {
         // Show success message
