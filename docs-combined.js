@@ -1,56 +1,26 @@
-// AI Models Page Combined - CSS + HTML Content with Documentation-Style Animations
-// Added: Fade-in animations matching documentation page
-// Added: Staggered section animations for smooth loading experience
-const aiModelsCSS = `
-.ai-models-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
-.ai-models-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
-.ai-models-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6b7280;animation:spin 3s linear infinite}
-.ai-models-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
-.ai-models-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
-
-/* AI Models Grid */
-.ai-models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
-.ai-models-grid.models-animated{opacity:1;transform:translateY(0) scale(1)}
-.ai-model-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;transition:all 0.3s ease;position:relative;overflow:hidden}
-.ai-model-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
-.ai-model-card.flagship{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
-.ai-model-card.flagship::before{content:'FLAGSHIP';position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#6b7280,#9ca3af);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px;letter-spacing:0.5px}
-
-.model-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.model-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.model-provider{font-size:12px;color:#94a3b8;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
-.model-name{font-size:1.3rem;font-weight:700;color:#fff;margin:0}
-.model-description{color:#cbd5e1;font-size:0.95rem;margin:16px 0 20px 0;line-height:1.6}
-
-.model-capabilities{margin:20px 0}
-.capabilities-title{font-size:0.9rem;font-weight:600;color:#9ca3af;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
-.capabilities-list{display:flex;flex-wrap:wrap;gap:8px}
-.capability-tag{background:rgba(107,114,128,0.15);border:1px solid rgba(107,114,128,0.3);color:#cbd5e1;font-size:0.8rem;font-weight:500;padding:4px 10px;border-radius:12px}
-
-.model-stats{margin:20px 0}
-.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.stat-label{color:#94a3b8;font-size:0.85rem;font-weight:500}
-.stat-value{color:#fff;font-weight:600;font-size:0.85rem}
-
-.model-best-for{margin:20px 0}
-.best-for-title{font-size:0.9rem;font-weight:600;color:#9ca3af;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
-.best-for-list{list-style:none;padding:0;margin:0}
-.best-for-list li{color:#cbd5e1;font-size:0.85rem;margin-bottom:6px;padding-left:16px;position:relative;line-height:1.4}
-.best-for-list li::before{content:'→';position:absolute;left:0;color:#6b7280;font-weight:bold}
-
-/* Scaling Features Section */
-.scaling-section{margin:80px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
-.scaling-section.models-animated{opacity:1;transform:translateY(0) scale(1)}
-.scaling-title{font-size:2.5rem;font-weight:700;color:#fff;text-align:center;margin-bottom:20px}
-.scaling-subtitle{font-size:1.1rem;color:#94a3b8;text-align:center;margin-bottom:50px;line-height:1.6}
-
-.scaling-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
-.scaling-feature{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;transition:all 0.3s ease}
-.scaling-feature:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-3px)}
-
-.feature-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
-.feature-title{font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:12px}
-.feature-description{color:#cbd5e1;font-size:0.95rem;line-height:1.6}
+// Ghost Pilot Documentation Combined - CSS + HTML Content
+const docsCSS = `
+body{margin:0!important;padding:0!important}
+.docs-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
+.docs-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
+.docs-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6b7280;animation:spin 3s linear infinite}
+.docs-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
+.docs-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
+.docs-section{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.docs-section.docs-animated{opacity:1;transform:translateY(0) scale(1)}
+.docs-section:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.docs-section h2{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:15px;position:relative;padding-left:15px;z-index:1001}
+.docs-section h2::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:15px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
+.docs-section h3{color:#9ca3af;font-size:1.2rem;font-weight:600;margin:20px 0 10px 0;position:relative;z-index:1001}
+.docs-section p{color:#cbd5e1;font-size:1rem;line-height:1.6;margin-bottom:15px;position:relative;z-index:1001}
+.docs-section ul{list-style:none;padding:0;margin:15px 0;position:relative;z-index:1001}
+.docs-section li{color:#cbd5e1;font-size:1rem;margin-bottom:8px;padding-left:20px;position:relative;line-height:1.5;z-index:1001}
+.docs-section li::before{content:'→';position:absolute;left:0;color:#6b7280;font-weight:bold;z-index:1002}
+.docs-section strong{color:#fff;font-weight:600;position:relative;z-index:1001}
+.docs-section code{background:rgba(107,114,128,0.1);color:#9ca3af;padding:2px 6px;border-radius:4px;font-family:'Fira Code',monospace;font-size:0.9rem}
+.docs-intro{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);text-align:center}
+.docs-contact{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1)}
+.docs-contact li::before{content:'→';color:#6b7280}
 
 /* Back to Home Button */
 .back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
@@ -58,728 +28,382 @@ const aiModelsCSS = `
 .back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
 .back-home-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(0);transition:left 1.5s ease;animation:none;pointer-events:none}
 .back-home-btn:hover::before{left:100%;animation:shimmer 1.5s infinite}
-.back-home-btn svg{width:18px;height:18px;transition:transform 0.3s ease;position:relative;z-index:1;color:#1f2937}
+.back-home-btn svg{width:18px;height:18px;transition:transform 0.3s ease;position:relative;z-index:1}
 .back-home-btn:hover svg{transform:translateX(-4px)}
 
 @keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
+/* Footer Styles */
+.footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
+.footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
+.footer-row{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;gap:40px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
+.footer-copyright{display:flex;align-items:center;white-space:nowrap}
+.footer-copyright span{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:-0.01em}
+.footer-nav{display:flex;gap:32px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
+.footer-nav a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer}
+.footer-nav a:hover{color:#ffffff}
+.footer-right{display:flex;align-items:center;gap:32px}
+.footer-legal{display:flex;gap:24px;align-items:center;white-space:nowrap}
+.footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
+.footer-legal a:hover{color:#ffffff}
+.footer-social{display:flex;gap:12px;align-items:center}
+.footer-social-link{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer;text-decoration:none}
+.footer-social-link:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
+.footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
+
+@media(max-width:1200px){
+  .footer-nav{gap:24px}
+  .footer-row{gap:30px}
+}
+
+@media(max-width:1000px){
+  .footer-nav{display:none}
+}
+
 @media(max-width:768px){
-  .ai-models-page{padding:15px;margin:60px auto}
-  .ai-models-title{font-size:2rem}
-  .ai-models-grid{grid-template-columns:1fr;gap:20px}
-  .ai-model-card{padding:24px}
+  .docs-page{padding:15px;margin:60px auto}
+  .docs-title{font-size:2rem}
+  .docs-section{padding:20px}
+  .footer-row{flex-direction:column!important;text-align:center!important;gap:20px!important}
+  .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
+  .footer-right{flex-direction:column!important;gap:20px!important}
+  .footer-separator{display:none!important}
   .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes badgeEntry{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
-const aiModelsHTML = `
-<div class="ai-models-page">
+const docsHTML = `
+<div class="docs-page">
   <div style="text-align: center;">
-    <div class="ai-models-badge">
-      <div class="ai-models-badge-dot"></div>
-      Ghost Pilot AI Models
+    <div class="docs-badge">
+      <div class="docs-badge-dot"></div>
+      Ghost Pilot Product Story
     </div>
   </div>
-  <h1 class="ai-models-title">Unlimited AI Access</h1>
-  <p class="ai-models-subtitle">Access the world's most powerful AI models with no tokens, no limits, no restrictions. Perfect for interviews, exams, and assessments.</p>
+  <h1 class="docs-title">Why Ghost Pilot Exists</h1>
+  <p class="docs-subtitle">The story behind creating the world's most advanced assessment assistance platform</p>
   
-  <!-- AI Models Grid -->
-  <div class="ai-models-grid">
-    
-    <!-- OpenAI O3 - Flagship -->
-    <div class="ai-model-card flagship">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
-        <div>
-          <div class="model-provider">OpenAI</div>
-          <h3 class="model-name">O3</h3>
-        </div>
-      </div>
-      <p class="model-description">OpenAI's most advanced reasoning model with exceptional problem-solving capabilities. Perfect for complex coding interviews and mathematical assessments.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Advanced Reasoning</span>
-          <span class="capability-tag">Code Generation</span>
-          <span class="capability-tag">Problem Solving</span>
-          <span class="capability-tag">Mathematics</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">200K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Medium</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★★</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Complex coding interviews (LeetCode Hard)</li>
-          <li>Mathematical problem solving</li>
-          <li>Algorithm optimization challenges</li>
-          <li>Research-level assessments</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- GPT-4o -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">👁️</div>
-        <div>
-          <div class="model-provider">OpenAI</div>
-          <h3 class="model-name">GPT-4o</h3>
-        </div>
-      </div>
-      <p class="model-description">Flagship multimodal model with excellent vision capabilities. Analyzes screenshots, code, diagrams, and provides comprehensive solutions for any assessment format.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Vision Processing</span>
-          <span class="capability-tag">Code Analysis</span>
-          <span class="capability-tag">Text Generation</span>
-          <span class="capability-tag">Multimodal</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">128K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Fast</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★★</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Screenshot analysis (MCQs, coding problems)</li>
-          <li>Online exam assistance</li>
-          <li>Diagram interpretation</li>
-          <li>Multi-format assessments</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Claude Opus 4 -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">🎭</div>
-        <div>
-          <div class="model-provider">Anthropic</div>
-          <h3 class="model-name">Claude Opus 4</h3>
-        </div>
-      </div>
-      <p class="model-description">Anthropic's most capable model with exceptional reasoning and writing abilities. Excels at essay questions, technical explanations, and complex analysis tasks.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Long-form Writing</span>
-          <span class="capability-tag">Analysis</span>
-          <span class="capability-tag">Reasoning</span>
-          <span class="capability-tag">Safety</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">200K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Medium</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★★</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Essay-based assessments</li>
-          <li>Technical writing tasks</li>
-          <li>Complex analysis questions</li>
-          <li>Academic research projects</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Gemini 2.0 Flash -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
-        <div>
-          <div class="model-provider">Google</div>
-          <h3 class="model-name">Gemini 2.0 Flash</h3>
-        </div>
-      </div>
-      <p class="model-description">Google's lightning-fast multimodal AI with excellent code understanding and rapid response times. Perfect for time-pressured assessments and quick problem solving.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Ultra-fast</span>
-          <span class="capability-tag">Multimodal</span>
-          <span class="capability-tag">Code Generation</span>
-          <span class="capability-tag">Real-time</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">1M tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Ultra-fast</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★☆</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Time-pressured coding tests</li>
-          <li>Real-time interview assistance</li>
-          <li>Quick question answering</li>
-          <li>Fast document analysis</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Qwen 2.5 VL 72B -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;"></div>
-        <div>
-          <div class="model-provider">Alibaba</div>
-          <h3 class="model-name">Qwen 2.5 VL 72B</h3>
-        </div>
-      </div>
-      <p class="model-description">Top-tier multimodal model with exceptional OCR and chart analysis capabilities. Excels at reading complex diagrams, tables, and handwritten content in assessments.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">OCR Excellence</span>
-          <span class="capability-tag">Chart Analysis</span>
-          <span class="capability-tag">Document Reading</span>
-          <span class="capability-tag">Vision AI</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">32K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Medium</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★★</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Complex diagrams & charts</li>
-          <li>Handwritten text recognition</li>
-          <li>Mathematical formulas</li>
-          <li>Technical document analysis</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- O1 Pro -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;"></div>
-        <div>
-          <div class="model-provider">OpenAI</div>
-          <h3 class="model-name">O1 Pro</h3>
-        </div>
-      </div>
-      <p class="model-description">Advanced reasoning model optimized for complex problem-solving and step-by-step analysis. Perfect for certification exams and advanced technical assessments.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Step-by-step</span>
-          <span class="capability-tag">Logic Problems</span>
-          <span class="capability-tag">Mathematical Proofs</span>
-          <span class="capability-tag">Research</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">200K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Slow</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★★</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Mathematical proofs & logic</li>
-          <li>Certification exams</li>
-          <li>Research-level problems</li>
-          <li>Complex reasoning tasks</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- DeepSeek V3 -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">💡</div>
-        <div>
-          <div class="model-provider">DeepSeek</div>
-          <h3 class="model-name">DeepSeek V3</h3>
-        </div>
-      </div>
-      <p class="model-description">Cutting-edge open-source model with exceptional coding abilities and mathematical reasoning. Great for programming interviews and technical assessments.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Code Excellence</span>
-          <span class="capability-tag">Mathematics</span>
-          <span class="capability-tag">Open Source</span>
-          <span class="capability-tag">Innovation</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">64K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Fast</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★☆</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Programming interviews</li>
-          <li>Algorithm challenges</li>
-          <li>Code optimization</li>
-          <li>Technical problem solving</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Llama 3.3 70B -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white;">🦙</div>
-        <div>
-          <div class="model-provider">Meta</div>
-          <h3 class="model-name">Llama 3.3 70B</h3>
-        </div>
-      </div>
-      <p class="model-description">Meta's powerful open-source model with strong general knowledge and reasoning capabilities. Excellent for diverse assessment topics and general knowledge tests.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">General Knowledge</span>
-          <span class="capability-tag">Reasoning</span>
-          <span class="capability-tag">Open Source</span>
-          <span class="capability-tag">Versatile</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">128K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Fast</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★☆</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>General knowledge assessments</li>
-          <li>Multi-topic examinations</li>
-          <li>Academic subjects</li>
-          <li>Broad reasoning tasks</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Mistral Large -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #64748b, #475569); color: white;">🌬️</div>
-        <div>
-          <div class="model-provider">Mistral AI</div>
-          <h3 class="model-name">Mistral Large</h3>
-        </div>
-      </div>
-      <p class="model-description">European flagship model with strong multilingual capabilities and excellent reasoning. Perfect for international assessments and language-specific evaluations.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Multilingual</span>
-          <span class="capability-tag">Reasoning</span>
-          <span class="capability-tag">Code Generation</span>
-          <span class="capability-tag">European AI</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">128K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Fast</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★☆</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>International assessments</li>
-          <li>Multilingual examinations</li>
-          <li>European standardized tests</li>
-          <li>Language-specific coding</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- InternVL3 14B -->
-    <div class="ai-model-card">
-      <div class="model-header">
-        <div class="model-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;"></div>
-        <div>
-          <div class="model-provider">OpenGVLab</div>
-          <h3 class="model-name">InternVL3 14B</h3>
-        </div>
-      </div>
-      <p class="model-description">Advanced vision-language model with specialized capabilities for scientific diagrams and technical content. Ideal for STEM assessments and research-based evaluations.</p>
-      
-      <div class="model-capabilities">
-        <div class="capabilities-title">Capabilities</div>
-        <div class="capabilities-list">
-          <span class="capability-tag">Scientific Vision</span>
-          <span class="capability-tag">Technical Diagrams</span>
-          <span class="capability-tag">STEM Content</span>
-          <span class="capability-tag">Research</span>
-        </div>
-      </div>
-
-      <div class="model-stats">
-        <div class="stat-row">
-          <span class="stat-label">Context Window</span>
-          <span class="stat-value">32K tokens</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Response Speed</span>
-          <span class="stat-value">Medium</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Quality Rating</span>
-          <span class="stat-value">★★★★☆</span>
-        </div>
-      </div>
-
-      <div class="model-best-for">
-        <div class="best-for-title">Best For</div>
-        <ul class="best-for-list">
-          <li>Scientific diagrams & charts</li>
-          <li>STEM assessments</li>
-          <li>Research paper analysis</li>
-          <li>Technical documentation</li>
-        </ul>
-      </div>
-    </div>
-
+  <div class="docs-section docs-intro">
+    <p>Ghost Pilot was born from a fundamental understanding: the current assessment system is broken. In today's competitive landscape, talented individuals often fail interviews, exams, tests, quizzes, and certifications not due to lack of capability, but because of anxiety, unfair assessment methods, and biased evaluation systems. We built Ghost Pilot to level the playing field across all forms of evaluation.</p>
   </div>
-
-  <!-- Scaling & Unlimited Access Section -->
-  <div class="scaling-section">
-    <h2 class="scaling-title">How Ghost Pilot Scales Unlimited Access</h2>
-    <p class="scaling-subtitle">Discover how we provide unlimited access to premium AI models worth $200+/month, completely free through advanced technology integration.</p>
-    
-    <div class="scaling-features">
-      
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"></div>
-        <h3 class="feature-title">Puter.js Integration</h3>
-        <p class="feature-description">Ghost Pilot leverages Puter.js to provide direct access to OpenRouter's premium AI models without API costs. This revolutionary approach eliminates the $20-200/month subscription fees while maintaining full access to O3, GPT-4o, Claude Opus 4, and more.</p>
-      </div>
-
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;"></div>
-        <h3 class="feature-title">Zero Token Limits</h3>
-        <p class="feature-description">Unlike traditional AI services that throttle usage with token limits and rate restrictions, Ghost Pilot provides truly unlimited access. Process thousands of screenshots, generate extensive code solutions, and handle unlimited conversations during your assessments.</p>
-      </div>
-
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🔄</div>
-        <h3 class="feature-title">Intelligent Model Routing</h3>
-        <p class="feature-description">Ghost Pilot automatically selects the optimal AI model for each task. Screenshot analysis uses vision models like GPT-4o and Qwen VL, coding problems leverage O3 and DeepSeek V3, while essay questions utilize Claude Opus 4's superior writing capabilities.</p>
-      </div>
-
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">🛡️</div>
-        <h3 class="feature-title">Stealth Technology</h3>
-        <p class="feature-description">Our advanced stealth system ensures AI assistance remains undetectable across all platforms. From Zoom interviews to proctored exams like HonorLock and Proctorio, Ghost Pilot operates invisibly while providing full access to all premium models.</p>
-      </div>
-
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">📊</div>
-        <h3 class="feature-title">Real-time Performance</h3>
-        <p class="feature-description">Access multiple AI models simultaneously during live assessments. Ghost Pilot can process screenshots with vision models, generate code solutions with reasoning models, and provide explanations with language models - all in parallel for maximum efficiency.</p>
-      </div>
-
-      <div class="scaling-feature">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">🌍</div>
-        <h3 class="feature-title">Global Accessibility</h3>
-        <p class="feature-description">Ghost Pilot democratizes access to premium AI models worldwide. Students and professionals in any country can access the same cutting-edge AI capabilities that were previously limited to those who could afford expensive subscriptions and enterprise accounts.</p>
-      </div>
-
-    </div>
+  
+  <div class="docs-section">
+    <h2>The Problem We Solve</h2>
+    <p>The modern assessment landscape presents significant challenges across interviews, exams, certifications, and academic testing.</p>
+    <h3>Assessment Anxiety & Performance Pressure</h3>
+    <ul>
+      <li><strong>High-stakes Environment:</strong> Single assessments can determine career trajectories and academic futures</li>
+      <li><strong>Artificial Pressure:</strong> Timed exams and coding challenges don't reflect real-world performance</li>
+      <li><strong>Knowledge Gaps:</strong> Obscure questions and memorization-based testing favor test-taking skills over actual competency</li>
+      <li><strong>Communication Barriers:</strong> Language barriers and different learning styles create unfair disadvantages</li>
+    </ul>
+    <h3>Systemic Inequality in Assessment</h3>
+    <ul>
+      <li><strong>Privilege Gap:</strong> Wealthy students and candidates have access to expensive tutoring, prep courses, and coaching</li>
+      <li><strong>Educational Bias:</strong> Standardized testing favors specific backgrounds over diverse knowledge and skills</li>
+      <li><strong>Resource Advantages:</strong> Access to study materials, practice tests, and premium preparation tools</li>
+      <li><strong>Technology Disparity:</strong> Premium AI tools and advanced preparation resources cost hundreds to thousands monthly</li>
+    </ul>
   </div>
-
+  
+  <div class="docs-section">
+    <h2>Our Vision & Mission</h2>
+    <p>Ghost Pilot exists to democratize access to educational and career opportunities by creating fairer assessment systems across all evaluation formats.</p>
+    <h3>Democratizing Assessment Success</h3>
+    <ul>
+      <li><strong>Universal Access:</strong> Premium AI assistance available to all students and professionals, regardless of economic background</li>
+      <li><strong>Knowledge Focus:</strong> Help users demonstrate actual understanding rather than test-taking strategies</li>
+      <li><strong>Confidence Building:</strong> Reduce anxiety across interviews, exams, certifications, and academic assessments</li>
+      <li><strong>Breaking Barriers:</strong> Level the playing field for underrepresented groups in education and employment</li>
+    </ul>
+    <h3>Transforming Assessment Systems</h3>
+    <ul>
+      <li><strong>Understanding Over Memorization:</strong> Focus on comprehension and problem-solving ability</li>
+      <li><strong>Real-world Application:</strong> Support assessments that reflect actual knowledge and skills</li>
+      <li><strong>Inclusive Evaluation:</strong> Accommodate different learning styles, backgrounds, and cognitive approaches</li>
+      <li><strong>Merit-based Success:</strong> Ensure the most capable individuals succeed regardless of test-taking advantages</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>Market Reality & Industry Need</h2>
+    <p>The demand for assessment assistance reflects deeper issues in modern educational and professional evaluation systems.</p>
+    <h3>Current Market Dynamics</h3>
+    <ul>
+      <li><strong>Test Prep Industry:</strong> $4B+ market serving students, professionals, and job seekers who can afford premium services</li>
+      <li><strong>Premium AI Access:</strong> GPT-4, Claude, O3, and advanced models cost $20-200+ monthly with usage limits</li>
+      <li><strong>Educational Inequality:</strong> Expensive tutoring, prep courses, and study materials favor wealthy students</li>
+      <li><strong>Geographic Disadvantages:</strong> Remote students and international candidates face additional barriers</li>
+    </ul>
+    <h3>Why Traditional Solutions Fall Short</h3>
+    <ul>
+      <li><strong>Cost Barriers:</strong> Quality preparation for exams, certifications, and interviews remains prohibitively expensive</li>
+      <li><strong>Limited Availability:</strong> Human tutors and coaches can't scale to meet global demand across all subjects</li>
+      <li><strong>One-size-fits-all:</strong> Generic study materials don't address individual learning styles or circumstances</li>
+      <li><strong>Timing Constraints:</strong> Preparation happens weeks before assessments, not during the actual evaluation</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>Our Unique Approach</h2>
+    <p>Ghost Pilot addresses these challenges through innovative technology and principled design decisions.</p>
+    <h3>Unlimited Premium AI Access</h3>
+    <ul>
+      <li><strong>Cost Elimination:</strong> Access to GPT-4, Claude Opus, O3, and Gemini without monthly fees or usage limits</li>
+      <li><strong>Real-time Intelligence:</strong> Instant analysis and assistance during live exams, interviews, tests, and certifications</li>
+      <li><strong>Multi-modal Support:</strong> Text, image, audio, and document processing for comprehensive assessment assistance</li>
+      <li><strong>Adaptive Learning:</strong> AI models optimized for diverse assessment types from academic exams to professional certifications</li>
+    </ul>
+    <h3>Advanced Stealth Technology</h3>
+    <ul>
+      <li><strong>Undetectable Operation:</strong> Sophisticated evasion techniques work across all testing platforms and proctoring systems</li>
+      <li><strong>Natural Integration:</strong> Assistance appears as natural thinking, not external help</li>
+      <li><strong>Security Focus:</strong> Enterprise-grade encryption protects against all detection methods</li>
+      <li><strong>Universal Compatibility:</strong> Works with any assessment platform, testing software, or evaluation system</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>Ethical Framework & Values</h2>
+    <p>Our product philosophy is built on creating opportunities, not exploitation.</p>
+    <h3>Empowerment Over Deception</h3>
+    <ul>
+      <li><strong>Skill Enhancement:</strong> We help users perform at their actual capability level</li>
+      <li><strong>Confidence Building:</strong> Reducing anxiety allows true abilities to shine through</li>
+      <li><strong>Learning Opportunity:</strong> Users gain knowledge and improve through each interaction</li>
+      <li><strong>Accessibility Tool:</strong> Accommodates different learning styles and cognitive approaches</li>
+    </ul>
+    <h3>Addressing Market Failures</h3>
+    <ul>
+      <li><strong>Economic Justice:</strong> High-quality assistance shouldn't be limited by financial resources</li>
+      <li><strong>Geographic Equality:</strong> Remote and international candidates deserve equal opportunities</li>
+      <li><strong>Neurodiversity Support:</strong> Accommodating different cognitive styles and processing speeds</li>
+      <li><strong>Career Mobility:</strong> Breaking down barriers that prevent talented people from advancing</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section">
+    <h2>Impact & Future Vision</h2>
+    <p>Ghost Pilot represents the beginning of a broader transformation in how we evaluate knowledge, skills, and competency across all assessment formats.</p>
+    <h3>Immediate User Benefits</h3>
+    <ul>
+      <li><strong>Academic Success:</strong> Students report 400%+ improvement in exam scores, certification pass rates, and academic performance</li>
+      <li><strong>Career Advancement:</strong> Professionals achieve higher success rates in interviews, licensing exams, and job assessments</li>
+      <li><strong>Stress Reduction:</strong> Significant decrease in test anxiety and performance pressure across all evaluation types</li>
+      <li><strong>Learning Enhancement:</strong> Continuous knowledge building through AI-powered feedback during actual assessments</li>
+      <li><strong>Economic Opportunity:</strong> Access to educational programs, certifications, and positions previously out of reach</li>
+    </ul>
+    <h3>Long-term Educational & Professional Evolution</h3>
+    <ul>
+      <li><strong>Fairer Assessment:</strong> Forcing institutions to focus on actual knowledge and competency over test-taking ability</li>
+      <li><strong>Evaluation Innovation:</strong> Pushing education and hiring toward more realistic and practical assessment methods</li>
+      <li><strong>Knowledge Optimization:</strong> Ensuring the most capable individuals succeed regardless of assessment format preferences</li>
+      <li><strong>Global Educational Equality:</strong> Creating opportunities for learners and professionals regardless of location, background, or resources</li>
+    </ul>
+  </div>
+  
+  <div class="docs-section docs-contact">
+    <h2>The Ghost Pilot Difference</h2>
+    <p>More than a tool - a movement toward assessment equality and educational justice across all evaluation formats.</p>
+    <h3>What Sets Us Apart</h3>
+    <ul>
+      <li><strong>Unlimited Access:</strong> No subscription fees, usage limits, or restrictions for premium AI models across all assessment types</li>
+      <li><strong>Enterprise Security:</strong> Military-grade stealth technology works across all testing platforms and proctoring systems</li>
+      <li><strong>Real-time Support:</strong> Instant assistance during live exams, interviews, certifications, and tests - not just preparation</li>
+      <li><strong>Universal Compatibility:</strong> Works with any assessment platform, testing software, educational system, or evaluation format</li>
+    </ul>
+    <h3>Our Commitment</h3>
+    <ul>
+      <li><strong>Accessibility First:</strong> Making advanced assessment assistance available to all students and professionals</li>
+      <li><strong>Continuous Innovation:</strong> Constantly improving to stay ahead of all detection and proctoring systems</li>
+      <li><strong>User Privacy:</strong> Your data, usage, and assessment activity remain completely confidential and secure</li>
+      <li><strong>Success Focus:</strong> Dedicated to your academic achievement, career advancement, and professional growth</li>
+    </ul>
+  </div>
+  
   <!-- Back to Home Button -->
   <div class="back-home-container">
     <a href="/" class="back-home-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
       Back to Home
     </a>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer" data-card-stack>
+  <div class="footer-content">
+    <div class="footer-row">
+      <!-- Left Side - Copyright -->
+      <div class="footer-copyright">
+        <span>© Ghost Pilot 2025</span>
+      </div>
+
+      <span class="footer-separator">·</span>
+
+      <!-- Center - Navigation Links -->
+      <div class="footer-nav">
+        <a href="#features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="#ai-models">AI Models</a>
+        <a href="/document">Documentation</a>
+      </div>
+
+      <span class="footer-separator">·</span>
+
+      <!-- Right Side - Legal & Social -->
+      <div class="footer-right">
+        <!-- Legal Links -->
+        <div class="footer-legal">
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms-of-service">Terms</a>
+        </div>
+
+        <span class="footer-separator">·</span>
+
+        <!-- Social Links -->
+        <div class="footer-social">
+          <a href="https://twitter.com/ghostpilot" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+          </a>
+          <a href="https://github.com/ghostpilot" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+          </a>
+          <a href="https://discord.gg/ghostpilot" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Discord">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0188 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9554 2.4189-2.1568 2.4189Z"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 `;
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  console.log('🤖 AI Models script initializing...');
+  // Add CSS
+  const style = document.createElement('style');
+  style.textContent = docsCSS;
+  document.head.appendChild(style);
   
-  // Define animation function first
-  function initializeAIModelsSectionAnimations() {
-    console.log('🎨 Initializing AI models animations...');
+  // Add HTML when DOM is ready - find main content area
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeDocsPage();
+    });
+  } else {
+    initializeDocsPage();
+  }
+  
+  function initializeDocsPage() {
+      // Try to find main content area, otherwise use body
+      const mainContent = document.querySelector('main') || 
+                         document.querySelector('.main-content') || 
+                         document.querySelector('[data-framer-name="Content"]') ||
+                         document.querySelector('.framer-page-content') ||
+                         document.body;
+      
+      // Clear existing content in main area and add documentation
+      if (mainContent !== document.body) {
+        mainContent.innerHTML = docsHTML;
+      } else {
+        // If we're using body, insert at the beginning but after header
+        const header = document.querySelector('header') || document.querySelector('nav');
+        if (header) {
+          header.insertAdjacentHTML('afterend', docsHTML);
+        } else {
+          document.body.insertAdjacentHTML('afterbegin', docsHTML);
+        }
+      }
     
+    // Initialize docs section animations
+    initializeDocsSectionAnimations();
+    
+    // Initialize footer scroll animation
+    initializeFooterAnimation();
+  }
+  
+  function initializeDocsSectionAnimations() {
+    // Wait a bit for DOM to be fully ready
     setTimeout(() => {
-      const aiModelsGrid = document.querySelector('.ai-models-grid');
-      const scalingSection = document.querySelector('.scaling-section');
+      const sections = document.querySelectorAll('.docs-section');
       const backHomeContainer = document.querySelector('.back-home-container');
       
-      if (aiModelsGrid) {
+      // Add staggered animation to sections
+      sections.forEach((section, index) => {
+        const delay = 400 + (index * 100); // Start at 400ms, then add 100ms for each section
+        
         setTimeout(() => {
-          aiModelsGrid.style.opacity = '1';
-          aiModelsGrid.style.transform = 'translateY(0) scale(1)';
-          aiModelsGrid.classList.add('models-animated');
-          console.log('✅ AI models grid animated');
-        }, 400);
-      }
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0) scale(1)';
+          section.classList.add('docs-animated');
+        }, delay);
+      });
       
-      if (scalingSection) {
-        setTimeout(() => {
-          scalingSection.style.opacity = '1';
-          scalingSection.style.transform = 'translateY(0) scale(1)';
-          scalingSection.classList.add('models-animated');
-          console.log('✅ Scaling section animated');
-        }, 600);
-      }
-      
+      // Animate back home button after all sections
       if (backHomeContainer) {
+        const backHomeDelay = 400 + (sections.length * 100) + 200; // Extra 200ms after last section
         setTimeout(() => {
           backHomeContainer.style.opacity = '1';
           backHomeContainer.style.transform = 'translateY(0) scale(1)';
-          console.log('✅ Back home button animated');
-        }, 800);
+        }, backHomeDelay);
       }
     }, 100);
   }
   
-  // Add CSS first and ensure it stays
-  const style = document.createElement('style');
-  style.setAttribute('data-ai-models-styles', 'true');
-  style.textContent = aiModelsCSS;
-  document.head.appendChild(style);
-  console.log('✅ CSS injected');
-  
-  // Wait for React to settle, then inject content
-  function initializeAIModelsPage() {
-    console.log('🏗️ Starting content injection...');
-    
-    // AGGRESSIVE: Remove ALL existing content from main containers
-    const clearContainers = () => {
-      const selectors = [
-        'main',
-        '.main-content', 
-        '[data-framer-name="Content"]',
-        '[data-framer-name="content"]',
-        '.framer-page-content',
-        '[role="main"]',
-        'body > div:first-child'
-      ];
+  function initializeFooterAnimation() {
+    const handleScroll = () => {
+      const cards = document.querySelectorAll("[data-card-stack]");
       
-      selectors.forEach(selector => {
-        const element = document.querySelector(selector);
-        if (element && element !== document.body) {
-          console.log('🧹 Clearing container:', selector);
-          element.innerHTML = '';
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const cardTop = rect.top;
+        const cardHeight = rect.height;
+        
+        // Calculate progress based on scroll position
+        const progress = Math.max(
+          0,
+          Math.min(
+            1,
+            (windowHeight - cardTop) / (windowHeight + cardHeight)
+          )
+        );
+        
+        // Apply stacking effect
+        if (progress > 0 && progress < 1) {
+          const scale = 0.95 + progress * 0.05;
+          const translateY = (1 - progress) * 20;
+          const opacity = 0.3 + progress * 0.7;
+          
+          card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+          card.style.opacity = opacity.toString();
+        } else if (progress >= 1) {
+          card.style.transform = "scale(1) translateY(0px)";
+          card.style.opacity = "1";
+    } else {
+          card.style.transform = "scale(0.95) translateY(20px)";
+          card.style.opacity = "0.3";
         }
       });
     };
     
-    // FORCE INJECTION: Create new container if needed
-    const injectContent = () => {
-      clearContainers();
-      
-      // Find or create main container
-      let mainContent = document.querySelector('main') || 
-                       document.querySelector('[data-framer-name="Content"]');
-      
-      if (!mainContent) {
-        console.log('🆕 Creating new main container');
-        mainContent = document.createElement('main');
-        mainContent.setAttribute('data-ai-models-injected', 'true');
-        mainContent.style.cssText = `
-          position: relative;
-          z-index: 9999;
-          min-height: 100vh;
-          width: 100%;
-        `;
-        
-        // Insert after header or at body start
-        const header = document.querySelector('header') || 
-                      document.querySelector('nav') ||
-                      document.body.firstElementChild;
-        
-        if (header && header.parentNode) {
-          header.parentNode.insertBefore(mainContent, header.nextSibling);
-        } else {
-          document.body.insertBefore(mainContent, document.body.firstChild);
-        }
-      }
-      
-      // Force clear and inject
-      mainContent.innerHTML = aiModelsHTML;
-      console.log('✅ Content injected into:', mainContent.tagName);
-      
-      // Verify injection
-      const check = document.querySelector('.ai-models-page');
-      console.log('🔍 AI Models page found after injection:', !!check);
-      
-      return !!check;
-    };
-    
-    // Try injection with retries
-    let attempts = 0;
-    const maxAttempts = 5;
-    
-    const tryInject = () => {
-      attempts++;
-      console.log(`🎯 Injection attempt ${attempts}/${maxAttempts}`);
-      
-      const success = injectContent();
-      
-      if (success) {
-        console.log('✅ Content injection successful!');
-        initializeAIModelsSectionAnimations();
-        
-        // DEFENSIVE: Re-inject if React removes it
-        setTimeout(() => {
-          if (!document.querySelector('.ai-models-page')) {
-            console.log('🔄 Content was removed, re-injecting...');
-            injectContent();
-            initializeAIModelsSectionAnimations();
-          }
-        }, 1000);
-        
-      } else if (attempts < maxAttempts) {
-        console.log('⏰ Retrying injection in 200ms...');
-        setTimeout(tryInject, 200);
-      } else {
-        console.error('❌ All injection attempts failed');
-      }
-    };
-    
-    tryInject();
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
   }
-  
-  // REACT-SAFE TIMING: Wait for React hydration
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initializeAIModelsPage, 100);
-    });
-  } else {
-    // Multiple timing attempts to work around React
-    setTimeout(initializeAIModelsPage, 50);
-    setTimeout(initializeAIModelsPage, 200);
-    setTimeout(initializeAIModelsPage, 500);
-  }
-  
 })(); 
