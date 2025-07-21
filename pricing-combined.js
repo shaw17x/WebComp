@@ -271,159 +271,81 @@ window.toggleFAQ = function(index) {
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  console.log('💰 Pricing script initializing...');
-  
-  // Add CSS first and ensure it stays
+  // Add CSS
   const style = document.createElement('style');
-  style.setAttribute('data-pricing-styles', 'true');
   style.textContent = pricingCSS;
   document.head.appendChild(style);
-  console.log('✅ CSS injected');
   
-  // Wait for React to settle, then inject content
-  function initializePricingPage() {
-    console.log('🏗️ Starting content injection...');
-    
-    // AGGRESSIVE: Remove ALL existing content from main containers
-    const clearContainers = () => {
-      const selectors = [
-        'main',
-        '.main-content', 
-        '[data-framer-name="Content"]',
-        '[data-framer-name="content"]',
-        '.framer-page-content',
-        '[role="main"]',
-        'body > div:first-child'
-      ];
-      
-      selectors.forEach(selector => {
-        const element = document.querySelector(selector);
-        if (element && element !== document.body) {
-          console.log('🧹 Clearing container:', selector);
-          element.innerHTML = '';
-        }
-      });
-    };
-    
-    // FORCE INJECTION: Create new container if needed
-    const injectContent = () => {
-      clearContainers();
-      
-      // Find or create main container
-      let mainContent = document.querySelector('main') || 
-                       document.querySelector('[data-framer-name="Content"]');
-      
-      if (!mainContent) {
-        console.log('🆕 Creating new main container');
-        mainContent = document.createElement('main');
-        mainContent.setAttribute('data-pricing-injected', 'true');
-                 mainContent.style.cssText = `
-           position: relative;
-           z-index: 9999;
-           min-height: 100vh;
-           width: 100%;
-         `;
-        
-        // Insert after header or at body start
-        const header = document.querySelector('header') || 
-                      document.querySelector('nav') ||
-                      document.body.firstElementChild;
-        
-        if (header && header.parentNode) {
-          header.parentNode.insertBefore(mainContent, header.nextSibling);
-        } else {
-          document.body.insertBefore(mainContent, document.body.firstChild);
-        }
-      }
-      
-      // Force clear and inject
-      mainContent.innerHTML = pricingHTML;
-      console.log('✅ Content injected into:', mainContent.tagName);
-      
-      // Verify injection
-      const check = document.querySelector('.pricing-page');
-      console.log('🔍 Pricing page found after injection:', !!check);
-      
-      return !!check;
-    };
-    
-    // Try injection with retries
-    let attempts = 0;
-    const maxAttempts = 5;
-    
-    const tryInject = () => {
-      attempts++;
-      console.log(`🎯 Injection attempt ${attempts}/${maxAttempts}`);
-      
-      const success = injectContent();
-      
-      if (success) {
-        console.log('✅ Content injection successful!');
-        initializePricingSectionAnimations();
-        
-        // DEFENSIVE: Re-inject if React removes it
-        setTimeout(() => {
-          if (!document.querySelector('.pricing-page')) {
-            console.log('🔄 Content was removed, re-injecting...');
-            injectContent();
-            initializePricingSectionAnimations();
-          }
-        }, 1000);
-        
-      } else if (attempts < maxAttempts) {
-        console.log('⏰ Retrying injection in 200ms...');
-        setTimeout(tryInject, 200);
-      } else {
-        console.error('❌ All injection attempts failed');
-      }
-    };
-    
-    tryInject();
-  }
-  
-  // REACT-SAFE TIMING: Wait for React hydration
+  // Add HTML when DOM is ready - find main content area
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initializePricingPage, 100);
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePricingPage();
     });
   } else {
-    // Multiple timing attempts to work around React
-    setTimeout(initializePricingPage, 50);
-    setTimeout(initializePricingPage, 200);
-    setTimeout(initializePricingPage, 500);
+    initializePricingPage();
+  }
+  
+  function initializePricingPage() {
+    // Check if pricing content already exists
+    if (document.querySelector('.pricing-page')) {
+      console.log('✅ Pricing component already loaded');
+      return;
+    }
+    
+    // Try to find main content area, otherwise use body
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    // Clear existing content in main area and add pricing content
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = pricingHTML;
+    } else {
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', pricingHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+      }
+    }
+    
+    // Initialize pricing section animations
+    initializePricingSectionAnimations();
   }
   
   function initializePricingSectionAnimations() {
-    console.log('🎨 Initializing animations...');
-    
+    // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const pricingGrid = document.querySelector('.pricing-grid');
       const faqSection = document.querySelector('.faq-section');
       const backHomeContainer = document.querySelector('.back-home-container');
       
+      // Add staggered animation to pricing grid
       if (pricingGrid) {
         setTimeout(() => {
           pricingGrid.style.opacity = '1';
           pricingGrid.style.transform = 'translateY(0) scale(1)';
           pricingGrid.classList.add('pricing-animated');
-          console.log('✅ Pricing grid animated');
         }, 400);
       }
       
+      // Animate FAQ section
       if (faqSection) {
         setTimeout(() => {
           faqSection.style.opacity = '1';
           faqSection.style.transform = 'translateY(0) scale(1)';
           faqSection.classList.add('pricing-animated');
-          console.log('✅ FAQ section animated');
         }, 600);
       }
       
+      // Animate back home button after all sections
       if (backHomeContainer) {
         setTimeout(() => {
           backHomeContainer.style.opacity = '1';
           backHomeContainer.style.transform = 'translateY(0) scale(1)';
-          console.log('✅ Back home button animated');
         }, 800);
       }
     }, 100);
