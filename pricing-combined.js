@@ -78,7 +78,7 @@ const pricingHTML = `
   <div style="text-align: center;">
     <div class="pricing-badge">
       <div class="pricing-badge-dot"></div>
-      Ghost Pilot Pricing
+      Steley Pricing
     </div>
   </div>
   <h1 class="pricing-title">Choose Your Plan</h1>
@@ -90,7 +90,7 @@ const pricingHTML = `
     <div class="pricing-card">
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
-      <p class="plan-description">Perfect for trying out Ghost Pilot with basic features.</p>
+      <p class="plan-description">Perfect for trying out Steley with basic features.</p>
       <ul class="plan-features">
         <li>5 AI queries per day</li>
         <li>Basic screenshot analysis</li>
