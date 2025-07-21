@@ -623,163 +623,83 @@ const aiModelsHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  console.log('🤖 AI Models script initializing...');
+  // Add CSS
+  const style = document.createElement('style');
+  style.textContent = aiModelsCSS;
+  document.head.appendChild(style);
   
-  // Define animation function first
-  function initializeAIModelsSectionAnimations() {
-    console.log('🎨 Initializing AI models animations...');
+  // Add HTML when DOM is ready - find main content area
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeAIModelsPage();
+    });
+  } else {
+    initializeAIModelsPage();
+  }
+  
+  function initializeAIModelsPage() {
+    // Check if AI models content already exists
+    if (document.querySelector('.ai-models-page')) {
+      console.log('✅ AI Models component already loaded');
+      return;
+    }
     
+    // Try to find main content area, otherwise use body
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    // Clear existing content in main area and add AI models content
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = aiModelsHTML;
+    } else {
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', aiModelsHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', aiModelsHTML);
+      }
+    }
+    
+    // Initialize AI models section animations
+    initializeAIModelsSectionAnimations();
+  }
+  
+  function initializeAIModelsSectionAnimations() {
+    // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const aiModelsGrid = document.querySelector('.ai-models-grid');
       const scalingSection = document.querySelector('.scaling-section');
       const backHomeContainer = document.querySelector('.back-home-container');
       
+      // Add staggered animation to AI models grid
       if (aiModelsGrid) {
         setTimeout(() => {
           aiModelsGrid.style.opacity = '1';
           aiModelsGrid.style.transform = 'translateY(0) scale(1)';
           aiModelsGrid.classList.add('models-animated');
-          console.log('✅ AI models grid animated');
         }, 400);
       }
       
+      // Animate scaling section
       if (scalingSection) {
         setTimeout(() => {
           scalingSection.style.opacity = '1';
           scalingSection.style.transform = 'translateY(0) scale(1)';
           scalingSection.classList.add('models-animated');
-          console.log('✅ Scaling section animated');
         }, 600);
       }
       
+      // Animate back home button after all sections
       if (backHomeContainer) {
         setTimeout(() => {
           backHomeContainer.style.opacity = '1';
           backHomeContainer.style.transform = 'translateY(0) scale(1)';
-          console.log('✅ Back home button animated');
         }, 800);
       }
     }, 100);
   }
-  
-  // Add CSS first and ensure it stays
-  const style = document.createElement('style');
-  style.setAttribute('data-ai-models-styles', 'true');
-  style.textContent = aiModelsCSS;
-  document.head.appendChild(style);
-  console.log('✅ CSS injected');
-  
-  // Wait for React to settle, then inject content
-  function initializeAIModelsPage() {
-    console.log('🏗️ Starting content injection...');
-    
-    // AGGRESSIVE: Remove ALL existing content from main containers
-    const clearContainers = () => {
-      const selectors = [
-        'main',
-        '.main-content', 
-        '[data-framer-name="Content"]',
-        '[data-framer-name="content"]',
-        '.framer-page-content',
-        '[role="main"]',
-        'body > div:first-child'
-      ];
-      
-      selectors.forEach(selector => {
-        const element = document.querySelector(selector);
-        if (element && element !== document.body) {
-          console.log('🧹 Clearing container:', selector);
-          element.innerHTML = '';
-        }
-      });
-    };
-    
-    // FORCE INJECTION: Create new container if needed
-    const injectContent = () => {
-      clearContainers();
-      
-      // Find or create main container
-      let mainContent = document.querySelector('main') || 
-                       document.querySelector('[data-framer-name="Content"]');
-      
-      if (!mainContent) {
-        console.log('🆕 Creating new main container');
-        mainContent = document.createElement('main');
-        mainContent.setAttribute('data-ai-models-injected', 'true');
-        mainContent.style.cssText = `
-          position: relative;
-          z-index: 9999;
-          min-height: 100vh;
-          width: 100%;
-        `;
-        
-        // Insert after header or at body start
-        const header = document.querySelector('header') || 
-                      document.querySelector('nav') ||
-                      document.body.firstElementChild;
-        
-        if (header && header.parentNode) {
-          header.parentNode.insertBefore(mainContent, header.nextSibling);
-        } else {
-          document.body.insertBefore(mainContent, document.body.firstChild);
-        }
-      }
-      
-      // Force clear and inject
-      mainContent.innerHTML = aiModelsHTML;
-      console.log('✅ Content injected into:', mainContent.tagName);
-      
-      // Verify injection
-      const check = document.querySelector('.ai-models-page');
-      console.log('🔍 AI Models page found after injection:', !!check);
-      
-      return !!check;
-    };
-    
-    // Try injection with retries
-    let attempts = 0;
-    const maxAttempts = 5;
-    
-    const tryInject = () => {
-      attempts++;
-      console.log(`🎯 Injection attempt ${attempts}/${maxAttempts}`);
-      
-      const success = injectContent();
-      
-      if (success) {
-        console.log('✅ Content injection successful!');
-        initializeAIModelsSectionAnimations();
-        
-        // DEFENSIVE: Re-inject if React removes it
-        setTimeout(() => {
-          if (!document.querySelector('.ai-models-page')) {
-            console.log('🔄 Content was removed, re-injecting...');
-            injectContent();
-            initializeAIModelsSectionAnimations();
-          }
-        }, 1000);
-        
-      } else if (attempts < maxAttempts) {
-        console.log('⏰ Retrying injection in 200ms...');
-        setTimeout(tryInject, 200);
-      } else {
-        console.error('❌ All injection attempts failed');
-      }
-    };
-    
-    tryInject();
-  }
-  
-  // REACT-SAFE TIMING: Wait for React hydration
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initializeAIModelsPage, 100);
-    });
-  } else {
-    // Multiple timing attempts to work around React
-    setTimeout(initializeAIModelsPage, 50);
-    setTimeout(initializeAIModelsPage, 200);
-    setTimeout(initializeAIModelsPage, 500);
-  }
-  
 })(); 
