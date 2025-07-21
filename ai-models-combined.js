@@ -625,6 +625,43 @@ const aiModelsHTML = `
 (function() {
   console.log('🤖 AI Models script initializing...');
   
+  // Define animation function first
+  function initializeAIModelsSectionAnimations() {
+    console.log('🎨 Initializing AI models animations...');
+    
+    setTimeout(() => {
+      const aiModelsGrid = document.querySelector('.ai-models-grid');
+      const scalingSection = document.querySelector('.scaling-section');
+      const backHomeContainer = document.querySelector('.back-home-container');
+      
+      if (aiModelsGrid) {
+        setTimeout(() => {
+          aiModelsGrid.style.opacity = '1';
+          aiModelsGrid.style.transform = 'translateY(0) scale(1)';
+          aiModelsGrid.classList.add('models-animated');
+          console.log('✅ AI models grid animated');
+        }, 400);
+      }
+      
+      if (scalingSection) {
+        setTimeout(() => {
+          scalingSection.style.opacity = '1';
+          scalingSection.style.transform = 'translateY(0) scale(1)';
+          scalingSection.classList.add('models-animated');
+          console.log('✅ Scaling section animated');
+        }, 600);
+      }
+      
+      if (backHomeContainer) {
+        setTimeout(() => {
+          backHomeContainer.style.opacity = '1';
+          backHomeContainer.style.transform = 'translateY(0) scale(1)';
+          console.log('✅ Back home button animated');
+        }, 800);
+      }
+    }, 100);
+  }
+  
   // Add CSS first and ensure it stays
   const style = document.createElement('style');
   style.setAttribute('data-ai-models-styles', 'true');
@@ -745,39 +782,4 @@ const aiModelsHTML = `
     setTimeout(initializeAIModelsPage, 500);
   }
   
-  function initializeAIModelsSectionAnimations() {
-    console.log('🎨 Initializing AI models animations...');
-    
-    setTimeout(() => {
-      const aiModelsGrid = document.querySelector('.ai-models-grid');
-      const scalingSection = document.querySelector('.scaling-section');
-      const backHomeContainer = document.querySelector('.back-home-container');
-      
-      if (aiModelsGrid) {
-        setTimeout(() => {
-          aiModelsGrid.style.opacity = '1';
-          aiModelsGrid.style.transform = 'translateY(0) scale(1)';
-          aiModelsGrid.classList.add('models-animated');
-          console.log('✅ AI models grid animated');
-        }, 400);
-      }
-      
-      if (scalingSection) {
-        setTimeout(() => {
-          scalingSection.style.opacity = '1';
-          scalingSection.style.transform = 'translateY(0) scale(1)';
-          scalingSection.classList.add('models-animated');
-          console.log('✅ Scaling section animated');
-        }, 600);
-      }
-      
-      if (backHomeContainer) {
-        setTimeout(() => {
-          backHomeContainer.style.opacity = '1';
-          backHomeContainer.style.transform = 'translateY(0) scale(1)';
-          console.log('✅ Back home button animated');
-        }, 800);
-      }
-    }, 100);
-  }
 })(); 
