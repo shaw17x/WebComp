@@ -271,49 +271,104 @@ window.toggleFAQ = function(index) {
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  // Add CSS
+  console.log('💰 Pricing script initializing...');
+  
+  // Add CSS immediately
   const style = document.createElement('style');
+  style.setAttribute('data-pricing-styles', 'true');
   style.textContent = pricingCSS;
   document.head.appendChild(style);
+  console.log('✅ CSS injected');
   
-  // Add HTML when DOM is ready - find main content area
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      initializePricingPage();
-    });
-  } else {
-    initializePricingPage();
-  }
-  
+  // Wait for React to finish before injecting content
   function initializePricingPage() {
+    console.log('🏗️ Starting pricing page initialization...');
+    
     // Check if pricing content already exists
     if (document.querySelector('.pricing-page')) {
-      console.log('✅ Pricing component already loaded');
+      console.log('✅ Pricing content already exists');
       return;
     }
     
-    // Try to find main content area, otherwise use body
-    const mainContent = document.querySelector('main') || 
-                       document.querySelector('.main-content') || 
-                       document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') ||
-                       document.body;
-    
-    // Clear existing content in main area and add pricing content
-    if (mainContent !== document.body) {
-      mainContent.innerHTML = pricingHTML;
-    } else {
-      // If we're using body, insert at the beginning but after header
-      const header = document.querySelector('header') || document.querySelector('nav');
-      if (header) {
-        header.insertAdjacentHTML('afterend', pricingHTML);
-      } else {
-        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+    // Wait for React hydration to complete, then inject content
+    const injectContent = () => {
+      console.log('📝 Injecting pricing content...');
+      
+      // Find the best container
+      const selectors = [
+        'main',
+        '.main-content', 
+        '[data-framer-name="Content"]',
+        '[data-framer-name="content"]',
+        '.framer-page-content',
+        '[role="main"]'
+      ];
+      
+      let mainContent = null;
+      for (const selector of selectors) {
+        mainContent = document.querySelector(selector);
+        if (mainContent) {
+          console.log('📍 Found container:', selector);
+          break;
+        }
       }
-    }
+      
+      if (!mainContent) {
+        console.log('🆕 Creating new main container');
+        mainContent = document.createElement('main');
+        mainContent.setAttribute('data-pricing-injected', 'true');
+        mainContent.style.cssText = `
+          position: relative;
+          z-index: 9999;
+          min-height: 100vh;
+          width: 100%;
+        `;
+        
+        // Insert after header or at body start
+        const header = document.querySelector('header') || document.querySelector('nav');
+        if (header && header.parentNode) {
+          header.parentNode.insertBefore(mainContent, header.nextSibling);
+        } else {
+          document.body.insertBefore(mainContent, document.body.firstChild);
+        }
+      }
+      
+      // Clear and inject content
+      mainContent.innerHTML = pricingHTML;
+      console.log('✅ Content injected successfully');
+      
+      // Verify injection
+      const check = document.querySelector('.pricing-page');
+      if (check) {
+        console.log('🎉 Pricing page is now visible');
+        initializePricingSectionAnimations();
+        
+        // Defensive re-injection if React removes it
+        setTimeout(() => {
+          if (!document.querySelector('.pricing-page')) {
+            console.log('🔄 Content was removed by React, re-injecting...');
+            mainContent.innerHTML = pricingHTML;
+            initializePricingSectionAnimations();
+          }
+        }, 1000);
+      } else {
+        console.error('❌ Content injection failed');
+      }
+    };
     
-    // Initialize pricing section animations
-    initializePricingSectionAnimations();
+    // Multiple timing strategies to work around React
+    setTimeout(injectContent, 100);   // Quick attempt
+    setTimeout(injectContent, 500);   // After React settles
+    setTimeout(injectContent, 1000);  // Final fallback
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initializePricingPage, 200);
+    });
+  } else {
+    setTimeout(initializePricingPage, 200);
   }
   
   function initializePricingSectionAnimations() {
