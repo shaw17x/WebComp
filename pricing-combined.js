@@ -269,106 +269,119 @@ window.toggleFAQ = function(index) {
   }
 };
 
-// Auto-execute function to inject CSS and HTML
+// Auto-execute function to inject CSS and HTML - React Compatible Version
 (function() {
-  console.log('💰 Pricing script initializing...');
+  console.log('💰 Pricing script initializing (React-safe mode)...');
   
-  // Add CSS immediately
-  const style = document.createElement('style');
-  style.setAttribute('data-pricing-styles', 'true');
-  style.textContent = pricingCSS;
-  document.head.appendChild(style);
-  console.log('✅ CSS injected');
+  // Add CSS immediately but safely
+  if (!document.querySelector('[data-pricing-styles]')) {
+    const style = document.createElement('style');
+    style.setAttribute('data-pricing-styles', 'true');
+    style.textContent = pricingCSS;
+    document.head.appendChild(style);
+    console.log('✅ CSS injected safely');
+  }
   
-  // Wait for React to finish before injecting content
+  // React-safe content injection
   function initializePricingPage() {
-    console.log('🏗️ Starting pricing page initialization...');
+    console.log('🏗️ Starting React-safe pricing initialization...');
     
-    // Check if pricing content already exists
-    if (document.querySelector('.pricing-page')) {
-      console.log('✅ Pricing content already exists');
+    // Check if already initialized
+    if (document.querySelector('.pricing-page') || document.body.hasAttribute('data-pricing-initialized')) {
+      console.log('✅ Pricing already initialized, skipping');
       return;
     }
     
-    // Wait for React hydration to complete, then inject content
-    const injectContent = () => {
-      console.log('📝 Injecting pricing content...');
+    // Mark as initializing to prevent multiple runs
+    document.body.setAttribute('data-pricing-initializing', 'true');
+    
+    // Wait for React to be completely ready
+    const waitForReactAndInject = () => {
+      // Check if React is still hydrating
+      const isReactBusy = document.querySelector('[data-reactroot]') && 
+                         !document.querySelector('[data-reactroot] main, [data-reactroot] [role="main"]');
       
-      // Find the best container
-      const selectors = [
-        'main',
-        '.main-content', 
-        '[data-framer-name="Content"]',
-        '[data-framer-name="content"]',
-        '.framer-page-content',
-        '[role="main"]'
-      ];
-      
-      let mainContent = null;
-      for (const selector of selectors) {
-        mainContent = document.querySelector(selector);
-        if (mainContent) {
-          console.log('📍 Found container:', selector);
-          break;
-        }
+      if (isReactBusy) {
+        console.log('⏳ React still hydrating, waiting...');
+        setTimeout(waitForReactAndInject, 300);
+        return;
       }
       
-      if (!mainContent) {
-        console.log('🆕 Creating new main container');
-        mainContent = document.createElement('main');
-        mainContent.setAttribute('data-pricing-injected', 'true');
-        mainContent.style.cssText = `
+      console.log('📝 React ready, injecting pricing content...');
+      
+      // Find existing main content
+      const mainContent = document.querySelector('main') || 
+                         document.querySelector('[role="main"]') ||
+                         document.querySelector('[data-framer-name="Content"]') ||
+                         document.querySelector('.main-content');
+      
+      if (mainContent) {
+        console.log('📍 Found main container, replacing content');
+        // Save original content as backup
+        const originalContent = mainContent.innerHTML;
+        mainContent.setAttribute('data-original-content', originalContent);
+        
+        // Replace with pricing content
+        mainContent.innerHTML = pricingHTML;
+        mainContent.setAttribute('data-pricing-content', 'true');
+        
+        // Mark as successfully initialized
+        document.body.setAttribute('data-pricing-initialized', 'true');
+        document.body.removeAttribute('data-pricing-initializing');
+        
+        console.log('✅ Pricing content injected successfully');
+        
+        // Initialize animations after a brief delay
+        setTimeout(() => {
+          initializePricingSectionAnimations();
+        }, 150);
+        
+      } else {
+        console.log('🆕 No main container found, creating one');
+        
+        // Create new main container
+        const newMain = document.createElement('main');
+        newMain.innerHTML = pricingHTML;
+        newMain.setAttribute('data-pricing-injected', 'true');
+        newMain.style.cssText = `
           position: relative;
-          z-index: 9999;
+          z-index: 10000;
           min-height: 100vh;
           width: 100%;
         `;
         
-        // Insert after header or at body start
+        // Insert after header/nav or at body start
         const header = document.querySelector('header') || document.querySelector('nav');
-        if (header && header.parentNode) {
-          header.parentNode.insertBefore(mainContent, header.nextSibling);
+        if (header) {
+          header.insertAdjacentElement('afterend', newMain);
         } else {
-          document.body.insertBefore(mainContent, document.body.firstChild);
+          document.body.insertBefore(newMain, document.body.firstChild);
         }
-      }
-      
-      // Clear and inject content
-      mainContent.innerHTML = pricingHTML;
-      console.log('✅ Content injected successfully');
-      
-      // Verify injection
-      const check = document.querySelector('.pricing-page');
-      if (check) {
-        console.log('🎉 Pricing page is now visible');
-        initializePricingSectionAnimations();
         
-        // Defensive re-injection if React removes it
+        document.body.setAttribute('data-pricing-initialized', 'true');
+        document.body.removeAttribute('data-pricing-initializing');
+        
+        console.log('✅ New pricing container created');
+        
         setTimeout(() => {
-          if (!document.querySelector('.pricing-page')) {
-            console.log('🔄 Content was removed by React, re-injecting...');
-            mainContent.innerHTML = pricingHTML;
-            initializePricingSectionAnimations();
-          }
-        }, 1000);
-      } else {
-        console.error('❌ Content injection failed');
+          initializePricingSectionAnimations();
+        }, 150);
       }
     };
     
-    // Multiple timing strategies to work around React
-    setTimeout(injectContent, 100);   // Quick attempt
-    setTimeout(injectContent, 500);   // After React settles
-    setTimeout(injectContent, 1000);  // Final fallback
+    // Start the React-safe injection process
+    setTimeout(waitForReactAndInject, 100);
   }
   
-  // Initialize when DOM is ready
+  // Initialize with proper timing
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(initializePricingPage, 200);
+      // Wait extra time for React hydration
+      setTimeout(initializePricingPage, 800);
     });
   } else {
-    setTimeout(initializePricingPage, 200);
+    // Document already loaded, wait for React
+    setTimeout(initializePricingPage, 800);
   }
   
   function initializePricingSectionAnimations() {
