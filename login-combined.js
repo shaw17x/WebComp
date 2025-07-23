@@ -100,7 +100,12 @@ const loginHTML = `
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
-      <h1 class="auth-title">Steley</h1>
+      <h1 class="auth-title">
+        <div style="display: inline-flex; align-items: center; gap: 4px;">
+          <img src="/assets/icons/win/icon.ico" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges;">
+          <span>teley</span>
+        </div>
+      </h1>
       <h2 class="auth-subtitle">Welcome Back</h2>
       <p class="auth-description">Sign in to access your personalized experience</p>
     </div>
