@@ -329,6 +329,9 @@ const loginHTML = `
     console.log('✅ Steley Login: Login component added successfully!');
     console.log('   Component element:', loginComponent);
     
+    // 🕵️ ADD WATCHER TO DETECT WHEN ELEMENT GETS REMOVED
+    setupRemovalDetector(loginComponent);
+    
     // Initialize login animations with proper timing (matching docs page pattern)
     console.log('🎬 Steley Login: Starting animations...');
     initializeLoginAnimations();
@@ -618,6 +621,78 @@ const loginHTML = `
     } else {
       console.error('❌ Steley Login: Could not display message - submit text element not found');
     }
+  }
+  
+  // 🕵️ DETECTIVE FUNCTION - Catch what's removing our login box!
+  function setupRemovalDetector(loginComponent) {
+    console.log('🕵️ Steley Login: Setting up removal detector...');
+    
+    // Method 1: MutationObserver to watch for removal
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList') {
+          // Check if our login component was removed
+          mutation.removedNodes.forEach(function(removedNode) {
+            if (removedNode === loginComponent || 
+                (removedNode.contains && removedNode.contains(loginComponent))) {
+              console.error('🚨 CAUGHT THE CULPRIT! Login component was REMOVED!');
+              console.error('   Removed by:', mutation);
+              console.error('   Target that removed it:', mutation.target);
+              console.error('   Time:', new Date().toISOString());
+              
+              // Log the stack trace to see what function removed it
+              console.trace('🔍 Stack trace of removal:');
+            }
+          });
+          
+          // Check if parent was cleared
+          if (mutation.target.contains && !mutation.target.contains(loginComponent)) {
+            const stillExists = document.querySelector('.auth-login-component');
+            if (!stillExists) {
+              console.error('🚨 LOGIN COMPONENT DISAPPEARED!');
+              console.error('   Parent that cleared content:', mutation.target);
+              console.error('   What was added instead:', Array.from(mutation.addedNodes));
+            }
+          }
+        }
+      });
+    });
+    
+    // Watch the entire document for changes
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    // Method 2: Periodic existence check
+    const existenceChecker = setInterval(() => {
+      const stillExists = document.querySelector('.auth-login-component');
+      if (!stillExists) {
+        console.error('🚨 LOGIN COMPONENT VANISHED! (detected by periodic check)');
+        console.error('   Time of disappearance:', new Date().toISOString());
+        console.error('   Current body content:', document.body.innerHTML.substring(0, 500) + '...');
+        clearInterval(existenceChecker);
+      }
+    }, 100); // Check every 100ms
+    
+    // Method 3: Check for React/Framework re-renders
+    setTimeout(() => {
+      const afterDelay = document.querySelector('.auth-login-component');
+      if (!afterDelay) {
+        console.error('🚨 LOGIN COMPONENT REMOVED WITHIN 1 SECOND!');
+        console.error('   Likely cause: React/Framework re-render');
+        console.error('   Check for routing changes or state updates');
+      } else {
+        console.log('✅ Login component still exists after 1 second');
+      }
+    }, 1000);
+    
+    // Stop checking after 10 seconds
+    setTimeout(() => {
+      clearInterval(existenceChecker);
+      observer.disconnect();
+      console.log('🕵️ Steley Login: Removal detector stopped (10 second limit)');
+    }, 10000);
   }
   
   console.log('🏁 Steley Login Script: Initialization complete');
