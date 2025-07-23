@@ -248,6 +248,12 @@ const loginHTML = `
 
 // Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
+  // Prevent multiple executions - this fixes the appearing/disappearing issue
+  if (window.steleyLoginInitialized) {
+    return;
+  }
+  window.steleyLoginInitialized = true;
+  
   // Add CSS immediately
   const style = document.createElement('style');
   style.textContent = loginCSS;
@@ -263,6 +269,12 @@ const loginHTML = `
   }
   
   function initializeLoginPage() {
+    // Check if login content already exists - prevent duplication
+    if (document.querySelector('.auth-login-component')) {
+      console.log('Login page already initialized');
+      return;
+    }
+    
     // Try to find main content area, otherwise use body - matching docs page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
@@ -270,9 +282,10 @@ const loginHTML = `
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    // Clear existing content in main area and add login content
+    // SAFER DOM insertion - don't clear existing content, just append
     if (mainContent !== document.body) {
-      mainContent.innerHTML = loginHTML;
+      // Don't clear content, just append login HTML
+      mainContent.insertAdjacentHTML('beforeend', loginHTML);
     } else {
       // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
@@ -281,6 +294,13 @@ const loginHTML = `
       } else {
         document.body.insertAdjacentHTML('afterbegin', loginHTML);
       }
+    }
+    
+    // Verify the login component was added successfully
+    const loginComponent = document.querySelector('.auth-login-component');
+    if (!loginComponent) {
+      console.error('Failed to add login component to page');
+      return;
     }
     
     // Initialize login animations with proper timing (matching docs page pattern)
@@ -304,18 +324,24 @@ const loginHTML = `
         
         // Add floating animation and effects after entry completes
         setTimeout(() => {
-          loginCard.classList.add('floating');
-          loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
-          loginCard.style.willChange = 'auto'; // Remove will-change after animation
+          // Double-check element still exists before animating
+          if (document.querySelector('.auth-screen-card')) {
+            loginCard.classList.add('floating');
+            loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
+            loginCard.style.willChange = 'auto'; // Remove will-change after animation
+          }
         }, 800);
       }
       
       // Animate footer with class-based approach
       if (footer) {
         setTimeout(() => {
-          footer.style.opacity = '1';
-          footer.style.transform = 'scale(1) translateY(0px)';
-          footer.style.willChange = 'auto';
+          // Double-check element still exists before animating
+          if (document.querySelector('.auth-footer')) {
+            footer.style.opacity = '1';
+            footer.style.transform = 'scale(1) translateY(0px)';
+            footer.style.willChange = 'auto';
+          }
         }, 300);
       }
     }, 50); // Reduced delay for instant start
