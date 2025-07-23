@@ -48,6 +48,22 @@ const aiModelsCSS = `
 .back-home-btn svg{width:16px;height:16px;transition:transform 0.3s ease}
 .back-home-btn:hover svg{transform:translateX(-4px)}
 
+/* Modal Popup */
+.model-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}
+.model-modal-overlay.active{display:flex;opacity:1}
+.model-modal{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;max-width:500px;width:90%;max-height:70vh;overflow-y:auto;position:relative;transform:scale(0.9);transition:transform 0.3s ease;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.model-modal-overlay.active .model-modal{transform:scale(1)}
+.model-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#9ca3af;font-size:24px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all 0.2s ease}
+.model-modal-close:hover{background:rgba(255,255,255,0.1);color:#fff}
+.model-modal-title{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:8px;font-family:'Fira Code',Monaco,Consolas,monospace}
+.model-modal-provider{color:#6b7280;font-size:0.9rem;font-weight:500;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}
+.model-modal-description{color:#cbd5e1;font-size:1rem;line-height:1.6;margin-bottom:20px}
+.model-modal-specs{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:16px}
+.model-spec-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.model-spec-row:last-child{border-bottom:none}
+.model-spec-label{color:#9ca3af;font-size:0.9rem;font-weight:500}
+.model-spec-value{color:#fff;font-size:0.9rem;font-weight:600}
+
 @media(max-width:768px){
   .ai-models-page{padding:15px;margin:60px auto}
   .ai-models-title{font-size:2rem}
@@ -80,16 +96,16 @@ const aiModelsHTML = `
     <div class="stat-card">
       <div class="stat-number">12</div>
       <div class="stat-label">Providers</div>
-    </div>
+        </div>
     <div class="stat-card">
       <div class="stat-number">∞</div>
       <div class="stat-label">Usage Limit</div>
-    </div>
+      </div>
     <div class="stat-card">
       <div class="stat-number">$0</div>
       <div class="stat-label">Monthly Cost</div>
-    </div>
-  </div>
+        </div>
+      </div>
 
   <!-- Provider Switcher -->
   <div class="provider-switcher">
@@ -102,7 +118,7 @@ const aiModelsHTML = `
       <div class="provider-tab" data-provider="deepseek">DeepSeek</div>
       <div class="provider-tab" data-provider="qwen">Qwen</div>
       <div class="provider-tab" data-provider="nvidia">NVIDIA</div>
-    </div>
+        </div>
 
     <div class="models-container">
       <!-- OpenAI Models -->
@@ -111,54 +127,54 @@ const aiModelsHTML = `
           <div class="category-title">Flagship Models</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-pro</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-mini</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-mini-high</span></div>
-          </div>
-        </div>
-        
+      </div>
+    </div>
+
         <div class="model-category">
           <div class="category-title">GPT-4 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-2024-11-20</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-mini</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-mini-2024-07-18</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/chatgpt-4o-latest</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4-turbo</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">O1 Reasoning Models</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-pro</span></div>
-          </div>
+    </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-mini</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-preview</span></div>
-          </div>
+      </div>
         </div>
       </div>
 
@@ -168,18 +184,18 @@ const aiModelsHTML = `
           <div class="category-title">Claude 3.5 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-sonnet</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-sonnet-20241022</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-haiku</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-haiku-20241022</span></div>
-          </div>
-        </div>
-        
+      </div>
+    </div>
+
         <div class="model-category">
           <div class="category-title">Claude 3 Family</div>
           <div class="model-item">
@@ -187,23 +203,23 @@ const aiModelsHTML = `
           </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3-sonnet</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3-haiku</span></div>
-          </div>
+      </div>
         </div>
         
         <div class="model-category">
           <div class="category-title">Claude 2 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2.1</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2.0</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2</span></div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -216,9 +232,9 @@ const aiModelsHTML = `
           </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-2.0-flash-thinking-exp</span></div>
-          </div>
-        </div>
-        
+      </div>
+    </div>
+
         <div class="model-category">
           <div class="category-title">Gemini 1.5 Family</div>
           <div class="model-item">
@@ -229,20 +245,20 @@ const aiModelsHTML = `
           </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-flash-1.5</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-flash-1.5-8b</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">Gemini Pro Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro-vision</span></div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -252,36 +268,36 @@ const aiModelsHTML = `
           <div class="category-title">Llama 3.3 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.3-70b-instruct</span></div>
-          </div>
-        </div>
-        
+      </div>
+    </div>
+
         <div class="model-category">
           <div class="category-title">Llama 3.2 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-90b-vision-instruct</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-11b-vision-instruct</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-3b-instruct</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-1b-instruct</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">Llama 3.1 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-405b-instruct</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-70b-instruct</span></div>
-          </div>
+    </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-8b-instruct</span></div>
-          </div>
+      </div>
         </div>
       </div>
 
@@ -291,36 +307,36 @@ const aiModelsHTML = `
           <div class="category-title">Mistral Large Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-large</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-large-2411</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">Pixtral Vision Models</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/pixtral-large-2411</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/pixtral-12b</span></div>
-          </div>
+    </div>
         </div>
         
         <div class="model-category">
           <div class="category-title">Mistral Small & Medium</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-small-3.2-24b-instruct</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-small-3.1-24b-instruct</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mixtral-8x7b-instruct</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mixtral-8x22b-instruct</span></div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -330,10 +346,10 @@ const aiModelsHTML = `
           <div class="category-title">DeepSeek V3 Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-chat</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-coder</span></div>
-          </div>
+    </div>
         </div>
         
         <div class="model-category">
@@ -343,7 +359,7 @@ const aiModelsHTML = `
           </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-r1-lite-preview</span></div>
-          </div>
+      </div>
         </div>
       </div>
 
@@ -356,33 +372,33 @@ const aiModelsHTML = `
           </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-7b-instruct</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-coder-32b-instruct</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">Qwen Vision Models</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen2.5-vl-72b-instruct</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen2.5-vl-32b-instruct</span></div>
-          </div>
+    </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-vl-7b-instruct</span></div>
-          </div>
         </div>
-        
+      </div>
+
         <div class="model-category">
           <div class="category-title">QwQ Reasoning Models</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwq-32b</span></div>
-          </div>
+        </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwq-32b-preview</span></div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -392,14 +408,14 @@ const aiModelsHTML = `
           <div class="category-title">Llama Nemotron Family</div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.3-nemotron-super-49b-v1</span></div>
-          </div>
+      </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.1-nemotron-70b-instruct</span></div>
-          </div>
+    </div>
           <div class="model-item">
             <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.1-nemotron-ultra-253b-v1</span></div>
-          </div>
-        </div>
+      </div>
+      </div>
       </div>
     </div>
   </div>
@@ -412,6 +428,19 @@ const aiModelsHTML = `
       </svg>
       Back to Home
     </a>
+  </div>
+</div>
+
+<!-- Model Information Modal -->
+<div class="model-modal-overlay" id="modelModal">
+  <div class="model-modal">
+    <button class="model-modal-close" onclick="closeModelModal()">&times;</button>
+    <div class="model-modal-title" id="modalTitle">Model Name</div>
+    <div class="model-modal-provider" id="modalProvider">Provider</div>
+    <div class="model-modal-description" id="modalDescription">Model description will appear here.</div>
+    <div class="model-modal-specs" id="modalSpecs">
+      <!-- Specs will be populated dynamically -->
+    </div>
   </div>
 </div>
 `;
@@ -450,8 +479,9 @@ const aiModelsHTML = `
       }
     }
     
-    // Initialize provider switching
+    // Initialize provider switching and model clicks
     initializeProviderSwitching();
+    initializeModelClicks();
   }
   
   function initializeProviderSwitching() {
@@ -482,5 +512,166 @@ const aiModelsHTML = `
         });
       });
     });
+  }
+  
+  function initializeModelClicks() {
+    const modelItems = document.querySelectorAll('.model-item');
+    
+    modelItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const modelPath = item.querySelector('.model-path').textContent;
+        showModelModal(modelPath);
+      });
+    });
+  }
+  
+  function showModelModal(modelPath) {
+    const modal = document.getElementById('modelModal');
+    const modelInfo = getModelInfo(modelPath);
+    
+    // Populate modal content
+    document.getElementById('modalTitle').textContent = modelInfo.name;
+    document.getElementById('modalProvider').textContent = modelInfo.provider;
+    document.getElementById('modalDescription').textContent = modelInfo.description;
+    
+    // Populate specs
+    const specsContainer = document.getElementById('modalSpecs');
+    specsContainer.innerHTML = '';
+    
+    modelInfo.specs.forEach(spec => {
+      const specRow = document.createElement('div');
+      specRow.className = 'model-spec-row';
+      specRow.innerHTML = `
+        <div class="model-spec-label">${spec.label}</div>
+        <div class="model-spec-value">${spec.value}</div>
+      `;
+      specsContainer.appendChild(specRow);
+    });
+    
+    // Show modal
+    modal.classList.add('active');
+  }
+  
+  function closeModelModal() {
+    const modal = document.getElementById('modelModal');
+    modal.classList.remove('active');
+  }
+  
+  // Make closeModelModal globally accessible for the onclick attribute
+  window.closeModelModal = closeModelModal;
+  
+  // Close modal when clicking overlay
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('model-modal-overlay')) {
+      closeModelModal();
+    }
+  });
+  
+  function getModelInfo(modelPath) {
+    const modelDatabase = {
+      'openai/o3': {
+        name: 'OpenAI O3',
+        provider: 'OpenAI',
+        description: 'The most advanced reasoning model from OpenAI. O3 excels at complex problem-solving, mathematical reasoning, and multi-step logical thinking. Designed for tasks requiring deep analysis and sophisticated reasoning capabilities.',
+        specs: [
+          { label: 'Type', value: 'Reasoning Model' },
+          { label: 'Context Length', value: '200,000 tokens' },
+          { label: 'Best For', value: 'Complex reasoning, math, logic' },
+          { label: 'Release', value: '2024' }
+        ]
+      },
+      'openai/o3-pro': {
+        name: 'OpenAI O3 Pro',
+        provider: 'OpenAI',
+        description: 'The premium version of O3 with enhanced reasoning capabilities and longer context windows. Optimized for professional use cases requiring the highest level of analytical thinking and problem-solving.',
+        specs: [
+          { label: 'Type', value: 'Advanced Reasoning' },
+          { label: 'Context Length', value: '1,000,000 tokens' },
+          { label: 'Best For', value: 'Professional reasoning tasks' },
+          { label: 'Performance', value: 'Highest tier' }
+        ]
+      },
+      'openai/o3-mini': {
+        name: 'OpenAI O3 Mini',
+        provider: 'OpenAI',
+        description: 'A smaller, faster version of O3 that maintains strong reasoning capabilities while being more cost-effective. Perfect for applications requiring quick reasoning without the full computational overhead.',
+        specs: [
+          { label: 'Type', value: 'Efficient Reasoning' },
+          { label: 'Context Length', value: '128,000 tokens' },
+          { label: 'Best For', value: 'Fast reasoning, cost-effective' },
+          { label: 'Speed', value: 'High' }
+        ]
+      },
+      'openai/gpt-4o': {
+        name: 'GPT-4 Omni',
+        provider: 'OpenAI',
+        description: 'OpenAI\'s flagship multimodal model that can process text, images, audio, and video. Combines the intelligence of GPT-4 with enhanced speed and efficiency across all modalities.',
+        specs: [
+          { label: 'Type', value: 'Multimodal' },
+          { label: 'Context Length', value: '128,000 tokens' },
+          { label: 'Modalities', value: 'Text, Image, Audio, Video' },
+          { label: 'Best For', value: 'General purpose, multimodal tasks' }
+        ]
+      },
+      'anthropic/claude-3.5-sonnet': {
+        name: 'Claude 3.5 Sonnet',
+        provider: 'Anthropic',
+        description: 'Anthropic\'s most intelligent model, offering superior performance on writing, math, coding, and complex reasoning tasks. Known for its nuanced understanding and thoughtful responses.',
+        specs: [
+          { label: 'Type', value: 'Large Language Model' },
+          { label: 'Context Length', value: '200,000 tokens' },
+          { label: 'Best For', value: 'Writing, coding, analysis' },
+          { label: 'Strengths', value: 'Reasoning, helpfulness' }
+        ]
+      },
+      'google/gemini-2.0-flash-exp': {
+        name: 'Gemini 2.0 Flash',
+        provider: 'Google',
+        description: 'Google\'s next-generation multimodal AI model with breakthrough performance in reasoning, coding, and multimodal understanding. Features enhanced speed and efficiency.',
+        specs: [
+          { label: 'Type', value: 'Multimodal' },
+          { label: 'Context Length', value: '1,000,000 tokens' },
+          { label: 'Modalities', value: 'Text, Image, Audio, Video' },
+          { label: 'Best For', value: 'Fast multimodal tasks' }
+        ]
+      },
+      'meta-llama/llama-3.3-70b-instruct': {
+        name: 'Llama 3.3 70B',
+        provider: 'Meta',
+        description: 'Meta\'s latest open-source language model with 70 billion parameters. Offers excellent performance on a wide range of tasks while being efficient and accessible.',
+        specs: [
+          { label: 'Type', value: 'Open Source LLM' },
+          { label: 'Parameters', value: '70 billion' },
+          { label: 'Context Length', value: '128,000 tokens' },
+          { label: 'Best For', value: 'General purpose, open source' }
+        ]
+      },
+      'deepseek/deepseek-r1': {
+        name: 'DeepSeek R1',
+        provider: 'DeepSeek',
+        description: 'DeepSeek\'s reasoning-focused model that rivals top proprietary models in mathematical and logical reasoning while being more cost-effective.',
+        specs: [
+          { label: 'Type', value: 'Reasoning Model' },
+          { label: 'Context Length', value: '64,000 tokens' },
+          { label: 'Best For', value: 'Math, logic, reasoning' },
+          { label: 'Cost', value: 'Very competitive' }
+        ]
+      }
+    };
+    
+    // Default fallback for models not in database
+    const defaultInfo = {
+      name: modelPath.split('/').pop().replace(/-/g, ' ').toUpperCase(),
+      provider: modelPath.split('/')[0].replace(/openrouter:/, '').toUpperCase(),
+      description: 'This is a high-performance AI model optimized for various tasks including text generation, analysis, and problem-solving. Part of a comprehensive suite of AI models available through Steley.',
+      specs: [
+        { label: 'Type', value: 'Language Model' },
+        { label: 'Access', value: 'Unlimited' },
+        { label: 'Cost', value: '$0/month' },
+        { label: 'Available', value: 'Now' }
+      ]
+    };
+    
+    return modelDatabase[modelPath] || defaultInfo;
   }
 })(); 
