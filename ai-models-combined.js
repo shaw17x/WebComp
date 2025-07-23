@@ -1,6 +1,6 @@
-// AI Models Page Combined - CSS + HTML Content with Documentation-Style Animations
-// Added: Fade-in animations matching documentation page
-// Added: Staggered section animations for smooth loading experience
+// AI Models Page Combined - CSS + HTML Content with Documentation-Style Instant Loading
+// Fixed: Immediate content loading without reload requirement
+// Fixed: Simplified initialization matching documentation approach
 const aiModelsCSS = `
 .ai-models-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
 .ai-models-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
@@ -621,14 +621,14 @@ const aiModelsHTML = `
 </div>
 `;
 
-// Auto-execute function to inject CSS and HTML
+// Auto-execute function to inject CSS and HTML - SIMPLIFIED APPROACH
 (function() {
-  // Add CSS
+  // Add CSS immediately
   const style = document.createElement('style');
   style.textContent = aiModelsCSS;
   document.head.appendChild(style);
   
-  // Add HTML when DOM is ready - find main content area
+  // Simplified initialization matching documentation approach
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       initializeAIModelsPage();
@@ -638,24 +638,18 @@ const aiModelsHTML = `
   }
   
   function initializeAIModelsPage() {
-    // Check if AI models content already exists
-    if (document.querySelector('.ai-models-page')) {
-      console.log('✅ AI Models component already loaded');
-      return;
-    }
-    
-    // Try to find main content area, otherwise use body
+    // Simplified approach - directly target main content area
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    // Clear existing content in main area and add AI models content
+    // Clear and add content immediately
     if (mainContent !== document.body) {
       mainContent.innerHTML = aiModelsHTML;
     } else {
-      // If we're using body, insert at the beginning but after header
+      // If using body, insert after header
       const header = document.querySelector('header') || document.querySelector('nav');
       if (header) {
         header.insertAdjacentHTML('afterend', aiModelsHTML);
@@ -664,24 +658,24 @@ const aiModelsHTML = `
       }
     }
     
-    // Initialize AI models section animations
+    // Start animations immediately with shorter delays
     initializeAIModelsSectionAnimations();
   }
   
   function initializeAIModelsSectionAnimations() {
-    // Wait a bit for DOM to be fully ready
+    // Immediate animation start with shorter delays
     setTimeout(() => {
       const aiModelsGrid = document.querySelector('.ai-models-grid');
       const scalingSection = document.querySelector('.scaling-section');
       const backHomeContainer = document.querySelector('.back-home-container');
       
-      // Add staggered animation to AI models grid
+      // Animate grid immediately  
       if (aiModelsGrid) {
         setTimeout(() => {
           aiModelsGrid.style.opacity = '1';
           aiModelsGrid.style.transform = 'translateY(0) scale(1)';
           aiModelsGrid.classList.add('models-animated');
-        }, 400);
+        }, 200); // Reduced from 400ms
       }
       
       // Animate scaling section
@@ -690,16 +684,16 @@ const aiModelsHTML = `
           scalingSection.style.opacity = '1';
           scalingSection.style.transform = 'translateY(0) scale(1)';
           scalingSection.classList.add('models-animated');
-        }, 600);
+        }, 300); // Reduced from 600ms
       }
       
-      // Animate back home button after all sections
+      // Animate back home button
       if (backHomeContainer) {
         setTimeout(() => {
           backHomeContainer.style.opacity = '1';
           backHomeContainer.style.transform = 'translateY(0) scale(1)';
-        }, 800);
+        }, 400); // Reduced from 800ms
       }
-    }, 100);
+    }, 50); // Reduced from 100ms
   }
 })(); 
