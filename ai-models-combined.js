@@ -1,6 +1,6 @@
-// Steley AI Models Page - Provider Switcher Interface
-// Redesigned: Modern provider-based organization with comprehensive model coverage
-// Added: All major providers from OpenRouter API with clean switching interface
+// Steley AI Models Page - Simple List Interface
+// Redesigned: Clean model lists exactly like OpenRouter format
+// Removed: All logos, images, and complex cards for simple text lists
 const aiModelsCSS = `
 .ai-models-page{max-width:1400px;margin:80px auto;padding:20px;position:relative;z-index:999}
 .ai-models-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
@@ -8,45 +8,38 @@ const aiModelsCSS = `
 .ai-models-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
 .ai-models-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
 
+/* Stats Overview */
+.stats-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:40px 0;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards}
+.stat-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center}
+.stat-number{font-size:2.5rem;font-weight:800;color:#fff;margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{color:#9ca3af;font-size:0.9rem;font-weight:500}
+
 /* Provider Switcher Interface */
-.provider-switcher{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:30px;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards}
+.provider-switcher{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:30px;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s forwards}
 
 .provider-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px;justify-content:center}
-.provider-tab{padding:12px 24px;border-radius:50px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);color:#9ca3af;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;gap:8px;min-width:120px;justify-content:center}
+.provider-tab{padding:12px 24px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);color:#9ca3af;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.3s ease;min-width:120px;text-align:center}
 .provider-tab:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:#cbd5e1}
 .provider-tab.active{background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-color:#3b82f6;color:#fff;box-shadow:0 4px 15px rgba(59,130,246,0.3)}
 .provider-tab.active:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,0.4)}
 
-.provider-icon{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
-
-/* Models Grid */
+/* Models List Container */
 .models-container{min-height:400px;position:relative}
-.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;opacity:0;transform:translateY(20px);transition:all 0.5s ease}
-.models-grid.active{opacity:1;transform:translateY(0)}
+.models-list{display:none;opacity:0;transform:translateY(20px);transition:all 0.5s ease}
+.models-list.active{display:block;opacity:1;transform:translateY(0)}
 
-.model-card{background:rgba(255,255,255,0.02);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:20px;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
-.model-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);box-shadow:0 10px 30px rgba(0,0,0,0.2)}
-.model-card.flagship{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.02)}
-.model-card.flagship::before{content:'FLAGSHIP';position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:8px;letter-spacing:0.5px}
+/* Model List Items */
+.model-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px 16px;margin-bottom:8px;transition:all 0.2s ease;cursor:pointer;font-family:'Fira Code',Monaco,Consolas,monospace}
+.model-item:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);transform:translateX(4px)}
+.model-item:last-child{margin-bottom:0}
 
-.model-header{margin-bottom:12px}
-.model-name{font-size:1.1rem;font-weight:600;color:#fff;margin:0 0 4px 0;display:flex;align-items:center;gap:8px}
-.model-tier{font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;background:rgba(107,114,128,0.1);padding:2px 6px;border-radius:4px}
-.model-description{color:#94a3b8;font-size:0.85rem;line-height:1.4;margin-bottom:12px}
+.model-name{color:#e2e8f0;font-size:14px;font-weight:400;line-height:1.4}
+.model-name .provider-prefix{color:#6b7280}
+.model-name .model-path{color:#cbd5e1}
 
-.model-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.stat-item{text-align:center;padding:8px;background:rgba(255,255,255,0.02);border-radius:8px}
-.stat-label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
-.stat-value{font-size:12px;color:#cbd5e1;font-weight:500}
-
-.model-capabilities{display:flex;flex-wrap:wrap;gap:4px}
-.capability-tag{background:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.2);color:#9ca3af;font-size:10px;font-weight:500;padding:3px 8px;border-radius:8px}
-
-/* Stats Overview */
-.stats-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:40px 0;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s forwards}
-.stat-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center}
-.stat-number{font-size:2.5rem;font-weight:800;color:#fff;margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat-label{color:#9ca3af;font-size:0.9rem;font-weight:500}
+/* Model Categories */
+.model-category{margin-bottom:24px}
+.category-title{color:#9ca3af;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding-left:4px}
 
 /* Back Button */
 .back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s forwards}
@@ -60,12 +53,10 @@ const aiModelsCSS = `
   .ai-models-title{font-size:2rem}
   .provider-tabs{justify-content:flex-start;overflow-x:auto;padding-bottom:10px}
   .provider-tab{min-width:100px;font-size:12px;padding:10px 16px}
-  .models-grid{grid-template-columns:1fr;gap:16px}
   .stats-overview{grid-template-columns:repeat(2,1fr);gap:16px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
@@ -103,511 +94,310 @@ const aiModelsHTML = `
   <!-- Provider Switcher -->
   <div class="provider-switcher">
     <div class="provider-tabs">
-      <div class="provider-tab active" data-provider="openai">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">AI</div>
-        OpenAI
-      </div>
-      <div class="provider-tab" data-provider="anthropic">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">A</div>
-        Anthropic
-      </div>
-      <div class="provider-tab" data-provider="google">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">G</div>
-        Google
-      </div>
-      <div class="provider-tab" data-provider="meta">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">M</div>
-        Meta
-      </div>
-      <div class="provider-tab" data-provider="mistral">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #64748b, #475569); color: white;">Mi</div>
-        Mistral
-      </div>
-      <div class="provider-tab" data-provider="deepseek">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">D</div>
-        DeepSeek
-      </div>
-      <div class="provider-tab" data-provider="qwen">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">Q</div>
-        Qwen
-      </div>
-      <div class="provider-tab" data-provider="nvidia">
-        <div class="provider-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">N</div>
-        NVIDIA
-      </div>
+      <div class="provider-tab active" data-provider="openai">OpenAI</div>
+      <div class="provider-tab" data-provider="anthropic">Anthropic</div>
+      <div class="provider-tab" data-provider="google">Google</div>
+      <div class="provider-tab" data-provider="meta">Meta</div>
+      <div class="provider-tab" data-provider="mistral">Mistral</div>
+      <div class="provider-tab" data-provider="deepseek">DeepSeek</div>
+      <div class="provider-tab" data-provider="qwen">Qwen</div>
+      <div class="provider-tab" data-provider="nvidia">NVIDIA</div>
     </div>
 
     <div class="models-container">
       <!-- OpenAI Models -->
-      <div class="models-grid active" data-provider-content="openai">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              O3 Pro
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Most advanced reasoning model with exceptional problem-solving capabilities</div>
+      <div class="models-list active" data-provider-content="openai">
+        <div class="model-category">
+          <div class="category-title">Flagship Models</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">200K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-pro</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Reasoning</span>
-            <span class="capability-tag">Mathematics</span>
-            <span class="capability-tag">Coding</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-mini</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o3-mini-high</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              GPT-4o
-              <span class="model-tier">Multimodal</span>
-            </div>
-            <div class="model-description">Flagship multimodal model with vision and reasoning capabilities</div>
+        
+        <div class="model-category">
+          <div class="category-title">GPT-4 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-2024-11-20</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Vision</span>
-            <span class="capability-tag">Code</span>
-            <span class="capability-tag">Analysis</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-mini</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4o-mini-2024-07-18</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/chatgpt-4o-latest</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/gpt-4-turbo</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              O1 Pro
-              <span class="model-tier">Reasoning</span>
-            </div>
-            <div class="model-description">Advanced step-by-step reasoning for complex problem solving</div>
+        
+        <div class="model-category">
+          <div class="category-title">O1 Reasoning Models</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">200K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Slow</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-pro</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Logic</span>
-            <span class="capability-tag">Math Proofs</span>
-            <span class="capability-tag">Research</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-mini</span></div>
           </div>
-        </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              GPT-4o Mini
-              <span class="model-tier">Efficient</span>
-            </div>
-            <div class="model-description">Fast and cost-effective model for everyday tasks</div>
-          </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Ultra Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Quick Tasks</span>
-            <span class="capability-tag">Chat</span>
-            <span class="capability-tag">Summarization</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">openai/o1-preview</span></div>
           </div>
         </div>
       </div>
 
       <!-- Anthropic Models -->
-      <div class="models-grid" data-provider-content="anthropic">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Claude 3.5 Sonnet
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Most capable model with exceptional reasoning and analysis</div>
+      <div class="models-list" data-provider-content="anthropic">
+        <div class="model-category">
+          <div class="category-title">Claude 3.5 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-sonnet</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">200K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-sonnet-20241022</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Analysis</span>
-            <span class="capability-tag">Writing</span>
-            <span class="capability-tag">Reasoning</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-haiku</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3.5-haiku-20241022</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              Claude 3 Opus
-              <span class="model-tier">Premium</span>
-            </div>
-            <div class="model-description">Most powerful model for complex tasks and creative work</div>
+        
+        <div class="model-category">
+          <div class="category-title">Claude 3 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3-opus</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">200K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3-sonnet</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Complex Tasks</span>
-            <span class="capability-tag">Creative</span>
-            <span class="capability-tag">Research</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-3-haiku</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              Claude 3 Haiku
-              <span class="model-tier">Fast</span>
-            </div>
-            <div class="model-description">Quick and efficient model for everyday interactions</div>
+        
+        <div class="model-category">
+          <div class="category-title">Claude 2 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2.1</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">200K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Ultra Fast</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2.0</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Chat</span>
-            <span class="capability-tag">Q&A</span>
-            <span class="capability-tag">Summarization</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">anthropic/claude-2</span></div>
           </div>
         </div>
       </div>
 
       <!-- Google Models -->
-      <div class="models-grid" data-provider-content="google">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Gemini 2.0 Flash
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Next-generation multimodal AI with lightning speed</div>
+      <div class="models-list" data-provider-content="google">
+        <div class="model-category">
+          <div class="category-title">Gemini 2.0 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-2.0-flash-exp</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">1M</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Ultra Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Multimodal</span>
-            <span class="capability-tag">Real-time</span>
-            <span class="capability-tag">Code</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-2.0-flash-thinking-exp</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              Gemini Pro 1.5
-              <span class="model-tier">Advanced</span>
-            </div>
-            <div class="model-description">Advanced reasoning with massive context window</div>
+        
+        <div class="model-category">
+          <div class="category-title">Gemini 1.5 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro-1.5</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">2M</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro-1.5-exp</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Long Context</span>
-            <span class="capability-tag">Analysis</span>
-            <span class="capability-tag">Documents</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-flash-1.5</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-flash-1.5-8b</span></div>
+          </div>
+        </div>
+        
+        <div class="model-category">
+          <div class="category-title">Gemini Pro Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">google/gemini-pro-vision</span></div>
           </div>
         </div>
       </div>
 
       <!-- Meta Models -->
-      <div class="models-grid" data-provider-content="meta">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Llama 3.3 70B
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Latest and most capable open-source model from Meta</div>
-          </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">General</span>
-            <span class="capability-tag">Reasoning</span>
-            <span class="capability-tag">Open Source</span>
+      <div class="models-list" data-provider-content="meta">
+        <div class="model-category">
+          <div class="category-title">Llama 3.3 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.3-70b-instruct</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              Llama 3.1 405B
-              <span class="model-tier">Ultra</span>
-            </div>
-            <div class="model-description">Massive open-source model with exceptional capabilities</div>
+        
+        <div class="model-category">
+          <div class="category-title">Llama 3.2 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-90b-vision-instruct</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-11b-vision-instruct</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Complex Tasks</span>
-            <span class="capability-tag">Research</span>
-            <span class="capability-tag">Code</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-3b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.2-1b-instruct</span></div>
+          </div>
+        </div>
+        
+        <div class="model-category">
+          <div class="category-title">Llama 3.1 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-405b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-70b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">meta-llama/llama-3.1-8b-instruct</span></div>
           </div>
         </div>
       </div>
 
       <!-- Mistral Models -->
-      <div class="models-grid" data-provider-content="mistral">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Mistral Large 2
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">European flagship model with strong multilingual capabilities</div>
+      <div class="models-list" data-provider-content="mistral">
+        <div class="model-category">
+          <div class="category-title">Mistral Large Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-large</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Multilingual</span>
-            <span class="capability-tag">Reasoning</span>
-            <span class="capability-tag">Code</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-large-2411</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              Pixtral Large
-              <span class="model-tier">Vision</span>
-            </div>
-            <div class="model-description">Advanced vision-language model for image understanding</div>
+        
+        <div class="model-category">
+          <div class="category-title">Pixtral Vision Models</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/pixtral-large-2411</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/pixtral-12b</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Vision</span>
-            <span class="capability-tag">OCR</span>
-            <span class="capability-tag">Charts</span>
+        </div>
+        
+        <div class="model-category">
+          <div class="category-title">Mistral Small & Medium</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-small-3.2-24b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mistral-small-3.1-24b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mixtral-8x7b-instruct</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">mistralai/mixtral-8x22b-instruct</span></div>
           </div>
         </div>
       </div>
 
       <!-- DeepSeek Models -->
-      <div class="models-grid" data-provider-content="deepseek">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              DeepSeek V3
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Cutting-edge model with exceptional coding and math abilities</div>
+      <div class="models-list" data-provider-content="deepseek">
+        <div class="model-category">
+          <div class="category-title">DeepSeek V3 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-chat</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">64K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Coding</span>
-            <span class="capability-tag">Mathematics</span>
-            <span class="capability-tag">Innovation</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-coder</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              DeepSeek Coder V2
-              <span class="model-tier">Coding</span>
-            </div>
-            <div class="model-description">Specialized coding model for programming tasks</div>
+        
+        <div class="model-category">
+          <div class="category-title">DeepSeek R1 Reasoning</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-r1</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
-          </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Code Gen</span>
-            <span class="capability-tag">Debug</span>
-            <span class="capability-tag">Algorithms</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">deepseek/deepseek-r1-lite-preview</span></div>
           </div>
         </div>
       </div>
 
       <!-- Qwen Models -->
-      <div class="models-grid" data-provider-content="qwen">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Qwen 2.5 VL 72B
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">Top-tier multimodal model with exceptional OCR capabilities</div>
+      <div class="models-list" data-provider-content="qwen">
+        <div class="model-category">
+          <div class="category-title">Qwen 2.5 Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-72b-instruct</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">32K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-7b-instruct</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">OCR</span>
-            <span class="capability-tag">Charts</span>
-            <span class="capability-tag">Documents</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-coder-32b-instruct</span></div>
           </div>
         </div>
-
-        <div class="model-card">
-          <div class="model-header">
-            <div class="model-name">
-              QwQ 32B
-              <span class="model-tier">Reasoning</span>
-            </div>
-            <div class="model-description">Reasoning-focused model for complex problem solving</div>
+        
+        <div class="model-category">
+          <div class="category-title">Qwen Vision Models</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen2.5-vl-72b-instruct</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">32K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Medium</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen2.5-vl-32b-instruct</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Logic</span>
-            <span class="capability-tag">Problem Solving</span>
-            <span class="capability-tag">Analysis</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwen-2.5-vl-7b-instruct</span></div>
+          </div>
+        </div>
+        
+        <div class="model-category">
+          <div class="category-title">QwQ Reasoning Models</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwq-32b</span></div>
+          </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">qwen/qwq-32b-preview</span></div>
           </div>
         </div>
       </div>
 
       <!-- NVIDIA Models -->
-      <div class="models-grid" data-provider-content="nvidia">
-        <div class="model-card flagship">
-          <div class="model-header">
-            <div class="model-name">
-              Llama 3.3 Nemotron
-              <span class="model-tier">Flagship</span>
-            </div>
-            <div class="model-description">NVIDIA's optimized model for enterprise applications</div>
+      <div class="models-list" data-provider-content="nvidia">
+        <div class="model-category">
+          <div class="category-title">Llama Nemotron Family</div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.3-nemotron-super-49b-v1</span></div>
           </div>
-          <div class="model-stats">
-            <div class="stat-item">
-              <div class="stat-label">Context</div>
-              <div class="stat-value">128K</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Speed</div>
-              <div class="stat-value">Fast</div>
-            </div>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.1-nemotron-70b-instruct</span></div>
           </div>
-          <div class="model-capabilities">
-            <span class="capability-tag">Enterprise</span>
-            <span class="capability-tag">Optimized</span>
-            <span class="capability-tag">Reliable</span>
+          <div class="model-item">
+            <div class="model-name"><span class="provider-prefix">openrouter:</span><span class="model-path">nvidia/llama-3.1-nemotron-ultra-253b-v1</span></div>
           </div>
         </div>
       </div>
@@ -626,7 +416,7 @@ const aiModelsHTML = `
 </div>
 `;
 
-// Auto-execute function with provider switching functionality
+// Auto-execute function with simple provider switching
 (function() {
   // Add CSS immediately
   const style = document.createElement('style');
@@ -666,7 +456,7 @@ const aiModelsHTML = `
   
   function initializeProviderSwitching() {
     const providerTabs = document.querySelectorAll('.provider-tab');
-    const modelsGrids = document.querySelectorAll('.models-grid');
+    const modelsLists = document.querySelectorAll('.models-list');
     
     providerTabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -676,18 +466,18 @@ const aiModelsHTML = `
         providerTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         
-        // Show corresponding models grid
-        modelsGrids.forEach(grid => {
-          if (grid.dataset.providerContent === provider) {
-            // Hide all grids first
-            modelsGrids.forEach(g => {
-              g.classList.remove('active');
+        // Show corresponding models list
+        modelsLists.forEach(list => {
+          if (list.dataset.providerContent === provider) {
+            // Hide all lists first
+            modelsLists.forEach(l => {
+              l.classList.remove('active');
             });
             
-            // Show selected grid with delay for smooth transition
+            // Show selected list with delay for smooth transition
             setTimeout(() => {
-              grid.classList.add('active');
-            }, 200);
+              list.classList.add('active');
+            }, 150);
           }
         });
       });
