@@ -232,33 +232,14 @@ const loginHTML = `
 </footer>
 `;
 
-// Auto-execute function to inject CSS and HTML
+// Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
-  // Check if we should load login (pathname OR hash)
-  const isLoginPage = location.pathname.includes('login') || 
-                      location.pathname.includes('signin') || 
-                      location.hash.includes('login') ||
-                      location.hash.includes('signin');
-  
-  console.log('🚀 Login component starting...');
-  console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', location.pathname);
-  console.log('📍 Hash:', location.hash);
-  console.log('📍 Is login page?', isLoginPage);
-  
-  // Only load if this is actually a login page
-  if (!isLoginPage) {
-    console.log('❌ Not a login page, skipping...');
-    return;
-  }
-  
-  // Add CSS
+  // Add CSS immediately
   const style = document.createElement('style');
   style.textContent = loginCSS;
   document.head.appendChild(style);
-  console.log('✅ Login CSS added');
   
-  // Add HTML when DOM is ready
+  // Initialize when DOM is ready - matching docs page logic
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       initializeLoginPage();
@@ -268,18 +249,14 @@ const loginHTML = `
   }
   
   function initializeLoginPage() {
-    console.log('🔧 Initializing login page...');
-    
-    // Try to find main content area, otherwise use body
+    // Try to find main content area, otherwise use body - matching docs page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    console.log('📍 Main content element:', mainContent.tagName);
-    
-    // Clear existing content in main area and add login page
+    // Clear existing content in main area and add login content
     if (mainContent !== document.body) {
       mainContent.innerHTML = loginHTML;
     } else {
@@ -292,156 +269,168 @@ const loginHTML = `
       }
     }
     
-    console.log('✅ Login HTML added');
+    // Initialize login animations with proper timing (matching docs page pattern)
+    initializeLoginAnimations();
     
-    // Initialize interactions after a short delay to ensure DOM is ready
+    // Initialize login interactions with staggered timing
+    initializeLoginInteractions();
+  }
+  
+  function initializeLoginAnimations() {
+    // Wait a bit for DOM to be fully ready - matching docs page timing
     setTimeout(() => {
-      initializeLoginInteractions();
+      const loginCard = document.querySelector('.auth-screen-card');
+      const footer = document.querySelector('.auth-footer');
+      
+      // Ensure smooth animation entry for login card
+      if (loginCard) {
+        setTimeout(() => {
+          loginCard.style.opacity = '1';
+          loginCard.style.transform = 'translateY(0) scale(1)';
+        }, 100);
+      }
+      
+      // Animate footer after login card with delay
+      if (footer) {
+        setTimeout(() => {
+          footer.style.opacity = '1';
+          footer.style.transform = 'scale(1) translateY(0px)';
+        }, 400);
+      }
     }, 100);
   }
   
   function initializeLoginInteractions() {
-    console.log('🔧 Initializing login interactions...');
-    
-    // Remember me checkbox
-    const checkbox = document.getElementById('rememberCheckbox');
-    const checkIcon = document.getElementById('checkIcon');
-    let isChecked = false;
-    
-    if (checkbox) {
-      console.log('✅ Remember checkbox found');
-      checkbox.addEventListener('click', function() {
-        isChecked = !isChecked;
-        if (isChecked) {
-          checkbox.classList.add('checked');
-          checkIcon.style.display = 'block';
-        } else {
-          checkbox.classList.remove('checked');
-          checkIcon.style.display = 'none';
-        }
-      });
-    } else {
-      console.log('❌ Remember checkbox not found');
-    }
-    
-    // Form submission
+    // Wait a bit for DOM to be fully ready - matching docs page timing
+    setTimeout(() => {
+      // Remember me checkbox
+      const checkbox = document.getElementById('rememberCheckbox');
+      const checkIcon = document.getElementById('checkIcon');
+      let isChecked = false;
+      
+      if (checkbox) {
+        checkbox.addEventListener('click', function() {
+          isChecked = !isChecked;
+          if (isChecked) {
+            checkbox.classList.add('checked');
+            checkIcon.style.display = 'block';
+          } else {
+            checkbox.classList.remove('checked');
+            checkIcon.style.display = 'none';
+          }
+        });
+      }
+      
+      // Form submission with delay to ensure smooth animation
+      setTimeout(() => {
+        initializeLoginForm();
+      }, 200);
+    }, 150);
+  }
+  
+  function initializeLoginForm() {
     const form = document.getElementById('loginForm');
     const submitText = document.getElementById('submitText');
     
-    if (form) {
-      console.log('✅ Login form found');
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
+    if (!form) return;
+    
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      
+      if (!emailInput || !passwordInput) return;
+      
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      
+      if (!email || !password) {
+        showMessage('Please enter both email and password', 'error');
+        return;
+      }
+      
+      // Show loading state with smooth transition
+      if (submitText) {
+        submitText.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            <div class="loading-spinner"></div>
+            Signing In...
+          </div>
+        `;
+      }
+      
+      try {
+        // Simulate authentication (replace with real auth when ready)
+        await simulateAuth(email, password);
         
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        
-        if (!emailInput || !passwordInput) {
-          console.log('❌ Email or password input not found');
-          return;
-        }
-        
-        const email = emailInput.value;
-        const password = passwordInput.value;
-        
-        if (!email || !password) {
-          alert('Please enter both email and password');
-          return;
-        }
-        
-        // Show loading state
+        // Show success with smooth transition
         if (submitText) {
           submitText.innerHTML = `
             <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-              <div class="loading-spinner"></div>
-              Signing In...
+              ✅ Welcome back!
             </div>
           `;
         }
         
-        try {
-          // Initialize auth client if needed
-          if (!window.steleyAuth) {
-            // Load auth client if not already loaded
-            const authScript = document.createElement('script');
-            authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
-            document.head.appendChild(authScript);
-            
-            // Wait for script to load
-            await new Promise(resolve => {
-              authScript.onload = resolve;
-            });
-          }
-          
-          // Perform real login
-          const result = await window.steleyAuth.signIn(email, password);
-          
-          if (result.success) {
-            console.log('✅ Login successful, redirecting to subscription management...');
-            
-            // Show success message briefly
-            if (submitText) {
-              submitText.innerHTML = `
-                <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-                  ✅ Welcome back!
-                </div>
-              `;
-            }
-            
-            // Store user data for React components to detect
-            localStorage.setItem('supabase_token', result.token);
-            localStorage.setItem('supabase_user', JSON.stringify(result.user));
-            
-            // Trigger storage event for React components
-            window.dispatchEvent(new StorageEvent('storage', {
-              key: 'supabase_token',
-              newValue: result.token
-            }));
-            
-            // Redirect after brief delay
-            setTimeout(() => {
-              window.location.href = '/subscription';
-            }, 2000);
-            
-          } else {
-            console.error('❌ Login failed:', result.error);
-            
-            if (submitText) {
-              submitText.innerHTML = `
-                <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-                  ❌ ${result.error}
-                </div>
-              `;
-            }
-            
-            // Reset button after 3 seconds
-            setTimeout(() => {
-              if (submitText) {
-                submitText.textContent = 'Sign In';
-              }
-              // Assuming submitButton is the button element
-              const submitButton = document.querySelector('.auth-submit');
-              if (submitButton) {
-                submitButton.disabled = false;
-              }
-            }, 3000);
-          }
-        } catch (error) {
-          console.error('❌ Login error:', error);
-          
+        // Store demo session
+        localStorage.setItem('steley_session', JSON.stringify({
+          email: email,
+          loginTime: new Date().toISOString(),
+          demo: true
+        }));
+        
+        // Redirect after brief delay
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
+        
+      } catch (error) {
+        // Show error with smooth transition
+        if (submitText) {
+          submitText.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+              ❌ ${error.message}
+            </div>
+          `;
+        }
+        
+        // Reset button after delay
+        setTimeout(() => {
           if (submitText) {
             submitText.textContent = 'Sign In';
           }
-          
-          alert('Failed to sign in. Please check your internet connection and try again.');
-        }
-      });
-    } else {
-      console.log('❌ Login form not found');
-    }
-    
-    console.log('✅ Login interactions initialized');
+        }, 3000);
+      }
+    });
   }
-
-  // Clean up - removed profile dropdown functionality to prevent duplicates
+  
+  async function simulateAuth(email, password) {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Simple validation for demo
+    if (email.includes('@') && password.length >= 6) {
+      return { success: true, user: { email } };
+    } else {
+      throw new Error('Invalid email or password');
+    }
+  }
+  
+  function showMessage(message, type = 'info') {
+    // Simple message display
+    const submitText = document.getElementById('submitText');
+    if (submitText) {
+      const icon = type === 'error' ? '❌' : 'ℹ️';
+      submitText.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+          ${icon} ${message}
+        </div>
+      `;
+      
+      setTimeout(() => {
+        submitText.textContent = 'Sign In';
+      }, 3000);
+    }
+  }
 })(); 
