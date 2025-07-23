@@ -102,7 +102,7 @@ const loginHTML = `
     <div class="auth-header">
       <h1 class="auth-title">
         <div style="display: inline-flex; align-items: center; gap: 4px;">
-          <img src="/assets/icons/win/icon.ico" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges;">
+          <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges;" onerror="this.style.display='none'">
           <span>teley</span>
         </div>
       </h1>
