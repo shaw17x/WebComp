@@ -48,21 +48,24 @@ const aiModelsCSS = `
 .back-home-btn svg{width:16px;height:16px;transition:transform 0.3s ease}
 .back-home-btn:hover svg{transform:translateX(-4px)}
 
-/* Modal Popup */
-.model-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}
+/* Modal Popup - Matching Your Program's AI Model Selection Styling */
+.model-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.70);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}
 .model-modal-overlay.active{display:flex;opacity:1}
-.model-modal{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;max-width:500px;width:90%;max-height:70vh;overflow-y:auto;position:relative;transform:scale(0.9);transition:transform 0.3s ease;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.model-modal{background:rgba(0,0,0,0.95);border:1px solid rgba(255,255,255,0.3);border-radius:12px;padding:0;max-width:320px;width:90%;max-height:90vh;overflow-y:auto;position:relative;transform:scale(0.9);transition:transform 0.3s ease;box-shadow:0 25px 80px rgba(0,0,0,0.9),0 10px 40px rgba(0,0,0,0.8),0 -25px 80px rgba(0,0,0,0.9),0 -10px 40px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.1),inset 0 -1px 0 rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8)) drop-shadow(0 -20px 60px rgba(0,0,0,0.8));color:white}
 .model-modal-overlay.active .model-modal{transform:scale(1)}
-.model-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#9ca3af;font-size:24px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all 0.2s ease}
-.model-modal-close:hover{background:rgba(255,255,255,0.1);color:#fff}
-.model-modal-title{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:8px;font-family:'Fira Code',Monaco,Consolas,monospace}
-.model-modal-provider{color:#6b7280;font-size:0.9rem;font-weight:500;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}
-.model-modal-description{color:#cbd5e1;font-size:1rem;line-height:1.6;margin-bottom:20px}
-.model-modal-specs{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:16px}
-.model-spec-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.model-modal-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.model-modal-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:all 0.15s ease}
+.model-modal-close:hover{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8)}
+.model-modal-title{color:rgba(255,255,255,0.8);font-size:14px;font-weight:500;margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+.model-modal-content{padding:16px}
+.model-modal-name{color:rgb(243,244,246);font-size:16px;font-weight:600;margin-bottom:4px;letter-spacing:0.025em}
+.model-modal-provider{color:#6b7280;font-size:12px;font-weight:500;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.model-modal-description{color:#cbd5e1;font-size:14px;line-height:1.5;margin-bottom:16px;font-weight:400}
+.model-modal-specs{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px}
+.model-spec-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .model-spec-row:last-child{border-bottom:none}
-.model-spec-label{color:#9ca3af;font-size:0.9rem;font-weight:500}
-.model-spec-value{color:#fff;font-size:0.9rem;font-weight:600}
+.model-spec-label{color:#9ca3af;font-size:12px;font-weight:500}
+.model-spec-value{color:rgb(243,244,246);font-size:12px;font-weight:600}
 
 @media(max-width:768px){
   .ai-models-page{padding:15px;margin:60px auto}
@@ -70,6 +73,9 @@ const aiModelsCSS = `
   .provider-tabs{justify-content:flex-start;overflow-x:auto;padding-bottom:10px}
   .provider-tab{min-width:100px;font-size:12px;padding:10px 16px}
   .stats-overview{grid-template-columns:repeat(2,1fr);gap:16px}
+  .model-modal{max-width:300px;margin:20px}
+  .model-modal-content{padding:12px}
+  .model-modal-specs{padding:8px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -434,12 +440,20 @@ const aiModelsHTML = `
 <!-- Model Information Modal -->
 <div class="model-modal-overlay" id="modelModal">
   <div class="model-modal">
-    <button class="model-modal-close" onclick="closeModelModal()">&times;</button>
-    <div class="model-modal-title" id="modalTitle">Model Name</div>
-    <div class="model-modal-provider" id="modalProvider">Provider</div>
-    <div class="model-modal-description" id="modalDescription">Model description will appear here.</div>
-    <div class="model-modal-specs" id="modalSpecs">
-      <!-- Specs will be populated dynamically -->
+    <!-- Header -->
+    <div class="model-modal-header">
+      <h2 class="model-modal-title" id="modalTitle">Model Information</h2>
+      <button class="model-modal-close" onclick="closeModelModal()">&times;</button>
+    </div>
+    
+    <!-- Content -->
+    <div class="model-modal-content">
+      <div class="model-modal-name" id="modalName">Model Name</div>
+      <div class="model-modal-provider" id="modalProvider">Provider</div>
+      <div class="model-modal-description" id="modalDescription">Model description will appear here.</div>
+      <div class="model-modal-specs" id="modalSpecs">
+        <!-- Specs will be populated dynamically -->
+      </div>
     </div>
   </div>
 </div>
@@ -530,7 +544,7 @@ const aiModelsHTML = `
     const modelInfo = getModelInfo(modelPath);
     
     // Populate modal content
-    document.getElementById('modalTitle').textContent = modelInfo.name;
+    document.getElementById('modalName').textContent = modelInfo.name;
     document.getElementById('modalProvider').textContent = modelInfo.provider;
     document.getElementById('modalDescription').textContent = modelInfo.description;
     
