@@ -469,13 +469,132 @@ const aiModelsHTML = `
   // Initialize when DOM is ready - matching docs page logic
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      initializeAIModelsPage();
+      initializeAIModelsNavigation();
     });
   } else {
-    initializeAIModelsPage();
+    initializeAIModelsNavigation();
+  }
+  
+  // Listen for navigation to AI Models page
+  function initializeAIModelsNavigation() {
+    // Check if we should load AI models page immediately
+    const shouldLoadAIModels = 
+      window.location.hash === '#ai-models' || 
+      window.location.pathname.includes('ai-models') ||
+      document.querySelector('[href*="ai-models"]');
+    
+    if (shouldLoadAIModels) {
+      initializeAIModelsPage();
+    }
+    
+    // Listen for footer navigation clicks with better targeting
+    document.addEventListener('click', function(e) {
+      // Check multiple possible AI models link patterns
+      const target = e.target.closest('a[href*="ai-models"], a[href="#ai-models"], a[href="/#ai-models"]') ||
+                     (e.target.textContent && e.target.textContent.trim().toLowerCase().includes('ai models') && e.target.tagName === 'A');
+      
+      if (target) {
+        console.log('AI Models navigation clicked:', target);
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Small delay to ensure clean navigation
+        setTimeout(() => {
+          initializeAIModelsPage();
+        }, 50);
+        
+        // Update URL without page reload
+        if (window.history && window.history.pushState) {
+          window.history.pushState({}, 'AI Models - Steley', '#ai-models');
+        }
+      }
+    });
+    
+    // Also listen on document body for better event capturing
+    document.body.addEventListener('click', function(e) {
+      if (e.target.textContent && e.target.textContent.trim().toLowerCase().includes('ai models')) {
+        const link = e.target.closest('a');
+        if (link) {
+          console.log('AI Models link detected via body listener:', link);
+          e.preventDefault();
+          setTimeout(() => {
+            initializeAIModelsPage();
+          }, 50);
+        }
+      }
+    });
+    
+    // Listen for hash changes (back/forward buttons)
+    window.addEventListener('hashchange', function() {
+      if (window.location.hash === '#ai-models') {
+        initializeAIModelsPage();
+      }
+    });
+    
+    // Watch for footer/navigation elements being added dynamically (for Framer)
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1) { // Element node
+            // Check if added node contains AI Models links
+            const aiModelLinks = node.querySelectorAll ? 
+              node.querySelectorAll('a[href*="ai-models"], a[href="#ai-models"]') : [];
+            
+            if (aiModelLinks.length > 0) {
+              console.log('AI Models links detected in dynamically added content');
+              // Re-run navigation setup
+              setTimeout(() => {
+                initializeAIModelsNavigation();
+              }, 100);
+            }
+          }
+        });
+      });
+    });
+    
+    // Start observing
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    // Make navigation function globally accessible for testing/debugging
+    window.loadAIModelsPage = initializeAIModelsPage;
+    
+    // Final catch-all: periodically check for AI models links and set up navigation
+    const setupInterval = setInterval(() => {
+      const aiModelLinks = document.querySelectorAll('a[href*="ai-models"], a[href="#ai-models"]');
+      if (aiModelLinks.length > 0) {
+        console.log('Found AI Models links via periodic check:', aiModelLinks.length);
+        clearInterval(setupInterval); // Stop checking once we find them
+        
+        // Ensure all links have proper navigation
+        aiModelLinks.forEach(link => {
+          if (!link.hasAttribute('data-ai-models-setup')) {
+            link.setAttribute('data-ai-models-setup', 'true');
+            link.addEventListener('click', function(e) {
+              console.log('Direct link click intercepted');
+              e.preventDefault();
+              initializeAIModelsPage();
+            });
+          }
+        });
+      }
+    }, 500); // Check every 500ms
+    
+    // Stop the interval after 10 seconds to avoid infinite checking
+    setTimeout(() => {
+      clearInterval(setupInterval);
+    }, 10000);
   }
   
   function initializeAIModelsPage() {
+    // Check if AI models content is already loaded to avoid duplicates
+    if (document.querySelector('.ai-models-page')) {
+      console.log('AI Models page already loaded');
+      return;
+    }
+    
     // Try to find main content area, otherwise use body - matching docs page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
@@ -496,8 +615,13 @@ const aiModelsHTML = `
       }
     }
     
+    // Scroll to top when loading AI models page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     // Initialize interactions with proper timing (matching docs page pattern)
     initializeAIModelsInteractions();
+    
+    console.log('AI Models page loaded successfully');
   }
   
   function initializeAIModelsInteractions() {
