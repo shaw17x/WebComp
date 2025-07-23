@@ -459,32 +459,35 @@ const aiModelsHTML = `
 </div>
 `;
 
-// Auto-execute function with simple provider switching
+// Auto-execute function with robust initialization (matching docs page pattern)
 (function() {
   // Add CSS immediately
   const style = document.createElement('style');
   style.textContent = aiModelsCSS;
   document.head.appendChild(style);
   
-  // Initialize when ready
+  // Initialize when DOM is ready - matching docs page logic
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeAIModelsPage);
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeAIModelsPage();
+    });
   } else {
     initializeAIModelsPage();
   }
   
   function initializeAIModelsPage() {
-    // Find main content area
+    // Try to find main content area, otherwise use body - matching docs page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    // Insert content
+    // Clear existing content in main area and add AI models content
     if (mainContent !== document.body) {
       mainContent.innerHTML = aiModelsHTML;
     } else {
+      // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
       if (header) {
         header.insertAdjacentHTML('afterend', aiModelsHTML);
@@ -493,50 +496,110 @@ const aiModelsHTML = `
       }
     }
     
-    // Initialize provider switching and model clicks
-    initializeProviderSwitching();
-    initializeModelClicks();
+    // Initialize interactions with proper timing (matching docs page pattern)
+    initializeAIModelsInteractions();
+  }
+  
+  function initializeAIModelsInteractions() {
+    // Wait a bit for DOM to be fully ready - matching docs page timing
+    setTimeout(() => {
+      // Initialize provider switching
+      initializeProviderSwitching();
+      
+      // Initialize model clicks with slight delay for better reliability
+      setTimeout(() => {
+        initializeModelClicks();
+      }, 100);
+      
+      // Initialize modal close handlers with additional delay
+      setTimeout(() => {
+        initializeModalHandlers();
+      }, 200);
+    }, 100);
   }
   
   function initializeProviderSwitching() {
-    const providerTabs = document.querySelectorAll('.provider-tab');
-    const modelsLists = document.querySelectorAll('.models-list');
-    
-    providerTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const provider = tab.dataset.provider;
+    // Use robust element finding with retry logic
+    const findAndAttachProviderListeners = () => {
+      const providerTabs = document.querySelectorAll('.provider-tab');
+      const modelsLists = document.querySelectorAll('.models-list');
+      
+      if (providerTabs.length === 0 || modelsLists.length === 0) {
+        // Retry after a short delay if elements not found
+        setTimeout(findAndAttachProviderListeners, 50);
+        return;
+      }
+      
+      providerTabs.forEach(tab => {
+        // Remove any existing listeners to prevent duplicates
+        const newTab = tab.cloneNode(true);
+        tab.parentNode.replaceChild(newTab, tab);
         
-        // Update active tab
-        providerTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        // Show corresponding models list
-        modelsLists.forEach(list => {
-          if (list.dataset.providerContent === provider) {
-            // Hide all lists first
-            modelsLists.forEach(l => {
-              l.classList.remove('active');
-            });
-            
-            // Show selected list with delay for smooth transition
-            setTimeout(() => {
-              list.classList.add('active');
-            }, 150);
-          }
+        // Add click listener to the new element
+        newTab.addEventListener('click', () => {
+          const provider = newTab.dataset.provider;
+          
+          // Update active tab - get fresh elements
+          const currentTabs = document.querySelectorAll('.provider-tab');
+          const currentLists = document.querySelectorAll('.models-list');
+          
+          currentTabs.forEach(t => t.classList.remove('active'));
+          newTab.classList.add('active');
+          
+          // Show corresponding models list
+          currentLists.forEach(list => {
+            if (list.dataset.providerContent === provider) {
+              // Hide all lists first
+              currentLists.forEach(l => {
+                l.classList.remove('active');
+              });
+              
+              // Show selected list with delay for smooth transition
+              setTimeout(() => {
+                list.classList.add('active');
+                
+                // Re-initialize model clicks for the newly shown list
+                setTimeout(() => {
+                  initializeModelClicks();
+                }, 100);
+              }, 150);
+            }
+          });
         });
       });
-    });
+    };
+    
+    findAndAttachProviderListeners();
   }
   
   function initializeModelClicks() {
-    const modelItems = document.querySelectorAll('.model-item');
-    
-    modelItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const modelPath = item.querySelector('.model-path').textContent;
-        showModelModal(modelPath);
+    // Use more robust element finding with retry logic
+    const findAndAttachListeners = () => {
+      const modelItems = document.querySelectorAll('.model-item');
+      
+      if (modelItems.length === 0) {
+        // Retry after a short delay if elements not found
+        setTimeout(findAndAttachListeners, 50);
+        return;
+      }
+      
+      modelItems.forEach(item => {
+        // Remove any existing listeners to prevent duplicates
+        const newItem = item.cloneNode(true);
+        item.parentNode.replaceChild(newItem, item);
+        
+        // Add click listener to the new element
+        newItem.addEventListener('click', () => {
+          const modelPathElement = newItem.querySelector('.model-path');
+          if (modelPathElement) {
+            const modelPath = modelPathElement.textContent;
+            showModelModal(modelPath);
+          }
+        });
       });
-    });
+    };
+    
+    findAndAttachListeners();
   }
   
   function showModelModal(modelPath) {
@@ -574,12 +637,21 @@ const aiModelsHTML = `
   // Make closeModelModal globally accessible for the onclick attribute
   window.closeModelModal = closeModelModal;
   
-  // Close modal when clicking overlay
-  document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('model-modal-overlay')) {
-      closeModelModal();
-    }
-  });
+  function initializeModalHandlers() {
+    // Close modal when clicking overlay
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('model-modal-overlay')) {
+        closeModelModal();
+      }
+    });
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModelModal();
+      }
+    });
+  }
   
   function getModelInfo(modelPath) {
     const modelDatabase = {
