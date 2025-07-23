@@ -5,8 +5,10 @@ const loginCSS = `
 /* Login Component Container */
 .auth-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
-/* Floating Card */
-.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards, cardFloat 6s ease-in-out infinite 1.2s}
+/* Floating Card - Optimized for Smooth Performance */
+.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translate3d(0,30px,0) scale(0.95);will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
+.auth-screen-card.animate-in{animation:smoothEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
+.auth-screen-card.floating{animation:cardFloat 6s ease-in-out infinite}
 
 /* Header Section */
 .auth-header{padding:1.5rem 1.5rem 1rem;text-align:center}
@@ -14,9 +16,9 @@ const loginCSS = `
 .auth-subtitle{font-size:1rem;font-weight:500;color:rgba(255,255,255,0.8);margin-bottom:0.5rem}
 .auth-description{font-size:0.75rem;line-height:1.5;color:rgba(255,255,255,0.5)}
 
-/* Form Container */
+/* Form Container - Optimized Performance */
 .auth-form-container{padding:0 1.5rem 1rem}
-.auth-form-card{background:rgba(255,255,255,0.02);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s}
+.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto}
 .auth-form-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 
 /* Form Elements */
@@ -28,9 +30,9 @@ const loginCSS = `
 .auth-input:focus{outline:none;border-color:rgba(255,255,255,0.2);box-shadow:0 0 0 1px rgba(255,255,255,0.2)}
 .auth-input:hover{border-color:rgba(255,255,255,0.1)}
 
-/* Remember Me Section */
+/* Remember Me Section - Optimized Performance */
 .remember-section{padding:0 1.5rem 1rem}
-.remember-card{background:rgba(255,255,255,0.02);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s}
+.remember-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto}
 .remember-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 .remember-checkbox-container{display:flex;align-items:center;gap:0.75rem;cursor:pointer}
 .remember-checkbox{width:1rem;height:1rem;border-radius:0.25rem;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.2);transition:all 0.2s;display:flex;align-items:center;justify-content:center}
@@ -42,8 +44,8 @@ const loginCSS = `
 .forgot-password{font-size:0.75rem;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s}
 .forgot-password:hover{color:rgba(255,255,255,0.8)}
 
-/* Submit Button */
-.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer}
+/* Submit Button - Optimized Performance */
+.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto}
 .auth-submit:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
@@ -76,11 +78,18 @@ const loginCSS = `
 .auth-social-link{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer}
 .auth-social-link:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
 
-/* Animations */
-@keyframes cardFloat{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-10px) rotate(0.5deg)}}
+/* Optimized Animations for Smooth Performance */
+@keyframes smoothEntry{
+  0%{opacity:0;transform:translate3d(0,30px,0) scale(0.95)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes cardFloat{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+  50%{transform:translate3d(0,-10px,0) rotate(0.5deg)}
+}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes containerEntry{from{opacity:0;transform:translate3d(0,30px,0) scale(0.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes fadeInUp{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 
 /* Responsive */
 @media(max-width:768px){.auth-login-component{padding:15px;margin:60px auto}.auth-screen-card{max-width:28rem}.auth-footer-row{flex-direction:column!important;text-align:center!important;gap:20px!important}.auth-footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}.auth-footer-right{flex-direction:column!important;gap:20px!important}.auth-footer-separator{display:none!important}}
@@ -277,27 +286,34 @@ const loginHTML = `
   }
   
   function initializeLoginAnimations() {
-    // Wait a bit for DOM to be fully ready - matching docs page timing
+    // Use optimized class-based animations for smooth performance
     setTimeout(() => {
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
-      // Ensure smooth animation entry for login card
+      // Trigger smooth entry animation for login card
       if (loginCard) {
+        // Add hardware acceleration and start animation
+        loginCard.style.willChange = 'transform, opacity';
+        loginCard.classList.add('animate-in');
+        
+        // Add floating animation and effects after entry completes
         setTimeout(() => {
-          loginCard.style.opacity = '1';
-          loginCard.style.transform = 'translateY(0) scale(1)';
-        }, 100);
+          loginCard.classList.add('floating');
+          loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
+          loginCard.style.willChange = 'auto'; // Remove will-change after animation
+        }, 800);
       }
       
-      // Animate footer after login card with delay
+      // Animate footer with class-based approach
       if (footer) {
         setTimeout(() => {
           footer.style.opacity = '1';
           footer.style.transform = 'scale(1) translateY(0px)';
-        }, 400);
+          footer.style.willChange = 'auto';
+        }, 300);
       }
-    }, 100);
+    }, 50); // Reduced delay for instant start
   }
   
   function initializeLoginInteractions() {
@@ -324,6 +340,8 @@ const loginHTML = `
       // Form submission with delay to ensure smooth animation
       setTimeout(() => {
         initializeLoginForm();
+        // Add subtle backdrop effects after animation completes
+        addSubtleEffects();
       }, 200);
     }, 150);
   }
@@ -415,6 +433,25 @@ const loginHTML = `
     } else {
       throw new Error('Invalid email or password');
     }
+  }
+  
+  function addSubtleEffects() {
+    // Add backdrop blur effects after main animation completes for better performance
+    setTimeout(() => {
+      const formCard = document.querySelector('.auth-form-card');
+      const rememberCard = document.querySelector('.remember-card');
+      const submitButton = document.querySelector('.auth-submit');
+      
+      if (formCard) {
+        formCard.style.backdropFilter = 'blur(10px)';
+      }
+      if (rememberCard) {
+        rememberCard.style.backdropFilter = 'blur(10px)';
+      }
+      if (submitButton) {
+        submitButton.style.backdropFilter = 'blur(10px)';
+      }
+    }, 600); // Add effects after login card animation
   }
   
   function showMessage(message, type = 'info') {
