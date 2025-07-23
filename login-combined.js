@@ -248,50 +248,72 @@ const loginHTML = `
 
 // Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
+  console.log('🚀 Steley Login Script: Starting execution...');
+  
   // Prevent multiple executions - this fixes the appearing/disappearing issue
   if (window.steleyLoginInitialized) {
+    console.log('⚠️ Steley Login Script: Already initialized, skipping...');
     return;
   }
   window.steleyLoginInitialized = true;
+  console.log('✅ Steley Login Script: First execution, proceeding...');
   
   // Add CSS immediately
+  console.log('🎨 Steley Login Script: Adding CSS styles...');
   const style = document.createElement('style');
   style.textContent = loginCSS;
   document.head.appendChild(style);
+  console.log('✅ Steley Login Script: CSS added successfully');
   
   // Initialize when DOM is ready - matching docs page logic
+  console.log('📋 Steley Login Script: DOM ready state is:', document.readyState);
   if (document.readyState === 'loading') {
+    console.log('⏳ Steley Login Script: Waiting for DOMContentLoaded...');
     document.addEventListener('DOMContentLoaded', function() {
+      console.log('✅ Steley Login Script: DOMContentLoaded fired, initializing...');
       initializeLoginPage();
     });
   } else {
+    console.log('✅ Steley Login Script: DOM already ready, initializing immediately...');
     initializeLoginPage();
   }
   
   function initializeLoginPage() {
+    console.log('🔄 Steley Login: initializeLoginPage() called');
+    
     // Check if login content already exists - prevent duplication
-    if (document.querySelector('.auth-login-component')) {
-      console.log('Login page already initialized');
+    const existingLogin = document.querySelector('.auth-login-component');
+    if (existingLogin) {
+      console.log('⚠️ Steley Login: Login component already exists, skipping initialization');
+      console.log('   Existing component:', existingLogin);
       return;
     }
+    console.log('✅ Steley Login: No existing login component found, proceeding...');
     
     // Try to find main content area, otherwise use body - matching docs page
+    console.log('🎯 Steley Login: Looking for main content area...');
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
+    console.log('📍 Steley Login: Selected target container:', mainContent.tagName, mainContent.className || '(no class)');
+    
     // SAFER DOM insertion - don't clear existing content, just append
     if (mainContent !== document.body) {
+      console.log('📝 Steley Login: Inserting into main content area...');
       // Don't clear content, just append login HTML
       mainContent.insertAdjacentHTML('beforeend', loginHTML);
     } else {
+      console.log('📝 Steley Login: Inserting into body (fallback)...');
       // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
       if (header) {
+        console.log('   Found header/nav, inserting after it');
         header.insertAdjacentHTML('afterend', loginHTML);
       } else {
+        console.log('   No header found, inserting at body beginning');
         document.body.insertAdjacentHTML('afterbegin', loginHTML);
       }
     }
@@ -299,65 +321,101 @@ const loginHTML = `
     // Verify the login component was added successfully
     const loginComponent = document.querySelector('.auth-login-component');
     if (!loginComponent) {
-      console.error('Failed to add login component to page');
+      console.error('❌ Steley Login: FAILED to add login component to page!');
+      console.error('   Target container:', mainContent);
+      console.error('   HTML length:', loginHTML.length);
       return;
     }
+    console.log('✅ Steley Login: Login component added successfully!');
+    console.log('   Component element:', loginComponent);
     
     // Initialize login animations with proper timing (matching docs page pattern)
+    console.log('🎬 Steley Login: Starting animations...');
     initializeLoginAnimations();
     
     // Initialize login interactions with staggered timing
+    console.log('🖱️ Steley Login: Starting interactions...');
     initializeLoginInteractions();
   }
   
   function initializeLoginAnimations() {
+    console.log('🎬 Steley Login: initializeLoginAnimations() called');
+    
     // Use optimized class-based animations for smooth performance
     setTimeout(() => {
+      console.log('🎭 Steley Login: Animation timeout fired, looking for elements...');
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
+      console.log('   Login card found:', !!loginCard);
+      console.log('   Footer found:', !!footer);
+      
       // Trigger smooth entry animation for login card
       if (loginCard) {
+        console.log('✨ Steley Login: Starting login card entry animation...');
         // Add hardware acceleration and start animation
         loginCard.style.willChange = 'transform, opacity';
         loginCard.classList.add('animate-in');
+        console.log('   Added animate-in class to login card');
         
         // Add floating animation and effects after entry completes
         setTimeout(() => {
+          console.log('🌊 Steley Login: Adding floating animation...');
           // Double-check element still exists before animating
-          if (document.querySelector('.auth-screen-card')) {
+          const stillExists = document.querySelector('.auth-screen-card');
+          if (stillExists) {
             loginCard.classList.add('floating');
             loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
             loginCard.style.willChange = 'auto'; // Remove will-change after animation
+            console.log('   Floating animation and blur effects added');
+          } else {
+            console.error('❌ Steley Login: Login card disappeared before floating animation!');
           }
         }, 800);
+      } else {
+        console.error('❌ Steley Login: Login card not found for animation!');
       }
       
       // Animate footer with class-based approach
       if (footer) {
+        console.log('📋 Steley Login: Starting footer animation...');
         setTimeout(() => {
           // Double-check element still exists before animating
-          if (document.querySelector('.auth-footer')) {
+          const footerStillExists = document.querySelector('.auth-footer');
+          if (footerStillExists) {
             footer.style.opacity = '1';
             footer.style.transform = 'scale(1) translateY(0px)';
             footer.style.willChange = 'auto';
+            console.log('   Footer animation applied');
+          } else {
+            console.error('❌ Steley Login: Footer disappeared before animation!');
           }
         }, 300);
+      } else {
+        console.error('❌ Steley Login: Footer not found for animation!');
       }
     }, 50); // Reduced delay for instant start
   }
   
   function initializeLoginInteractions() {
+    console.log('🖱️ Steley Login: initializeLoginInteractions() called');
+    
     // Wait a bit for DOM to be fully ready - matching docs page timing
     setTimeout(() => {
+      console.log('⏰ Steley Login: Interaction timeout fired, setting up elements...');
+      
       // Remember me checkbox
       const checkbox = document.getElementById('rememberCheckbox');
       const checkIcon = document.getElementById('checkIcon');
       let isChecked = false;
       
+      console.log('☑️ Steley Login: Remember checkbox found:', !!checkbox);
+      console.log('🔲 Steley Login: Check icon found:', !!checkIcon);
+      
       if (checkbox) {
         checkbox.addEventListener('click', function() {
           isChecked = !isChecked;
+          console.log('☑️ Steley Login: Checkbox clicked, new state:', isChecked);
           if (isChecked) {
             checkbox.classList.add('checked');
             checkIcon.style.display = 'block';
@@ -366,11 +424,16 @@ const loginHTML = `
             checkIcon.style.display = 'none';
           }
         });
+        console.log('☑️ Steley Login: Checkbox event listener added');
+      } else {
+        console.error('❌ Steley Login: Remember checkbox not found!');
       }
       
       // Form submission with delay to ensure smooth animation
       setTimeout(() => {
+        console.log('📝 Steley Login: Initializing login form...');
         initializeLoginForm();
+        console.log('🎨 Steley Login: Adding subtle effects...');
         // Add subtle backdrop effects after animation completes
         addSubtleEffects();
       }, 200);
@@ -378,12 +441,21 @@ const loginHTML = `
   }
   
   function initializeLoginForm() {
+    console.log('📝 Steley Login: initializeLoginForm() called');
+    
     const form = document.getElementById('loginForm');
     const submitText = document.getElementById('submitText');
     
-    if (!form) return;
+    console.log('🔍 Steley Login: Form found:', !!form);
+    console.log('🔍 Steley Login: Submit text element found:', !!submitText);
+    
+    if (!form) {
+      console.error('❌ Steley Login: Login form not found!');
+      return;
+    }
     
     form.addEventListener('submit', async function(e) {
+      console.log('📤 Steley Login: Form submitted');
       e.preventDefault();
       
       const emailInput = document.getElementById('email');
@@ -410,9 +482,11 @@ const loginHTML = `
       }
       
       try {
+        console.log('🔐 Steley Login: Attempting authentication...');
         // Simulate authentication (replace with real auth when ready)
         await simulateAuth(email, password);
         
+        console.log('✅ Steley Login: Authentication successful');
         // Show success with smooth transition
         if (submitText) {
           submitText.innerHTML = `
@@ -423,18 +497,22 @@ const loginHTML = `
         }
         
         // Store demo session
-        localStorage.setItem('steley_session', JSON.stringify({
+        const sessionData = {
           email: email,
           loginTime: new Date().toISOString(),
           demo: true
-        }));
+        };
+        localStorage.setItem('steley_session', JSON.stringify(sessionData));
+        console.log('💾 Steley Login: Session stored:', sessionData);
         
         // Redirect after brief delay
+        console.log('🔄 Steley Login: Redirecting in 1.5 seconds...');
         setTimeout(() => {
           window.location.href = '/';
         }, 1500);
         
       } catch (error) {
+        console.error('❌ Steley Login: Authentication failed:', error.message);
         // Show error with smooth transition
         if (submitText) {
           submitText.innerHTML = `
@@ -445,9 +523,11 @@ const loginHTML = `
         }
         
         // Reset button after delay
+        console.log('🔄 Steley Login: Resetting button in 3 seconds...');
         setTimeout(() => {
           if (submitText) {
             submitText.textContent = 'Sign In';
+            console.log('🔄 Steley Login: Button reset to default state');
           }
         }, 3000);
       }
@@ -455,50 +535,90 @@ const loginHTML = `
   }
   
   async function simulateAuth(email, password) {
+    console.log('🔐 Steley Login: simulateAuth() called with email:', email);
+    console.log('🔐 Steley Login: Password length:', password.length);
+    
     // Simulate network delay
+    console.log('⏳ Steley Login: Simulating network delay (1 second)...');
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Simple validation for demo
-    if (email.includes('@') && password.length >= 6) {
-      return { success: true, user: { email } };
+    const hasValidEmail = email.includes('@');
+    const hasValidPassword = password.length >= 6;
+    
+    console.log('📧 Steley Login: Email validation (contains @):', hasValidEmail);
+    console.log('🔑 Steley Login: Password validation (>= 6 chars):', hasValidPassword);
+    
+    if (hasValidEmail && hasValidPassword) {
+      const result = { success: true, user: { email } };
+      console.log('✅ Steley Login: Authentication simulation successful:', result);
+      return result;
     } else {
-      throw new Error('Invalid email or password');
+      const errorMsg = 'Invalid email or password';
+      console.log('❌ Steley Login: Authentication simulation failed:', errorMsg);
+      throw new Error(errorMsg);
     }
   }
   
   function addSubtleEffects() {
+    console.log('🎨 Steley Login: addSubtleEffects() called');
+    
     // Add backdrop blur effects after main animation completes for better performance
     setTimeout(() => {
+      console.log('✨ Steley Login: Applying subtle backdrop effects...');
+      
       const formCard = document.querySelector('.auth-form-card');
       const rememberCard = document.querySelector('.remember-card');
       const submitButton = document.querySelector('.auth-submit');
       
+      console.log('   Form card found:', !!formCard);
+      console.log('   Remember card found:', !!rememberCard);
+      console.log('   Submit button found:', !!submitButton);
+      
       if (formCard) {
         formCard.style.backdropFilter = 'blur(10px)';
+        console.log('   Applied blur to form card');
       }
       if (rememberCard) {
         rememberCard.style.backdropFilter = 'blur(10px)';
+        console.log('   Applied blur to remember card');
       }
       if (submitButton) {
         submitButton.style.backdropFilter = 'blur(10px)';
+        console.log('   Applied blur to submit button');
       }
+      
+      console.log('✅ Steley Login: All subtle effects applied successfully');
     }, 600); // Add effects after login card animation
   }
   
   function showMessage(message, type = 'info') {
+    console.log('💬 Steley Login: showMessage() called with:', { message, type });
+    
     // Simple message display
     const submitText = document.getElementById('submitText');
+    console.log('🔍 Steley Login: Submit text element found:', !!submitText);
+    
     if (submitText) {
       const icon = type === 'error' ? '❌' : 'ℹ️';
-      submitText.innerHTML = `
+      const messageHTML = `
         <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
           ${icon} ${message}
         </div>
       `;
+      submitText.innerHTML = messageHTML;
+      console.log('💬 Steley Login: Message displayed:', message);
       
       setTimeout(() => {
-        submitText.textContent = 'Sign In';
+        if (submitText) {
+          submitText.textContent = 'Sign In';
+          console.log('💬 Steley Login: Message cleared, button reset');
+        }
       }, 3000);
+    } else {
+      console.error('❌ Steley Login: Could not display message - submit text element not found');
     }
   }
+  
+  console.log('🏁 Steley Login Script: Initialization complete');
 })(); 
