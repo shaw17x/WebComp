@@ -350,6 +350,30 @@ const loginHTML = `
     // 🕵️ ADD WATCHER TO DETECT WHEN ELEMENT GETS REMOVED
     setupRemovalDetector(loginComponent);
     
+    // 🔍 IMMEDIATE STATUS CHECK - Debug current state
+    setTimeout(() => {
+      console.log('🔍 IMMEDIATE STATUS CHECK (5 seconds):');
+      const currentLogin = document.querySelector('.auth-login-component');
+      if (currentLogin) {
+        const style = window.getComputedStyle(currentLogin);
+        console.log('   ✅ Login component still exists');
+        console.log('   📏 Dimensions:', `${currentLogin.offsetWidth}x${currentLogin.offsetHeight}`);
+        console.log('   🎨 Display:', style.display);
+        console.log('   👁️ Visibility:', style.visibility);
+        console.log('   🌟 Opacity:', style.opacity);
+        console.log('   📍 Position:', style.position);
+        console.log('   🔢 Z-index:', style.zIndex);
+        console.log('   🧭 Parent:', currentLogin.parentElement?.tagName, currentLogin.parentElement?.className);
+        
+        // Check if it's actually visible on screen
+        const rect = currentLogin.getBoundingClientRect();
+        console.log('   📐 Screen position:', `top: ${rect.top}, left: ${rect.left}, width: ${rect.width}, height: ${rect.height}`);
+        console.log('   🖥️ In viewport:', rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth);
+      } else {
+        console.error('   ❌ Login component MISSING after 5 seconds!');
+      }
+    }, 5000);
+    
     // Initialize login animations with proper timing (matching docs page pattern)
     console.log('🎬 Steley Login: Starting animations...');
     initializeLoginAnimations();
@@ -705,12 +729,64 @@ const loginHTML = `
       }
     }, 1000);
     
-    // Stop checking after 10 seconds
+    // Extended monitoring - check for 60 seconds and monitor visibility
+    let visibilityChecker;
+    
+    // Monitor visibility issues (hidden by CSS, not removed)
+    visibilityChecker = setInterval(() => {
+      const loginComponent = document.querySelector('.auth-login-component');
+      if (loginComponent) {
+        const computedStyle = window.getComputedStyle(loginComponent);
+        const isVisible = loginComponent.offsetWidth > 0 && 
+                         loginComponent.offsetHeight > 0 && 
+                         computedStyle.display !== 'none' && 
+                         computedStyle.visibility !== 'hidden' &&
+                         computedStyle.opacity !== '0';
+        
+        if (!isVisible) {
+          console.error('🚨 LOGIN COMPONENT HIDDEN BY CSS!');
+          console.error('   Element still exists but not visible');
+          console.error('   Display:', computedStyle.display);
+          console.error('   Visibility:', computedStyle.visibility);
+          console.error('   Opacity:', computedStyle.opacity);
+          console.error('   Width:', loginComponent.offsetWidth);
+          console.error('   Height:', loginComponent.offsetHeight);
+          console.error('   Position:', computedStyle.position);
+          console.error('   Z-index:', computedStyle.zIndex);
+          
+          // Try to force visibility
+          console.log('🔧 Attempting to restore visibility...');
+          loginComponent.style.display = 'block !important';
+          loginComponent.style.visibility = 'visible !important';
+          loginComponent.style.opacity = '1 !important';
+          loginComponent.style.zIndex = '9999 !important';
+          
+          clearInterval(visibilityChecker);
+        }
+      }
+    }, 500); // Check every 500ms
+    
+    // Stop checking after 60 seconds (extended from 10)
     setTimeout(() => {
       clearInterval(existenceChecker);
+      clearInterval(visibilityChecker);
       observer.disconnect();
-      console.log('🕵️ Steley Login: Removal detector stopped (10 second limit)');
-    }, 10000);
+      console.log('🕵️ Steley Login: Extended removal detector stopped (60 second limit)');
+      
+      // Final status report
+      const finalCheck = document.querySelector('.auth-login-component');
+      if (finalCheck) {
+        const finalStyle = window.getComputedStyle(finalCheck);
+        console.log('📊 Final Status Report:');
+        console.log('   Element exists:', !!finalCheck);
+        console.log('   Display:', finalStyle.display);
+        console.log('   Visibility:', finalStyle.visibility);
+        console.log('   Opacity:', finalStyle.opacity);
+        console.log('   Z-index:', finalStyle.zIndex);
+      } else {
+        console.error('❌ Final Check: Login component completely missing!');
+      }
+    }, 60000);
   }
   
   console.log('🏁 Steley Login Script: Initialization complete');
