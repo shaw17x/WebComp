@@ -1,12 +1,14 @@
-// Steley Sign Up Page Combined - CSS + HTML Content (Component Only) - WITH DEBUG
+// Steley Sign Up Page Combined - CSS + HTML Content (Component Only) - v2.1 (Logo + teley)
 const signupCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
 /* Signup Component Container */
 .auth-signup-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
-/* Floating Card */
-.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards, cardFloat 6s ease-in-out infinite 1.2s}
+/* Floating Card - Optimized for Smooth Performance */
+.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:1 !important;transform:translate3d(0,0,0) scale(1) !important;visibility:visible !important;will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
+.auth-screen-card.animate-in{animation:smoothEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
+.auth-screen-card.floating{animation:cardFloat 6s ease-in-out infinite}
 
 /* Header Section */
 .auth-header{padding:1.5rem 1.5rem 1rem;text-align:center}
@@ -16,7 +18,7 @@ const signupCSS = `
 
 /* Form Container */
 .auth-form-container{padding:0 1.5rem 1rem}
-.auth-form-card{background:rgba(255,255,255,0.02);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s}
+.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto}
 .auth-form-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 
 /* Form Elements */
@@ -29,7 +31,7 @@ const signupCSS = `
 .auth-input:hover{border-color:rgba(255,255,255,0.1)}
 
 /* Submit Button */
-.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer}
+.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto}
 .auth-submit:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
@@ -52,11 +54,11 @@ const signupCSS = `
 .verification-title{font-size:1.125rem;font-weight:600;color:rgba(255,255,255,0.9);text-align:center;margin-bottom:0.5rem}
 .verification-subtitle{font-size:0.75rem;color:rgba(255,255,255,0.6);text-align:center;margin-bottom:1.5rem;line-height:1.4}
 .verification-code-inputs{display:flex;justify-content:center;gap:0.75rem;margin-bottom:1rem}
-.verification-digit{width:3rem;height:3rem;text-align:center;font-size:1.25rem;font-weight:bold;border-radius:0.5rem;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;backdrop-filter:blur(10px);transition:all 0.2s}
+.verification-digit{width:3rem;height:3rem;text-align:center;font-size:1.25rem;font-weight:bold;border-radius:0.5rem;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;transition:all 0.2s}
 .verification-digit:focus{outline:none;border-color:rgba(255,255,255,0.4);box-shadow:0 0 0 2px rgba(255,255,255,0.1)}
 .verification-digit:disabled{opacity:0.5;cursor:not-allowed}
 .verification-buttons{display:flex;flex-direction:column;gap:0.75rem}
-.verification-verify{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer}
+.verification-verify{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto}
 .verification-verify:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
 .verification-verify:disabled{opacity:0.5;cursor:not-allowed}
 .verification-resend{background:none;border:none;color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:underline;cursor:pointer;transition:color 0.2s}
@@ -82,6 +84,7 @@ const signupCSS = `
 .auth-social-link:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
 
 /* Animations */
+@keyframes smoothEntry{0%{opacity:0;transform:translate3d(0,30px,0) scale(0.95)}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
 @keyframes cardFloat{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-10px) rotate(0.5deg)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -96,7 +99,11 @@ const signupHTML = `
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
-      <h1 class="auth-title">Steley</h1>
+      <!-- Logo + Title Container (v2.1 - Cache Bust) -->
+      <div style="display: inline-flex; align-items: center; gap: 0; margin-bottom: 0.5rem;">
+        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-right: -4px;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
+        <h1 class="auth-title" style="margin-bottom: 0;">teley</h1>
+      </div>
       <h2 class="auth-subtitle">Join Steley</h2>
       <p class="auth-description">Create an account to save preferences and history</p>
     </div>
@@ -278,7 +285,7 @@ const signupHTML = `
                        location.hash.includes('signup') ||
                        location.hash.includes('sign-up');
   
-  console.log('🚀 Signup component starting...');
+  console.log('🚀 NEW v2.1: Signup component starting - Logo+teley mode...');
   console.log('📍 Current URL:', location.href);
   console.log('📍 Pathname:', location.pathname);
   console.log('📍 Hash:', location.hash);
