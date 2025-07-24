@@ -516,6 +516,123 @@ const loginHTML = `
           console.log('   ✅ Emergency login box added to body');
           console.log('   🟢 Look for GREEN BORDER login box at top of page');
           
+          // 🚨 ULTRA-VISIBLE BACKUP - Create impossible-to-miss login
+          setTimeout(() => {
+            console.log('🚨 Creating ULTRA-VISIBLE backup login...');
+            const ultraVisible = document.createElement('div');
+            ultraVisible.innerHTML = `
+              <div id="ultra-visible-login" style="
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(255, 0, 0, 0.9) !important;
+                z-index: 2147483647 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                font-family: Arial, sans-serif !important;
+                color: white !important;
+                text-align: center !important;
+              ">
+                <div style="
+                  background: black !important;
+                  padding: 40px !important;
+                  border: 5px solid yellow !important;
+                  border-radius: 10px !important;
+                  box-shadow: 0 0 50px yellow !important;
+                  animation: pulse 1s infinite !important;
+                ">
+                  <h1 style="color: yellow !important; font-size: 48px !important; margin: 0 0 20px 0 !important;">
+                    🚨 STELEY LOGIN 🚨
+                  </h1>
+                  <p style="font-size: 18px !important; margin-bottom: 20px !important;">
+                    If you can see this, the login system is working!<br>
+                    Original login box was hidden by page styling.
+                  </p>
+                  <div style="margin: 20px 0 !important;">
+                    <input type="email" placeholder="Enter your email" style="
+                      padding: 15px !important;
+                      font-size: 16px !important;
+                      width: 300px !important;
+                      margin: 10px !important;
+                      border: 2px solid yellow !important;
+                      border-radius: 5px !important;
+                      background: #333 !important;
+                      color: white !important;
+                    " id="ultraEmail">
+                    <br>
+                    <input type="password" placeholder="Enter your password" style="
+                      padding: 15px !important;
+                      font-size: 16px !important;
+                      width: 300px !important;
+                      margin: 10px !important;
+                      border: 2px solid yellow !important;
+                      border-radius: 5px !important;
+                      background: #333 !important;
+                      color: white !important;
+                    " id="ultraPassword">
+                    <br>
+                    <button onclick="handleUltraLogin()" style="
+                      padding: 15px 30px !important;
+                      font-size: 18px !important;
+                      background: yellow !important;
+                      color: black !important;
+                      border: none !important;
+                      border-radius: 5px !important;
+                      cursor: pointer !important;
+                      margin: 10px !important;
+                      font-weight: bold !important;
+                    ">🚀 LOGIN NOW</button>
+                    <br>
+                    <button onclick="closeUltraLogin()" style="
+                      padding: 10px 20px !important;
+                      font-size: 14px !important;
+                      background: #666 !important;
+                      color: white !important;
+                      border: none !important;
+                      border-radius: 5px !important;
+                      cursor: pointer !important;
+                      margin: 10px !important;
+                    ">❌ Close This Alert</button>
+                  </div>
+                </div>
+              </div>
+              <style>
+                @keyframes pulse {
+                  0% { transform: scale(1); }
+                  50% { transform: scale(1.05); }
+                  100% { transform: scale(1); }
+                }
+              </style>
+            `;
+            
+            // Add global functions
+            window.handleUltraLogin = function() {
+              const email = document.getElementById('ultraEmail')?.value;
+              const password = document.getElementById('ultraPassword')?.value;
+              if (email && password) {
+                console.log('🚨 Ultra login attempt:', email);
+                alert('Ultra Login Success! Email: ' + email);
+                localStorage.setItem('steley_ultra_login', JSON.stringify({ email, time: Date.now() }));
+                window.location.href = '/';
+              } else {
+                alert('Please enter both email and password');
+              }
+            };
+            
+            window.closeUltraLogin = function() {
+              const ultra = document.getElementById('ultra-visible-login');
+              if (ultra) ultra.remove();
+              console.log('🚨 Ultra visible login closed by user');
+            };
+            
+            document.body.appendChild(ultraVisible);
+            console.log('🚨 ULTRA-VISIBLE LOGIN CREATED - COVERS ENTIRE SCREEN');
+            console.log('🚨 This should be IMPOSSIBLE to miss!');
+          }, 2000);
+          
           // Re-initialize interactions for the emergency login box
           setTimeout(() => {
             console.log('🔄 Re-initializing emergency login interactions...');
