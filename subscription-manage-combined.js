@@ -81,10 +81,18 @@ const subscriptionCSS = `
   color: rgba(255, 255, 255, 0.9);
 }
 
+.nav-item:hover .nav-icon{
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .nav-item.active{
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   font-weight: 500;
+}
+
+.nav-item.active .nav-icon{
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .nav-icon{
@@ -93,8 +101,10 @@ const subscriptionCSS = `
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.15s;
 }
 
 /* Search Bar */
@@ -440,43 +450,43 @@ const subscriptionHTML = `
     <!-- Search -->
     <input type="text" class="sidebar-search" placeholder="Search settings Ctrl+F" id="settingsSearch">
 
-    <!-- Navigation -->
-    <div class="sidebar-nav">
-      <button class="nav-item active" data-page="general">
-        <span class="nav-icon">⚙️</span>
-        <span>General</span>
-      </button>
-      
-      <button class="nav-item" data-page="subscription">
-        <span class="nav-icon">💳</span>
-        <span>Subscription</span>
-      </button>
-      
-      <button class="nav-item" data-page="usage">
-        <span class="nav-icon">📊</span>
-        <span>Usage</span>
-      </button>
-      
-      <button class="nav-item" data-page="billing">
-        <span class="nav-icon">🧾</span>
-        <span>Billing</span>
-      </button>
-      
-      <button class="nav-item" data-page="security">
-        <span class="nav-icon">🔐</span>
-        <span>Security</span>
-      </button>
-      
-      <button class="nav-item" data-page="preferences">
-        <span class="nav-icon">🎯</span>
-        <span>Preferences</span>
-      </button>
-      
-      <button class="nav-item" data-page="support">
-        <span class="nav-icon">💬</span>
-        <span>Support</span>
-      </button>
-    </div>
+         <!-- Navigation -->
+     <div class="sidebar-nav">
+       <button class="nav-item active" data-page="general">
+         <span class="nav-icon">⚙</span>
+         <span>General</span>
+       </button>
+       
+       <button class="nav-item" data-page="subscription">
+         <span class="nav-icon">∞</span>
+         <span>Subscription</span>
+       </button>
+       
+       <button class="nav-item" data-page="usage">
+         <span class="nav-icon">→</span>
+         <span>Usage</span>
+       </button>
+       
+       <button class="nav-item" data-page="billing">
+         <span class="nav-icon">$</span>
+         <span>Billing</span>
+       </button>
+       
+       <button class="nav-item" data-page="security">
+         <span class="nav-icon">◦</span>
+         <span>Security</span>
+       </button>
+       
+       <button class="nav-item" data-page="preferences">
+         <span class="nav-icon">≫</span>
+         <span>Preferences</span>
+       </button>
+       
+       <button class="nav-item" data-page="support">
+         <span class="nav-icon">?</span>
+         <span>Support</span>
+       </button>
+     </div>
   </div>
 
   <!-- Right Content Area -->
@@ -488,15 +498,18 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Manage Account</div>
-              <div class="item-description">Manage your account and billing</div>
-            </div>
-            <button class="action-button" id="manageAccountBtn">Open</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">⚙</span>
+                 Manage Account
+               </div>
+               <div class="item-description">Manage your account and billing</div>
+             </div>
+             <button class="action-button" id="manageAccountBtn">Open</button>
+           </div>
+         </div>
 
         <div class="content-section">
           <div class="section-header">
@@ -520,25 +533,31 @@ const subscriptionHTML = `
             <div class="section-title">Preferences</div>
           </div>
           
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Auto-Save Screenshots</div>
-              <div class="item-description">Automatically save screenshots to your device</div>
-            </div>
-            <div class="toggle-switch" id="autoSaveToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Privacy Mode</div>
-              <div class="item-description">Enhanced privacy protection during screenshots</div>
-            </div>
-            <div class="toggle-switch enabled" id="privacyToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
+                     <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Auto-Save Screenshots
+               </div>
+               <div class="item-description">Automatically save screenshots to your device</div>
+             </div>
+             <div class="toggle-switch" id="autoSaveToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Privacy Mode
+               </div>
+               <div class="item-description">Enhanced privacy protection during screenshots</div>
+             </div>
+             <div class="toggle-switch enabled" id="privacyToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
         </div>
       </div>
     </div>
@@ -555,38 +574,47 @@ const subscriptionHTML = `
             <div class="section-title">Available Plans</div>
           </div>
           
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Free Plan</div>
-              <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
-              <button class="action-button success" id="freeBtn">Current</button>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Pro Plan</div>
-              <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
-              <button class="action-button primary" id="proBtn">Upgrade</button>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Ultra Plan</div>
-              <div class="item-description">Unlimited usage, all AI models, priority support</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
-              <button class="action-button primary" id="ultraBtn">Upgrade</button>
-            </div>
-          </div>
+                     <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Free Plan
+               </div>
+               <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
+               <button class="action-button success" id="freeBtn">Current</button>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Pro Plan
+               </div>
+               <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
+               <button class="action-button primary" id="proBtn">Upgrade</button>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Ultra Plan
+               </div>
+               <div class="item-description">Unlimited usage, all AI models, priority support</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
+               <button class="action-button primary" id="ultraBtn">Upgrade</button>
+             </div>
+           </div>
         </div>
       </div>
     </div>
@@ -626,23 +654,29 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">View Usage History</div>
-              <div class="item-description">Detailed usage statistics and trends</div>
-            </div>
-            <button class="action-button" id="viewHistoryBtn">View</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Export Usage Data</div>
-              <div class="item-description">Download your usage data as CSV</div>
-            </div>
-            <button class="action-button" id="exportDataBtn">Export</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                 View Usage History
+               </div>
+               <div class="item-description">Detailed usage statistics and trends</div>
+             </div>
+             <button class="action-button" id="viewHistoryBtn">View</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                 Export Usage Data
+               </div>
+               <div class="item-description">Download your usage data as CSV</div>
+             </div>
+             <button class="action-button" id="exportDataBtn">Export</button>
+           </div>
+         </div>
       </div>
     </div>
 
@@ -653,31 +687,40 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Payment Method</div>
-              <div class="item-description">Update payment information and billing details</div>
-            </div>
-            <button class="action-button" id="updatePaymentBtn">Update</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Billing History</div>
-              <div class="item-description">View past invoices and payment history</div>
-            </div>
-            <button class="action-button" id="billingHistoryBtn">View</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Download Receipts</div>
-              <div class="item-description">Download receipts for tax purposes</div>
-            </div>
-            <button class="action-button" id="downloadReceiptsBtn">Download</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">$</span>
+                 Payment Method
+               </div>
+               <div class="item-description">Update payment information and billing details</div>
+             </div>
+             <button class="action-button" id="updatePaymentBtn">Update</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                 Billing History
+               </div>
+               <div class="item-description">View past invoices and payment history</div>
+             </div>
+             <button class="action-button" id="billingHistoryBtn">View</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                 Download Receipts
+               </div>
+               <div class="item-description">Download receipts for tax purposes</div>
+             </div>
+             <button class="action-button" id="downloadReceiptsBtn">Download</button>
+           </div>
+         </div>
       </div>
     </div>
 
@@ -688,31 +731,40 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Change Password</div>
-              <div class="item-description">Update your account password</div>
-            </div>
-            <button class="action-button" id="changePasswordBtn">Change</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Two-Factor Authentication</div>
-              <div class="item-description">Add extra security to your account</div>
-            </div>
-            <button class="action-button" id="enable2FABtn">Enable</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Active Sessions</div>
-              <div class="item-description">Manage devices and active sessions</div>
-            </div>
-            <button class="action-button" id="manageSessionsBtn">Manage</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Change Password
+               </div>
+               <div class="item-description">Update your account password</div>
+             </div>
+             <button class="action-button" id="changePasswordBtn">Change</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Two-Factor Authentication
+               </div>
+               <div class="item-description">Add extra security to your account</div>
+             </div>
+             <button class="action-button" id="enable2FABtn">Enable</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Active Sessions
+               </div>
+               <div class="item-description">Manage devices and active sessions</div>
+             </div>
+             <button class="action-button" id="manageSessionsBtn">Manage</button>
+           </div>
+         </div>
       </div>
     </div>
 
@@ -723,35 +775,44 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Theme</div>
-              <div class="item-description">Choose your preferred theme</div>
-            </div>
-            <button class="action-button" id="themeBtn">Dark</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Notifications</div>
-              <div class="item-description">Configure notification preferences</div>
-            </div>
-            <div class="toggle-switch enabled" id="notificationsToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Auto-Update</div>
-              <div class="item-description">Automatically update Steley when new versions are available</div>
-            </div>
-            <div class="toggle-switch enabled" id="autoUpdateToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Theme
+               </div>
+               <div class="item-description">Choose your preferred theme</div>
+             </div>
+             <button class="action-button" id="themeBtn">Dark</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Notifications
+               </div>
+               <div class="item-description">Configure notification preferences</div>
+             </div>
+             <div class="toggle-switch enabled" id="notificationsToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Auto-Update
+               </div>
+               <div class="item-description">Automatically update Steley when new versions are available</div>
+             </div>
+             <div class="toggle-switch enabled" id="autoUpdateToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
+         </div>
       </div>
     </div>
 
@@ -762,31 +823,40 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Contact Support</div>
-              <div class="item-description">Get help with your subscription or technical issues</div>
-            </div>
-            <button class="action-button" id="contactSupportBtn">Contact</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Documentation</div>
-              <div class="item-description">View help articles and user guides</div>
-            </div>
-            <button class="action-button" id="docsBtn">Open</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">Send Feedback</div>
-              <div class="item-description">Share your thoughts and suggestions</div>
-            </div>
-            <button class="action-button" id="feedbackBtn">Send</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">?</span>
+                 Contact Support
+               </div>
+               <div class="item-description">Get help with your subscription or technical issues</div>
+             </div>
+             <button class="action-button" id="contactSupportBtn">Contact</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                 Documentation
+               </div>
+               <div class="item-description">View help articles and user guides</div>
+             </div>
+             <button class="action-button" id="docsBtn">Open</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                 Send Feedback
+               </div>
+               <div class="item-description">Share your thoughts and suggestions</div>
+             </div>
+             <button class="action-button" id="feedbackBtn">Send</button>
+           </div>
+         </div>
       </div>
     </div>
   </div>
