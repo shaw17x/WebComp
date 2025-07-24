@@ -161,6 +161,13 @@ const subscriptionHTML = `
         <div class="stat-limit">Daily limits reset</div>
       </div>
     </div>
+    
+    <!-- User Info -->
+    <div style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 8px;">
+      <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0;">
+        Logged in as: <span id="userEmail" style="color: #fff; font-weight: 500;">Loading...</span>
+      </p>
+    </div>
   </div>
 
   <!-- Available Plans -->
@@ -440,105 +447,96 @@ const subscriptionHTML = `
     initializeSubscriptionLogic();
   }
   
-  async function initializeSubscriptionLogic() {
+  function initializeSubscriptionLogic() {
     console.log('🔧 Initializing subscription logic...');
     
-    try {
-      // Initialize auth client if needed
-      if (!window.steleyAuth) {
-        // Load auth client if not already loaded
-        const authScript = document.createElement('script');
-        authScript.src = 'https://raw.githubusercontent.com/shaw17x/WebComp/main/auth-client.js';
-        document.head.appendChild(authScript);
+    // 🎯 CHECK AUTHENTICATION USING THE SAME FORMAT AS PROFILEDROPDOWN
+    let userEmail = null;
+    let isAuthenticated = false;
+    
+    // Check multiple localStorage keys (same as ProfileDropdown)
+    const userStr = localStorage.getItem('supabase_user');
+    const sessionStr = localStorage.getItem('steley_session');
+    const supabaseSessionStr = localStorage.getItem('supabase_session');
+    const tokenStr = localStorage.getItem('supabase.auth.token');
+    
+    console.log('🔍 Checking authentication...');
+    console.log('👤 User data:', userStr ? 'FOUND' : 'NOT FOUND');
+    console.log('🔐 Steley session:', sessionStr ? 'FOUND' : 'NOT FOUND');
+    console.log('🔐 Supabase session:', supabaseSessionStr ? 'FOUND' : 'NOT FOUND');
+    console.log('🎫 Token data:', tokenStr ? 'FOUND' : 'NOT FOUND');
+    
+    // Try to get user email from any available source
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        if (user.email) {
+          userEmail = user.email;
+          isAuthenticated = true;
+          console.log('✅ User found in user data:', userEmail);
+        }
+      } catch {
+        console.log('❌ Failed to parse user data');
+      }
+    } else if (sessionStr) {
+      try {
+        const session = JSON.parse(sessionStr);
+        console.log('🔍 Session structure:', session);
         
-        // Wait for script to load
-        await new Promise(resolve => {
-          authScript.onload = resolve;
-        });
-      }
-      
-      // Get real user data from Supabase
-      const token = localStorage.getItem('supabase_token');
-      if (!token) {
-        console.log('❌ No token found, redirecting to login');
-        window.location.href = '/login';
-        return;
-      }
-      
-      const user = await window.steleyAuth.getUser(token);
-      if (!user?.id) {
-        console.log('❌ Invalid user, redirecting to login');
-        window.location.href = '/login';
-        return;
-      }
-      
-       // Get license data (contains usage info)
-       const licenseData = await window.steleyAuth.getLicenseData(user.id);
-       const license = licenseData[0] || {};
-       
-      // Prepare real user data
-      const userData = {
-        currentPlan: license.tier || 'FREE',
-        isActive: license.status === 'active',
-        usage: {
-          screenshots: { 
-            used: license.daily_screenshots_used || 0, 
-            limit: license.daily_screenshot_limit || 3 
-          },
-          aiRequests: { 
-            used: license.daily_ai_requests_used || 0, 
-            limit: license.daily_ai_request_limit || 3 
-          }
-        },
-        resetTime: license.usage_reset_time ? new Date(license.usage_reset_time) : new Date(Date.now() + 24 * 60 * 60 * 1000),
-        user: user,
-        license: license
-      };
-      
-      console.log('📊 Real user data loaded:', userData);
-      
-      // Update current status
-      updateCurrentStatus(userData);
-      
-      // Setup plan buttons
-      setupPlanButtons(userData);
-      
-      // Setup account management buttons
-      setupAccountButtons();
-      
-      console.log('✅ Subscription functionality initialized');
-      
-    } catch (error) {
-      console.error('❌ Failed to initialize subscription logic:', error);
-      
-      // Show error state or fallback to mock data
-      const fallbackData = {
-        currentPlan: 'FREE',
-        isActive: false,
-        usage: {
-          screenshots: { used: 0, limit: 10 },
-          aiRequests: { used: 0, limit: 10 }
-        },
-        resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
-      };
-      
-      updateCurrentStatus(fallbackData);
-      setupPlanButtons(fallbackData);
-      setupAccountButtons();
-      
-      // Show error message to user
-      const statusTitle = document.getElementById('currentPlanName');
-      if (statusTitle) {
-        statusTitle.textContent = 'Unable to load data';
+        // Handle multiple session formats (same as ProfileDropdown)
+        if (session.user && session.user.email) {
+          userEmail = session.user.email;
+          isAuthenticated = true;
+          console.log('✅ User found in Supabase session format:', userEmail);
+        } else if (session.email && !session.user) {
+          userEmail = session.email;
+          isAuthenticated = true;
+          console.log('✅ User found in login session format:', userEmail);
+        }
+      } catch {
+        console.log('❌ Failed to parse session data');
       }
     }
+    
+    if (!isAuthenticated) {
+      console.log('❌ User not authenticated, redirecting to login');
+      alert('Please log in to access your subscription management.');
+      window.location.href = '/login';
+      return;
+    }
+    
+    console.log('✅ User authenticated:', userEmail);
+    
+    // Prepare demo user data (since this is a demo without real Supabase)
+    const userData = {
+      email: userEmail,
+      currentPlan: 'FREE',
+      isActive: true,
+      usage: {
+        screenshots: { used: 3, limit: 10 },
+        aiRequests: { used: 7, limit: 10 }
+      },
+      resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
+    };
+    
+    console.log('📊 Using demo user data:', userData);
+    
+    // Update UI with user data
+    updateCurrentStatus(userData);
+    setupPlanButtons(userData);
+    setupAccountButtons();
+    
+    console.log('✅ Subscription functionality initialized');
   }
   
   function updateCurrentStatus(userData) {
+    console.log('🔧 Updating status display...');
+    
     const planIcon = document.getElementById('currentPlanIcon');
     const planName = document.getElementById('currentPlanName');
     const statusBadge = document.getElementById('statusBadge');
     const statusText = document.getElementById('statusText');
+    const userEmailElement = document.getElementById('userEmail');
     
     // Update plan display
     const planConfigs = {
@@ -551,6 +549,7 @@ const subscriptionHTML = `
     
     if (planIcon) planIcon.textContent = config.icon;
     if (planName) planName.textContent = config.name;
+    if (userEmailElement) userEmailElement.textContent = userData.email;
     
     if (statusBadge) {
       statusBadge.className = `status-badge ${config.class}`;
@@ -561,9 +560,13 @@ const subscriptionHTML = `
     
     // Update usage statistics
     updateUsageStats(userData.usage, userData.resetTime);
+    
+    console.log('✅ Status display updated');
   }
   
   function updateUsageStats(usage, resetTime) {
+    console.log('🔧 Updating usage stats...');
+    
     // Screenshots
     const screenshotUsage = document.getElementById('screenshotUsage');
     const screenshotLimit = document.getElementById('screenshotLimit');
@@ -596,6 +599,8 @@ const subscriptionHTML = `
       const timeString = resetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       resetTimeElement.textContent = timeString;
     }
+    
+    console.log('✅ Usage stats updated');
   }
   
   function getUsageClass(percentage) {
@@ -605,6 +610,8 @@ const subscriptionHTML = `
   }
   
   function setupPlanButtons(userData) {
+    console.log('🔧 Setting up plan buttons...');
+    
     const freeButton = document.getElementById('freeButton');
     const proButton = document.getElementById('proButton');
     const ultraButton = document.getElementById('ultraButton');
@@ -614,13 +621,15 @@ const subscriptionHTML = `
       if (btn) {
         btn.addEventListener('click', function() {
           const planType = this.id.replace('Button', '').toUpperCase();
-          handlePlanUpgrade(planType);
+          handlePlanUpgrade(planType, userData);
         });
       }
     });
     
     // Update current plan styling
     updatePlanCardStyling(userData.currentPlan);
+    
+    console.log('✅ Plan buttons setup complete');
   }
   
   function updatePlanCardStyling(currentPlan) {
@@ -654,8 +663,8 @@ const subscriptionHTML = `
     });
   }
   
-  async function handlePlanUpgrade(planType) {
-    console.log(`🚀 Upgrade to ${planType} clicked`);
+  function handlePlanUpgrade(planType, userData) {
+    console.log(`🚀 ${planType} plan button clicked`);
     
     // Show loading state
     const button = document.getElementById(`${planType.toLowerCase()}Button`);
@@ -670,77 +679,32 @@ const subscriptionHTML = `
     `;
     button.disabled = true;
     
-    try {
-      // Check if user is authenticated
-      if (!window.steleyAuth?.isAuthenticated()) {
-        alert('Please sign in to upgrade your plan');
-        window.location.href = '/login';
-        return;
-      }
-      
-      // For FREE tier, handle downgrade
-      if (planType === 'FREE') {
+    // Simulate processing
+    setTimeout(() => {
+      if (planType === userData.currentPlan) {
+        alert('You are already on this plan!');
+      } else if (planType === 'FREE') {
         const confirmDowngrade = confirm('Are you sure you want to downgrade to the FREE plan? You will lose access to premium features.');
-        if (!confirmDowngrade) {
-          button.innerHTML = originalText;
-          button.disabled = false;
-          return;
+        if (confirmDowngrade) {
+          alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
         }
-      }
-      
-      // For PRO/ULTRA, simulate payment process
-      if (planType === 'PRO' || planType === 'ULTRA') {
+      } else {
         const prices = { PRO: '$19.99', ULTRA: '$99.99' };
         const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
-        
-        if (!confirmUpgrade) {
-          button.innerHTML = originalText;
-          button.disabled = false;
-          return;
+        if (confirmUpgrade) {
+          alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
         }
       }
       
-      // Update subscription tier in database
-      const result = await window.steleyAuth.updateSubscriptionTier(planType);
-      
-      if (result.success) {
-        // Show success message
-        button.innerHTML = `
-          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-            ✅ ${planType === 'FREE' ? 'Downgraded' : 'Upgraded'}!
-          </div>
-        `;
-        
-        // Wait a moment then reload page to show updated data
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-        
-      } else {
-        throw new Error(result.error || 'Failed to update subscription');
-      }
-      
-    } catch (error) {
-      console.error('❌ Plan upgrade failed:', error);
-      
-      // Show error message
+      // Reset button
       button.innerHTML = originalText;
       button.disabled = false;
-      
-      let errorMessage = 'Failed to update subscription. ';
-      if (error.message.includes('not authenticated')) {
-        errorMessage += 'Please sign in and try again.';
-      } else if (error.message.includes('network')) {
-        errorMessage += 'Please check your internet connection.';
-      } else {
-        errorMessage += 'Please try again later.';
-      }
-      
-      alert(errorMessage);
-    }
+    }, 2000);
   }
   
   function setupAccountButtons() {
+    console.log('🔧 Setting up account buttons...');
+    
     const buttons = [
       { id: 'viewHistoryBtn', action: 'View usage history' },
       { id: 'updatePaymentBtn', action: 'Update payment method' },
@@ -753,11 +717,11 @@ const subscriptionHTML = `
       if (button) {
         button.addEventListener('click', function() {
           console.log(`🔧 ${action} clicked`);
-          alert(`${action} functionality would be implemented here!`);
+          alert(`${action} functionality would be implemented here in a real application!`);
         });
       }
     });
+    
+    console.log('✅ Account buttons setup complete');
   }
-  
-  // Clean up - removed profile dropdown functionality to prevent duplicates
 })(); 
