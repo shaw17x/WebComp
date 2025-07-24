@@ -1,4 +1,4 @@
-// Steley Login Page Combined - CSS + HTML Content (Component Only)
+// Steley Login Page Combined - CSS + HTML Content (Component Only) - v2.1
 const loginCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -100,9 +100,9 @@ const loginHTML = `
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
-      <!-- Logo + Title Container -->
+      <!-- Logo + Title Container (v2.1 - Cache Bust) -->
       <div style="display: inline-flex; align-items: center; gap: 4px; margin-bottom: 0.5rem;">
-        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
         <h1 class="auth-title" style="margin-bottom: 0;">teley</h1>
       </div>
       <h2 class="auth-subtitle">Welcome Back</h2>
@@ -295,7 +295,7 @@ const loginHTML = `
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
-      console.log('🎬 Login animations starting...', { loginCard, footer });
+      console.log('🎬 NEW v2.1: Login animations starting - Logo+teley mode...', { loginCard, footer });
       
       // Trigger smooth entry animation for login card
       if (loginCard) {
