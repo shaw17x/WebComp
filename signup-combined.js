@@ -36,14 +36,9 @@ const signupCSS = `
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
 /* Toggle Section */
-.auth-toggle{padding:0 1.5rem 1rem;text-align:center}
+.auth-toggle{padding:0 1.5rem 1.5rem;text-align:center}
 .auth-toggle-button{color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer}
 .auth-toggle-button:hover{color:rgba(255,255,255,0.8)}
-
-/* Skip Section */
-.auth-skip{padding:0 1.5rem 1.5rem;text-align:center}
-.auth-skip-button{color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer}
-.auth-skip-button:hover{color:rgba(255,255,255,0.8)}
 
 /* Loading Spinner */
 .loading-spinner{width:1rem;height:1rem;border:2px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-right:0.5rem}
@@ -161,16 +156,6 @@ const signupHTML = `
       <button type="button" class="auth-toggle-button" onclick="window.location.href='/login'">
         Already have an account? Sign in
       </button>
-    </div>
-
-    <!-- Skip & Options -->
-    <div class="auth-skip">
-      <button type="button" class="auth-skip-button" onclick="window.location.href='/'">
-        Skip for now and continue to app
-      </button>
-      <p style="font-size:0.625rem;color:rgba(255,255,255,0.4);margin-top:0.5rem;">
-        Once signed in, use to start capturing screenshots
-      </p>
     </div>
 
     <!-- Email Verification Section (Initially Hidden) -->
@@ -769,11 +754,9 @@ const signupHTML = `
     // Hide main signup form
     const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
     const toggleSection = document.querySelector('.auth-toggle');
-    const skipSection = document.querySelector('.auth-skip');
     
     if (signupForm) signupForm.style.display = 'none';
     if (toggleSection) toggleSection.style.display = 'none';
-    if (skipSection) skipSection.style.display = 'none';
     
     // Show verification container
     const verificationContainer = document.getElementById('verificationContainer');
@@ -1112,11 +1095,9 @@ const signupHTML = `
     // Show main signup form
     const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
     const toggleSection = document.querySelector('.auth-toggle');
-    const skipSection = document.querySelector('.auth-skip');
     
     if (signupForm) signupForm.style.display = 'block';
     if (toggleSection) toggleSection.style.display = 'block';
-    if (skipSection) skipSection.style.display = 'block';
     
     // Hide verification container
     const verificationContainer = document.getElementById('verificationContainer');
