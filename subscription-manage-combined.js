@@ -1,651 +1,165 @@
-// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v3.0 Program Style
+// Steley Subscription Management Page Combined - CSS + HTML Content (Enhanced v2.0) 
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
-/* Subscription Management Container - Program Style */
-.subscription-manage-component {
-  max-width: 1200px;
-  width: 100%;
-  margin: 80px auto 40px auto;
-  padding: 20px;
-  position: relative;
-  z-index: 999;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-/* Page Header - Program Style */
-.subscription-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  position: relative;
-  z-index: 1000;
-}
-
-.subscription-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 8px 18px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  animation: badgeEntry 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
-  backdrop-filter: blur(20px);
-}
-
-.subscription-badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
-  animation: spin 3s linear infinite;
-}
-
-.subscription-title {
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1000;
-  letter-spacing: -0.02em;
-}
-
-.subscription-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 400;
-  margin: 0 0 40px 0;
-  text-align: center;
-  position: relative;
-  z-index: 1000;
-}
-
-/* Current Status Card - Program Style */
-.current-status-card {
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 32px;
-  position: relative;
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: programCardEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.status-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.status-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  letter-spacing: -0.01em;
-}
-
-.status-badge {
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  letter-spacing: 0.3px;
-}
-
-.badge-active {
-  background: rgba(34, 197, 94, 0.1);
-  color: #86efac;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.badge-expired {
-  background: rgba(239, 68, 68, 0.1);
-  color: #fca5a5;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.badge-free {
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Usage Statistics - Program Style */
-.usage-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.usage-stat {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-sizing: border-box;
-}
-
-.usage-stat:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.stat-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.stat-value {
-  color: #fff;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-  letter-spacing: -0.02em;
-}
-
-.stat-limit {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.usage-bar {
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 2px;
-  margin-top: 12px;
-  overflow: hidden;
-}
-
-.usage-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.usage-low { background: linear-gradient(90deg, #22c55e, #4ade80); }
-.usage-medium { background: linear-gradient(90deg, #eab308, #facc15); }
-.usage-high { background: linear-gradient(90deg, #ef4444, #f87171); }
-
-/* Plan Cards Grid - Program Style */
-.plans-section {
-  margin-bottom: 3rem;
-}
-
-.plans-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-}
-
-.plans-subtitle {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.plans-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  margin-bottom: 32px;
-}
-
-/* Individual Plan Card - Program Style */
-.plan-card {
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 24px;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: programCardEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.plan-card:nth-child(1) { animation-delay: 0.1s; }
-.plan-card:nth-child(2) { animation-delay: 0.2s; }
-.plan-card:nth-child(3) { animation-delay: 0.3s; }
-
-.plan-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-}
-
-.plan-card.current {
-  border-color: rgba(34, 197, 94, 0.3);
-  background: rgba(34, 197, 94, 0.02);
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.1);
-}
-
-.plan-card.recommended {
-  border-color: rgba(59, 130, 246, 0.3);
-  background: rgba(59, 130, 246, 0.02);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
-}
-
-.plan-card.premium {
-  border-color: rgba(168, 85, 247, 0.3);
-  background: rgba(168, 85, 247, 0.02);
-  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.1);
-}
-
-.plan-header {
-  margin-bottom: 24px;
-}
-
-.plan-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  letter-spacing: -0.01em;
-}
-
-.plan-description {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.plan-price {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.price-amount {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.02em;
-}
-
-.price-period {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.price-label {
-  color: rgba(34, 197, 94, 0.9);
-  font-size: 11px;
-  font-weight: 600;
-  margin-left: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.plan-features {
-  margin-bottom: 24px;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.feature-icon {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  color: #86efac;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.plan-action {
-  margin-top: auto;
-}
-
-/* Program-Style Buttons */
-.plan-button {
-  width: 100%;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  cursor: pointer;
-  border: none;
-  letter-spacing: 0.3px;
-  position: relative;
-  overflow: hidden;
-}
-
-.button-primary {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-}
-
-.button-primary:hover {
-  background: linear-gradient(135deg, #2563eb, #1e40af);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-}
-
-.button-premium {
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
-}
-
-.button-premium:hover {
-  background: linear-gradient(135deg, #9333ea, #6d28d9);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
-}
-
-.button-current {
-  background: rgba(34, 197, 94, 0.1);
-  color: #86efac;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.button-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.button-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-/* Account Management Section - Program Style */
-.account-section {
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 32px;
-  position: relative;
-  z-index: 1000;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.account-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
-}
-
-.account-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.account-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.account-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.account-item-title {
-  color: #fff;
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-}
-
-.account-item-description {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.account-button {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.2px;
-}
-
-.account-button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-/* Plan Icons */
-.icon-free { color: rgba(255, 255, 255, 0.7); }
-.icon-pro { color: #3b82f6; }
-.icon-ultra { color: #a855f7; }
-
-/* Footer - Program Style */
-.subscription-footer {
-  text-align: center;
-  margin-top: 3rem;
-  padding: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-text {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.footer-link {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.footer-link:hover {
-  color: #fff;
-}
-
-/* Loading Spinner - Program Style */
-.loading-spinner {
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-top: 2px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* Program-Style Animations */
-@keyframes programCardEntry {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes badgeEntry {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive Design - Program Style */
-@media (max-width: 768px) {
-  .subscription-manage-component {
-    margin: 20px auto;
-    padding: 16px;
-  }
-  
-  .subscription-title {
-    font-size: 2.2rem;
-  }
-  
-  .plans-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .usage-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .account-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-links {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .plan-card {
-    padding: 20px;
-  }
-  
-  .current-status-card,
-  .account-section {
-    padding: 20px;
-  }
-}
-
-/* Enhanced Visual Effects */
-.plan-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
-  border-radius: 16px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.plan-card:hover::before {
-  opacity: 1;
-}
-
-/* Subtle glow effects for premium plans */
-.plan-card.recommended::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
-  border-radius: 17px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.plan-card.recommended:hover::after {
-  opacity: 1;
+/* Subscription Management Container - Optimized Performance */
+.subscription-manage-component{max-width:1200px;width:100%;margin:80px auto 40px auto;padding:20px;position:relative;z-index:999;opacity:0;transform:translate3d(0,30px,0) scale(0.95);animation:smoothPageEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
+
+/* Enhanced Page Header with Professional Styling */
+.subscription-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1000;opacity:0;transform:translate3d(0,20px,0);animation:headerEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
+.subscription-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:8px 20px;margin-bottom:20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:1.2px;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden}
+.subscription-badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:shimmer 3s infinite}
+.subscription-badge:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.subscription-badge-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);box-shadow:0 0 12px rgba(59,130,246,0.5);animation:pulse 2s ease-in-out infinite}
+.subscription-title{font-size:clamp(2.5rem,4vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.9) 40%,rgba(156,163,175,0.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:16px;position:relative;z-index:1000;letter-spacing:-0.02em}
+.subscription-subtitle{font-size:1.2rem;color:rgba(255,255,255,0.7);font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0.9}
+
+/* Enhanced Status Card with Floating Animation */
+.current-status-card{background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:2.5rem;margin-bottom:3rem;position:relative;z-index:1000;opacity:0;transform:translate3d(0,40px,0) scale(0.95);animation:cardEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s both;box-shadow:0 20px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.1);will-change:transform,opacity;backface-visibility:hidden}
+.current-status-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,transparent 50%,rgba(255,255,255,0.05) 100%);pointer-events:none;opacity:0;transition:opacity 0.3s}
+.current-status-card:hover::before{opacity:1}
+.current-status-card:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(255,255,255,0.2);box-shadow:0 25px 50px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.2)}
+
+/* Professional Status Header */
+.status-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.status-title{font-size:1.75rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:1rem;letter-spacing:-0.01em}
+.status-badge{padding:0.75rem 1.5rem;border-radius:50px;font-size:0.875rem;font-weight:600;display:flex;align-items:center;gap:0.75rem;transition:all 0.3s;backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.status-badge::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:inherit;filter:brightness(1.2);opacity:0;transition:opacity 0.3s}
+.status-badge:hover::before{opacity:1}
+.badge-active{background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.4);box-shadow:0 0 20px rgba(34,197,94,0.1)}
+.badge-expired{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);box-shadow:0 0 20px rgba(239,68,68,0.1)}
+.badge-free{background:rgba(107,114,128,0.2);color:#d1d5db;border:1px solid rgba(107,114,128,0.4);box-shadow:0 0 20px rgba(107,114,128,0.1)}
+
+/* Enhanced Usage Statistics Grid */
+.usage-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:2.5rem}
+.usage-stat{background:rgba(255,255,255,0.03);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden;will-change:transform;opacity:0;transform:translateY(20px);animation:statEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
+.usage-stat:nth-child(1){animation-delay:0.4s}
+.usage-stat:nth-child(2){animation-delay:0.5s}
+.usage-stat:nth-child(3){animation-delay:0.6s}
+.usage-stat::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;border-radius:16px}
+.usage-stat:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);transform:translateY(-5px) scale(1.02);box-shadow:0 15px 30px rgba(0,0,0,0.2)}
+.usage-stat:hover::before{opacity:1}
+.stat-label{color:rgba(255,255,255,0.7);font-size:0.875rem;font-weight:600;margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.5px}
+.stat-value{color:#fff;font-size:2rem;font-weight:800;margin-bottom:0.5rem;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-limit{color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500}
+.usage-bar{width:100%;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;margin-top:1rem;overflow:hidden;position:relative}
+.usage-bar::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:barShimmer 2s infinite}
+.usage-fill{height:100%;border-radius:4px;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden}
+.usage-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:fillShimmer 3s infinite}
+.usage-low{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 0 15px rgba(34,197,94,0.3)}
+.usage-medium{background:linear-gradient(135deg,#eab308,#d97706);box-shadow:0 0 15px rgba(234,179,8,0.3)}
+.usage-high{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 0 15px rgba(239,68,68,0.3)}
+
+/* Enhanced Plan Cards Section */
+.plans-section{margin-bottom:4rem;opacity:0;transform:translateY(30px);animation:sectionEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s both}
+.plans-title{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:1rem;letter-spacing:-0.02em}
+.plans-subtitle{font-size:1.1rem;color:rgba(255,255,255,0.7);text-align:center;margin-bottom:3rem;font-weight:400}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;margin-bottom:2rem}
+
+/* Professional Plan Cards with Enhanced Hover Effects */
+.plan-card{background:rgba(0,0,0,0.7);backdrop-filter:blur(25px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:2.5rem;position:relative;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;transform:translateY(30px);animation:cardEntry 1s cubic-bezier(0.25,0.46,0.45,0.94) forwards;overflow:hidden;will-change:transform;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.plan-card:nth-child(1){animation-delay:0.7s}
+.plan-card:nth-child(2){animation-delay:0.8s}
+.plan-card:nth-child(3){animation-delay:0.9s}
+.plan-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 50%,rgba(255,255,255,0.02) 100%);opacity:0;transition:opacity 0.4s;border-radius:24px;pointer-events:none}
+.plan-card:hover{transform:translateY(-8px) scale(1.03);border-color:rgba(255,255,255,0.25);box-shadow:0 25px 50px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.1)}
+.plan-card:hover::before{opacity:1}
+.plan-card.current{border-color:rgba(34,197,94,0.5);background:rgba(34,197,94,0.08);box-shadow:0 15px 40px rgba(34,197,94,0.15)}
+.plan-card.recommended{border-color:rgba(59,130,246,0.5);background:rgba(59,130,246,0.08);box-shadow:0 15px 40px rgba(59,130,246,0.15)}
+.plan-card.premium{border-color:rgba(168,85,247,0.5);background:rgba(168,85,247,0.08);box-shadow:0 15px 40px rgba(168,85,247,0.15)}
+
+/* Plan Card Content */
+.plan-header{margin-bottom:2rem}
+.plan-name{font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:0.75rem;display:flex;align-items:center;gap:1rem;letter-spacing:-0.01em}
+.plan-description{color:rgba(255,255,255,0.7);font-size:0.95rem;margin-bottom:1.5rem;line-height:1.6}
+.plan-price{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.price-amount{font-size:3rem;font-weight:900;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em}
+.price-period{color:rgba(255,255,255,0.6);font-size:1.1rem;font-weight:500}
+.price-label{color:rgba(34,197,94,0.9);font-size:0.8rem;font-weight:600;padding:0.25rem 0.75rem;background:rgba(34,197,94,0.15);border-radius:12px;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Enhanced Feature List */
+.plan-features{margin-bottom:2.5rem}
+.feature-item{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;color:rgba(255,255,255,0.85);font-size:0.95rem;transition:all 0.2s}
+.feature-item:hover{color:#fff;transform:translateX(4px)}
+.feature-icon{width:1.25rem;height:1.25rem;border-radius:50%;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#86efac;font-weight:700;flex-shrink:0}
+
+/* Professional Plan Buttons */
+.plan-action{margin-top:auto}
+.plan-button{width:100%;padding:1rem 1.5rem;border-radius:12px;font-size:0.95rem;font-weight:700;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);cursor:pointer;border:none;position:relative;overflow:hidden;text-transform:uppercase;letter-spacing:0.5px;backdrop-filter:blur(10px)}
+.plan-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.6s}
+.plan-button:hover::before{left:100%}
+.button-primary{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff;box-shadow:0 8px 25px rgba(59,130,246,0.3)}
+.button-primary:hover{background:linear-gradient(135deg,#2563eb,#1d4ed8);transform:translateY(-2px);box-shadow:0 12px 35px rgba(59,130,246,0.4)}
+.button-premium{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 8px 25px rgba(168,85,247,0.3)}
+.button-premium:hover{background:linear-gradient(135deg,#9333ea,#6d28d9);transform:translateY(-2px);box-shadow:0 12px 35px rgba(168,85,247,0.4)}
+.button-current{background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.4);box-shadow:0 8px 25px rgba(34,197,94,0.15)}
+.button-current:hover{background:rgba(34,197,94,0.3);border-color:rgba(34,197,94,0.6)}
+.button-secondary{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 25px rgba(255,255,255,0.05)}
+.button-secondary:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);transform:translateY(-2px)}
+
+/* Enhanced Account Management Section */
+.account-section{background:rgba(0,0,0,0.7);backdrop-filter:blur(25px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:3rem;margin-bottom:3rem;position:relative;z-index:1000;box-shadow:0 15px 40px rgba(0,0,0,0.3);opacity:0;transform:translateY(30px);animation:sectionEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 1s both}
+.account-title{font-size:2rem;font-weight:700;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2rem;letter-spacing:-0.01em}
+.account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.account-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.account-item::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;border-radius:16px}
+.account-item:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.2)}
+.account-item:hover::before{opacity:1}
+.account-item-title{color:#fff;font-weight:700;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;font-size:1.1rem}
+.account-item-description{color:rgba(255,255,255,0.7);font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6}
+.account-button{padding:0.75rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:600;transition:all 0.3s;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);backdrop-filter:blur(10px);text-transform:uppercase;letter-spacing:0.5px}
+.account-button:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.35);transform:translateY(-1px);box-shadow:0 5px 15px rgba(255,255,255,0.1)}
+
+/* Enhanced Icons */
+.icon-free{color:#9ca3af;filter:drop-shadow(0 0 8px rgba(156,163,175,0.3))}
+.icon-pro{color:#3b82f6;filter:drop-shadow(0 0 8px rgba(59,130,246,0.4))}
+.icon-ultra{color:#a855f7;filter:drop-shadow(0 0 8px rgba(168,85,247,0.4))}
+
+/* Professional Footer */
+.subscription-footer{text-align:center;margin-top:4rem;padding:3rem 2rem;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.3);backdrop-filter:blur(20px);border-radius:20px 20px 0 0}
+.footer-text{color:rgba(255,255,255,0.6);font-size:0.9rem;margin-bottom:1.5rem;font-weight:400}
+.footer-links{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.footer-link{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.875rem;transition:all 0.3s;font-weight:500;position:relative}
+.footer-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(135deg,#3b82f6,#a855f7);transition:width 0.3s}
+.footer-link:hover{color:#fff;transform:translateY(-1px)}
+.footer-link:hover::after{width:100%}
+
+/* Enhanced Loading Spinner */
+.loading-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.2);border-top:2px solid rgba(255,255,255,0.8);border-radius:50%;animation:spin 1s linear infinite}
+
+/* Professional Animations with Hardware Acceleration */
+@keyframes smoothPageEntry{from{opacity:0;transform:translate3d(0,40px,0) scale(0.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes headerEntry{from{opacity:0;transform:translate3d(0,30px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes cardEntry{from{opacity:0;transform:translate3d(0,40px,0) scale(0.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes statEntry{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes sectionEntry{from{opacity:0;transform:translate3d(0,30px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
+@keyframes barShimmer{0%{left:-100%}50%{left:100%}100%{left:100%}}
+@keyframes fillShimmer{0%{left:-100%}100%{left:100%}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.7;transform:scale(1.1)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px){
+  .subscription-manage-component{margin:40px auto 20px auto;padding:15px}
+  .subscription-title{font-size:2.25rem}
+  .plans-grid{grid-template-columns:1fr;gap:1.5rem}
+  .usage-stats{grid-template-columns:1fr;gap:1rem}
+  .account-grid{grid-template-columns:1fr}
+  .footer-links{flex-direction:column;gap:1.5rem}
+  .status-header{flex-direction:column;align-items:stretch;text-align:center}
+  .plan-price{justify-content:center}
+  .current-status-card{padding:2rem}
+  .account-section{padding:2rem}
+}
+
+@media (max-width: 480px){
+  .subscription-manage-component{padding:10px}
+  .current-status-card{padding:1.5rem}
+  .plan-card{padding:2rem}
+  .account-section{padding:1.5rem}
+  .subscription-title{font-size:2rem}
+  .price-amount{font-size:2.5rem}
 }
 `;
 
@@ -700,9 +214,9 @@ const subscriptionHTML = `
     </div>
     
     <!-- User Info -->
-    <div style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 8px;">
-      <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0;">
-        Logged in as: <span id="userEmail" style="color: #fff; font-weight: 500;">Loading...</span>
+    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0;">
+        Logged in as: <span id="userEmail" style="color: #fff; font-weight: 600;">Loading...</span>
       </p>
     </div>
   </div>
@@ -901,8 +415,10 @@ const subscriptionHTML = `
 </div>
 `;
 
-// Auto-execute function to inject CSS and HTML
+// Auto-execute function with enhanced initialization (matching successful pages)
 (function() {
+  console.log('🚀 Enhanced Subscription Management v2.0 Starting...');
+  
   // 🎯 STRICT URL DETECTION - Only load on specific subscription URLs
   const pathname = location.pathname.toLowerCase();
   const hash = location.hash.toLowerCase();
@@ -920,11 +436,7 @@ const subscriptionHTML = `
                             hash === '#manage' ||
                             hash === '#account';
   
-  console.log('🚀 Subscription management component starting...');
-  console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', pathname);
-  console.log('📍 Hash:', hash);
-  console.log('📍 Is subscription page?', isSubscriptionPage);
+  console.log('📍 URL Analysis:', { pathname, hash, isSubscriptionPage });
   
   // Only load if this is actually a subscription management page
   if (!isSubscriptionPage) {
@@ -932,23 +444,23 @@ const subscriptionHTML = `
     return;
   }
   
-  // Add CSS
+  // Add CSS immediately for instant styling
   const style = document.createElement('style');
   style.textContent = subscriptionCSS;
   document.head.appendChild(style);
-  console.log('✅ Subscription CSS added');
+  console.log('✅ Enhanced subscription CSS added');
   
-  // Add HTML when DOM is ready
+  // Initialize with optimized timing (matching successful pages)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      initializeSubscriptionPage();
+      setTimeout(initializeSubscriptionPage, 50);
     });
   } else {
-    initializeSubscriptionPage();
+    setTimeout(initializeSubscriptionPage, 50);
   }
   
   function initializeSubscriptionPage() {
-    console.log('🔧 Initializing subscription page...');
+    console.log('🔧 Initializing enhanced subscription page...');
     
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
@@ -956,20 +468,19 @@ const subscriptionHTML = `
       return;
     }
     
-    // 🎯 USE EXACT SAME LOGIC AS WORKING SIGNUP PAGE
+    // 🎯 EXACT SAME INJECTION LOGIC AS SUCCESSFUL PAGES
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    console.log('📍 Main content element:', mainContent.tagName);
+    console.log('📍 Target container:', mainContent.tagName);
     
-    // 🚀 EXACT SAME INJECTION LOGIC AS SIGNUP
+    // Clear and inject with React-safe approach
     if (mainContent !== document.body) {
       mainContent.innerHTML = subscriptionHTML;
     } else {
-      // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
       if (header) {
         header.insertAdjacentHTML('afterend', subscriptionHTML);
@@ -978,39 +489,61 @@ const subscriptionHTML = `
       }
     }
     
-    console.log('✅ Subscription HTML added');
+    console.log('✅ Enhanced subscription HTML injected');
     
-    // Initialize subscription functionality
-    initializeSubscriptionLogic();
+    // Initialize with staggered timing for smooth performance
+    setTimeout(() => {
+      initializeEnhancedAnimations();
+      initializeSubscriptionLogic();
+    }, 100);
+  }
+  
+  function initializeEnhancedAnimations() {
+    console.log('🎬 Initializing enhanced animations...');
+    
+    // Apply hardware acceleration to key elements
+    const animatedElements = document.querySelectorAll('.subscription-manage-component, .current-status-card, .plan-card, .usage-stat');
+    animatedElements.forEach(element => {
+      element.style.willChange = 'transform, opacity';
+      element.style.backfaceVisibility = 'hidden';
+    });
+    
+    // Remove will-change after animations complete
+    setTimeout(() => {
+      animatedElements.forEach(element => {
+        element.style.willChange = 'auto';
+      });
+      console.log('🎯 Animation optimization applied');
+    }, 2000);
   }
   
   function initializeSubscriptionLogic() {
-    console.log('🔧 Initializing subscription logic...');
+    console.log('🔧 Initializing enhanced subscription logic...');
     
-    // 🎯 CHECK AUTHENTICATION USING THE SAME FORMAT AS PROFILEDROPDOWN
+    // 🎯 EXACT SAME AUTH LOGIC AS WORKING COMPONENTS
     let userEmail = null;
     let isAuthenticated = false;
     
-    // Check multiple localStorage keys (same as ProfileDropdown)
     const userStr = localStorage.getItem('supabase_user');
     const sessionStr = localStorage.getItem('steley_session');
     const supabaseSessionStr = localStorage.getItem('supabase_session');
     const tokenStr = localStorage.getItem('supabase.auth.token');
     
-    console.log('🔍 Checking authentication...');
-    console.log('👤 User data:', userStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Steley session:', sessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Supabase session:', supabaseSessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🎫 Token data:', tokenStr ? 'FOUND' : 'NOT FOUND');
+    console.log('🔍 Auth check:', { 
+      user: !!userStr, 
+      session: !!sessionStr, 
+      supabaseSession: !!supabaseSessionStr, 
+      token: !!tokenStr 
+    });
     
-    // Try to get user email from any available source
+    // Multi-format auth detection (same as ProfileDropdown)
     if (userStr) {
       try {
         const user = JSON.parse(userStr);
         if (user.email) {
           userEmail = user.email;
           isAuthenticated = true;
-          console.log('✅ User found in user data:', userEmail);
+          console.log('✅ User authenticated via user data:', userEmail);
         }
       } catch {
         console.log('❌ Failed to parse user data');
@@ -1018,17 +551,14 @@ const subscriptionHTML = `
     } else if (sessionStr) {
       try {
         const session = JSON.parse(sessionStr);
-        console.log('🔍 Session structure:', session);
-        
-        // Handle multiple session formats (same as ProfileDropdown)
         if (session.user && session.user.email) {
           userEmail = session.user.email;
           isAuthenticated = true;
-          console.log('✅ User found in Supabase session format:', userEmail);
+          console.log('✅ User authenticated via Supabase session:', userEmail);
         } else if (session.email && !session.user) {
           userEmail = session.email;
           isAuthenticated = true;
-          console.log('✅ User found in login session format:', userEmail);
+          console.log('✅ User authenticated via login session:', userEmail);
         }
       } catch {
         console.log('❌ Failed to parse session data');
@@ -1036,15 +566,15 @@ const subscriptionHTML = `
     }
     
     if (!isAuthenticated) {
-      console.log('❌ User not authenticated, redirecting to login');
+      console.log('❌ User not authenticated, redirecting...');
       alert('Please log in to access your subscription management.');
       window.location.href = '/login';
       return;
     }
     
-    console.log('✅ User authenticated:', userEmail);
+    console.log('✅ User authenticated successfully:', userEmail);
     
-    // Prepare demo user data (since this is a demo without real Supabase)
+    // Enhanced demo user data
     const userData = {
       email: userEmail,
       currentPlan: 'FREE',
@@ -1056,26 +586,25 @@ const subscriptionHTML = `
       resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
     };
     
-    console.log('📊 Using demo user data:', userData);
+    // Update UI with enhanced interactions
+    updateEnhancedStatus(userData);
+    setupEnhancedPlanButtons(userData);
+    setupEnhancedAccountButtons();
     
-    // Update UI with user data
-    updateCurrentStatus(userData);
-    setupPlanButtons(userData);
-    setupAccountButtons();
-    
-    console.log('✅ Subscription functionality initialized');
+    console.log('✅ Enhanced subscription functionality initialized');
   }
   
-  function updateCurrentStatus(userData) {
-    console.log('🔧 Updating status display...');
+  function updateEnhancedStatus(userData) {
+    console.log('🔧 Updating enhanced status display...');
     
-    const planIcon = document.getElementById('currentPlanIcon');
-    const planName = document.getElementById('currentPlanName');
-    const statusBadge = document.getElementById('statusBadge');
-    const statusText = document.getElementById('statusText');
-    const userEmailElement = document.getElementById('userEmail');
+    const elements = {
+      planIcon: document.getElementById('currentPlanIcon'),
+      planName: document.getElementById('currentPlanName'),
+      statusBadge: document.getElementById('statusBadge'),
+      statusText: document.getElementById('statusText'),
+      userEmail: document.getElementById('userEmail')
+    };
     
-    // Update plan display
     const planConfigs = {
       'FREE': { icon: '🛡️', name: 'Free Plan', class: 'badge-free' },
       'PRO': { icon: '⭐', name: 'Pro Plan', class: 'badge-active' },
@@ -1084,60 +613,74 @@ const subscriptionHTML = `
     
     const config = planConfigs[userData.currentPlan] || planConfigs['FREE'];
     
-    if (planIcon) planIcon.textContent = config.icon;
-    if (planName) planName.textContent = config.name;
-    if (userEmailElement) userEmailElement.textContent = userData.email;
+    // Update with smooth transitions
+    Object.entries(elements).forEach(([key, element]) => {
+      if (!element) return;
+      
+      switch(key) {
+        case 'planIcon':
+          element.textContent = config.icon;
+          break;
+        case 'planName':
+          element.textContent = config.name;
+          break;
+        case 'statusBadge':
+          element.className = `status-badge ${config.class}`;
+          break;
+        case 'statusText':
+          element.textContent = userData.isActive ? 'Active' : 'Expired';
+          break;
+        case 'userEmail':
+          element.textContent = userData.email;
+          break;
+      }
+    });
     
-    if (statusBadge) {
-      statusBadge.className = `status-badge ${config.class}`;
-    }
-    if (statusText) {
-      statusText.textContent = userData.isActive ? 'Active' : 'Expired';
-    }
-    
-    // Update usage statistics
-    updateUsageStats(userData.usage, userData.resetTime);
-    
-    console.log('✅ Status display updated');
+    updateEnhancedUsageStats(userData.usage, userData.resetTime);
+    console.log('✅ Enhanced status display updated');
   }
   
-  function updateUsageStats(usage, resetTime) {
-    console.log('🔧 Updating usage stats...');
+  function updateEnhancedUsageStats(usage, resetTime) {
+    console.log('🔧 Updating enhanced usage stats...');
     
-    // Screenshots
-    const screenshotUsage = document.getElementById('screenshotUsage');
-    const screenshotLimit = document.getElementById('screenshotLimit');
-    const screenshotBar = document.getElementById('screenshotBar');
+    // Screenshots with smooth animation
+    const screenshotElements = {
+      usage: document.getElementById('screenshotUsage'),
+      limit: document.getElementById('screenshotLimit'),
+      bar: document.getElementById('screenshotBar')
+    };
     
-    if (screenshotUsage) screenshotUsage.textContent = usage.screenshots.used;
-    if (screenshotLimit) screenshotLimit.textContent = `of ${usage.screenshots.limit} daily limit`;
-    if (screenshotBar) {
+    if (screenshotElements.usage) screenshotElements.usage.textContent = usage.screenshots.used;
+    if (screenshotElements.limit) screenshotElements.limit.textContent = `of ${usage.screenshots.limit} daily limit`;
+    if (screenshotElements.bar) {
       const percentage = (usage.screenshots.used / usage.screenshots.limit) * 100;
-      screenshotBar.style.width = `${percentage}%`;
-      screenshotBar.className = `usage-fill ${getUsageClass(percentage)}`;
+      screenshotElements.bar.style.width = `${percentage}%`;
+      screenshotElements.bar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
-    // AI Requests
-    const aiUsage = document.getElementById('aiUsage');
-    const aiLimit = document.getElementById('aiLimit');
-    const aiBar = document.getElementById('aiBar');
+    // AI Requests with smooth animation
+    const aiElements = {
+      usage: document.getElementById('aiUsage'),
+      limit: document.getElementById('aiLimit'),
+      bar: document.getElementById('aiBar')
+    };
     
-    if (aiUsage) aiUsage.textContent = usage.aiRequests.used;
-    if (aiLimit) aiLimit.textContent = `of ${usage.aiRequests.limit} daily limit`;
-    if (aiBar) {
+    if (aiElements.usage) aiElements.usage.textContent = usage.aiRequests.used;
+    if (aiElements.limit) aiElements.limit.textContent = `of ${usage.aiRequests.limit} daily limit`;
+    if (aiElements.bar) {
       const percentage = (usage.aiRequests.used / usage.aiRequests.limit) * 100;
-      aiBar.style.width = `${percentage}%`;
-      aiBar.className = `usage-fill ${getUsageClass(percentage)}`;
+      aiElements.bar.style.width = `${percentage}%`;
+      aiElements.bar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
-    // Reset time
+    // Reset time with formatting
     const resetTimeElement = document.getElementById('resetTime');
     if (resetTimeElement && resetTime) {
       const timeString = resetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       resetTimeElement.textContent = timeString;
     }
     
-    console.log('✅ Usage stats updated');
+    console.log('✅ Enhanced usage stats updated');
   }
   
   function getUsageClass(percentage) {
@@ -1146,39 +689,37 @@ const subscriptionHTML = `
     return 'usage-high';
   }
   
-  function setupPlanButtons(userData) {
-    console.log('🔧 Setting up plan buttons...');
+  function setupEnhancedPlanButtons(userData) {
+    console.log('🔧 Setting up enhanced plan buttons...');
     
-    const freeButton = document.getElementById('freeButton');
-    const proButton = document.getElementById('proButton');
-    const ultraButton = document.getElementById('ultraButton');
+    const buttons = ['freeButton', 'proButton', 'ultraButton'];
     
-    // Update button states based on current plan
-    [freeButton, proButton, ultraButton].forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', function() {
-          const planType = this.id.replace('Button', '').toUpperCase();
-          handlePlanUpgrade(planType, userData);
-        });
-      }
+    buttons.forEach(buttonId => {
+      const button = document.getElementById(buttonId);
+      if (!button) return;
+      
+      button.addEventListener('click', function() {
+        const planType = buttonId.replace('Button', '').toUpperCase();
+        handleEnhancedPlanUpgrade(planType, userData, this);
+      });
     });
     
-    // Update current plan styling
-    updatePlanCardStyling(userData.currentPlan);
-    
-    console.log('✅ Plan buttons setup complete');
+    updateEnhancedPlanStyling(userData.currentPlan);
+    console.log('✅ Enhanced plan buttons setup complete');
   }
   
-  function updatePlanCardStyling(currentPlan) {
-    const planCards = {
-      'FREE': { card: document.getElementById('freePlan'), button: document.getElementById('freeButton') },
-      'PRO': { card: document.getElementById('proPlan'), button: document.getElementById('proButton') },
-      'ULTRA': { card: document.getElementById('ultraPlan'), button: document.getElementById('ultraButton') }
+  function updateEnhancedPlanStyling(currentPlan) {
+    const planConfigs = {
+      'FREE': { buttonId: 'freeButton', cardId: 'freePlan' },
+      'PRO': { buttonId: 'proButton', cardId: 'proPlan' },
+      'ULTRA': { buttonId: 'ultraButton', cardId: 'ultraPlan' }
     };
     
-    Object.entries(planCards).forEach(([plan, elements]) => {
-      const { card, button } = elements;
-      if (!card || !button) return;
+    Object.entries(planConfigs).forEach(([plan, config]) => {
+      const button = document.getElementById(config.buttonId);
+      const card = document.getElementById(config.cardId);
+      
+      if (!button || !card) return;
       
       if (plan === currentPlan) {
         card.classList.add('current');
@@ -1186,79 +727,109 @@ const subscriptionHTML = `
         button.className = 'plan-button button-current';
       } else {
         card.classList.remove('current');
-        if (plan === 'FREE') {
-          button.textContent = 'Downgrade to Free';
-          button.className = 'plan-button button-secondary';
-        } else if (plan === 'PRO') {
-          button.textContent = 'Upgrade to Pro';
-          button.className = 'plan-button button-primary';
-        } else if (plan === 'ULTRA') {
-          button.textContent = 'Upgrade to Ultra';
-          button.className = 'plan-button button-premium';
-        }
+        const buttonText = plan === 'FREE' ? 'Downgrade to Free' : `Upgrade to ${plan}`;
+        const buttonClass = plan === 'FREE' ? 'button-secondary' : 
+                          plan === 'PRO' ? 'button-primary' : 'button-premium';
+        button.textContent = buttonText;
+        button.className = `plan-button ${buttonClass}`;
       }
     });
   }
   
-  function handlePlanUpgrade(planType, userData) {
-    console.log(`🚀 ${planType} plan button clicked`);
+  function handleEnhancedPlanUpgrade(planType, userData, button) {
+    console.log(`🚀 Enhanced ${planType} plan upgrade initiated`);
     
-    // Show loading state
-    const button = document.getElementById(`${planType.toLowerCase()}Button`);
-    if (!button) return;
+    const originalHTML = button.innerHTML;
     
-    const originalText = button.innerHTML;
+    // Enhanced loading state
     button.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;">
         <div class="loading-spinner"></div>
         Processing...
       </div>
     `;
     button.disabled = true;
     
-    // Simulate processing
+    // Simulate processing with enhanced feedback
     setTimeout(() => {
+      let message = '';
+      let success = false;
+      
       if (planType === userData.currentPlan) {
-        alert('You are already on this plan!');
+        message = 'You are already on this plan!';
       } else if (planType === 'FREE') {
-        const confirmDowngrade = confirm('Are you sure you want to downgrade to the FREE plan? You will lose access to premium features.');
-        if (confirmDowngrade) {
-          alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
+        const confirmed = confirm('Are you sure you want to downgrade to the FREE plan?\n\nYou will lose access to premium features.');
+        if (confirmed) {
+          message = 'Downgrade successful! This is a demo - in production, this would update your subscription.';
+          success = true;
         }
       } else {
         const prices = { PRO: '$19.99', ULTRA: '$99.99' };
-        const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
-        if (confirmUpgrade) {
-          alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
+        const confirmed = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
+        if (confirmed) {
+          message = 'Upgrade successful! This is a demo - in production, this would process payment.';
+          success = true;
         }
       }
       
-      // Reset button
-      button.innerHTML = originalText;
-      button.disabled = false;
+      if (message) {
+        // Enhanced success/error feedback
+        button.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;">
+            ${success ? '✅' : '⚠️'} ${success ? 'Success!' : 'Notice'}
+          </div>
+        `;
+        
+        setTimeout(() => {
+          alert(message);
+          button.innerHTML = originalHTML;
+          button.disabled = false;
+        }, 1000);
+      } else {
+        button.innerHTML = originalHTML;
+        button.disabled = false;
+      }
     }, 2000);
   }
   
-  function setupAccountButtons() {
-    console.log('🔧 Setting up account buttons...');
+  function setupEnhancedAccountButtons() {
+    console.log('🔧 Setting up enhanced account buttons...');
     
-    const buttons = [
-      { id: 'viewHistoryBtn', action: 'View usage history' },
-      { id: 'updatePaymentBtn', action: 'Update payment method' },
-      { id: 'accountSettingsBtn', action: 'Open account settings' },
-      { id: 'contactSupportBtn', action: 'Contact support' }
+    const buttonConfigs = [
+      { id: 'viewHistoryBtn', action: 'View usage history', icon: '📊' },
+      { id: 'updatePaymentBtn', action: 'Update payment method', icon: '💳' },
+      { id: 'accountSettingsBtn', action: 'Open account settings', icon: '⚙️' },
+      { id: 'contactSupportBtn', action: 'Contact support', icon: '📞' }
     ];
     
-    buttons.forEach(({ id, action }) => {
+    buttonConfigs.forEach(({ id, action, icon }) => {
       const button = document.getElementById(id);
-      if (button) {
-        button.addEventListener('click', function() {
-          console.log(`🔧 ${action} clicked`);
-          alert(`${action} functionality would be implemented here in a real application!`);
-        });
-      }
+      if (!button) return;
+      
+      button.addEventListener('click', function() {
+        console.log(`🔧 ${action} clicked`);
+        
+        const originalHTML = this.innerHTML;
+        this.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            <div class="loading-spinner"></div>
+            Loading...
+          </div>
+        `;
+        this.disabled = true;
+        
+        setTimeout(() => {
+          this.innerHTML = `${icon} Opening...`;
+          
+          setTimeout(() => {
+            alert(`${action} functionality would be implemented here in a real application!`);
+            this.innerHTML = originalHTML;
+            this.disabled = false;
+          }, 800);
+        }, 1000);
+      });
     });
     
-    console.log('✅ Account buttons setup complete');
+    console.log('✅ Enhanced account buttons setup complete');
   }
 })(); 
