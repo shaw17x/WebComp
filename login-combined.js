@@ -6,7 +6,7 @@ const loginCSS = `
 .auth-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
 /* Floating Card - Optimized for Smooth Performance */
-.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translate3d(0,30px,0) scale(0.95);will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
+.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:1 !important;transform:translate3d(0,0,0) scale(1) !important;visibility:visible !important;will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
 .auth-screen-card.animate-in{animation:smoothEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
 .auth-screen-card.floating{animation:cardFloat 6s ease-in-out infinite}
 
@@ -295,11 +295,23 @@ const loginHTML = `
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
+      console.log('🎬 Login animations starting...', { loginCard, footer });
+      
       // Trigger smooth entry animation for login card
       if (loginCard) {
+        console.log('📱 Animating login card...');
+        
         // Add hardware acceleration and start animation
         loginCard.style.willChange = 'transform, opacity';
         loginCard.classList.add('animate-in');
+        
+        // FAILSAFE: Force visibility if animation doesn't work
+        setTimeout(() => {
+          console.log('🔧 Applying failsafe visibility...');
+          loginCard.style.opacity = '1 !important';
+          loginCard.style.transform = 'translate3d(0,0,0) scale(1) !important';
+          loginCard.style.visibility = 'visible !important';
+        }, 100);
         
         // Add floating animation and effects after entry completes
         setTimeout(() => {
@@ -307,6 +319,8 @@ const loginHTML = `
           loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
           loginCard.style.willChange = 'auto'; // Remove will-change after animation
         }, 800);
+      } else {
+        console.error('❌ Login card not found!');
       }
       
       // Animate footer with class-based approach
