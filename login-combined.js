@@ -248,7 +248,25 @@ const loginHTML = `
 
 // Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
+  // Check if we should load login (pathname OR hash) - CRITICAL PAGE DETECTION
+  const isLoginPage = location.pathname.includes('login') || 
+                      location.pathname.includes('sign-in') || 
+                      location.hash.includes('login') ||
+                      location.hash.includes('sign-in') ||
+                      location.pathname === '/auth' ||
+                      location.hash === '#login';
+  
   console.log('🚀 Steley Login Script: Starting execution...');
+  console.log('📍 Current URL:', location.href);
+  console.log('📍 Pathname:', location.pathname);
+  console.log('📍 Hash:', location.hash);
+  console.log('📍 Is login page?', isLoginPage);
+  
+  // Only load if this is actually a login page - PREVENTS CONFLICTS
+  if (!isLoginPage) {
+    console.log('❌ Not a login page, skipping login script...');
+    return;
+  }
   
   // Prevent multiple executions - this fixes the appearing/disappearing issue
   if (window.steleyLoginInitialized) {
@@ -300,11 +318,11 @@ const loginHTML = `
     
     console.log('📍 Steley Login: Selected target container:', mainContent.tagName, mainContent.className || '(no class)');
     
-    // SAFER DOM insertion - don't clear existing content, just append
+    // CLEAR AND INSERT - match signup script's successful approach  
     if (mainContent !== document.body) {
-      console.log('📝 Steley Login: Inserting into main content area...');
-      // Don't clear content, just append login HTML
-      mainContent.insertAdjacentHTML('beforeend', loginHTML);
+      console.log('📝 Steley Login: Clearing and inserting into main content area...');
+      // Clear existing content and add login page (like signup script)
+      mainContent.innerHTML = loginHTML;
     } else {
       console.log('📝 Steley Login: Inserting into body (fallback)...');
       // If we're using body, insert at the beginning but after header
