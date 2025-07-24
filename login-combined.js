@@ -369,6 +369,46 @@ const loginHTML = `
         const rect = currentLogin.getBoundingClientRect();
         console.log('   📐 Screen position:', `top: ${rect.top}, left: ${rect.left}, width: ${rect.width}, height: ${rect.height}`);
         console.log('   🖥️ In viewport:', rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth);
+        
+        // 🚨 POSITIONING CONFLICT DETECTION
+        console.log('🚨 POSITIONING CONFLICT ANALYSIS:');
+        
+        // Check what elements might be covering it
+        const elementsAtPosition = document.elementsFromPoint(rect.left + rect.width/2, rect.top + rect.height/2);
+        console.log('   🎯 Elements at login box center:', elementsAtPosition.slice(0, 5).map(el => `${el.tagName}.${el.className}`));
+        
+        // Check if login box is the topmost element
+        const isTopMost = elementsAtPosition[0] === currentLogin || elementsAtPosition[0].closest('.auth-login-component');
+        console.log('   👑 Login box is topmost element:', isTopMost);
+        
+        // Check for overlapping content
+        const allFixedElements = Array.from(document.querySelectorAll('*')).filter(el => {
+          const elStyle = window.getComputedStyle(el);
+          return elStyle.position === 'fixed' || elStyle.position === 'absolute';
+        });
+        console.log('   🔒 Fixed/Absolute positioned elements:', allFixedElements.length);
+        
+        // Check main page content that might be covering
+        const mainPageContent = document.querySelector('main, .main-content, [data-framer-name="Content"], .framer-page-content');
+        if (mainPageContent && mainPageContent !== currentLogin.parentElement) {
+          const mainRect = mainPageContent.getBoundingClientRect();
+          const mainStyle = window.getComputedStyle(mainPageContent);
+          console.log('   📄 Main content position:', `top: ${mainRect.top}, left: ${mainRect.left}, z-index: ${mainStyle.zIndex}`);
+          console.log('   📄 Main content overlaps login:', 
+            !(rect.right < mainRect.left || rect.left > mainRect.right || rect.bottom < mainRect.top || rect.top > mainRect.bottom));
+        }
+        
+        // 🔧 AUTO-FIX ATTEMPT
+        console.log('🔧 ATTEMPTING AUTO-FIX...');
+        currentLogin.style.position = 'fixed !important';
+        currentLogin.style.top = '50px !important';
+        currentLogin.style.left = '50% !important';
+        currentLogin.style.transform = 'translateX(-50%) !important';
+        currentLogin.style.zIndex = '999999 !important';
+        currentLogin.style.background = 'rgba(0,0,0,0.95) !important';
+        currentLogin.style.border = '2px solid #fff !important';
+        console.log('   ✅ Applied emergency positioning fix');
+        
       } else {
         console.error('   ❌ Login component MISSING after 5 seconds!');
       }
