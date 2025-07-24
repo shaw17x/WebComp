@@ -50,14 +50,9 @@ const loginCSS = `
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
 /* Toggle Section */
-.auth-toggle{padding:0 1.5rem 1rem;text-align:center}
+.auth-toggle{padding:0 1.5rem 1.5rem;text-align:center}
 .auth-toggle-button{color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer}
 .auth-toggle-button:hover{color:rgba(255,255,255,0.8)}
-
-/* Skip Section */
-.auth-skip{padding:0 1.5rem 1.5rem;text-align:center}
-.auth-skip-button{color:rgba(255,255,255,0.6);font-size:0.75rem;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer}
-.auth-skip-button:hover{color:rgba(255,255,255,0.8)}
 
 /* Loading Spinner */
 .loading-spinner{width:1rem;height:1rem;border:2px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-right:0.5rem}
@@ -170,16 +165,6 @@ const loginHTML = `
       <button type="button" class="auth-toggle-button" onclick="window.location.href='/sign-up'">
         Don't have an account? Create one
       </button>
-    </div>
-
-    <!-- Skip & Options -->
-    <div class="auth-skip">
-      <button type="button" class="auth-skip-button" onclick="window.location.href='/'">
-        Skip for now and continue to app
-      </button>
-      <p style="font-size:0.625rem;color:rgba(255,255,255,0.4);margin-top:0.5rem;">
-        Once signed in, use to start capturing screenshots
-      </p>
     </div>
   </div>
 </div>
