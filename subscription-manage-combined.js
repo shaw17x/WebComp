@@ -1,197 +1,293 @@
-// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v2.0 Program Style
+// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v3.0 Program Settings Style
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
-/* Subscription Management Container - Program Style */
+/* Main Container - Exact Program Style */
 .subscription-manage-component{
-  max-width: 1000px;
+  max-width: 1400px;
   width: 100%;
   margin: 40px auto;
   padding: 0;
   position: relative;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   backdrop-filter: blur(20px);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  display: flex;
+  min-height: 600px;
+  overflow: hidden;
 }
 
-/* Header Section - Program Style */
-.subscription-header{
-  padding: 24px 32px;
+/* Left Sidebar Navigation - Exact Match */
+.subscription-sidebar{
+  width: 240px;
+  background: rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* User Info Header in Sidebar */
+.sidebar-user-info{
+  padding: 20px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px 12px 0 0;
 }
 
-.subscription-title{
-  font-size: 20px;
-  font-weight: 600;
+.user-email{
+  font-size: 13px;
+  font-weight: 500;
   color: #ffffff;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
+  line-height: 1.3;
+}
+
+.user-plan{
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Navigation Items */
+.sidebar-nav{
+  flex: 1;
+  padding: 12px 0;
+}
+
+.nav-item{
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.subscription-subtitle{
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0;
-  font-weight: 400;
-}
-
-/* Main Content */
-.subscription-content{
-  padding: 0;
-}
-
-/* Section Styles - Program Style */
-.subscription-section{
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.subscription-section:last-child{
-  border-bottom: none;
-  border-radius: 0 0 12px 12px;
-}
-
-.section-header{
-  padding: 20px 32px 16px 32px;
-  margin: 0;
-}
-
-.section-title{
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0 0 4px 0;
-}
-
-.section-description{
+  padding: 8px 16px;
+  margin: 0 8px;
+  border-radius: 4px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0;
-  line-height: 1.4;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+  background: none;
+  width: calc(100% - 16px);
+  text-align: left;
 }
 
-/* Current Plan Display - Program Style */
-.current-plan-item{
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background-color 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+.nav-item:hover{
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.current-plan-item:hover{
-  background: rgba(255, 255, 255, 0.02);
+.nav-item.active{
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 500;
 }
 
-.current-plan-info{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.plan-icon{
-  width: 20px;
-  height: 20px;
+.nav-icon{
+  width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
+  flex-shrink: 0;
 }
 
-.plan-details{
+/* Search Bar */
+.sidebar-search{
+  padding: 12px 16px;
+  margin: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: inherit;
+}
+
+.sidebar-search::placeholder{
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sidebar-search:focus{
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Right Content Area - Exact Match */
+.subscription-content{
+  flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
-.plan-name{
-  font-size: 14px;
-  font-weight: 500;
+/* Content Header */
+.content-header{
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.01);
+  flex-shrink: 0;
+}
+
+.content-title{
+  font-size: 18px;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
   line-height: 1.3;
 }
 
-.plan-description{
+/* Content Body */
+.content-body{
+  flex: 1;
+  padding: 0;
+}
+
+/* Section Groups */
+.content-section{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.content-section:last-child{
+  border-bottom: none;
+}
+
+.section-header{
+  padding: 20px 32px 8px 32px;
+  margin: 0;
+}
+
+.section-title{
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Settings Items - Exact Match */
+.settings-item{
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.15s;
+  min-height: 44px;
+}
+
+.settings-item:hover{
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.item-info{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.item-title{
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+  line-height: 1.3;
+}
+
+.item-description{
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
   margin: 0;
   line-height: 1.3;
 }
 
-.plan-status{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
+/* Action Buttons - Exact Match */
+.action-button{
+  padding: 6px 12px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 54px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
-.status-active{
-  background: rgba(34, 197, 94, 0.1);
+.action-button:hover{
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.action-button.primary{
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: rgba(59, 130, 246, 0.9);
+}
+
+.action-button.success{
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
   color: rgba(34, 197, 94, 0.9);
-  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.status-free{
-  background: rgba(107, 114, 128, 0.1);
-  color: rgba(107, 114, 128, 0.9);
-  border: 1px solid rgba(107, 114, 128, 0.2);
-}
-
-/* Usage Stats - Program Style */
-.usage-stats{
+/* Usage Display */
+.usage-display{
   padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.usage-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
 }
 
 .usage-item{
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-  padding: 16px;
-  transition: all 0.2s;
-}
-
-.usage-item:hover{
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.usage-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  border-radius: 4px;
+  padding: 12px;
 }
 
 .usage-label{
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .usage-value{
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.usage-limit{
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
 }
 
 .usage-bar{
   width: 100%;
-  height: 4px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
+  margin-top: 8px;
   overflow: hidden;
 }
 
@@ -205,204 +301,80 @@ const subscriptionCSS = `
 .usage-medium{ background: rgba(234, 179, 8, 0.8); }
 .usage-high{ background: rgba(239, 68, 68, 0.8); }
 
-/* Plan Options - Program Style */
-.plan-options{
-  padding: 0;
-}
-
-.plan-option{
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background-color 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.plan-option:hover{
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.plan-option:last-child{
-  border-bottom: none;
-}
-
-.plan-option-info{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.plan-option-details{
-  display: flex;
-  flex-direction: column;
-}
-
-.plan-option-name{
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  margin: 0 0 2px 0;
-  line-height: 1.3;
-}
-
-.plan-option-description{
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
-  line-height: 1.3;
-}
-
-.plan-price{
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  margin-right: 12px;
-}
-
-.plan-button{
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  transition: all 0.2s;
-  min-width: 64px;
-  text-align: center;
-}
-
-.plan-button:hover{
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.plan-button.current{
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.3);
-  color: rgba(34, 197, 94, 0.9);
-}
-
-.plan-button.primary{
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.4);
-  color: rgba(59, 130, 246, 0.9);
-}
-
-.plan-button.premium{
-  background: rgba(168, 85, 247, 0.2);
-  border-color: rgba(168, 85, 247, 0.4);
-  color: rgba(168, 85, 247, 0.9);
-}
-
-/* Account Management - Program Style */
-.account-options{
-  padding: 0;
-}
-
-.account-option{
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background-color 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.account-option:hover{
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.account-option:last-child{
-  border-bottom: none;
-}
-
-.account-option-info{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.account-icon{
-  width: 20px;
+/* Toggle Switches - Program Style */
+.toggle-switch{
+  width: 36px;
   height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.account-option-details{
-  display: flex;
-  flex-direction: column;
-}
-
-.account-option-name{
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  margin: 0 0 2px 0;
-  line-height: 1.3;
-}
-
-.account-option-description{
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
-  line-height: 1.3;
-}
-
-.account-button{
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  position: relative;
   cursor: pointer;
   transition: all 0.2s;
-  min-width: 48px;
-  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.account-button:hover{
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+.toggle-switch.enabled{
+  background: rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.5);
 }
 
-/* User Info Display */
-.user-info{
-  padding: 16px 32px;
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
+.toggle-slider{
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-switch.enabled .toggle-slider{
+  transform: translateX(16px);
+}
+
+/* Plan Badge */
+.plan-badge{
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.user-details{
-  display: flex;
-  flex-direction: column;
-}
-
-.user-email{
-  font-size: 13px;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
   font-weight: 500;
-  color: #ffffff;
-  margin: 0 0 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.user-status{
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
+.badge-free{
+  background: rgba(107, 114, 128, 0.2);
+  color: rgba(107, 114, 128, 0.9);
+  border: 1px solid rgba(107, 114, 128, 0.3);
 }
 
-/* Loading States */
+.badge-pro{
+  background: rgba(59, 130, 246, 0.2);
+  color: rgba(59, 130, 246, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-ultra{
+  background: rgba(168, 85, 247, 0.2);
+  color: rgba(168, 85, 247, 0.9);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+/* Content Pages (Hidden by default) */
+.content-page{
+  display: none;
+}
+
+.content-page.active{
+  display: block;
+}
+
+/* Loading Spinner */
 .loading-spinner{
   width: 12px;
   height: 12px;
@@ -410,6 +382,7 @@ const subscriptionCSS = `
   border-top-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  margin-right: 6px;
 }
 
 @keyframes spin{
@@ -419,220 +392,401 @@ const subscriptionCSS = `
 /* Responsive Design */
 @media (max-width: 768px){
   .subscription-manage-component{
+    flex-direction: column;
     margin: 20px;
     border-radius: 8px;
+    min-height: auto;
   }
   
-  .subscription-header,
+  .subscription-sidebar{
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .sidebar-nav{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 8px;
+  }
+  
+  .nav-item{
+    margin: 0 4px;
+    min-width: 120px;
+    justify-content: center;
+  }
+  
+  .content-header,
   .section-header,
-  .current-plan-item,
-  .usage-stats,
-  .plan-option,
-  .account-option,
-  .user-info{
+  .settings-item,
+  .usage-display{
     padding-left: 20px;
     padding-right: 20px;
-  }
-  
-  .usage-stats{
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .plan-option,
-  .account-option{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  
-  .plan-option-info,
-  .account-option-info{
-    width: 100%;
   }
 }
 `;
 
 const subscriptionHTML = `
 <div class="subscription-manage-component">
-  <!-- Header -->
-  <div class="subscription-header">
-    <h1 class="subscription-title">
-      <span>⚙️</span>
-      Subscription Management
-    </h1>
-    <p class="subscription-subtitle">Manage your account and billing preferences</p>
+  <!-- Left Sidebar Navigation -->
+  <div class="subscription-sidebar">
+    <!-- User Info -->
+    <div class="sidebar-user-info">
+      <div class="user-email" id="userEmail">Loading...</div>
+      <div class="user-plan" id="userPlan">Loading...</div>
+    </div>
+
+    <!-- Search -->
+    <input type="text" class="sidebar-search" placeholder="Search settings Ctrl+F" id="settingsSearch">
+
+    <!-- Navigation -->
+    <div class="sidebar-nav">
+      <button class="nav-item active" data-page="general">
+        <span class="nav-icon">⚙️</span>
+        <span>General</span>
+      </button>
+      
+      <button class="nav-item" data-page="subscription">
+        <span class="nav-icon">💳</span>
+        <span>Subscription</span>
+      </button>
+      
+      <button class="nav-item" data-page="usage">
+        <span class="nav-icon">📊</span>
+        <span>Usage</span>
+      </button>
+      
+      <button class="nav-item" data-page="billing">
+        <span class="nav-icon">🧾</span>
+        <span>Billing</span>
+      </button>
+      
+      <button class="nav-item" data-page="security">
+        <span class="nav-icon">🔐</span>
+        <span>Security</span>
+      </button>
+      
+      <button class="nav-item" data-page="preferences">
+        <span class="nav-icon">🎯</span>
+        <span>Preferences</span>
+      </button>
+      
+      <button class="nav-item" data-page="support">
+        <span class="nav-icon">💬</span>
+        <span>Support</span>
+      </button>
+    </div>
   </div>
 
+  <!-- Right Content Area -->
   <div class="subscription-content">
-    <!-- Current Plan Section -->
-    <div class="subscription-section">
-      <div class="section-header">
-        <h2 class="section-title">Current Plan</h2>
-        <p class="section-description">Your active subscription and usage information</p>
+    <!-- General Page (Default) -->
+    <div class="content-page active" id="generalPage">
+      <div class="content-header">
+        <h1 class="content-title">General</h1>
       </div>
       
-      <div class="current-plan-item">
-        <div class="current-plan-info">
-          <div class="plan-icon" id="currentPlanIcon">🛡️</div>
-          <div class="plan-details">
-            <div class="plan-name" id="currentPlanName">Loading...</div>
-            <div class="plan-description" id="currentPlanDescription">Loading subscription details...</div>
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Manage Account</div>
+              <div class="item-description">Manage your account and billing</div>
+            </div>
+            <button class="action-button" id="manageAccountBtn">Open</button>
           </div>
         </div>
-        <div class="plan-status status-free" id="planStatus">
-          <span>●</span>
-          <span id="statusText">Loading...</span>
-        </div>
-      </div>
 
-      <div class="usage-stats">
-        <div class="usage-item">
-          <div class="usage-header">
-            <span class="usage-label">Daily Screenshots</span>
-            <span class="usage-value" id="screenshotUsage">0/0</span>
+        <div class="content-section">
+          <div class="section-header">
+            <div class="section-title">Current Plan</div>
           </div>
-          <div class="usage-bar">
-            <div class="usage-fill usage-low" id="screenshotBar" style="width: 0%"></div>
-          </div>
-        </div>
-        
-        <div class="usage-item">
-          <div class="usage-header">
-            <span class="usage-label">Daily AI Requests</span>
-            <span class="usage-value" id="aiUsage">0/0</span>
-          </div>
-          <div class="usage-bar">
-            <div class="usage-fill usage-low" id="aiBar" style="width: 0%"></div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span id="currentPlanName">Free Plan</span>
+                <span class="plan-badge badge-free" id="planBadge">Free</span>
+              </div>
+              <div class="item-description" id="planDescription">10 screenshots/day, 10 AI requests/day</div>
+            </div>
+            <button class="action-button" id="changePlanBtn">Change</button>
           </div>
         </div>
-        
-        <div class="usage-item">
-          <div class="usage-header">
-            <span class="usage-label">Reset Time</span>
-            <span class="usage-value" id="resetTime">--:--</span>
+
+        <div class="content-section">
+          <div class="section-header">
+            <div class="section-title">Preferences</div>
           </div>
-          <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px;">
-            Daily limits reset automatically
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Auto-Save Screenshots</div>
+              <div class="item-description">Automatically save screenshots to your device</div>
+            </div>
+            <div class="toggle-switch" id="autoSaveToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Privacy Mode</div>
+              <div class="item-description">Enhanced privacy protection during screenshots</div>
+            </div>
+            <div class="toggle-switch enabled" id="privacyToggle">
+              <div class="toggle-slider"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Available Plans Section -->
-    <div class="subscription-section">
-      <div class="section-header">
-        <h2 class="section-title">Available Plans</h2>
-        <p class="section-description">Upgrade or change your subscription plan</p>
+    <!-- Subscription Page -->
+    <div class="content-page" id="subscriptionPage">
+      <div class="content-header">
+        <h1 class="content-title">Subscription</h1>
       </div>
       
-      <div class="plan-options">
-        <div class="plan-option" id="freePlan">
-          <div class="plan-option-info">
-            <div class="plan-icon">🛡️</div>
-            <div class="plan-option-details">
-              <div class="plan-option-name">Free Plan</div>
-              <div class="plan-option-description">10 screenshots/day, 10 AI requests/day, basic features</div>
+      <div class="content-body">
+        <div class="content-section">
+          <div class="section-header">
+            <div class="section-title">Available Plans</div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Free Plan</div>
+              <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
+              <button class="action-button success" id="freeBtn">Current</button>
             </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span class="plan-price">$0/month</span>
-            <button class="plan-button current" id="freeButton">Current</button>
-          </div>
-        </div>
-        
-        <div class="plan-option" id="proPlan">
-          <div class="plan-option-info">
-            <div class="plan-icon">⭐</div>
-            <div class="plan-option-details">
-              <div class="plan-option-name">Pro Plan</div>
-              <div class="plan-option-description">100 screenshots/day, 100 AI requests/day, premium features</div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Pro Plan</div>
+              <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
+              <button class="action-button primary" id="proBtn">Upgrade</button>
             </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span class="plan-price">$19.99/month</span>
-            <button class="plan-button primary" id="proButton">Upgrade</button>
-          </div>
-        </div>
-        
-        <div class="plan-option" id="ultraPlan">
-          <div class="plan-option-info">
-            <div class="plan-icon">👑</div>
-            <div class="plan-option-details">
-              <div class="plan-option-name">Ultra Plan</div>
-              <div class="plan-option-description">Unlimited usage, all AI models, priority support</div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Ultra Plan</div>
+              <div class="item-description">Unlimited usage, all AI models, priority support</div>
             </div>
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span class="plan-price">$99.99/month</span>
-            <button class="plan-button premium" id="ultraButton">Upgrade</button>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
+              <button class="action-button primary" id="ultraBtn">Upgrade</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Account Management Section -->
-    <div class="subscription-section">
-      <div class="section-header">
-        <h2 class="section-title">Account</h2>
-        <p class="section-description">Manage your account settings and preferences</p>
+    <!-- Usage Page -->
+    <div class="content-page" id="usagePage">
+      <div class="content-header">
+        <h1 class="content-title">Usage</h1>
       </div>
       
-      <div class="account-options">
-        <div class="account-option">
-          <div class="account-option-info">
-            <div class="account-icon">💳</div>
-            <div class="account-option-details">
-              <div class="account-option-name">Payment Method</div>
-              <div class="account-option-description">Update payment information and billing details</div>
+      <div class="usage-display">
+        <div class="usage-grid">
+          <div class="usage-item">
+            <div class="usage-label">Screenshots Today</div>
+            <div class="usage-value" id="screenshotUsage">3</div>
+            <div class="usage-limit" id="screenshotLimit">of 10 daily limit</div>
+            <div class="usage-bar">
+              <div class="usage-fill usage-low" id="screenshotBar" style="width: 30%"></div>
             </div>
           </div>
-          <button class="account-button" id="updatePaymentBtn">Update</button>
+          
+          <div class="usage-item">
+            <div class="usage-label">AI Requests Today</div>
+            <div class="usage-value" id="aiUsage">7</div>
+            <div class="usage-limit" id="aiLimit">of 10 daily limit</div>
+            <div class="usage-bar">
+              <div class="usage-fill usage-medium" id="aiBar" style="width: 70%"></div>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <div class="usage-label">Next Reset</div>
+            <div class="usage-value" id="resetTime">23:45</div>
+            <div class="usage-limit">Daily limits reset</div>
+          </div>
         </div>
-        
-        <div class="account-option">
-          <div class="account-option-info">
-            <div class="account-icon">📊</div>
-            <div class="account-option-details">
-              <div class="account-option-name">Usage History</div>
-              <div class="account-option-description">View detailed usage statistics and billing history</div>
+      </div>
+      
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">View Usage History</div>
+              <div class="item-description">Detailed usage statistics and trends</div>
             </div>
+            <button class="action-button" id="viewHistoryBtn">View</button>
           </div>
-          <button class="account-button" id="viewHistoryBtn">View</button>
-        </div>
-        
-        <div class="account-option">
-          <div class="account-option-info">
-            <div class="account-icon">🔐</div>
-            <div class="account-option-details">
-              <div class="account-option-name">Security Settings</div>
-              <div class="account-option-description">Manage password, two-factor authentication, and security</div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Export Usage Data</div>
+              <div class="item-description">Download your usage data as CSV</div>
             </div>
+            <button class="action-button" id="exportDataBtn">Export</button>
           </div>
-          <button class="account-button" id="securityBtn">Open</button>
-        </div>
-        
-        <div class="account-option">
-          <div class="account-option-info">
-            <div class="account-icon">📞</div>
-            <div class="account-option-details">
-              <div class="account-option-name">Support</div>
-              <div class="account-option-description">Get help with your subscription or technical issues</div>
-            </div>
-          </div>
-          <button class="account-button" id="contactSupportBtn">Contact</button>
         </div>
       </div>
     </div>
 
-    <!-- User Info Footer -->
-    <div class="user-info">
-      <div class="user-details">
-        <div class="user-email" id="userEmail">Loading...</div>
-        <div class="user-status">Account Status: Active</div>
+    <!-- Billing Page -->
+    <div class="content-page" id="billingPage">
+      <div class="content-header">
+        <h1 class="content-title">Billing</h1>
       </div>
-      <div style="font-size: 11px; color: rgba(255,255,255,0.4);">
-        Last updated: <span id="lastUpdated">--</span>
+      
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Payment Method</div>
+              <div class="item-description">Update payment information and billing details</div>
+            </div>
+            <button class="action-button" id="updatePaymentBtn">Update</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Billing History</div>
+              <div class="item-description">View past invoices and payment history</div>
+            </div>
+            <button class="action-button" id="billingHistoryBtn">View</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Download Receipts</div>
+              <div class="item-description">Download receipts for tax purposes</div>
+            </div>
+            <button class="action-button" id="downloadReceiptsBtn">Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Page -->
+    <div class="content-page" id="securityPage">
+      <div class="content-header">
+        <h1 class="content-title">Security</h1>
+      </div>
+      
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Change Password</div>
+              <div class="item-description">Update your account password</div>
+            </div>
+            <button class="action-button" id="changePasswordBtn">Change</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Two-Factor Authentication</div>
+              <div class="item-description">Add extra security to your account</div>
+            </div>
+            <button class="action-button" id="enable2FABtn">Enable</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Active Sessions</div>
+              <div class="item-description">Manage devices and active sessions</div>
+            </div>
+            <button class="action-button" id="manageSessionsBtn">Manage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preferences Page -->
+    <div class="content-page" id="preferencesPage">
+      <div class="content-header">
+        <h1 class="content-title">Preferences</h1>
+      </div>
+      
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Theme</div>
+              <div class="item-description">Choose your preferred theme</div>
+            </div>
+            <button class="action-button" id="themeBtn">Dark</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Notifications</div>
+              <div class="item-description">Configure notification preferences</div>
+            </div>
+            <div class="toggle-switch enabled" id="notificationsToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Auto-Update</div>
+              <div class="item-description">Automatically update Steley when new versions are available</div>
+            </div>
+            <div class="toggle-switch enabled" id="autoUpdateToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support Page -->
+    <div class="content-page" id="supportPage">
+      <div class="content-header">
+        <h1 class="content-title">Support</h1>
+      </div>
+      
+      <div class="content-body">
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Contact Support</div>
+              <div class="item-description">Get help with your subscription or technical issues</div>
+            </div>
+            <button class="action-button" id="contactSupportBtn">Contact</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Documentation</div>
+              <div class="item-description">View help articles and user guides</div>
+            </div>
+            <button class="action-button" id="docsBtn">Open</button>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">Send Feedback</div>
+              <div class="item-description">Share your thoughts and suggestions</div>
+            </div>
+            <button class="action-button" id="feedbackBtn">Send</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -658,7 +812,7 @@ const subscriptionHTML = `
                             hash === '#manage' ||
                             hash === '#account';
   
-  console.log('🚀 Subscription management component starting...');
+  console.log('🚀 Subscription management component starting (v3.0 - Program Settings Style)...');
   console.log('📍 Current URL:', location.href);
   console.log('📍 Pathname:', pathname);
   console.log('📍 Hash:', hash);
@@ -796,49 +950,90 @@ const subscriptionHTML = `
     
     console.log('📊 Using demo user data:', userData);
     
-    // Update UI with user data
-    updateCurrentStatus(userData);
-    setupPlanButtons(userData);
-    setupAccountButtons();
+    // Initialize the interface
+    initializeNavigation();
+    updateUserInfo(userData);
+    setupAllButtons(userData);
+    setupToggles();
     
     console.log('✅ Subscription functionality initialized');
   }
   
-  function updateCurrentStatus(userData) {
-    console.log('🔧 Updating status display...');
+  function initializeNavigation() {
+    console.log('🔧 Setting up navigation...');
     
-    const planIcon = document.getElementById('currentPlanIcon');
-    const planName = document.getElementById('currentPlanName');
-    const planDescription = document.getElementById('currentPlanDescription');
-    const planStatus = document.getElementById('planStatus');
-    const statusText = document.getElementById('statusText');
+    const navItems = document.querySelectorAll('.nav-item');
+    const contentPages = document.querySelectorAll('.content-page');
+    
+    navItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const targetPage = this.getAttribute('data-page');
+        console.log('📄 Switching to page:', targetPage);
+        
+        // Update active nav item
+        navItems.forEach(nav => nav.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Show target content page
+        contentPages.forEach(page => page.classList.remove('active'));
+        const targetElement = document.getElementById(targetPage + 'Page');
+        if (targetElement) {
+          targetElement.classList.add('active');
+        }
+      });
+    });
+    
+    console.log('✅ Navigation setup complete');
+  }
+  
+  function updateUserInfo(userData) {
+    console.log('🔧 Updating user info...');
+    
     const userEmailElement = document.getElementById('userEmail');
+    const userPlanElement = document.getElementById('userPlan');
+    const currentPlanNameElement = document.getElementById('currentPlanName');
+    const planBadgeElement = document.getElementById('planBadge');
+    const planDescriptionElement = document.getElementById('planDescription');
     
-    // Update plan display
+    // Update user info in sidebar
+    if (userEmailElement) userEmailElement.textContent = userData.email;
+    if (userPlanElement) userPlanElement.textContent = userData.currentPlan + ' Plan';
+    
+    // Update current plan info
     const planConfigs = {
-      'FREE': { icon: '🛡️', name: 'Free Plan', description: '10 screenshots/day, 10 AI requests/day, basic features', class: 'status-free' },
-      'PRO': { icon: '⭐', name: 'Pro Plan', description: '100 screenshots/day, 100 AI requests/day, premium features', class: 'status-active' },
-      'ULTRA': { icon: '👑', name: 'Ultra Plan', description: 'Unlimited usage, all AI models, priority support', class: 'status-active' }
+      'FREE': { 
+        name: 'Free Plan', 
+        description: '10 screenshots/day, 10 AI requests/day',
+        badge: 'Free',
+        badgeClass: 'badge-free'
+      },
+      'PRO': { 
+        name: 'Pro Plan', 
+        description: '100 screenshots/day, 100 AI requests/day',
+        badge: 'Pro',
+        badgeClass: 'badge-pro'
+      },
+      'ULTRA': { 
+        name: 'Ultra Plan', 
+        description: 'Unlimited usage, all AI models',
+        badge: 'Ultra',
+        badgeClass: 'badge-ultra'
+      }
     };
     
     const config = planConfigs[userData.currentPlan] || planConfigs['FREE'];
     
-    if (planIcon) planIcon.textContent = config.icon;
-    if (planName) planName.textContent = config.name;
-    if (planDescription) planDescription.textContent = config.description;
-    if (userEmailElement) userEmailElement.textContent = userData.email;
-    
-    if (planStatus) {
-      planStatus.className = `plan-status ${config.class}`;
-    }
-    if (statusText) {
-      statusText.textContent = userData.isActive ? 'Active' : 'Expired';
+    if (currentPlanNameElement) currentPlanNameElement.textContent = config.name;
+    if (planDescriptionElement) planDescriptionElement.textContent = config.description;
+    if (planBadgeElement) {
+      planBadgeElement.textContent = config.badge;
+      planBadgeElement.className = `plan-badge ${config.badgeClass}`;
     }
     
-    // Update usage statistics
+    // Update usage stats
     updateUsageStats(userData.usage, userData.resetTime);
     
-    console.log('✅ Status display updated');
+    console.log('✅ User info updated');
   }
   
   function updateUsageStats(usage, resetTime) {
@@ -846,9 +1041,11 @@ const subscriptionHTML = `
     
     // Screenshots
     const screenshotUsage = document.getElementById('screenshotUsage');
+    const screenshotLimit = document.getElementById('screenshotLimit');
     const screenshotBar = document.getElementById('screenshotBar');
     
-    if (screenshotUsage) screenshotUsage.textContent = `${usage.screenshots.used}/${usage.screenshots.limit}`;
+    if (screenshotUsage) screenshotUsage.textContent = usage.screenshots.used;
+    if (screenshotLimit) screenshotLimit.textContent = `of ${usage.screenshots.limit} daily limit`;
     if (screenshotBar) {
       const percentage = (usage.screenshots.used / usage.screenshots.limit) * 100;
       screenshotBar.style.width = `${percentage}%`;
@@ -857,9 +1054,11 @@ const subscriptionHTML = `
     
     // AI Requests
     const aiUsage = document.getElementById('aiUsage');
+    const aiLimit = document.getElementById('aiLimit');
     const aiBar = document.getElementById('aiBar');
     
-    if (aiUsage) aiUsage.textContent = `${usage.aiRequests.used}/${usage.aiRequests.limit}`;
+    if (aiUsage) aiUsage.textContent = usage.aiRequests.used;
+    if (aiLimit) aiLimit.textContent = `of ${usage.aiRequests.limit} daily limit`;
     if (aiBar) {
       const percentage = (usage.aiRequests.used / usage.aiRequests.limit) * 100;
       aiBar.style.width = `${percentage}%`;
@@ -882,63 +1081,76 @@ const subscriptionHTML = `
     return 'usage-high';
   }
   
-  function setupPlanButtons(userData) {
-    console.log('🔧 Setting up plan buttons...');
+  function setupAllButtons(userData) {
+    console.log('🔧 Setting up all buttons...');
     
-    const freeButton = document.getElementById('freeButton');
-    const proButton = document.getElementById('proButton');
-    const ultraButton = document.getElementById('ultraButton');
-    
-    // Update button states based on current plan
-    [freeButton, proButton, ultraButton].forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', function() {
-          const planType = this.id.replace('Button', '').toUpperCase();
+    // Plan buttons
+    const planButtons = ['freeBtn', 'proBtn', 'ultraBtn'];
+    planButtons.forEach(buttonId => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener('click', function() {
+          const planType = buttonId.replace('Btn', '').toUpperCase();
           handlePlanUpgrade(planType, userData);
         });
       }
     });
     
-    // Update current plan styling
-    updatePlanCardStyling(userData.currentPlan);
-    
-    console.log('✅ Plan buttons setup complete');
-  }
-  
-  function updatePlanCardStyling(currentPlan) {
-    const planButtons = {
-      'FREE': { button: document.getElementById('freeButton') },
-      'PRO': { button: document.getElementById('proButton') },
-      'ULTRA': { button: document.getElementById('ultraButton') }
+    // Action buttons
+    const actionButtons = {
+      'manageAccountBtn': 'Manage account',
+      'changePlanBtn': 'Change plan',
+      'updatePaymentBtn': 'Update payment method',
+      'viewHistoryBtn': 'View usage history',
+      'billingHistoryBtn': 'View billing history',
+      'downloadReceiptsBtn': 'Download receipts',
+      'changePasswordBtn': 'Change password',
+      'enable2FABtn': 'Enable two-factor authentication',
+      'manageSessionsBtn': 'Manage sessions',
+      'themeBtn': 'Change theme',
+      'contactSupportBtn': 'Contact support',
+      'docsBtn': 'Open documentation',
+      'feedbackBtn': 'Send feedback',
+      'exportDataBtn': 'Export data'
     };
     
-    Object.entries(planButtons).forEach(([plan, elements]) => {
-      const { button } = elements;
-      if (!button) return;
-      
-      if (plan === currentPlan) {
-        button.textContent = '✓ Current Plan';
-        button.className = 'plan-button current';
-      } else {
-        if (plan === 'FREE') {
-          button.textContent = 'Downgrade to Free';
-          button.className = 'plan-button';
-        } else if (plan === 'PRO') {
-          button.textContent = 'Upgrade to Pro';
-          button.className = 'plan-button primary';
-        } else if (plan === 'ULTRA') {
-          button.textContent = 'Upgrade to Ultra';
-          button.className = 'plan-button premium';
-        }
+    Object.entries(actionButtons).forEach(([buttonId, action]) => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener('click', function() {
+          console.log(`🔧 ${action} clicked`);
+          alert(`${action} functionality would be implemented here in a real application!`);
+        });
       }
     });
+    
+    console.log('✅ All buttons setup complete');
+  }
+  
+  function setupToggles() {
+    console.log('🔧 Setting up toggle switches...');
+    
+    const toggles = ['autoSaveToggle', 'privacyToggle', 'notificationsToggle', 'autoUpdateToggle'];
+    
+    toggles.forEach(toggleId => {
+      const toggle = document.getElementById(toggleId);
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          this.classList.toggle('enabled');
+          const isEnabled = this.classList.contains('enabled');
+          console.log(`🔧 ${toggleId} toggled:`, isEnabled);
+        });
+      }
+    });
+    
+    console.log('✅ Toggle switches setup complete');
   }
   
   function handlePlanUpgrade(planType, userData) {
     console.log(`🚀 ${planType} plan button clicked`);
     
     // Show loading state
-    const button = document.getElementById(`${planType.toLowerCase()}Button`);
+    const button = document.getElementById(`${planType.toLowerCase()}Btn`);
     if (!button) return;
     
     const originalText = button.innerHTML;
@@ -971,28 +1183,5 @@ const subscriptionHTML = `
       button.innerHTML = originalText;
       button.disabled = false;
     }, 2000);
-  }
-  
-  function setupAccountButtons() {
-    console.log('🔧 Setting up account buttons...');
-    
-    const buttons = [
-      { id: 'updatePaymentBtn', action: 'Update payment method' },
-      { id: 'viewHistoryBtn', action: 'View usage history' },
-      { id: 'securityBtn', action: 'Open account settings' },
-      { id: 'contactSupportBtn', action: 'Contact support' }
-    ];
-    
-    buttons.forEach(({ id, action }) => {
-      const button = document.getElementById(id);
-      if (button) {
-        button.addEventListener('click', function() {
-          console.log(`🔧 ${action} clicked`);
-          alert(`${action} functionality would be implemented here in a real application!`);
-        });
-      }
-    });
-    
-    console.log('✅ Account buttons setup complete');
   }
 })(); 
