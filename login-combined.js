@@ -102,7 +102,7 @@ const loginHTML = `
     <div class="auth-header">
       <h1 class="auth-title">
         <div style="display: inline-flex; align-items: center; gap: 4px;">
-          <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges;" onerror="this.style.display='none'">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; font-weight: bold; font-size: 24px; border-radius: 8px; margin-right: 4px;">S</span>
           <span>teley</span>
         </div>
       </h1>
@@ -347,6 +347,52 @@ const loginHTML = `
     console.log('✅ Steley Login: Login component added successfully!');
     console.log('   Component element:', loginComponent);
     
+    // 🖼️ LOGO IMAGE DEBUGGING - Check if logo is causing issues
+    const logoImage = loginComponent.querySelector('img[alt="Steley Logo"]');
+    if (logoImage) {
+      console.log('🖼️ Logo image found:', logoImage.src);
+      console.log('🖼️ Logo natural dimensions:', logoImage.naturalWidth, 'x', logoImage.naturalHeight);
+      console.log('🖼️ Logo complete:', logoImage.complete);
+      
+      // Add error handler to catch logo loading issues
+      logoImage.addEventListener('error', function(e) {
+        console.error('🚨 LOGO IMAGE ERROR - This might be causing the disappearing login box!');
+        console.error('   Image src:', logoImage.src);
+        console.error('   Error event:', e);
+        
+        // Replace broken logo with text fallback
+        const textFallback = document.createElement('span');
+        textFallback.textContent = 'S';
+        textFallback.style.cssText = `
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+          color: white;
+          font-weight: bold;
+          font-size: 24px;
+          border-radius: 8px;
+          margin-right: 4px;
+        `;
+        logoImage.parentNode.replaceChild(textFallback, logoImage);
+        console.log('✅ Replaced broken logo with text fallback');
+      });
+      
+      logoImage.addEventListener('load', function() {
+        console.log('✅ Logo image loaded successfully');
+      });
+      
+      // Force check if already loaded
+      if (logoImage.complete && logoImage.naturalWidth === 0) {
+        console.error('🚨 Logo image failed to load (0 dimensions)');
+        logoImage.dispatchEvent(new Event('error'));
+      }
+    } else {
+      console.log('ℹ️ No logo image found');
+    }
+    
     // 🕵️ ADD WATCHER TO DETECT WHEN ELEMENT GETS REMOVED
     setupRemovalDetector(loginComponent);
     
@@ -398,56 +444,112 @@ const loginHTML = `
             !(rect.right < mainRect.left || rect.left > mainRect.right || rect.bottom < mainRect.top || rect.top > mainRect.bottom));
         }
         
-        // 🔧 PARENT CONTAINER ANALYSIS
-        console.log('🔧 PARENT CONTAINER ANALYSIS:');
-        let parent = currentLogin.parentElement;
-        let level = 0;
-        while (parent && level < 5) {
-          const parentStyle = window.getComputedStyle(parent);
-          console.log(`   📦 Level ${level}: ${parent.tagName}.${parent.className}`);
-          console.log(`      Display: ${parentStyle.display}, Visibility: ${parentStyle.visibility}, Opacity: ${parentStyle.opacity}`);
-          
-          // Check if parent is being hidden
-          if (parentStyle.display === 'none' || parentStyle.visibility === 'hidden' || parentStyle.opacity === '0') {
-            console.error(`🚨 PARENT LEVEL ${level} IS HIDDEN!`);
-            console.log('🔧 Attempting to fix parent visibility...');
-            parent.style.display = 'block !important';
-            parent.style.visibility = 'visible !important';
-            parent.style.opacity = '1 !important';
+        try {
+          // 🔧 PARENT CONTAINER ANALYSIS
+          console.log('🔧 PARENT CONTAINER ANALYSIS:');
+          let parent = currentLogin.parentElement;
+          let level = 0;
+          while (parent && level < 5) {
+            const parentStyle = window.getComputedStyle(parent);
+            console.log(`   📦 Level ${level}: ${parent.tagName}.${parent.className}`);
+            console.log(`      Display: ${parentStyle.display}, Visibility: ${parentStyle.visibility}, Opacity: ${parentStyle.opacity}`);
+            
+            // Check if parent is being hidden
+            if (parentStyle.display === 'none' || parentStyle.visibility === 'hidden' || parentStyle.opacity === '0') {
+              console.error(`🚨 PARENT LEVEL ${level} IS HIDDEN!`);
+              console.log('🔧 Attempting to fix parent visibility...');
+              parent.style.display = 'block !important';
+              parent.style.visibility = 'visible !important';
+              parent.style.opacity = '1 !important';
+            }
+            
+            parent = parent.parentElement;
+            level++;
           }
-          
-          parent = parent.parentElement;
-          level++;
+        } catch (parentError) {
+          console.error('❌ Error in parent container analysis:', parentError);
         }
         
-        // 🔧 AUTO-FIX ATTEMPT - MOVE TO BODY TO ESCAPE FRAMER CONTROL
-        console.log('🔧 ATTEMPTING AUTO-FIX - MOVING TO BODY...');
-        
-        // Clone the login component
-        const clonedLogin = currentLogin.cloneNode(true);
-        
-        // Apply emergency positioning to clone
-        clonedLogin.style.position = 'fixed !important';
-        clonedLogin.style.top = '80px !important';
-        clonedLogin.style.left = '50% !important';
-        clonedLogin.style.transform = 'translateX(-50%) !important';
-        clonedLogin.style.zIndex = '999999 !important';
-        clonedLogin.style.background = 'rgba(0,0,0,0.95) !important';
-        clonedLogin.style.border = '2px solid #00ff00 !important';
-        clonedLogin.style.boxShadow = '0 0 20px rgba(0,255,0,0.5) !important';
-        clonedLogin.id = 'emergency-login-fix';
-        
-        // Add directly to body (escape Framer control)
-        document.body.appendChild(clonedLogin);
-        
-        console.log('   ✅ Emergency login box added to body');
-        console.log('   🟢 Look for GREEN BORDER login box at top of page');
-        
-        // Re-initialize interactions for the emergency login box
-        setTimeout(() => {
-          console.log('🔄 Re-initializing emergency login interactions...');
-          initializeEmergencyLoginInteractions(clonedLogin);
-        }, 100);
+        try {
+          // 🔧 AUTO-FIX ATTEMPT - MOVE TO BODY TO ESCAPE FRAMER CONTROL
+          console.log('🔧 ATTEMPTING AUTO-FIX - MOVING TO BODY...');
+          
+          // Clone the login component
+          const clonedLogin = currentLogin.cloneNode(true);
+          
+          // Remove any problematic images from clone
+          const clonedImages = clonedLogin.querySelectorAll('img');
+          clonedImages.forEach(img => {
+            console.log('🖼️ Removing image from emergency clone:', img.src);
+            const textFallback = document.createElement('span');
+            textFallback.textContent = 'S';
+            textFallback.style.cssText = `
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 40px;
+              height: 40px;
+              background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+              color: white;
+              font-weight: bold;
+              font-size: 24px;
+              border-radius: 8px;
+              margin-right: 4px;
+            `;
+            img.parentNode.replaceChild(textFallback, img);
+          });
+          
+          // Apply emergency positioning to clone
+          clonedLogin.style.position = 'fixed !important';
+          clonedLogin.style.top = '80px !important';
+          clonedLogin.style.left = '50% !important';
+          clonedLogin.style.transform = 'translateX(-50%) !important';
+          clonedLogin.style.zIndex = '999999 !important';
+          clonedLogin.style.background = 'rgba(0,0,0,0.95) !important';
+          clonedLogin.style.border = '2px solid #00ff00 !important';
+          clonedLogin.style.boxShadow = '0 0 20px rgba(0,255,0,0.5) !important';
+          clonedLogin.id = 'emergency-login-fix';
+          
+          // Add directly to body (escape Framer control)
+          document.body.appendChild(clonedLogin);
+          
+          console.log('   ✅ Emergency login box added to body');
+          console.log('   🟢 Look for GREEN BORDER login box at top of page');
+          
+          // Re-initialize interactions for the emergency login box
+          setTimeout(() => {
+            console.log('🔄 Re-initializing emergency login interactions...');
+            try {
+              initializeEmergencyLoginInteractions(clonedLogin);
+            } catch (interactionError) {
+              console.error('❌ Error in emergency interactions:', interactionError);
+            }
+          }, 100);
+          
+        } catch (emergencyError) {
+          console.error('❌ Error in emergency fix:', emergencyError);
+          
+          // Last resort - simple visible login box
+          console.log('🆘 LAST RESORT - Creating simple emergency login...');
+          const simpleLogin = document.createElement('div');
+          simpleLogin.innerHTML = `
+            <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+                        z-index: 999999; background: black; border: 3px solid red; 
+                        padding: 20px; color: white; text-align: center;">
+              <h2>🆘 EMERGENCY LOGIN</h2>
+              <p>Original login box failed to display</p>
+              <input type="email" placeholder="Email" style="margin: 5px; padding: 10px; width: 200px;">
+              <br>
+              <input type="password" placeholder="Password" style="margin: 5px; padding: 10px; width: 200px;">
+              <br>
+              <button onclick="alert('Emergency login clicked')" style="margin: 10px; padding: 10px 20px; background: red; color: white; border: none;">
+                Emergency Login
+              </button>
+            </div>
+          `;
+          document.body.appendChild(simpleLogin);
+          console.log('🆘 Last resort emergency login added');
+        }
         
       } else {
         console.error('   ❌ Login component MISSING after 5 seconds!');
