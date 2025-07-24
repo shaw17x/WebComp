@@ -100,12 +100,11 @@ const loginHTML = `
   <div class="auth-screen-card">
     <!-- Header Section -->
     <div class="auth-header">
-      <h1 class="auth-title">
-        <div style="display: inline-flex; align-items: center; gap: 4px;">
-          <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
-          <span>teley</span>
-        </div>
-      </h1>
+      <!-- Logo + Title Container -->
+      <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
+        <h1 class="auth-title" style="margin-bottom: 0;">Steley</h1>
+      </div>
       <h2 class="auth-subtitle">Welcome Back</h2>
       <p class="auth-description">Sign in to access your personalized experience</p>
     </div>
