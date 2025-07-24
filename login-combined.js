@@ -101,7 +101,7 @@ const loginHTML = `
     <!-- Header Section -->
     <div class="auth-header">
       <!-- Logo + Title Container (v2.1 - Cache Bust) -->
-      <div style="display: inline-flex; align-items: center; gap: 2px; margin-bottom: 0.5rem;">
+      <div style="display: inline-flex; align-items: center; gap: 1px; margin-bottom: 0.5rem;">
         <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-left: 4px;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
         <h1 class="auth-title" style="margin-bottom: 0;">teley</h1>
       </div>
