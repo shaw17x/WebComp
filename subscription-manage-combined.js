@@ -384,110 +384,6 @@ const subscriptionCSS = `
   display: block;
 }
 
-/* Footer Styles */
-.subscription-footer{
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-family: inherit;
-  margin-top: auto;
-  padding: 16px 0;
-}
-
-.footer-content{
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-.footer-row{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 20px;
-  font-size: 12px;
-}
-
-.footer-left{
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.footer-copyright{
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: -0.01em;
-}
-
-.footer-separator{
-  color: rgba(255, 255, 255, 0.2);
-  font-size: 14px;
-  line-height: 1;
-  margin: 0 4px;
-}
-
-.footer-nav{
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.footer-link{
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  transition: color 0.2s ease;
-  cursor: pointer;
-}
-
-.footer-link:hover{
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.footer-right{
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.footer-legal{
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.footer-social{
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.footer-social-link{
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.02);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.4);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 10px;
-}
-
-.footer-social-link:hover{
-  background-color: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.7);
-}
-
 /* Loading Spinner */
 .loading-spinner{
   width: 12px;
@@ -531,34 +427,14 @@ const subscriptionCSS = `
     justify-content: center;
   }
   
-     .content-header,
-   .section-header,
-   .settings-item,
-   .usage-display{
-     padding-left: 20px;
-     padding-right: 20px;
-   }
-   
-   .footer-content{
-     padding: 0 20px;
-   }
-   
-   .footer-row{
-     flex-direction: column;
-     gap: 12px;
-     text-align: center;
-   }
-   
-   .footer-nav{
-     flex-wrap: wrap;
-     justify-content: center;
-     gap: 12px;
-   }
-   
-   .footer-separator{
-     display: none;
-   }
- }
+  .content-header,
+  .section-header,
+  .settings-item,
+  .usage-display{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 `;
 
 const subscriptionHTML = `
@@ -632,9 +508,9 @@ const subscriptionHTML = `
                <div class="item-description">Manage your account and billing</div>
              </div>
              <button class="action-button" id="manageAccountBtn">Open</button>
-           </div>
-         </div>
-
+      </div>
+    </div>
+    
         <div class="content-section">
           <div class="section-header">
             <div class="section-title">Current Plan</div>
@@ -755,28 +631,28 @@ const subscriptionHTML = `
             <div class="usage-label">Screenshots Today</div>
             <div class="usage-value" id="screenshotUsage">3</div>
             <div class="usage-limit" id="screenshotLimit">of 10 daily limit</div>
-            <div class="usage-bar">
+        <div class="usage-bar">
               <div class="usage-fill usage-low" id="screenshotBar" style="width: 30%"></div>
-            </div>
-          </div>
+        </div>
+      </div>
           
           <div class="usage-item">
             <div class="usage-label">AI Requests Today</div>
             <div class="usage-value" id="aiUsage">7</div>
             <div class="usage-limit" id="aiLimit">of 10 daily limit</div>
-            <div class="usage-bar">
+        <div class="usage-bar">
               <div class="usage-fill usage-medium" id="aiBar" style="width: 70%"></div>
-            </div>
-          </div>
+        </div>
+      </div>
           
           <div class="usage-item">
             <div class="usage-label">Next Reset</div>
             <div class="usage-value" id="resetTime">23:45</div>
             <div class="usage-limit">Daily limits reset</div>
-          </div>
-        </div>
       </div>
-      
+    </div>
+  </div>
+
       <div class="content-body">
                  <div class="content-section">
            <div class="settings-item">
@@ -784,31 +660,31 @@ const subscriptionHTML = `
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
                  View Usage History
-               </div>
+          </div>
                <div class="item-description">Detailed usage statistics and trends</div>
              </div>
              <button class="action-button" id="viewHistoryBtn">View</button>
-           </div>
-           
+        </div>
+        
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
                  Export Usage Data
-               </div>
+          </div>
                <div class="item-description">Download your usage data as CSV</div>
-             </div>
+          </div>
              <button class="action-button" id="exportDataBtn">Export</button>
-           </div>
+          </div>
          </div>
-      </div>
-    </div>
-
+          </div>
+        </div>
+        
     <!-- Billing Page -->
     <div class="content-page" id="billingPage">
       <div class="content-header">
         <h1 class="content-title">Billing</h1>
-      </div>
+        </div>
       
       <div class="content-body">
                  <div class="content-section">
@@ -821,38 +697,38 @@ const subscriptionHTML = `
                <div class="item-description">Update payment information and billing details</div>
              </div>
              <button class="action-button" id="updatePaymentBtn">Update</button>
-           </div>
-           
+      </div>
+
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
                  Billing History
-               </div>
+          </div>
                <div class="item-description">View past invoices and payment history</div>
              </div>
              <button class="action-button" id="billingHistoryBtn">View</button>
-           </div>
-           
+        </div>
+        
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
                  Download Receipts
-               </div>
+          </div>
                <div class="item-description">Download receipts for tax purposes</div>
-             </div>
+          </div>
              <button class="action-button" id="downloadReceiptsBtn">Download</button>
-           </div>
-         </div>
-      </div>
-    </div>
-
+          </div>
+          </div>
+          </div>
+        </div>
+        
     <!-- Security Page -->
     <div class="content-page" id="securityPage">
       <div class="content-header">
         <h1 class="content-title">Security</h1>
-      </div>
+        </div>
       
       <div class="content-body">
                  <div class="content-section">
@@ -865,39 +741,39 @@ const subscriptionHTML = `
                <div class="item-description">Update your account password</div>
              </div>
              <button class="action-button" id="changePasswordBtn">Change</button>
-           </div>
-           
+      </div>
+
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
                  Two-Factor Authentication
-               </div>
+          </div>
                <div class="item-description">Add extra security to your account</div>
              </div>
              <button class="action-button" id="enable2FABtn">Enable</button>
-           </div>
-           
+        </div>
+        
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
                  Active Sessions
-               </div>
+          </div>
                <div class="item-description">Manage devices and active sessions</div>
-             </div>
+          </div>
              <button class="action-button" id="manageSessionsBtn">Manage</button>
-           </div>
-         </div>
-      </div>
-    </div>
+          </div>
+          </div>
+          </div>
+          </div>
 
     <!-- Preferences Page -->
     <div class="content-page" id="preferencesPage">
       <div class="content-header">
         <h1 class="content-title">Preferences</h1>
-      </div>
-      
+        </div>
+        
       <div class="content-body">
                  <div class="content-section">
            <div class="settings-item">
@@ -905,9 +781,9 @@ const subscriptionHTML = `
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
                  Theme
-               </div>
+        </div>
                <div class="item-description">Choose your preferred theme</div>
-             </div>
+      </div>
              <button class="action-button" id="themeBtn">Dark</button>
            </div>
            
@@ -921,9 +797,9 @@ const subscriptionHTML = `
              </div>
              <div class="toggle-switch enabled" id="notificationsToggle">
                <div class="toggle-slider"></div>
-             </div>
-           </div>
-           
+    </div>
+  </div>
+
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
@@ -938,8 +814,8 @@ const subscriptionHTML = `
            </div>
          </div>
       </div>
-    </div>
-
+      </div>
+      
     <!-- Support Page -->
     <div class="content-page" id="supportPage">
       <div class="content-header">
@@ -957,82 +833,34 @@ const subscriptionHTML = `
                <div class="item-description">Get help with your subscription or technical issues</div>
              </div>
              <button class="action-button" id="contactSupportBtn">Contact</button>
-           </div>
-           
+      </div>
+      
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
                  Documentation
-               </div>
+      </div>
                <div class="item-description">View help articles and user guides</div>
-             </div>
+    </div>
              <button class="action-button" id="docsBtn">Open</button>
-           </div>
-           
+  </div>
+
            <div class="settings-item">
              <div class="item-info">
                <div class="item-title">
                  <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
                  Send Feedback
-               </div>
+    </div>
                <div class="item-description">Share your thoughts and suggestions</div>
              </div>
              <button class="action-button" id="feedbackBtn">Send</button>
            </div>
          </div>
       </div>
-         </div>
-   </div>
-   
-   <!-- Footer -->
-   <div class="subscription-footer">
-     <div class="footer-content">
-       <div class="footer-row">
-         <!-- Left Side - Copyright -->
-         <div class="footer-left">
-           <span class="footer-copyright">© Steley 2025</span>
-         </div>
-
-         <span class="footer-separator">·</span>
-
-         <!-- Center - Navigation Links -->
-         <div class="footer-nav">
-           <a href="#features" class="footer-link">Features</a>
-           <a href="/pricing" class="footer-link">Pricing</a>
-           <a href="#ai-models" class="footer-link">AI Models</a>
-           <a href="/document" class="footer-link">Documentation</a>
-         </div>
-
-         <span class="footer-separator">·</span>
-
-         <!-- Right Side - Legal & Social -->
-         <div class="footer-right">
-           <!-- Legal Links -->
-           <div class="footer-legal">
-             <a href="/privacy-policy" class="footer-link">Privacy</a>
-             <a href="/terms-of-service" class="footer-link">Terms</a>
-           </div>
-
-           <span class="footer-separator">·</span>
-
-           <!-- Social Links -->
-           <div class="footer-social">
-             <a href="https://twitter.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
-               <span style="color: rgba(255,255,255,0.5);">→</span>
-             </a>
-             <a href="https://github.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
-               <span style="color: rgba(255,255,255,0.5);">≡</span>
-             </a>
-             <a href="https://discord.gg/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Discord">
-               <span style="color: rgba(255,255,255,0.5);">◦</span>
-             </a>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
+    </div>
+  </div>
+</div>
 `;
 
 // Auto-execute function to inject CSS and HTML
@@ -1172,18 +1000,18 @@ const subscriptionHTML = `
     if (!isAuthenticated) {
       console.log('❌ User not authenticated, redirecting to login');
       alert('Please log in to access your subscription management.');
-      window.location.href = '/login';
-      return;
-    }
-    
+        window.location.href = '/login';
+        return;
+      }
+      
     console.log('✅ User authenticated:', userEmail);
-    
+       
     // Prepare demo user data (since this is a demo without real Supabase)
-    const userData = {
+      const userData = {
       email: userEmail,
       currentPlan: 'FREE',
       isActive: true,
-      usage: {
+        usage: {
         screenshots: { used: 3, limit: 10 },
         aiRequests: { used: 7, limit: 10 }
       },
