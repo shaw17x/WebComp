@@ -398,16 +398,56 @@ const loginHTML = `
             !(rect.right < mainRect.left || rect.left > mainRect.right || rect.bottom < mainRect.top || rect.top > mainRect.bottom));
         }
         
-        // 🔧 AUTO-FIX ATTEMPT
-        console.log('🔧 ATTEMPTING AUTO-FIX...');
-        currentLogin.style.position = 'fixed !important';
-        currentLogin.style.top = '50px !important';
-        currentLogin.style.left = '50% !important';
-        currentLogin.style.transform = 'translateX(-50%) !important';
-        currentLogin.style.zIndex = '999999 !important';
-        currentLogin.style.background = 'rgba(0,0,0,0.95) !important';
-        currentLogin.style.border = '2px solid #fff !important';
-        console.log('   ✅ Applied emergency positioning fix');
+        // 🔧 PARENT CONTAINER ANALYSIS
+        console.log('🔧 PARENT CONTAINER ANALYSIS:');
+        let parent = currentLogin.parentElement;
+        let level = 0;
+        while (parent && level < 5) {
+          const parentStyle = window.getComputedStyle(parent);
+          console.log(`   📦 Level ${level}: ${parent.tagName}.${parent.className}`);
+          console.log(`      Display: ${parentStyle.display}, Visibility: ${parentStyle.visibility}, Opacity: ${parentStyle.opacity}`);
+          
+          // Check if parent is being hidden
+          if (parentStyle.display === 'none' || parentStyle.visibility === 'hidden' || parentStyle.opacity === '0') {
+            console.error(`🚨 PARENT LEVEL ${level} IS HIDDEN!`);
+            console.log('🔧 Attempting to fix parent visibility...');
+            parent.style.display = 'block !important';
+            parent.style.visibility = 'visible !important';
+            parent.style.opacity = '1 !important';
+          }
+          
+          parent = parent.parentElement;
+          level++;
+        }
+        
+        // 🔧 AUTO-FIX ATTEMPT - MOVE TO BODY TO ESCAPE FRAMER CONTROL
+        console.log('🔧 ATTEMPTING AUTO-FIX - MOVING TO BODY...');
+        
+        // Clone the login component
+        const clonedLogin = currentLogin.cloneNode(true);
+        
+        // Apply emergency positioning to clone
+        clonedLogin.style.position = 'fixed !important';
+        clonedLogin.style.top = '80px !important';
+        clonedLogin.style.left = '50% !important';
+        clonedLogin.style.transform = 'translateX(-50%) !important';
+        clonedLogin.style.zIndex = '999999 !important';
+        clonedLogin.style.background = 'rgba(0,0,0,0.95) !important';
+        clonedLogin.style.border = '2px solid #00ff00 !important';
+        clonedLogin.style.boxShadow = '0 0 20px rgba(0,255,0,0.5) !important';
+        clonedLogin.id = 'emergency-login-fix';
+        
+        // Add directly to body (escape Framer control)
+        document.body.appendChild(clonedLogin);
+        
+        console.log('   ✅ Emergency login box added to body');
+        console.log('   🟢 Look for GREEN BORDER login box at top of page');
+        
+        // Re-initialize interactions for the emergency login box
+        setTimeout(() => {
+          console.log('🔄 Re-initializing emergency login interactions...');
+          initializeEmergencyLoginInteractions(clonedLogin);
+        }, 100);
         
       } else {
         console.error('   ❌ Login component MISSING after 5 seconds!');
@@ -827,6 +867,56 @@ const loginHTML = `
         console.error('❌ Final Check: Login component completely missing!');
       }
     }, 60000);
+  }
+  
+  // Initialize interactions for emergency login box
+  function initializeEmergencyLoginInteractions(emergencyLogin) {
+    console.log('🚨 Setting up emergency login interactions...');
+    
+    // Set up form submission for emergency login
+    const emergencyForm = emergencyLogin.querySelector('#loginForm');
+    if (emergencyForm) {
+      // Remove existing event listeners by cloning
+      const newForm = emergencyForm.cloneNode(true);
+      emergencyForm.parentNode.replaceChild(newForm, emergencyForm);
+      
+      newForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        console.log('🚨 Emergency login form submitted');
+        
+        const email = newForm.querySelector('#email')?.value;
+        const password = newForm.querySelector('#password')?.value;
+        
+        if (email && password) {
+          console.log('🚨 Emergency login attempt:', email);
+          // Simple demo authentication for emergency login
+          alert(`Emergency Login Demo: ${email}`);
+          localStorage.setItem('steley_emergency_login', JSON.stringify({ email, time: Date.now() }));
+          window.location.href = '/';
+        }
+      });
+      
+      console.log('✅ Emergency form event listener added');
+    }
+    
+    // Set up checkbox for emergency login
+    const emergencyCheckbox = emergencyLogin.querySelector('#rememberCheckbox');
+    const emergencyCheckIcon = emergencyLogin.querySelector('#checkIcon');
+    
+    if (emergencyCheckbox && emergencyCheckIcon) {
+      let isChecked = false;
+      emergencyCheckbox.addEventListener('click', function() {
+        isChecked = !isChecked;
+        if (isChecked) {
+          emergencyCheckbox.classList.add('checked');
+          emergencyCheckIcon.style.display = 'block';
+        } else {
+          emergencyCheckbox.classList.remove('checked');
+          emergencyCheckIcon.style.display = 'none';
+        }
+      });
+      console.log('✅ Emergency checkbox event listener added');
+    }
   }
   
   console.log('🏁 Steley Login Script: Initialization complete');
