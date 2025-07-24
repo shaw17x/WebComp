@@ -18,7 +18,7 @@ const loginCSS = `
 
 /* Form Container - Optimized Performance */
 .auth-form-container{padding:0 1.5rem 1rem}
-.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto}
+.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s both}
 .auth-form-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 
 /* Form Elements */
@@ -32,7 +32,7 @@ const loginCSS = `
 
 /* Remember Me Section - Optimized Performance */
 .remember-section{padding:0 1.5rem 1rem}
-.remember-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto}
+.remember-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s both}
 .remember-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 .remember-checkbox-container{display:flex;align-items:center;gap:0.75rem;cursor:pointer}
 .remember-checkbox{width:1rem;height:1rem;border-radius:0.25rem;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.2);transition:all 0.2s;display:flex;align-items:center;justify-content:center}
@@ -45,7 +45,7 @@ const loginCSS = `
 .forgot-password:hover{color:rgba(255,255,255,0.8)}
 
 /* Submit Button - Optimized Performance */
-.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto}
+.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s both}
 .auth-submit:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
@@ -330,6 +330,39 @@ const loginHTML = `
           footer.style.transform = 'scale(1) translateY(0px)';
           footer.style.willChange = 'auto';
         }, 300);
+      }
+      
+      // Animate form card with same fade-in effect as footer
+      const formCard = document.querySelector('.auth-form-card');
+      if (formCard) {
+        setTimeout(() => {
+          console.log('🎭 Animating form card with fade-in...');
+          formCard.style.opacity = '1';
+          formCard.style.transform = 'translate3d(0,0,0)';
+          formCard.style.willChange = 'auto';
+        }, 400); // Same timing as CSS animation delay
+      }
+      
+      // Animate submit button with fade-in effect
+      const submitButton = document.querySelector('.auth-submit');
+      if (submitButton) {
+        setTimeout(() => {
+          console.log('🎭 Animating submit button with fade-in...');
+          submitButton.style.opacity = '1';
+          submitButton.style.transform = 'translate3d(0,0,0)';
+          submitButton.style.willChange = 'auto';
+        }, 500); // Same timing as CSS animation delay
+      }
+      
+      // Animate remember card with fade-in effect
+      const rememberCard = document.querySelector('.remember-card');
+      if (rememberCard) {
+        setTimeout(() => {
+          console.log('🎭 Animating remember card with fade-in...');
+          rememberCard.style.opacity = '1';
+          rememberCard.style.transform = 'translate3d(0,0,0)';
+          rememberCard.style.willChange = 'auto';
+        }, 600); // Same timing as CSS animation delay
       }
     }, 50); // Reduced delay for instant start
   }
