@@ -1,5 +1,6 @@
-// Steley Login Page Combined - CSS + HTML Content (Component Only) - v2.2 - FIXED LOGIN BOX ANIMATION
+// Steley Login Page Combined - CSS + HTML Content (Component Only) - v2.3 - EMERGENCY VISIBILITY FIX
 const loginCSS = `
+/* EMERGENCY CSS v2.3 - Force visibility */
 /* NO BODY STYLING - Let Framer handle the background */
 
 /* Login Component Container */
@@ -247,10 +248,33 @@ const loginHTML = `
 
 // Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
-  // Add CSS immediately
+  // Add CSS immediately with debugging
+  console.log('🎨 Injecting login CSS...');
   const style = document.createElement('style');
+  style.setAttribute('data-login-styles-v2', 'true');
   style.textContent = loginCSS;
   document.head.appendChild(style);
+      console.log('✅ CSS injected successfully', style);
+    
+    // EMERGENCY CSS BACKUP - Force inject if needed
+    setTimeout(() => {
+      if (!document.querySelector('.auth-screen-card')) {
+        console.warn('⚠️ Login card not found, CSS may not be working!');
+      } else {
+        const card = document.querySelector('.auth-screen-card');
+        const computedStyle = window.getComputedStyle(card);
+        console.log('🔍 Login card computed styles:', {
+          opacity: computedStyle.opacity,
+          display: computedStyle.display,
+          visibility: computedStyle.visibility,
+          background: computedStyle.background
+        });
+        
+        if (computedStyle.opacity === '0' || computedStyle.display === 'none') {
+          console.error('❌ CSS not working! Emergency inline styles needed');
+        }
+      }
+    }, 200);
   
   // Initialize when DOM is ready - matching docs page logic
   if (document.readyState === 'loading') {
@@ -295,19 +319,71 @@ const loginHTML = `
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
-      console.log('🎬 NEW v2.2: FIXED LOGIN BOX ANIMATION - Starting cascade...', { loginCard, footer });
+      console.log('🎬 NEW v2.3: EMERGENCY VISIBILITY FIX - Forcing all styles...', { loginCard, footer });
       
       // Force visibility with animation - EMERGENCY FIX
       if (loginCard) {
         console.log('📱 Emergency fix: Forcing login card visibility...');
         
-        // FAILSAFE: Ensure box is always visible
+        // EMERGENCY: Force all styles directly
         setTimeout(() => {
-          console.log('🆘 FAILSAFE: Making login card visible...');
-          loginCard.style.opacity = '1 !important';
-          loginCard.style.transform = 'translate3d(0,0,0) scale(1) !important';
-          loginCard.style.visibility = 'visible !important';
-        }, 100);
+          console.log('🆘 EMERGENCY: Forcing all login styles...');
+          
+          // Force login card visibility and styles
+          loginCard.style.cssText = `
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            transform: translate3d(0,0,0) scale(1) !important;
+            background: rgba(0,0,0,0.8) !important;
+            border: 1px solid rgba(255,255,255,0.05) !important;
+            border-radius: 12px !important;
+            padding: 0 !important;
+            max-width: 32rem !important;
+            width: 100% !important;
+            position: relative !important;
+            z-index: 1000 !important;
+          `;
+          
+          // Force form elements visibility with detailed styles
+          const formInputs = loginCard.querySelectorAll('input, button, label, h1, h2, p, div');
+          formInputs.forEach(el => {
+            if (el.tagName === 'INPUT') {
+              el.style.cssText = `
+                color: white !important;
+                background: rgba(0,0,0,0.2) !important;
+                border: 1px solid rgba(255,255,255,0.05) !important;
+                padding: 0.5rem 0.75rem !important;
+                border-radius: 0.375rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: block !important;
+              `;
+            } else if (el.tagName === 'BUTTON') {
+              el.style.cssText = `
+                color: white !important;
+                background: rgba(0,0,0,0.8) !important;
+                border: 1px solid rgba(255,255,255,0.05) !important;
+                padding: 0.75rem 1rem !important;
+                border-radius: 0.375rem !important;
+                width: 100% !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: block !important;
+                cursor: pointer !important;
+              `;
+            } else {
+              el.style.color = 'white !important';
+              el.style.opacity = '1 !important';
+              el.style.visibility = 'visible !important';
+              el.style.display = 'block !important';
+            }
+          });
+          
+          console.log('✅ Emergency styles applied to', formInputs.length, 'elements');
+        }, 50);
         
         // Add floating animation and effects after visibility ensured
         setTimeout(() => {
