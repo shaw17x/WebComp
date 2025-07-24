@@ -1,13 +1,13 @@
-// Steley Login Page Combined - CSS + HTML Content (Component Only) - v2.3 - EMERGENCY VISIBILITY FIX
+// Steley Login Page Combined - CSS + HTML Content (Component Only) - v2.1
 const loginCSS = `
-/* EMERGENCY CSS v2.3 - Force visibility */
 /* NO BODY STYLING - Let Framer handle the background */
 
 /* Login Component Container */
 .auth-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
-/* Floating Card - EMERGENCY VISIBLE */
-.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:1 !important;transform:translate3d(0,0,0) scale(1) !important;visibility:visible !important;will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
+/* Floating Card - Optimized for Smooth Performance */
+.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translate3d(0,30px,0) scale(0.95);will-change:transform,opacity;backface-visibility:hidden;perspective:1000px;animation:cardFadeIn 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both}
+.auth-screen-card.animate-in{animation:smoothEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
 .auth-screen-card.floating{animation:cardFloat 6s ease-in-out infinite}
 
 /* Header Section */
@@ -18,7 +18,7 @@ const loginCSS = `
 
 /* Form Container - Optimized Performance */
 .auth-form-container{padding:0 1.5rem 1rem}
-.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s both}
+.auth-form-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s both}
 .auth-form-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 
 /* Form Elements */
@@ -32,7 +32,7 @@ const loginCSS = `
 
 /* Remember Me Section - Optimized Performance */
 .remember-section{padding:0 1.5rem 1rem}
-.remember-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s both}
+.remember-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:0.5rem;padding:1rem;transition:all 0.15s;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s both}
 .remember-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 .remember-checkbox-container{display:flex;align-items:center;gap:0.75rem;cursor:pointer}
 .remember-checkbox{width:1rem;height:1rem;border-radius:0.25rem;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.2);transition:all 0.2s;display:flex;align-items:center;justify-content:center}
@@ -45,7 +45,7 @@ const loginCSS = `
 .forgot-password:hover{color:rgba(255,255,255,0.8)}
 
 /* Submit Button - Optimized Performance */
-.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.7s both}
+.auth-submit{width:100%;padding:0.75rem 1rem;font-size:0.875rem;font-weight:500;border-radius:0.375rem;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);transition:all 0.15s;cursor:pointer;will-change:auto;opacity:0;transform:translate3d(0,20px,0);animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s both}
 .auth-submit:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.1);color:white}
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
 
@@ -90,7 +90,7 @@ const loginCSS = `
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes containerEntry{from{opacity:0;transform:translate3d(0,30px,0) scale(0.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
 @keyframes fadeInUp{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes cardFadeIn{from{opacity:0;transform:translate3d(0,40px,0) scale(0.9)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes cardFadeIn{from{opacity:0;transform:translate3d(0,30px,0) scale(0.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
 
 /* Responsive */
 @media(max-width:768px){.auth-login-component{padding:15px;margin:60px auto}.auth-screen-card{max-width:28rem}.auth-footer-row{flex-direction:column!important;text-align:center!important;gap:20px!important}.auth-footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}.auth-footer-right{flex-direction:column!important;gap:20px!important}.auth-footer-separator{display:none!important}}
@@ -248,33 +248,10 @@ const loginHTML = `
 
 // Auto-execute function with robust initialization (matching docs page pattern for smooth loading)
 (function() {
-  // Add CSS immediately with debugging
-  console.log('🎨 Injecting login CSS...');
+  // Add CSS immediately
   const style = document.createElement('style');
-  style.setAttribute('data-login-styles-v2', 'true');
   style.textContent = loginCSS;
   document.head.appendChild(style);
-      console.log('✅ CSS injected successfully', style);
-    
-    // EMERGENCY CSS BACKUP - Force inject if needed
-    setTimeout(() => {
-      if (!document.querySelector('.auth-screen-card')) {
-        console.warn('⚠️ Login card not found, CSS may not be working!');
-      } else {
-        const card = document.querySelector('.auth-screen-card');
-        const computedStyle = window.getComputedStyle(card);
-        console.log('🔍 Login card computed styles:', {
-          opacity: computedStyle.opacity,
-          display: computedStyle.display,
-          visibility: computedStyle.visibility,
-          background: computedStyle.background
-        });
-        
-        if (computedStyle.opacity === '0' || computedStyle.display === 'none') {
-          console.error('❌ CSS not working! Emergency inline styles needed');
-        }
-      }
-    }, 200);
   
   // Initialize when DOM is ready - matching docs page logic
   if (document.readyState === 'loading') {
@@ -319,79 +296,22 @@ const loginHTML = `
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
-      console.log('🎬 NEW v2.3: EMERGENCY VISIBILITY FIX - Forcing all styles...', { loginCard, footer });
+      console.log('🎬 NEW v2.1: Login animations starting - Logo+teley mode...', { loginCard, footer });
       
-      // Force visibility with animation - EMERGENCY FIX
+      // Trigger smooth entry animation for login card
       if (loginCard) {
-        console.log('📱 Emergency fix: Forcing login card visibility...');
+        console.log('📱 Animating login card with fade-in...');
         
-        // EMERGENCY: Force all styles directly
-        setTimeout(() => {
-          console.log('🆘 EMERGENCY: Forcing all login styles...');
-          
-          // Force login card visibility and styles
-          loginCard.style.cssText = `
-            opacity: 1 !important;
-            visibility: visible !important;
-            display: block !important;
-            transform: translate3d(0,0,0) scale(1) !important;
-            background: rgba(0,0,0,0.8) !important;
-            border: 1px solid rgba(255,255,255,0.05) !important;
-            border-radius: 12px !important;
-            padding: 0 !important;
-            max-width: 32rem !important;
-            width: 100% !important;
-            position: relative !important;
-            z-index: 1000 !important;
-          `;
-          
-          // Force form elements visibility with detailed styles
-          const formInputs = loginCard.querySelectorAll('input, button, label, h1, h2, p, div');
-          formInputs.forEach(el => {
-            if (el.tagName === 'INPUT') {
-              el.style.cssText = `
-                color: white !important;
-                background: rgba(0,0,0,0.2) !important;
-                border: 1px solid rgba(255,255,255,0.05) !important;
-                padding: 0.5rem 0.75rem !important;
-                border-radius: 0.375rem !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                display: block !important;
-              `;
-            } else if (el.tagName === 'BUTTON') {
-              el.style.cssText = `
-                color: white !important;
-                background: rgba(0,0,0,0.8) !important;
-                border: 1px solid rgba(255,255,255,0.05) !important;
-                padding: 0.75rem 1rem !important;
-                border-radius: 0.375rem !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                display: block !important;
-                cursor: pointer !important;
-              `;
-            } else {
-              el.style.color = 'white !important';
-              el.style.opacity = '1 !important';
-              el.style.visibility = 'visible !important';
-              el.style.display = 'block !important';
-            }
-          });
-          
-          console.log('✅ Emergency styles applied to', formInputs.length, 'elements');
-        }, 50);
+        // Let CSS animation handle the fade-in, no forcing styles
+        loginCard.style.willChange = 'transform, opacity';
         
-        // Add floating animation and effects after visibility ensured
+        // Add floating animation and effects after entry completes
         setTimeout(() => {
           console.log('🎭 Adding floating animation and backdrop blur...');
           loginCard.classList.add('floating');
           loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
-          loginCard.style.willChange = 'auto'; // Clean up performance optimization
-        }, 1500);
+          loginCard.style.willChange = 'auto'; // Remove will-change after animation
+        }, 900); // Delayed to let fade-in complete first
       } else {
         console.error('❌ Login card not found!');
       }
