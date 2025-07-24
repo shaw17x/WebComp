@@ -262,6 +262,22 @@ const loginHTML = `
   }
   
   function initializeLoginPage() {
+    // 🎯 CHECK IF USER IS ALREADY LOGGED IN - REDIRECT IF SO
+    const sessionData = localStorage.getItem('steley_session');
+    if (sessionData) {
+      try {
+        const session = JSON.parse(sessionData);
+        if (session.email) {
+          console.log('✅ User already logged in:', session.email);
+          console.log('🔄 Redirecting to home page...');
+          window.location.href = '/';
+          return; // Stop login page initialization
+        }
+      } catch {
+        console.log('⚠️ Invalid session data, continuing with login');
+      }
+    }
+    
     // Try to find main content area, otherwise use body - matching docs page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
