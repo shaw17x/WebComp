@@ -1,114 +1,651 @@
-// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only)
+// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v3.0 Program Style
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
-/* Subscription Management Container */
-.subscription-manage-component{max-width:1200px;width:100%;margin:80px auto 40px auto;padding:20px;position:relative;z-index:999}
+/* Subscription Management Container - Program Style */
+.subscription-manage-component {
+  max-width: 1200px;
+  width: 100%;
+  margin: 80px auto 40px auto;
+  padding: 20px;
+  position: relative;
+  z-index: 999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
 
-/* Page Header */
-.subscription-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1000}
-.subscription-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;animation:badgeEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both;position:relative;z-index:1000}
-.subscription-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6b7280;animation:spin 3s linear infinite}
-.subscription-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:20px;position:relative;z-index:1000}
-.subscription-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center;position:relative;z-index:1000}
+/* Page Header - Program Style */
+.subscription-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1000;
+}
 
-/* Current Status Card */
-.current-status-card{background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;margin-bottom:2rem;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
-.status-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
-.status-title{font-size:1.5rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:0.75rem}
-.status-badge{padding:0.5rem 1rem;border-radius:9999px;font-size:0.875rem;font-weight:500;display:flex;align-items:center;gap:0.5rem}
-.badge-active{background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
-.badge-expired{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
-.badge-free{background:rgba(107,114,128,0.2);color:#d1d5db;border:1px solid rgba(107,114,128,0.3)}
+.subscription-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 8px 18px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: badgeEntry 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+  backdrop-filter: blur(20px);
+}
 
-/* Usage Statistics */
-.usage-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
-.usage-stat{background:rgba(255,255,255,0.02);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;transition:all 0.2s}
-.usage-stat:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);transform:translateY(-2px)}
-.stat-label{color:rgba(255,255,255,0.7);font-size:0.875rem;font-weight:500;margin-bottom:0.5rem}
-.stat-value{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:0.25rem}
-.stat-limit{color:rgba(255,255,255,0.5);font-size:0.75rem}
-.usage-bar{width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-top:0.75rem;overflow:hidden}
-.usage-fill{height:100%;border-radius:3px;transition:all 0.3s}
-.usage-low{background:linear-gradient(to right,#22c55e,#4ade80)}
-.usage-medium{background:linear-gradient(to right,#eab308,#facc15)}
-.usage-high{background:linear-gradient(to right,#ef4444,#f87171)}
+.subscription-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  animation: spin 3s linear infinite;
+}
 
-/* Plan Cards Grid */
-.plans-section{margin-bottom:3rem}
-.plans-title{font-size:2rem;font-weight:700;color:#fff;text-align:center;margin-bottom:1rem}
-.plans-subtitle{font-size:1rem;color:rgba(255,255,255,0.7);text-align:center;margin-bottom:2rem}
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem}
+.subscription-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1000;
+  letter-spacing: -0.02em;
+}
 
-/* Individual Plan Card */
-.plan-card{background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;position:relative;transition:all 0.3s;opacity:0;animation:cardEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
-.plan-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
-.plan-card.current{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.05)}
-.plan-card.recommended{border-color:rgba(59,130,246,0.4);background:rgba(59,130,246,0.05)}
-.plan-card.premium{border-color:rgba(168,85,247,0.4);background:rgba(168,85,247,0.05)}
+.subscription-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  margin: 0 0 40px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
 
-.plan-header{margin-bottom:1.5rem}
-.plan-name{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem}
-.plan-description{color:rgba(255,255,255,0.7);font-size:0.875rem;margin-bottom:1rem}
-.plan-price{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:1rem}
-.price-amount{font-size:2.5rem;font-weight:800;color:#fff}
-.price-period{color:rgba(255,255,255,0.6);font-size:1rem}
-.price-label{color:rgba(34,197,94,0.8);font-size:0.75rem;font-weight:500;margin-left:0.5rem}
+/* Current Status Card - Program Style */
+.current-status-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: programCardEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
 
-.plan-features{margin-bottom:2rem}
-.feature-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;color:rgba(255,255,255,0.8)}
-.feature-icon{width:1rem;height:1rem;border-radius:50%;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);display:flex;align-items:center;justify-content:center;font-size:0.625rem;color:#86efac}
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-.plan-action{margin-top:auto}
-.plan-button{width:100%;padding:0.875rem 1.5rem;border-radius:8px;font-size:0.875rem;font-weight:600;transition:all 0.2s;cursor:pointer;border:none}
-.button-primary{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff}
-.button-primary:hover{background:linear-gradient(135deg,#2563eb,#1e40af);transform:translateY(-1px)}
-.button-premium{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff}
-.button-premium:hover{background:linear-gradient(135deg,#9333ea,#6d28d9);transform:translateY(-1px)}
-.button-current{background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
-.button-secondary{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.2)}
-.button-secondary:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3)}
+.status-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: -0.01em;
+}
 
-/* Account Management Section */
-.account-section{background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;margin-bottom:2rem;position:relative;z-index:1000}
-.account-title{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:1.5rem}
-.account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
-.account-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;transition:all 0.2s}
-.account-item:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1)}
-.account-item-title{color:#fff;font-weight:600;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
-.account-item-description{color:rgba(255,255,255,0.7);font-size:0.875rem;margin-bottom:1rem}
-.account-button{padding:0.5rem 1rem;border-radius:6px;font-size:0.875rem;font-weight:500;transition:all 0.2s;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9)}
-.account-button:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3)}
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.3px;
+}
+
+.badge-active {
+  background: rgba(34, 197, 94, 0.1);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.badge-expired {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badge-free {
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Usage Statistics - Program Style */
+.usage-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.usage-stat {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-sizing: border-box;
+}
+
+.usage-stat:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.stat-limit {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.usage-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.usage-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.usage-low { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.usage-medium { background: linear-gradient(90deg, #eab308, #facc15); }
+.usage-high { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+/* Plan Cards Grid - Program Style */
+.plans-section {
+  margin-bottom: 3rem;
+}
+
+.plans-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.plans-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+/* Individual Plan Card - Program Style */
+.plan-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: programCardEntry 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.plan-card:nth-child(1) { animation-delay: 0.1s; }
+.plan-card:nth-child(2) { animation-delay: 0.2s; }
+.plan-card:nth-child(3) { animation-delay: 0.3s; }
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.plan-card.current {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.02);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.1);
+}
+
+.plan-card.recommended {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.02);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
+}
+
+.plan-card.premium {
+  border-color: rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.02);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.1);
+}
+
+.plan-header {
+  margin-bottom: 24px;
+}
+
+.plan-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.01em;
+}
+
+.plan-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.price-amount {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.price-period {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.price-label {
+  color: rgba(34, 197, 94, 0.9);
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.plan-features {
+  margin-bottom: 24px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.feature-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #86efac;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.plan-action {
+  margin-top: auto;
+}
+
+/* Program-Style Buttons */
+.plan-button {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.button-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.button-premium {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.button-premium:hover {
+  background: linear-gradient(135deg, #9333ea, #6d28d9);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+}
+
+.button-current {
+  background: rgba(34, 197, 94, 0.1);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.button-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Account Management Section - Program Style */
+.account-section {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.account-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.account-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.account-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.account-item-title {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.account-item-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.account-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2px;
+}
+
+.account-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
 
 /* Plan Icons */
-.icon-free{color:#9ca3af}
-.icon-pro{color:#3b82f6}
-.icon-ultra{color:#a855f7}
+.icon-free { color: rgba(255, 255, 255, 0.7); }
+.icon-pro { color: #3b82f6; }
+.icon-ultra { color: #a855f7; }
 
-/* Footer */
-.subscription-footer{text-align:center;margin-top:3rem;padding:2rem;border-top:1px solid rgba(255,255,255,0.1)}
-.footer-text{color:rgba(255,255,255,0.6);font-size:0.875rem;margin-bottom:1rem}
-.footer-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
-.footer-link{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
-.footer-link:hover{color:#fff}
+/* Footer - Program Style */
+.subscription-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-/* Loading Spinner */
-.loading-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.2);border-top:2px solid rgba(255,255,255,0.8);border-radius:50%;animation:spin 1s linear infinite}
+.footer-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
 
-/* Animations */
-@keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes cardEntry{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes badgeEntry{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
 
-/* Responsive Design */
-@media (max-width: 768px){
-  .subscription-manage-component{margin:20px auto;padding:15px}
-  .subscription-title{font-size:2rem}
-  .plans-grid{grid-template-columns:1fr;gap:1rem}
-  .usage-stats{grid-template-columns:1fr}
-  .account-grid{grid-template-columns:1fr}
-  .footer-links{flex-direction:column;gap:1rem}
+.footer-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+/* Loading Spinner - Program Style */
+.loading-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Program-Style Animations */
+@keyframes programCardEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes badgeEntry {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design - Program Style */
+@media (max-width: 768px) {
+  .subscription-manage-component {
+    margin: 20px auto;
+    padding: 16px;
+  }
+  
+  .subscription-title {
+    font-size: 2.2rem;
+  }
+  
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .usage-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .plan-card {
+    padding: 20px;
+  }
+  
+  .current-status-card,
+  .account-section {
+    padding: 20px;
+  }
+}
+
+/* Enhanced Visual Effects */
+.plan-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.plan-card:hover::before {
+  opacity: 1;
+}
+
+/* Subtle glow effects for premium plans */
+.plan-card.recommended::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+  border-radius: 17px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.plan-card.recommended:hover::after {
+  opacity: 1;
 }
 `;
 
