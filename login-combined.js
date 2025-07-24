@@ -5,8 +5,8 @@ const loginCSS = `
 /* Login Component Container */
 .auth-login-component{max-width:32rem;width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
-/* Floating Card - Clean Animation */
-.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:0;transform:translate3d(0,40px,0) scale(0.9);will-change:transform,opacity;backface-visibility:hidden;perspective:1000px;animation:cardFadeIn 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s both}
+/* Floating Card - EMERGENCY VISIBLE */
+.auth-screen-card{max-width:32rem;width:100%;position:relative;z-index:10;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.05);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.4);opacity:1 !important;transform:translate3d(0,0,0) scale(1) !important;visibility:visible !important;will-change:transform,opacity;backface-visibility:hidden;perspective:1000px}
 .auth-screen-card.floating{animation:cardFloat 6s ease-in-out infinite}
 
 /* Header Section */
@@ -297,17 +297,25 @@ const loginHTML = `
       
       console.log('🎬 NEW v2.2: FIXED LOGIN BOX ANIMATION - Starting cascade...', { loginCard, footer });
       
-      // Let CSS handle the main login box animation completely
+      // Force visibility with animation - EMERGENCY FIX
       if (loginCard) {
-        console.log('📱 CSS will animate login card with cardFadeIn...');
+        console.log('📱 Emergency fix: Forcing login card visibility...');
         
-        // Only add floating animation and effects after CSS animation completes
+        // FAILSAFE: Ensure box is always visible
+        setTimeout(() => {
+          console.log('🆘 FAILSAFE: Making login card visible...');
+          loginCard.style.opacity = '1 !important';
+          loginCard.style.transform = 'translate3d(0,0,0) scale(1) !important';
+          loginCard.style.visibility = 'visible !important';
+        }, 100);
+        
+        // Add floating animation and effects after visibility ensured
         setTimeout(() => {
           console.log('🎭 Adding floating animation and backdrop blur...');
           loginCard.classList.add('floating');
           loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
           loginCard.style.willChange = 'auto'; // Clean up performance optimization
-        }, 1500); // Wait for CSS cardFadeIn to complete (1200ms + 300ms delay)
+        }, 1500);
       } else {
         console.error('❌ Login card not found!');
       }
