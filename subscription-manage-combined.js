@@ -384,6 +384,110 @@ const subscriptionCSS = `
   display: block;
 }
 
+/* Footer Styles */
+.subscription-footer{
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: inherit;
+  margin-top: auto;
+  padding: 16px 0;
+}
+
+.footer-content{
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  font-size: 12px;
+}
+
+.footer-left{
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.footer-copyright{
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.01em;
+}
+
+.footer-separator{
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  line-height: 1;
+  margin: 0 4px;
+}
+
+.footer-nav{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.footer-link{
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footer-link:hover{
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-right{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-legal{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.footer-social{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.footer-social-link{
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.footer-social-link:hover{
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* Loading Spinner */
 .loading-spinner{
   width: 12px;
@@ -427,14 +531,34 @@ const subscriptionCSS = `
     justify-content: center;
   }
   
-  .content-header,
-  .section-header,
-  .settings-item,
-  .usage-display{
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
+     .content-header,
+   .section-header,
+   .settings-item,
+   .usage-display{
+     padding-left: 20px;
+     padding-right: 20px;
+   }
+   
+   .footer-content{
+     padding: 0 20px;
+   }
+   
+   .footer-row{
+     flex-direction: column;
+     gap: 12px;
+     text-align: center;
+   }
+   
+   .footer-nav{
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 12px;
+   }
+   
+   .footer-separator{
+     display: none;
+   }
+ }
 `;
 
 const subscriptionHTML = `
@@ -858,9 +982,57 @@ const subscriptionHTML = `
            </div>
          </div>
       </div>
-    </div>
-  </div>
-</div>
+         </div>
+   </div>
+   
+   <!-- Footer -->
+   <div class="subscription-footer">
+     <div class="footer-content">
+       <div class="footer-row">
+         <!-- Left Side - Copyright -->
+         <div class="footer-left">
+           <span class="footer-copyright">© Steley 2025</span>
+         </div>
+
+         <span class="footer-separator">·</span>
+
+         <!-- Center - Navigation Links -->
+         <div class="footer-nav">
+           <a href="#features" class="footer-link">Features</a>
+           <a href="/pricing" class="footer-link">Pricing</a>
+           <a href="#ai-models" class="footer-link">AI Models</a>
+           <a href="/document" class="footer-link">Documentation</a>
+         </div>
+
+         <span class="footer-separator">·</span>
+
+         <!-- Right Side - Legal & Social -->
+         <div class="footer-right">
+           <!-- Legal Links -->
+           <div class="footer-legal">
+             <a href="/privacy-policy" class="footer-link">Privacy</a>
+             <a href="/terms-of-service" class="footer-link">Terms</a>
+           </div>
+
+           <span class="footer-separator">·</span>
+
+           <!-- Social Links -->
+           <div class="footer-social">
+             <a href="https://twitter.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+               <span style="color: rgba(255,255,255,0.5);">→</span>
+             </a>
+             <a href="https://github.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+               <span style="color: rgba(255,255,255,0.5);">≡</span>
+             </a>
+             <a href="https://discord.gg/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Discord">
+               <span style="color: rgba(255,255,255,0.5);">◦</span>
+             </a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 `;
 
 // Auto-execute function to inject CSS and HTML
