@@ -33,21 +33,21 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary{background:transparent;border:1px solid rgba(107,114,128,0.3);color:#9ca3af}
 .plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
-/* FAQ Section - Home Page Style */
-.faq-section{background:linear-gradient(135deg,#0a0b0f 0%,#111318 50%,#0a0b0f 100%);border:1px solid rgba(255,255,255,0.08);border-radius:32px;padding:80px 60px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif}
+/* FAQ Section - Compact Pricing Style */
+.faq-section{background:linear-gradient(135deg,#0a0b0f 0%,#111318 50%,#0a0b0f 100%);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:50px 40px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:900px;margin-left:auto;margin-right:auto}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.faq-title{text-align:center;margin-bottom:60px;font-size:48px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.faq-container{max-width:800px;margin:0 auto}
+.faq-title{text-align:center;margin-bottom:40px;font-size:36px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.faq-container{max-width:700px;margin:0 auto}
 .faq-item{border-bottom:1px solid rgba(255,255,255,0.1)}
-.faq-question{width:100%;padding:32px 0;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
-.faq-question:hover{transform:translateX(8px)}
-.faq-question-text{font-size:20px;font-weight:500;color:#ffffff;text-align:left;line-height:1.4;padding-right:20px}
-.faq-icon-container{width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
-.faq-icon{width:16px;height:16px;stroke:rgba(255,255,255,0.6);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.faq-question{width:100%;padding:24px 0;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.faq-question:hover{transform:translateX(6px)}
+.faq-question-text{font-size:18px;font-weight:500;color:#ffffff;text-align:left;line-height:1.4;padding-right:16px}
+.faq-icon-container{width:20px;height:20px;display:flex;align-items:center;justify-content:center;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
+.faq-icon{width:14px;height:14px;stroke:rgba(255,255,255,0.6);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .faq-answer{overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);height:0;opacity:0;transform:translateY(-10px)}
 .faq-answer.open{opacity:1;transform:translateY(0)}
-.faq-answer-content{padding-bottom:32px;padding-right:44px}
-.faq-answer-text{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0}
+.faq-answer-content{padding-bottom:24px;padding-right:36px}
+.faq-answer-text{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0}
 
 /* Background Effects */
 .faq-bg-effect-1{position:absolute;top:20%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px);pointer-events:none}
@@ -160,12 +160,12 @@ const pricingHTML = `
 
   <!-- FAQ Section -->
   <div class="faq-section">
-    <h1 class="faq-title">Frequently asked questions</h1>
+    <h1 class="faq-title">Pricing Questions</h1>
     <div class="faq-container">
       
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(0)">
-          <span class="faq-question-text">Is there a free trial available?</span>
+          <span class="faq-question-text">What's the difference between Free, Pro, and Ultra plans?</span>
           <div id="icon-container-0" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -175,14 +175,14 @@ const pricingHTML = `
         </button>
         <div id="answer-0" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Yes! Steley offers a Free plan with 10 AI queries per month, basic screenshot analysis, and community support. You can start using our platform immediately without any payment required.</p>
+            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o mini access. Pro ($19.99/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 mini, and advanced features. Ultra ($99.99/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, and enterprise features.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(1)">
-          <span class="faq-question-text">What's included in the Pro plan?</span>
+          <span class="faq-question-text">Can I upgrade or downgrade my plan anytime?</span>
           <div id="icon-container-1" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -192,14 +192,14 @@ const pricingHTML = `
         </button>
         <div id="answer-1" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">The Pro plan ($29/month) includes unlimited AI queries, advanced screenshot analysis, priority response time, 24/7 chat support, premium templates, custom AI models, advanced analytics, and interview recording features.</p>
+            <p class="faq-answer-text">Yes! You can upgrade or downgrade your plan at any time from your subscription settings. Changes take effect immediately for upgrades, or at the next billing cycle for downgrades. However, all payments are non-refundable.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(2)">
-          <span class="faq-question-text">Can I cancel my subscription anytime?</span>
+          <span class="faq-question-text">Do you offer refunds if I'm not satisfied?</span>
           <div id="icon-container-2" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -209,14 +209,14 @@ const pricingHTML = `
         </button>
         <div id="answer-2" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Yes, you can cancel your subscription at any time. However, please note that all sales are final and we do not offer refunds for any subscription plans. Your access will continue until the end of your current billing period.</p>
+            <p class="faq-answer-text">No, Steley operates under a strict no-refund policy. All sales are final. We recommend starting with our Free plan to thoroughly test all features before committing to a paid subscription.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(3)">
-          <span class="faq-question-text">Do you offer refunds?</span>
+          <span class="faq-question-text">What happens if I exceed my daily usage limits?</span>
           <div id="icon-container-3" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -226,14 +226,14 @@ const pricingHTML = `
         </button>
         <div id="answer-3" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">No, all sales are final. Steley does not offer refunds for any subscription plans (Free, Pro, or Ultra). We recommend starting with our Free plan to test the platform before upgrading to a paid subscription.</p>
+            <p class="faq-answer-text">Free users (3/day limit) and Pro users (100/day limit) will need to wait until the next day for limits to reset, or upgrade to a higher tier. Ultra users have unlimited usage with no daily restrictions.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(4)">
-          <span class="faq-question-text">What payment methods do you accept?</span>
+          <span class="faq-question-text">Which AI models are available in each plan?</span>
           <div id="icon-container-4" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -243,14 +243,14 @@ const pricingHTML = `
         </button>
         <div id="answer-4" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">We accept all major credit cards including Visa, Mastercard, American Express, and Discover. All payments are processed securely through our encrypted payment system with SSL protection.</p>
+            <p class="faq-answer-text">Free: GPT-4o mini only. Pro: GPT-4o, Claude Sonnet 4, O1 mini, Gemini Pro. Ultra: All models including O3, Claude Opus 4, O1 Pro, plus priority access to new releases and custom model configurations.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(5)">
-          <span class="faq-question-text">Is my data secure with Steley?</span>
+          <span class="faq-question-text">How secure are my payment details?</span>
           <div id="icon-container-5" class="faq-icon-container">
             <svg class="faq-icon" viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -260,58 +260,7 @@ const pricingHTML = `
         </button>
         <div id="answer-5" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Absolutely. Steley employs enterprise-grade security including SSL encryption, secure data storage, advanced security protocols, and compliance with industry standards. Your interview data and personal information are protected with the highest security measures.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(6)">
-          <span class="faq-question-text">What platforms does Steley support?</span>
-          <div id="icon-container-6" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-6" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text">Steley is cross-platform compatible and works on Windows, macOS, and Linux. Our Electron-based application ensures consistent performance across all operating systems with the same features and functionality.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(7)">
-          <span class="faq-question-text">How does the AI interview assistance work?</span>
-          <div id="icon-container-7" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-7" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text">Steley uses advanced AI models to analyze interview questions, provide intelligent responses, and offer real-time assistance. Our screenshot analysis can interpret coding problems, multiple-choice questions, and essay prompts to provide contextually relevant help.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(8)">
-          <span class="faq-question-text">Can I use Steley for team interviews?</span>
-          <div id="icon-container-8" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-8" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text">Yes! Our Ultra plan ($99/month) includes team collaboration features, custom integrations, dedicated account management, and advanced security perfect for organizations conducting team interviews or training programs.</p>
+            <p class="faq-answer-text">We accept all major credit cards (Visa, Mastercard, American Express, Discover) with full SSL encryption. All payments are processed through secure, PCI-compliant systems and we never store your payment details locally.</p>
           </div>
         </div>
       </div>
