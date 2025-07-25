@@ -399,6 +399,20 @@ function initializeFAQ() {
 
 // Auto-execute function to inject CSS and HTML - Exact Docs Pattern
 (function() {
+  // DUPLICATE PREVENTION - Multiple checks
+  if (window.pricingPageLoaded || 
+      document.querySelector('.pricing-page') || 
+      document.querySelector('.pricing-grid') ||
+      document.querySelector('.faq-section') ||
+      document.body.innerHTML.includes('Choose Your Plan')) {
+    console.log('🛑 Pricing page already loaded, skipping...');
+    return;
+  }
+  
+  // Set loading flag immediately
+  window.pricingPageLoaded = true;
+  console.log('🚀 Loading pricing page...');
+  
   // Add CSS
   const style = document.createElement('style');
   style.textContent = pricingCSS;
