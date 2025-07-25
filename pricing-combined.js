@@ -2,12 +2,12 @@
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
-.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
+.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1000}
 .pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6b7280;animation:spin 3s linear infinite}
-.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
-.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
+.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000}
+.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000}
 .pricing-content{max-width:900px;margin:0 auto;position:relative;z-index:1000}
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:60px}
 .plan-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:16px;margin-bottom:8px;transition:all 0.2s ease;cursor:pointer;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;position:relative}
 .plan-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);transform:translateX(4px)}
 .plan-card.popular{border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)}
@@ -24,7 +24,7 @@ body{margin:0!important;padding:0!important}
 .plan-button.primary:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;transform:translateY(-1px)}
 .plan-button.secondary{background:rgba(255,255,255,0.02);color:#9ca3af;border:1px solid rgba(255,255,255,0.1)}
 .plan-button.secondary:hover{background:rgba(255,255,255,0.04);color:#cbd5e1}
-.faq-section{margin-top:60px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s forwards}
+.faq-section{margin-top:60px;position:relative;z-index:1000}
 .faq-title{font-size:2rem;font-weight:700;text-align:center;margin-bottom:30px;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .faq-container{max-width:800px;margin:0 auto}
 .faq-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;margin-bottom:8px;overflow:hidden;transition:all 0.2s ease}
