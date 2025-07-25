@@ -33,23 +33,25 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary{background:transparent;border:1px solid rgba(107,114,128,0.3);color:#9ca3af}
 .plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
-/* FAQ Section - Docs Style */
-.faq-section{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+/* FAQ Section - Home Page Style */
+.faq-section{background:linear-gradient(135deg,#0a0b0f 0%,#111318 50%,#0a0b0f 100%);border:1px solid rgba(255,255,255,0.08);border-radius:32px;padding:80px 60px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.faq-section:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
-.faq-title{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:15px;position:relative;padding-left:15px;z-index:1001}
-.faq-title::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:15px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
+.faq-title{text-align:center;margin-bottom:60px;font-size:48px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .faq-container{max-width:800px;margin:0 auto}
-.faq-item{border:1px solid rgba(255,255,255,0.1);border-radius:16px;margin-bottom:16px;overflow:hidden;transition:all 0.3s ease}
-.faq-item:hover{border-color:rgba(255,255,255,0.2)}
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.1)}
+.faq-question{width:100%;padding:32px 0;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.faq-question:hover{transform:translateX(8px)}
+.faq-question-text{font-size:20px;font-weight:500;color:#ffffff;text-align:left;line-height:1.4;padding-right:20px}
+.faq-icon-container{width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
+.faq-icon{width:16px;height:16px;stroke:rgba(255,255,255,0.6);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.faq-answer{overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);height:0;opacity:0;transform:translateY(-10px)}
+.faq-answer.open{opacity:1;transform:translateY(0)}
+.faq-answer-content{padding-bottom:32px;padding-right:44px}
+.faq-answer-text{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0}
 
-.faq-question{width:100%;background:transparent;border:none;padding:24px;text-align:left;font-size:1.1rem;font-weight:600;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s ease}
-.faq-question:hover{background:rgba(107,114,128,0.05)}
-
-.faq-icon{width:24px;height:24px;color:#6b7280;transition:transform 0.3s ease;transform:rotate(0deg)}
-
-.faq-answer{max-height:0;opacity:0;overflow:hidden;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);background:rgba(15,23,42,0.3)}
-.faq-answer-content{padding:0 24px 24px 24px;color:#cbd5e1;font-size:1rem;line-height:1.6}
+/* Background Effects */
+.faq-bg-effect-1{position:absolute;top:20%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px);pointer-events:none}
+.faq-bg-effect-2{position:absolute;bottom:20%;right:10%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 70%);filter:blur(30px);pointer-events:none}
 
 @keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
@@ -158,80 +160,167 @@ const pricingHTML = `
 
   <!-- FAQ Section -->
   <div class="faq-section">
-    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <h1 class="faq-title">Frequently asked questions</h1>
     <div class="faq-container">
       
       <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(0)">
+          <span class="faq-question-text">Is there a free trial available?</span>
+          <div id="icon-container-0" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-0" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Yes! Steley offers a Free plan with 10 AI queries per month, basic screenshot analysis, and community support. You can start using our platform immediately without any payment required.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(1)">
-          Can I change my plan at any time?
-          <svg id="icon-1" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">What's included in the Pro plan?</span>
+          <div id="icon-container-1" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-1" class="faq-answer">
           <div class="faq-answer-content">
-            Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
+            <p class="faq-answer-text">The Pro plan ($29/month) includes unlimited AI queries, advanced screenshot analysis, priority response time, 24/7 chat support, premium templates, custom AI models, advanced analytics, and interview recording features.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(2)">
-          What happens if I exceed my query limit?
-          <svg id="icon-2" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">Can I cancel my subscription anytime?</span>
+          <div id="icon-container-2" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-2" class="faq-answer">
           <div class="faq-answer-content">
-            For free users, you'll need to wait until your daily limit resets or upgrade to a paid plan. Pro and Enterprise users have unlimited queries.
+            <p class="faq-answer-text">Yes, you can cancel your subscription at any time. However, please note that all sales are final and we do not offer refunds for any subscription plans. Your access will continue until the end of your current billing period.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(3)">
-          Is there a free trial for paid plans?
-          <svg id="icon-3" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">Do you offer refunds?</span>
+          <div id="icon-container-3" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-3" class="faq-answer">
           <div class="faq-answer-content">
-            Yes! We offer a 7-day free trial for both Pro and Enterprise plans. No credit card required to start your trial.
+            <p class="faq-answer-text">No, all sales are final. Steley does not offer refunds for any subscription plans (Free, Pro, or Ultra). We recommend starting with our Free plan to test the platform before upgrading to a paid subscription.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(4)">
-          How secure is my data?
-          <svg id="icon-4" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">What payment methods do you accept?</span>
+          <div id="icon-container-4" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-4" class="faq-answer">
           <div class="faq-answer-content">
-            We use enterprise-grade encryption and never store your screenshots or sensitive data. All processing is done in real-time and data is immediately discarded after processing.
+            <p class="faq-answer-text">We accept all major credit cards including Visa, Mastercard, American Express, and Discover. All payments are processed securely through our encrypted payment system with SSL protection.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(5)">
-          Can I cancel my subscription anytime?
-          <svg id="icon-5" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">Is my data secure with Steley?</span>
+          <div id="icon-container-5" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-5" class="faq-answer">
           <div class="faq-answer-content">
-            Absolutely! You can cancel your subscription at any time from your account settings. You'll continue to have access until the end of your current billing period.
+            <p class="faq-answer-text">Absolutely. Steley employs enterprise-grade security including SSL encryption, secure data storage, advanced security protocols, and compliance with industry standards. Your interview data and personal information are protected with the highest security measures.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(6)">
+          <span class="faq-question-text">What platforms does Steley support?</span>
+          <div id="icon-container-6" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-6" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Steley is cross-platform compatible and works on Windows, macOS, and Linux. Our Electron-based application ensures consistent performance across all operating systems with the same features and functionality.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(7)">
+          <span class="faq-question-text">How does the AI interview assistance work?</span>
+          <div id="icon-container-7" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-7" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Steley uses advanced AI models to analyze interview questions, provide intelligent responses, and offer real-time assistance. Our screenshot analysis can interpret coding problems, multiple-choice questions, and essay prompts to provide contextually relevant help.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(8)">
+          <span class="faq-question-text">Can I use Steley for team interviews?</span>
+          <div id="icon-container-8" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-8" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Yes! Our Ultra plan ($99/month) includes team collaboration features, custom integrations, dedicated account management, and advanced security perfect for organizations conducting team interviews or training programs.</p>
           </div>
         </div>
       </div>
 
     </div>
+    
+    <!-- Background Effects -->
+    <div class="faq-bg-effect-1"></div>
+    <div class="faq-bg-effect-2"></div>
   </div>
 
 </div>
@@ -297,22 +386,24 @@ const pricingHTML = `
 </footer>
 `;
 
-// FAQ functionality - Enhanced for inline styling
-let openFAQ = null;
+// FAQ functionality - Home Page Style
+let openFAQ = 0; // First FAQ open by default
 window.toggleFAQ = function(index) {
   const answer = document.getElementById('answer-' + index);
-  const icon = document.getElementById('icon-' + index);
+  const iconContainer = document.getElementById('icon-container-' + index);
   
   // Close previously open FAQ
   if (openFAQ !== null && openFAQ !== index) {
     const prevAnswer = document.getElementById('answer-' + openFAQ);
-    const prevIcon = document.getElementById('icon-' + openFAQ);
+    const prevIconContainer = document.getElementById('icon-container-' + openFAQ);
     if (prevAnswer) {
-      prevAnswer.style.maxHeight = '0';
+      prevAnswer.style.height = '0px';
       prevAnswer.style.opacity = '0';
+      prevAnswer.style.transform = 'translateY(-10px)';
+      prevAnswer.classList.remove('open');
     }
-    if (prevIcon) {
-      prevIcon.style.transform = 'rotate(0deg)';
+    if (prevIconContainer) {
+      prevIconContainer.style.transform = 'rotate(0deg)';
     }
   }
   
@@ -320,11 +411,13 @@ window.toggleFAQ = function(index) {
   if (openFAQ === index) {
     // Close current FAQ
     if (answer) {
-      answer.style.maxHeight = '0';
+      answer.style.height = '0px';
       answer.style.opacity = '0';
+      answer.style.transform = 'translateY(-10px)';
+      answer.classList.remove('open');
     }
-    if (icon) {
-      icon.style.transform = 'rotate(0deg)';
+    if (iconContainer) {
+      iconContainer.style.transform = 'rotate(0deg)';
     }
     openFAQ = null;
   } else {
@@ -332,16 +425,28 @@ window.toggleFAQ = function(index) {
     if (answer) {
       // Get the content height dynamically
       const content = answer.querySelector('.faq-answer-content');
-      const contentHeight = content ? content.scrollHeight + 40 : 120; // Add padding
-      answer.style.maxHeight = contentHeight + 'px';
+      const contentHeight = content ? content.scrollHeight : 120;
+      answer.style.height = contentHeight + 'px';
       answer.style.opacity = '1';
+      answer.style.transform = 'translateY(0)';
+      answer.classList.add('open');
     }
-    if (icon) {
-      icon.style.transform = 'rotate(45deg)';
+    if (iconContainer) {
+      iconContainer.style.transform = 'rotate(45deg)';
     }
     openFAQ = index;
   }
 };
+
+// Initialize FAQ with first item open
+function initializeFAQ() {
+  setTimeout(() => {
+    if (typeof window.toggleFAQ === 'function') {
+      // Open first FAQ by default
+      window.toggleFAQ(0);
+    }
+  }, 100);
+}
 
 // Auto-execute function to inject CSS and HTML - Exact Docs Pattern
 (function() {
@@ -385,6 +490,9 @@ window.toggleFAQ = function(index) {
     
     // Initialize footer scroll animation
     initializeFooterAnimation();
+    
+    // Initialize FAQ
+    initializeFAQ();
   }
   
   function initializePricingSectionAnimations() {
