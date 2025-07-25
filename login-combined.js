@@ -58,20 +58,22 @@ const loginCSS = `
 .loading-spinner{width:1rem;height:1rem;border:2px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-right:0.5rem}
 
 /* Footer Styles */
-.auth-footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);margin-top:80px;animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
+.auth-footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
 .auth-footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
 .auth-footer-row{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;gap:40px;animation:fadeInUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s both}
-.auth-footer-left{display:flex;align-items:center;white-space:nowrap}
-.auth-footer-copyright{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:-0.01em}
-.auth-footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
+.auth-footer-copyright{display:flex;align-items:center;white-space:nowrap}
+.auth-footer-copyright span{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:-0.01em}
 .auth-footer-nav{display:flex;gap:32px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
-.auth-footer-link{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer}
-.auth-footer-link:hover{color:#ffffff}
+.auth-footer-nav a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer}
+.auth-footer-nav a:hover{color:#ffffff}
 .auth-footer-right{display:flex;align-items:center;gap:32px}
 .auth-footer-legal{display:flex;gap:24px;align-items:center;white-space:nowrap}
+.auth-footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
+.auth-footer-legal a:hover{color:#ffffff}
 .auth-footer-social{display:flex;gap:12px;align-items:center}
-.auth-social-link{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer}
+.auth-social-link{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer;text-decoration:none}
 .auth-social-link:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
+.auth-footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
 
 /* Optimized Animations for Smooth Performance */
 @keyframes smoothEntry{
@@ -97,7 +99,7 @@ const loginHTML = `
     <div class="auth-header">
       <!-- Logo + Title Container (v2.1 - Cache Bust) -->
       <div style="display: inline-flex; align-items: center; gap: 0; margin-bottom: 0.5rem;">
-        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-right: -4px;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-right: -4px;" onerror="this.style.display='none'">
         <h1 class="auth-title" style="margin-bottom: 0;">teley</h1>
       </div>
       <h2 class="auth-subtitle">Welcome Back</h2>
@@ -247,23 +249,21 @@ const loginHTML = `
   }
   
   function initializeLoginPage() {
-    // 🎯 CHECK IF USER IS ALREADY LOGGED IN - REDIRECT IF SO
+    // Check if user is already logged in
     const sessionData = localStorage.getItem('steley_session');
     if (sessionData) {
       try {
         const session = JSON.parse(sessionData);
         if (session.email) {
-          console.log('✅ User already logged in:', session.email);
-          console.log('🔄 Redirecting to home page...');
           window.location.href = '/';
-          return; // Stop login page initialization
+          return;
         }
       } catch {
-        console.log('⚠️ Invalid session data, continuing with login');
+        // Continue with login
       }
     }
     
-    // Try to find main content area, otherwise use body - matching docs page
+    // Try to find main content area, otherwise use body
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
@@ -283,7 +283,7 @@ const loginHTML = `
       }
     }
     
-    // Initialize login animations with proper timing (matching docs page pattern)
+    // Initialize login animations with proper timing
     initializeLoginAnimations();
     
     // Initialize login interactions with staggered timing
@@ -296,19 +296,14 @@ const loginHTML = `
       const loginCard = document.querySelector('.auth-screen-card');
       const footer = document.querySelector('.auth-footer');
       
-      console.log('🎬 NEW v2.1: Login animations starting - Logo+teley mode...', { loginCard, footer });
-      
       // Trigger smooth entry animation for login card
       if (loginCard) {
-        console.log('📱 Animating login card...');
-        
         // Add hardware acceleration and start animation
         loginCard.style.willChange = 'transform, opacity';
         loginCard.classList.add('animate-in');
         
         // FAILSAFE: Force visibility if animation doesn't work
         setTimeout(() => {
-          console.log('🔧 Applying failsafe visibility...');
           loginCard.style.opacity = '1 !important';
           loginCard.style.transform = 'translate3d(0,0,0) scale(1) !important';
           loginCard.style.visibility = 'visible !important';
@@ -317,11 +312,9 @@ const loginHTML = `
         // Add floating animation and effects after entry completes
         setTimeout(() => {
           loginCard.classList.add('floating');
-          loginCard.style.backdropFilter = 'blur(20px)'; // Add blur after animation
-          loginCard.style.willChange = 'auto'; // Remove will-change after animation
+          loginCard.style.backdropFilter = 'blur(20px)';
+          loginCard.style.willChange = 'auto';
         }, 800);
-      } else {
-        console.error('❌ Login card not found!');
       }
       
       // Animate footer with class-based approach
@@ -332,11 +325,11 @@ const loginHTML = `
           footer.style.willChange = 'auto';
         }, 300);
       }
-    }, 50); // Reduced delay for instant start
+    }, 50);
   }
   
   function initializeLoginInteractions() {
-    // Wait a bit for DOM to be fully ready - matching docs page timing
+    // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       // Remember me checkbox
       const checkbox = document.getElementById('rememberCheckbox');
@@ -470,7 +463,7 @@ const loginHTML = `
       if (submitButton) {
         submitButton.style.backdropFilter = 'blur(10px)';
       }
-    }, 600); // Add effects after login card animation
+    }, 600);
   }
   
   function showMessage(message, type = 'info') {
