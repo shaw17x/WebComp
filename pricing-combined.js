@@ -343,48 +343,115 @@ window.toggleFAQ = function(index) {
   }
 };
 
-// Auto-execute function to inject CSS and HTML - Docs Style Instant Loading
+// Auto-execute function to inject CSS and HTML - React Safe Version
 (function() {
-  // Add CSS
-  const style = document.createElement('style');
-  style.textContent = pricingCSS;
-  document.head.appendChild(style);
+  console.log('💰 Pricing script initializing (React-safe mode)...');
   
-  // Add HTML when DOM is ready - find main content area
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      initializePricingPage();
-    });
-  } else {
-    initializePricingPage();
+  // Add CSS immediately but safely
+  if (!document.querySelector('[data-pricing-styles]')) {
+    const style = document.createElement('style');
+    style.setAttribute('data-pricing-styles', 'true');
+    style.textContent = pricingCSS;
+    document.head.appendChild(style);
+    console.log('✅ Pricing CSS injected safely');
   }
   
+  // Wait for React hydration to complete before injecting content
   function initializePricingPage() {
-    // Try to find main content area, otherwise use body
-    const mainContent = document.querySelector('main') || 
-                       document.querySelector('.main-content') || 
-                       document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') ||
-                       document.body;
+    console.log('🏗️ Starting React-safe pricing initialization...');
     
-    // Clear existing content in main area and add pricing content
-    if (mainContent !== document.body) {
-      mainContent.innerHTML = pricingHTML;
-    } else {
-      // If we're using body, insert at the beginning but after header
-      const header = document.querySelector('header') || document.querySelector('nav');
-      if (header) {
-        header.insertAdjacentHTML('afterend', pricingHTML);
-      } else {
-        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
-      }
+    // Check if already initialized
+    if (document.querySelector('.pricing-page') || document.body.hasAttribute('data-pricing-initialized')) {
+      console.log('✅ Pricing already initialized, skipping');
+      return;
     }
     
-    // Initialize pricing section animations
-    initializePricingSectionAnimations();
+    // Mark as initializing to prevent multiple runs
+    document.body.setAttribute('data-pricing-initializing', 'true');
     
-    // Initialize footer scroll animation
-    initializeFooterAnimation();
+    // Wait for React to finish hydrating
+    const waitForReactHydration = () => {
+      // Check for React hydration completion
+      const isReactReady = document.querySelector('[data-framer-name="Content"]') || 
+                          document.querySelector('main') ||
+                          !document.querySelector('[data-reactroot]');
+      
+      if (!isReactReady) {
+        console.log('⏳ Waiting for React hydration...');
+        setTimeout(waitForReactHydration, 200);
+        return;
+      }
+      
+      console.log('📝 React hydrated, safely injecting pricing content...');
+      
+      // Find the safest content container
+      let targetContainer = document.querySelector('[data-framer-name="Content"]') ||
+                           document.querySelector('main') ||
+                           document.querySelector('.main-content');
+      
+      if (targetContainer) {
+        console.log('📍 Found safe container:', targetContainer.tagName);
+        
+        // Gentle content replacement to avoid React conflicts
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pricingHTML;
+        tempDiv.setAttribute('data-pricing-injected', 'true');
+        tempDiv.style.cssText = 'width: 100%; min-height: 100vh;';
+        
+        // Clear and replace content safely
+        targetContainer.innerHTML = '';
+        targetContainer.appendChild(tempDiv);
+        
+        console.log('✅ Pricing content injected safely');
+        
+      } else {
+        console.log('🆕 Creating new container for pricing content');
+        
+        // Create new container as last resort
+        const newContainer = document.createElement('div');
+        newContainer.innerHTML = pricingHTML;
+        newContainer.setAttribute('data-pricing-fallback', 'true');
+        newContainer.style.cssText = `
+          position: relative;
+          z-index: 10000;
+          width: 100%;
+          min-height: 100vh;
+          background: transparent;
+        `;
+        
+        // Insert after header or at start of body
+        const header = document.querySelector('header') || document.querySelector('nav');
+        if (header) {
+          header.insertAdjacentElement('afterend', newContainer);
+        } else {
+          document.body.insertBefore(newContainer, document.body.firstChild);
+        }
+        
+        console.log('✅ Fallback pricing container created');
+      }
+      
+      // Mark as initialized
+      document.body.setAttribute('data-pricing-initialized', 'true');
+      document.body.removeAttribute('data-pricing-initializing');
+      
+      // Initialize animations with delay
+      setTimeout(() => {
+        initializePricingSectionAnimations();
+        initializeFooterAnimation();
+      }, 100);
+    };
+    
+    // Start waiting for React
+    setTimeout(waitForReactHydration, 500);
+  }
+  
+  // Initialize with proper timing for React
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initializePricingPage, 1000); // Extra delay for React
+    });
+  } else {
+    setTimeout(initializePricingPage, 1000); // Extra delay for React
   }
   
   function initializePricingSectionAnimations() {
