@@ -882,15 +882,8 @@ const subscriptionHTML = `
                             hash === '#manage' ||
                             hash === '#account';
   
-  console.log('🚀 Subscription management component starting (v3.0 - Program Settings Style)...');
-  console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', pathname);
-  console.log('📍 Hash:', hash);
-  console.log('📍 Is subscription page?', isSubscriptionPage);
-  
   // Only load if this is actually a subscription management page
   if (!isSubscriptionPage) {
-    console.log('❌ Not a subscription page, skipping...');
     return;
   }
   
@@ -898,7 +891,6 @@ const subscriptionHTML = `
   const style = document.createElement('style');
   style.textContent = subscriptionCSS;
   document.head.appendChild(style);
-  console.log('✅ Subscription CSS added');
   
   // Add HTML when DOM is ready
   if (document.readyState === 'loading') {
@@ -910,24 +902,19 @@ const subscriptionHTML = `
   }
   
   function initializeSubscriptionPage() {
-    console.log('🔧 Initializing subscription page...');
-    
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
-      console.log('✅ Subscription component already loaded');
       return;
     }
     
-    // 🎯 USE EXACT SAME LOGIC AS WORKING SIGNUP PAGE
+    // Use exact same logic as working signup page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    console.log('📍 Main content element:', mainContent.tagName);
-    
-    // 🚀 EXACT SAME INJECTION LOGIC AS SIGNUP
+    // Exact same injection logic as signup
     if (mainContent !== document.body) {
       mainContent.innerHTML = subscriptionHTML;
     } else {
@@ -940,30 +927,18 @@ const subscriptionHTML = `
       }
     }
     
-    console.log('✅ Subscription HTML added');
-    
     // Initialize subscription functionality
     initializeSubscriptionLogic();
   }
   
   function initializeSubscriptionLogic() {
-    console.log('🔧 Initializing subscription logic...');
-    
-    // 🎯 CHECK AUTHENTICATION USING THE SAME FORMAT AS PROFILEDROPDOWN
+    // Check authentication using the same format as ProfileDropdown
     let userEmail = null;
     let isAuthenticated = false;
     
     // Check multiple localStorage keys (same as ProfileDropdown)
     const userStr = localStorage.getItem('supabase_user');
     const sessionStr = localStorage.getItem('steley_session');
-    const supabaseSessionStr = localStorage.getItem('supabase_session');
-    const tokenStr = localStorage.getItem('supabase.auth.token');
-    
-    console.log('🔍 Checking authentication...');
-    console.log('👤 User data:', userStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Steley session:', sessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Supabase session:', supabaseSessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🎫 Token data:', tokenStr ? 'FOUND' : 'NOT FOUND');
     
     // Try to get user email from any available source
     if (userStr) {
@@ -972,39 +947,32 @@ const subscriptionHTML = `
         if (user.email) {
           userEmail = user.email;
           isAuthenticated = true;
-          console.log('✅ User found in user data:', userEmail);
         }
       } catch {
-        console.log('❌ Failed to parse user data');
+        // Failed to parse user data
       }
     } else if (sessionStr) {
       try {
         const session = JSON.parse(sessionStr);
-        console.log('🔍 Session structure:', session);
         
         // Handle multiple session formats (same as ProfileDropdown)
         if (session.user && session.user.email) {
           userEmail = session.user.email;
           isAuthenticated = true;
-          console.log('✅ User found in Supabase session format:', userEmail);
         } else if (session.email && !session.user) {
           userEmail = session.email;
           isAuthenticated = true;
-          console.log('✅ User found in login session format:', userEmail);
         }
       } catch {
-        console.log('❌ Failed to parse session data');
+        // Failed to parse session data
       }
     }
     
     if (!isAuthenticated) {
-      console.log('❌ User not authenticated, redirecting to login');
       alert('Please log in to access your subscription management.');
         window.location.href = '/login';
         return;
       }
-      
-    console.log('✅ User authenticated:', userEmail);
        
     // Prepare demo user data (since this is a demo without real Supabase)
       const userData = {
@@ -1018,27 +986,20 @@ const subscriptionHTML = `
       resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
     };
     
-    console.log('📊 Using demo user data:', userData);
-    
     // Initialize the interface
     initializeNavigation();
     updateUserInfo(userData);
     setupAllButtons(userData);
     setupToggles();
-    
-    console.log('✅ Subscription functionality initialized');
   }
   
   function initializeNavigation() {
-    console.log('🔧 Setting up navigation...');
-    
     const navItems = document.querySelectorAll('.nav-item');
     const contentPages = document.querySelectorAll('.content-page');
     
     navItems.forEach(item => {
       item.addEventListener('click', function() {
         const targetPage = this.getAttribute('data-page');
-        console.log('📄 Switching to page:', targetPage);
         
         // Update active nav item
         navItems.forEach(nav => nav.classList.remove('active'));
@@ -1052,12 +1013,9 @@ const subscriptionHTML = `
         }
       });
     });
-    
-    console.log('✅ Navigation setup complete');
   }
   
   function updateUserInfo(userData) {
-    console.log('🔧 Updating user info...');
     
     const userEmailElement = document.getElementById('userEmail');
     const userPlanElement = document.getElementById('userPlan');
@@ -1102,12 +1060,9 @@ const subscriptionHTML = `
     
     // Update usage stats
     updateUsageStats(userData.usage, userData.resetTime);
-    
-    console.log('✅ User info updated');
   }
   
   function updateUsageStats(usage, resetTime) {
-    console.log('🔧 Updating usage stats...');
     
     // Screenshots
     const screenshotUsage = document.getElementById('screenshotUsage');
@@ -1141,8 +1096,6 @@ const subscriptionHTML = `
       const timeString = resetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       resetTimeElement.textContent = timeString;
     }
-    
-    console.log('✅ Usage stats updated');
   }
   
   function getUsageClass(percentage) {
@@ -1152,7 +1105,6 @@ const subscriptionHTML = `
   }
   
   function setupAllButtons(userData) {
-    console.log('🔧 Setting up all buttons...');
     
     // Plan buttons
     const planButtons = ['freeBtn', 'proBtn', 'ultraBtn'];
@@ -1188,17 +1140,13 @@ const subscriptionHTML = `
       const button = document.getElementById(buttonId);
       if (button) {
         button.addEventListener('click', function() {
-          console.log(`🔧 ${action} clicked`);
           alert(`${action} functionality would be implemented here in a real application!`);
         });
       }
     });
-    
-    console.log('✅ All buttons setup complete');
   }
   
   function setupToggles() {
-    console.log('🔧 Setting up toggle switches...');
     
     const toggles = ['autoSaveToggle', 'privacyToggle', 'notificationsToggle', 'autoUpdateToggle'];
     
@@ -1207,17 +1155,12 @@ const subscriptionHTML = `
       if (toggle) {
         toggle.addEventListener('click', function() {
           this.classList.toggle('enabled');
-          const isEnabled = this.classList.contains('enabled');
-          console.log(`🔧 ${toggleId} toggled:`, isEnabled);
         });
       }
     });
-    
-    console.log('✅ Toggle switches setup complete');
   }
   
   function handlePlanUpgrade(planType, userData) {
-    console.log(`🚀 ${planType} plan button clicked`);
     
     // Show loading state
     const button = document.getElementById(`${planType.toLowerCase()}Btn`);
