@@ -87,7 +87,7 @@ const privacyHTML = `
   <p class="pp-subtitle">Effective Date: January 15, 2025 | Last Updated: January 15, 2025</p>
   
   <div class="pp-section pp-intro">
-    <p>At Steley, Inc., we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use our AI-powered interview assistance platform, in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).</p>
+      <p>At Steley, Inc., we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use our AI-powered interview assistance platform, in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).</p>
   </div>
   
   <div class="pp-section">
@@ -203,11 +203,11 @@ const privacyHTML = `
     <h2>12. Contact Us</h2>
     <p>For questions about this Privacy Policy or to exercise your rights, please contact:</p>
     <ul>
-      <li><strong>Email:</strong> privacy@steley.ai</li>
-      <li><strong>Data Protection Officer (DPO):</strong> dpo@steley.ai</li>
+              <li><strong>Email:</strong> privacy@steley.ai</li>
+        <li><strong>Data Protection Officer (DPO):</strong> dpo@steley.ai</li>
     </ul>
     <h3>Mailing Address:</h3>
-    <p>Steley, Inc.<br>
+          <p>Steley, Inc.<br>
     123 AI Street<br>
     Tech City, TC 12345<br>
     United States</p>
@@ -284,6 +284,19 @@ const privacyHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
+  // DUPLICATE PREVENTION - Multiple checks
+  if (window.privacyPageLoaded || 
+      document.querySelector('.pp') || 
+      document.querySelector('.pp-section') ||
+      document.body.innerHTML.includes('Privacy Policy')) {
+    console.log('🛑 Privacy page already loaded, skipping...');
+    return;
+  }
+  
+  // Set loading flag immediately
+  window.privacyPageLoaded = true;
+  console.log('🔒 Loading privacy page...');
+  
   // Add CSS
   const style = document.createElement('style');
   style.textContent = privacyCSS;
