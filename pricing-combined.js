@@ -360,34 +360,25 @@ window.toggleFAQ = function(index) {
   }
   
   function initializePricingPage() {
-    // Check if pricing content already exists
-    if (document.querySelector('.pricing-page')) {
-      return;
+    // Try to find main content area, otherwise use body
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    // Clear existing content in main area and add pricing content
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = pricingHTML;
+    } else {
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', pricingHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+      }
     }
-    
-    // Create a new container that won't interfere with React
-    const pricingContainer = document.createElement('div');
-    pricingContainer.innerHTML = pricingHTML;
-    pricingContainer.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      z-index: 1000;
-      overflow-y: auto;
-      pointer-events: none;
-    `;
-    
-    // Make only the pricing content clickable
-    const pricingPage = pricingContainer.querySelector('.pricing-page');
-    if (pricingPage) {
-      pricingPage.style.pointerEvents = 'auto';
-    }
-    
-    // Add to body without replacing anything
-    document.body.appendChild(pricingContainer);
     
     // Initialize pricing section animations
     initializePricingSectionAnimations();
