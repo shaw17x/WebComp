@@ -1,56 +1,59 @@
-// Pricing Page Combined - CSS + HTML Content
+// Pricing Page Combined - CSS + HTML Content with Docs-Style Instant Loading
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
-.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#a5b4fc;text-transform:uppercase;letter-spacing:1px;animation:badgeEntry 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both;position:relative;z-index:1000}
-.pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6366f1;animation:spin 3s linear infinite}
-.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#6366f1 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000}
-.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;opacity:0.8;text-align:center;position:relative;z-index:1000}
+.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;position:relative;z-index:1000}
+.pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#6b7280;animation:spin 3s linear infinite}
+.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards}
+.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0 0 40px 0;text-align:center;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards}
 
-/* Pricing Cards */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000}
-.pricing-card{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:20px;padding:30px;transition:all 0.3s ease;position:relative;overflow:hidden}
-.pricing-card:hover{transform:translateY(-5px);border-color:rgba(99,102,241,0.3);box-shadow:0 20px 40px rgba(99,102,241,0.1)}
-.pricing-card.featured{border-color:rgba(99,102,241,0.4);background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05))}
-.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px;letter-spacing:0.5px}
+/* Pricing Cards - Docs Style */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
+.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+.pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
+.pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
+.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#6b7280,#9ca3af);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px;letter-spacing:0.5px}
 
-.plan-name{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px}
-.plan-price{font-size:3rem;font-weight:800;color:#6366f1;margin-bottom:8px}
+.plan-name{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:15px;position:relative;padding-left:15px;z-index:1001}
+.plan-name::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:15px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
+.plan-price{font-size:3rem;font-weight:800;color:#9ca3af;margin-bottom:8px;position:relative;z-index:1001}
 .plan-price span{font-size:1rem;color:#94a3b8;font-weight:400}
-.plan-description{color:#cbd5e1;font-size:1rem;margin-bottom:30px;line-height:1.5}
+.plan-description{color:#cbd5e1;font-size:1rem;margin-bottom:30px;line-height:1.6;position:relative;z-index:1001}
 
-.plan-features{list-style:none;padding:0;margin:30px 0}
-.plan-features li{color:#cbd5e1;font-size:1rem;margin-bottom:12px;padding-left:25px;position:relative;line-height:1.5}
-.plan-features li::before{content:'✓';position:absolute;left:0;color:#6366f1;font-weight:bold;font-size:1.2rem}
+.plan-features{list-style:none;padding:0;margin:30px 0;position:relative;z-index:1001}
+.plan-features li{color:#cbd5e1;font-size:1rem;margin-bottom:8px;padding-left:20px;position:relative;line-height:1.5;z-index:1001}
+.plan-features li::before{content:'→';position:absolute;left:0;color:#6b7280;font-weight:bold;z-index:1002}
 
-.plan-button{width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:12px;padding:14px 28px;font-size:16px;font-weight:600;color:#fff;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-block;text-align:center}
-.plan-button:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(99,102,241,0.3)}
-.plan-button.secondary{background:transparent;border:1px solid rgba(99,102,241,0.3);color:#6366f1}
-.plan-button.secondary:hover{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.6)}
+.plan-button{width:100%;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:0.5rem;padding:1rem 2.5rem;font-size:1.125rem;font-weight:600;color:#1f2937;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);text-decoration:none;display:inline-block;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
+.plan-button:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
+.plan-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(0);transition:left 1.5s ease;animation:none;pointer-events:none}
+.plan-button:hover::before{left:100%;animation:shimmer 1.5s infinite}
+.plan-button.secondary{background:transparent;border:1px solid rgba(107,114,128,0.3);color:#9ca3af}
+.plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
-/* FAQ Section */
-.faq-section{margin:80px 0;position:relative;z-index:1000}
-.faq-title{font-size:2.5rem;font-weight:700;color:#fff;text-align:center;margin-bottom:50px}
-.faq-container{max-width:800px;margin:0 auto}
-.faq-item{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.1);border-radius:16px;margin-bottom:16px;overflow:hidden;transition:all 0.3s ease}
-.faq-item:hover{border-color:rgba(99,102,241,0.3)}
+/* FAQ Section - Compact Pricing Style */
+.faq-section{background:linear-gradient(135deg,#0a0b0f 0%,#111318 50%,#0a0b0f 100%);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:50px 40px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:900px;margin-left:auto;margin-right:auto}
+.faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
+.faq-title{text-align:center;margin-bottom:40px;font-size:36px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.faq-container{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.1)}
+.faq-question{width:100%;padding:24px 0;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.faq-question:hover{transform:translateX(6px)}
+.faq-question-text{font-size:18px;font-weight:500;color:#ffffff;text-align:left;line-height:1.4;padding-right:16px}
+.faq-icon-container{width:20px;height:20px;display:flex;align-items:center;justify-content:center;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
+.faq-icon{width:14px;height:14px;stroke:rgba(255,255,255,0.6);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.faq-answer{overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);height:0;opacity:0;transform:translateY(-10px)}
+.faq-answer.open{opacity:1;transform:translateY(0)}
+.faq-answer-content{padding-bottom:24px;padding-right:36px}
+.faq-answer-text{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0}
 
-.faq-question{width:100%;background:transparent;border:none;padding:24px;text-align:left;font-size:1.1rem;font-weight:600;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s ease}
-.faq-question:hover{background:rgba(99,102,241,0.05)}
+/* Background Effects */
+.faq-bg-effect-1{position:absolute;top:20%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px);pointer-events:none}
+.faq-bg-effect-2{position:absolute;bottom:20%;right:10%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 70%);filter:blur(30px);pointer-events:none}
 
-.faq-icon{width:24px;height:24px;color:#6366f1;transition:transform 0.3s ease;transform:rotate(0deg)}
-
-.faq-answer{max-height:0;opacity:0;overflow:hidden;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);background:rgba(15,23,42,0.3)}
-.faq-answer-content{padding:0 24px 24px 24px;color:#cbd5e1;font-size:1rem;line-height:1.6}
-
-/* Back to Home Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000}
-.back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.3);border-radius:50px;padding:14px 28px;font-size:16px;font-weight:600;color:#fff;text-decoration:none;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
-.back-home-btn:hover{transform:translateY(-2px);border-color:rgba(99,102,241,0.6);box-shadow:0 10px 30px rgba(99,102,241,0.3);background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.1))}
-.back-home-btn::before{content:'';position:absolute;top:50%;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(-50%);transition:left 0.6s ease}
-.back-home-btn:hover::before{left:100%}
-.back-home-btn svg{width:20px;height:20px;transition:transform 0.3s ease}
-.back-home-btn:hover svg{transform:translateX(-3px)}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
@@ -66,9 +69,8 @@ body{margin:0!important;padding:0!important}
 .footer-legal a{font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s ease;cursor:pointer;font-family:inherit}
 .footer-legal a:hover{color:#ffffff}
 .footer-social{display:flex;gap:12px;align-items:center}
-.footer-social a{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer}
-.footer-social a:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
-.footer-social svg{width:16px;height:16px}
+.footer-social-link{width:32px;height:32px;border-radius:6px;background-color:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 0.3s ease;cursor:pointer;text-decoration:none}
+.footer-social-link:hover{background-color:rgba(255,255,255,0.1);color:#ffffff}
 .footer-separator{color:rgba(255,255,255,0.2);font-size:18px;line-height:1;margin:0 8px}
 
 @media(max-width:1200px){
@@ -84,17 +86,15 @@ body{margin:0!important;padding:0!important}
   .pricing-page{padding:15px;margin:60px auto}
   .pricing-title{font-size:2rem}
   .pricing-grid{grid-template-columns:1fr;gap:20px}
-  .pricing-card{padding:24px}
-  .footer-row{flex-direction:column;text-align:center;gap:20px}
-  .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-  .footer-right{flex-direction:column;gap:20px}
-  .footer-separator{display:none}
-  .back-home-btn{font-size:14px;padding:12px 24px}
+  .pricing-card{padding:20px}
+  .footer-row{flex-direction:column!important;text-align:center!important;gap:20px!important}
+  .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
+  .footer-right{flex-direction:column!important;gap:20px!important}
+  .footer-separator{display:none!important}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes badgeEntry{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
@@ -103,7 +103,7 @@ const pricingHTML = `
   <div style="text-align: center;">
     <div class="pricing-badge">
       <div class="pricing-badge-dot"></div>
-      Ghost Pilot Pricing
+      Steley Pricing
     </div>
   </div>
   <h1 class="pricing-title">Choose Your Plan</h1>
@@ -113,138 +113,234 @@ const pricingHTML = `
   <div class="pricing-grid">
     <!-- Free Plan -->
     <div class="pricing-card">
-        <h3 class="plan-name">Free</h3>
+      <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
-      <p class="plan-description">Perfect for trying out Ghost Pilot with basic features.</p>
-        <ul class="plan-features">
-        <li>5 AI queries per day</li>
-          <li>Basic screenshot analysis</li>
-          <li>Standard response time</li>
-          <li>Community support</li>
-        </ul>
+      <p class="plan-description">Perfect for trying out Steley with basic features.</p>
+      <ul class="plan-features">
+        <li>3 screenshots per day</li>
+        <li>GPT-4o Mini access</li>
+        <li>Basic interview coaching</li>
+        <li>Limited stealth mode</li>
+        <li>Community support</li>
+      </ul>
       <a href="#" class="plan-button secondary">Get Started Free</a>
-      </div>
+    </div>
 
     <!-- Pro Plan -->
     <div class="pricing-card featured">
-        <h3 class="plan-name">Pro</h3>
-      <div class="plan-price">$19<span>/month</span></div>
+      <h3 class="plan-name">Pro</h3>
+      <div class="plan-price">$19.99<span>/month</span></div>
       <p class="plan-description">Best for professionals and frequent users.</p>
-        <ul class="plan-features">
-          <li>Unlimited AI queries</li>
-          <li>Advanced screenshot analysis</li>
-          <li>Priority response time</li>
-        <li>Email support</li>
-          <li>Custom AI models</li>
-        <li>Export capabilities</li>
-        </ul>
+      <ul class="plan-features">
+        <li>100 screenshots per day</li>
+        <li>GPT-4o, Claude Sonnet 4, O1 Mini</li>
+        <li>Gemini Pro, Gemini 2.0 Flash</li>
+        <li>Advanced interview strategies</li>
+        <li>Priority AI processing</li>
+        <li>Cloud sync & templates</li>
+      </ul>
       <a href="#" class="plan-button">Start Pro Trial</a>
-      </div>
-
-    <!-- Enterprise Plan -->
-    <div class="pricing-card">
-      <h3 class="plan-name">Enterprise</h3>
-      <div class="plan-price">$99<span>/month</span></div>
-      <p class="plan-description">For teams and organizations with advanced needs.</p>
-        <ul class="plan-features">
-          <li>Everything in Pro</li>
-          <li>Team collaboration</li>
-        <li>Advanced security</li>
-        <li>Dedicated support</li>
-          <li>Custom integrations</li>
-        <li>SLA guarantee</li>
-        </ul>
-      <a href="#" class="plan-button">Contact Sales</a>
-      </div>
     </div>
 
+    <!-- Ultra Plan -->
+    <div class="pricing-card">
+      <h3 class="plan-name">Ultra</h3>
+      <div class="plan-price">$99.99<span>/month</span></div>
+      <p class="plan-description">For power users with unlimited needs.</p>
+      <ul class="plan-features">
+        <li>Unlimited screenshots</li>
+        <li>All premium AI models (O3, Claude Opus 4)</li>
+        <li>Maximum stealth technology</li>
+        <li>API access & white label</li>
+        <li>Dedicated support</li>
+        <li>Custom integrations</li>
+      </ul>
+      <a href="#" class="plan-button">Contact Sales</a>
+    </div>
+  </div>
+
   <!-- FAQ Section -->
-    <div class="faq-section">
-      <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-section">
+    <h1 class="faq-title">Pricing Questions</h1>
     <div class="faq-container">
       
-        <div class="faq-item">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(0)">
+          <span class="faq-question-text">What's the difference between Free, Pro, and Ultra plans?</span>
+          <div id="icon-container-0" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-0" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o Mini access, basic interview coaching, and local processing. Pro ($19.99/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 Mini, Gemini Pro, advanced interview strategies, speech-to-text, and priority AI processing. Ultra ($99.99/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, O1 Pro, maximum stealth technology, unlimited AI processing, API access, and dedicated support.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(1)">
-          Can I change my plan at any time?
-          <svg id="icon-1" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-              </svg>
+          <span class="faq-question-text">Is Ghost Pilot detectable by proctoring software like Proctorio, ExamSoft, or Respondus?</span>
+          <div id="icon-container-1" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-1" class="faq-answer">
           <div class="faq-answer-content">
-            Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
+            <p class="faq-answer-text">No. Ghost Pilot uses advanced stealth technology with kernel-level protection and maximum invisibility features (Ultra plan). Our system is specifically designed to be undetectable by common proctoring software including Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU. The stealth mode operates at the system level to avoid detection.</p>
           </div>
         </div>
-            </div>
+      </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(2)">
-          What happens if I exceed my query limit?
-          <svg id="icon-2" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
-          </button>
+          <span class="faq-question-text">What platforms and assessment types does Ghost Pilot support?</span>
+          <div id="icon-container-2" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
         <div id="answer-2" class="faq-answer">
-            <div class="faq-answer-content">
-            For free users, you'll need to wait until your daily limit resets or upgrade to a paid plan. Pro and Enterprise users have unlimited queries.
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Ghost Pilot works with 500+ platforms including coding interviews (HackerRank, LeetCode, CodeSignal), video interviews (Zoom, Teams, Google Meet), online exams (Canvas, Blackboard, Moodle), proctored tests (Proctorio, ExamSoft), and certification exams (AWS, Google Cloud, Microsoft). It supports interviews, coding assessments, multiple-choice quizzes, essays, and any screen-based assessment.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(3)">
-          Is there a free trial for paid plans?
-          <svg id="icon-3" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
+          <span class="faq-question-text">How does the AI screenshot analysis work?</span>
+          <div id="icon-container-3" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-3" class="faq-answer">
           <div class="faq-answer-content">
-            Yes! We offer a 7-day free trial for both Pro and Enterprise plans. No credit card required to start your trial.
-            </div>
+            <p class="faq-answer-text">Simply take a screenshot of your assessment question, and Ghost Pilot's AI analyzes the content in under 1 second with 99% accuracy. Our advanced OCR technology reads text, code, mathematical equations, and diagrams. The AI then provides detailed answers, explanations, and step-by-step solutions using your selected AI model (GPT-4o, Claude, O3, etc.).</p>
           </div>
         </div>
+      </div>
 
-        <div class="faq-item">
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(4)">
-          How secure is my data?
-          <svg id="icon-4" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-              </svg>
+          <span class="faq-question-text">Which AI models are available in each plan?</span>
+          <div id="icon-container-4" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
         </button>
         <div id="answer-4" class="faq-answer">
           <div class="faq-answer-content">
-            We use enterprise-grade encryption and never store your screenshots or sensitive data. All processing is done in real-time and data is immediately discarded after processing.
+            <p class="faq-answer-text">Free: GPT-4o Mini only. Pro: GPT-4o, Claude Sonnet 4, O1 Mini, Gemini Pro, Gemini 2.0 Flash, and Qwen 2.5 VL 72B for advanced multimodal analysis. Ultra: All models including O3, Claude Opus 4, O1 Pro, plus priority access to new releases and custom model configurations. Ultra users get first access to cutting-edge models as they're released.</p>
           </div>
         </div>
-            </div>
+      </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(5)">
-          Can I cancel my subscription anytime?
-          <svg id="icon-5" class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
-          </button>
+          <span class="faq-question-text">Can I upgrade or downgrade my plan anytime?</span>
+          <div id="icon-container-5" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
         <div id="answer-5" class="faq-answer">
-            <div class="faq-answer-content">
-            Absolutely! You can cancel your subscription at any time from your account settings. You'll continue to have access until the end of your current billing period.
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Yes! You can upgrade or downgrade your plan at any time from your settings. Upgrades take effect immediately with prorated billing. Downgrades take effect at your next billing cycle. However, all payments are non-refundable - we recommend starting with our Free plan to test all features before committing to a paid subscription.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(6)">
+          <span class="faq-question-text">Do you offer refunds if I'm not satisfied?</span>
+          <div id="icon-container-6" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-6" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">No, Ghost Pilot operates under a strict no-refund policy. All sales are final including monthly subscriptions, annual plans, and upgrades. We strongly recommend starting with our Free plan (3 screenshots/day) to thoroughly test all features and ensure the platform meets your needs before purchasing a paid subscription.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(7)">
+          <span class="faq-question-text">What happens if I exceed my daily usage limits?</span>
+          <div id="icon-container-7" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-7" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Free users (3 screenshots/day) and Pro users (100 screenshots/day) will need to wait until limits reset at midnight UTC, or upgrade to a higher tier for immediate access. Ultra users have unlimited usage with no daily restrictions. Usage counters reset every 24 hours, and you can monitor your current usage in the dashboard.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(8)">
+          <span class="faq-question-text">How secure are my screenshots and data?</span>
+          <div id="icon-container-8" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-8" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">Ghost Pilot employs enterprise-grade security with AES-256 encryption, SSL protection, and bank-level security protocols. Screenshots are processed locally when possible and automatically deleted within 24 hours. We never store your assessment content permanently or use your data to train AI models. All payment processing via Stripe is PCI-compliant with secure data handling.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(9)">
+          <span class="faq-question-text">What payment methods do you accept and how is billing handled?</span>
+          <div id="icon-container-9" class="faq-icon-container">
+            <svg class="faq-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+        </button>
+        <div id="answer-9" class="faq-answer">
+          <div class="faq-answer-content">
+            <p class="faq-answer-text">We accept all major credit cards (Visa, Mastercard, American Express, Discover) processed securely through Stripe with full SSL encryption and PCI compliance. Billing is processed monthly or annually in advance. You can manage your subscription and payment methods in your account settings. All transactions are secure and we never store your payment details locally.</p>
           </div>
         </div>
       </div>
 
     </div>
+    
+    <!-- Background Effects -->
+    <div class="faq-bg-effect-1"></div>
+    <div class="faq-bg-effect-2"></div>
   </div>
-  
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-      Back to Home
-    </a>
-  </div>
+
 </div>
 
 <!-- Footer -->
@@ -253,7 +349,7 @@ const pricingHTML = `
     <div class="footer-row">
       <!-- Left Side - Copyright -->
       <div class="footer-copyright">
-        <span>© Ghost Pilot 2025</span>
+        <span>© Steley 2025</span>
       </div>
 
       <span class="footer-separator">·</span>
@@ -263,9 +359,7 @@ const pricingHTML = `
         <a href="#features">Features</a>
         <a href="/pricing">Pricing</a>
         <a href="#ai-models">AI Models</a>
-        <a href="#help">Help Center</a>
-        <a href="#docs">Documentation</a>
-        <a href="#community">Community</a>
+        <a href="/document">Documentation</a>
       </div>
 
       <span class="footer-separator">·</span>
@@ -282,20 +376,26 @@ const pricingHTML = `
 
         <!-- Social Links -->
         <div class="footer-social">
-          <a href="https://twitter.com/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
+          <a href="https://twitter.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
           </a>
-          <a href="https://github.com/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
+          <a href="https://github.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
           </a>
-          <a href="https://discord.gg/ghostpilot" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0188 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9554 2.4189-2.1568 2.4189Z"/>
-            </svg>
+          <a href="https://discord.gg/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Discord">
+            <div style="transform:scale(0.8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0188 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9554 2.4189-2.1568 2.4189Z"/>
+              </svg>
+            </div>
           </a>
         </div>
       </div>
@@ -304,22 +404,24 @@ const pricingHTML = `
 </footer>
 `;
 
-// FAQ functionality - Enhanced for inline styling
-let openFAQ = null;
+// FAQ functionality - Home Page Style
+let openFAQ = 0; // First FAQ open by default
 window.toggleFAQ = function(index) {
   const answer = document.getElementById('answer-' + index);
-  const icon = document.getElementById('icon-' + index);
+  const iconContainer = document.getElementById('icon-container-' + index);
   
   // Close previously open FAQ
   if (openFAQ !== null && openFAQ !== index) {
     const prevAnswer = document.getElementById('answer-' + openFAQ);
-    const prevIcon = document.getElementById('icon-' + openFAQ);
+    const prevIconContainer = document.getElementById('icon-container-' + openFAQ);
     if (prevAnswer) {
-      prevAnswer.style.maxHeight = '0';
+      prevAnswer.style.height = '0px';
       prevAnswer.style.opacity = '0';
+      prevAnswer.style.transform = 'translateY(-10px)';
+      prevAnswer.classList.remove('open');
     }
-    if (prevIcon) {
-      prevIcon.style.transform = 'rotate(0deg)';
+    if (prevIconContainer) {
+      prevIconContainer.style.transform = 'rotate(0deg)';
     }
   }
   
@@ -327,11 +429,13 @@ window.toggleFAQ = function(index) {
   if (openFAQ === index) {
     // Close current FAQ
     if (answer) {
-      answer.style.maxHeight = '0';
+      answer.style.height = '0px';
       answer.style.opacity = '0';
+      answer.style.transform = 'translateY(-10px)';
+      answer.classList.remove('open');
     }
-    if (icon) {
-      icon.style.transform = 'rotate(0deg)';
+    if (iconContainer) {
+      iconContainer.style.transform = 'rotate(0deg)';
     }
     openFAQ = null;
   } else {
@@ -339,16 +443,28 @@ window.toggleFAQ = function(index) {
     if (answer) {
       // Get the content height dynamically
       const content = answer.querySelector('.faq-answer-content');
-      const contentHeight = content ? content.scrollHeight + 40 : 120; // Add padding
-      answer.style.maxHeight = contentHeight + 'px';
+      const contentHeight = content ? content.scrollHeight : 120;
+      answer.style.height = contentHeight + 'px';
       answer.style.opacity = '1';
+      answer.style.transform = 'translateY(0)';
+      answer.classList.add('open');
     }
-    if (icon) {
-      icon.style.transform = 'rotate(45deg)';
+    if (iconContainer) {
+      iconContainer.style.transform = 'rotate(45deg)';
     }
     openFAQ = index;
   }
 };
+
+// Initialize FAQ with first item open
+function initializeFAQ() {
+  setTimeout(() => {
+    if (typeof window.toggleFAQ === 'function') {
+      // Open first FAQ by default
+      window.toggleFAQ(0);
+    }
+  }, 100);
+}
 
 // Auto-execute function to inject CSS and HTML
 (function() {
@@ -370,25 +486,70 @@ window.toggleFAQ = function(index) {
     // Try to find main content area, otherwise use body
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
-                   document.querySelector('[data-framer-name="Content"]') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
-  
-    // Clear existing content in main area and add pricing page
+    
+    // Clear existing content in main area and add pricing content
     if (mainContent !== document.body) {
-    mainContent.innerHTML = pricingHTML;
-  } else {
+      mainContent.innerHTML = pricingHTML;
+    } else {
       // If we're using body, insert at the beginning but after header
       const header = document.querySelector('header') || document.querySelector('nav');
-    if (header) {
-      header.insertAdjacentHTML('afterend', pricingHTML);
-    } else {
-      document.body.insertAdjacentHTML('afterbegin', pricingHTML);
+      if (header) {
+        header.insertAdjacentHTML('afterend', pricingHTML);
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
       }
     }
     
+    // Initialize pricing section animations
+    initializePricingSectionAnimations();
+    
     // Initialize footer scroll animation
     initializeFooterAnimation();
+    
+    // Initialize FAQ
+    initializeFAQ();
+  }
+  
+  function initializePricingSectionAnimations() {
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+      const pricingCards = document.querySelectorAll('.pricing-card');
+      const pricingGrid = document.querySelector('.pricing-grid');
+      const faqSection = document.querySelector('.faq-section');
+      
+      // Add staggered animation to cards
+      pricingCards.forEach((card, index) => {
+        const delay = 400 + (index * 100); // Start at 400ms, then add 100ms for each card
+        
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+          card.classList.add('pricing-animated');
+        }, delay);
+      });
+      
+      // Animate pricing grid
+      if (pricingGrid) {
+        setTimeout(() => {
+          pricingGrid.style.opacity = '1';
+          pricingGrid.style.transform = 'translateY(0) scale(1)';
+          pricingGrid.classList.add('pricing-animated');
+        }, 300);
+      }
+      
+      // Animate FAQ section after cards
+      if (faqSection) {
+        const faqDelay = 400 + (pricingCards.length * 100) + 200; // Extra 200ms after last card
+        setTimeout(() => {
+          faqSection.style.opacity = '1';
+          faqSection.style.transform = 'translateY(0) scale(1)';
+          faqSection.classList.add('pricing-animated');
+        }, faqDelay);
+      }
+    }, 100);
   }
   
   function initializeFooterAnimation() {
