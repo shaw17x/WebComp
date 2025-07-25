@@ -58,7 +58,6 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
-  .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -203,13 +202,6 @@ const privacyHTML = `
     Tech City, TC 12345<br>
     United States</p>
   </div>
-  
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      Back to Home
-    </a>
-  </div>
 </div>
 
 <!-- Footer -->
@@ -321,7 +313,6 @@ const privacyHTML = `
     // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const sections = document.querySelectorAll('.pp-section');
-      const backHomeContainer = document.querySelector('.back-home-container');
       
       // Add staggered animation to sections
       sections.forEach((section, index) => {
@@ -333,15 +324,6 @@ const privacyHTML = `
           section.classList.add('pp-animated');
         }, delay);
       });
-      
-      // Animate back home button after all sections
-      if (backHomeContainer) {
-        const backHomeDelay = 400 + (sections.length * 100) + 200; // Extra 200ms after last section
-        setTimeout(() => {
-          backHomeContainer.style.opacity = '1';
-          backHomeContainer.style.transform = 'translateY(0) scale(1)';
-        }, backHomeDelay);
-      }
     }, 100);
   }
   
