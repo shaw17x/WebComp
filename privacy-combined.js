@@ -284,19 +284,10 @@ const privacyHTML = `
 
 // Auto-execute function to inject CSS and HTML
 (function() {
-  // Simple duplicate prevention - exactly like terms page
-  if (document.querySelector('.pp')) {
-    console.log('🛑 Privacy page already loaded, skipping...');
-    return;
-  }
-  
-  console.log('🔒 Loading privacy page...');
-  
-  // Add CSS immediately
+  // Add CSS
   const style = document.createElement('style');
   style.textContent = privacyCSS;
   document.head.appendChild(style);
-  console.log('✅ Privacy CSS loaded');
   
   // Add HTML when DOM is ready - find main content area
   if (document.readyState === 'loading') {
@@ -308,22 +299,12 @@ const privacyHTML = `
   }
   
   function initializePrivacyPage() {
-      console.log('🔧 Initializing privacy page...');
-      
-      // Check if content already exists
-      if (document.querySelector('.pp')) {
-        console.log('✅ Privacy content already exists');
-        return;
-      }
-      
       // Try to find main content area, otherwise use body
       const mainContent = document.querySelector('main') || 
                          document.querySelector('.main-content') || 
                          document.querySelector('[data-framer-name="Content"]') ||
                          document.querySelector('.framer-page-content') ||
                          document.body;
-      
-      console.log('📍 Using container:', mainContent.tagName, mainContent.className || 'no-class');
       
       // Clear existing content in main area and add privacy policy
       if (mainContent !== document.body) {
@@ -337,16 +318,12 @@ const privacyHTML = `
           document.body.insertAdjacentHTML('afterbegin', privacyHTML);
         }
       }
-      
-      console.log('✅ Privacy HTML added');
     
     // Initialize privacy section animations
     initializePrivacySectionAnimations();
     
     // Initialize footer scroll animation
     initializeFooterAnimation();
-    
-    console.log('🎬 Privacy animations initialized');
   }
   
   function initializePrivacySectionAnimations() {
