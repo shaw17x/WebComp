@@ -91,6 +91,18 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
+  
+  /* Mobile-friendly AI models table */
+  .faq-answer-content div[style*="grid-template-columns"]{
+    grid-template-columns:1fr!important;
+    gap:15px!important;
+  }
+  .faq-answer-content div[style*="grid-template-columns"] > div{
+    border:1px solid rgba(107,114,128,0.2);
+    border-radius:8px;
+    padding:12px;
+    background:rgba(10,11,15,0.5);
+  }
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -244,7 +256,36 @@ const pricingHTML = `
         </button>
         <div id="answer-4" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Free: GPT-4o Mini only. Pro: GPT-4o, Claude Sonnet 4, O1 Mini, Gemini Pro, Gemini 2.0 Flash, and Qwen 2.5 VL 72B for advanced multimodal analysis. Ultra: All models including O3, Claude Opus 4, O1 Pro, plus priority access to new releases and custom model configurations. Ultra users get first access to cutting-edge models as they're released.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 20px 0;">
+              <div>
+                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Free</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px; padding: 6px 12px; background: rgba(107,114,128,0.1); border-radius: 6px; text-align: center;">GPT-4o Mini</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Pro</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">GPT-4o</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Claude Sonnet 4</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O1 Mini</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Gemini Pro</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Gemini 2.0 Flash</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Qwen 2.5 VL 72B</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Ultra</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">All Pro Models +</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O3</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Claude Opus 4</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O1 Pro</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Priority Access</li>
+                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Custom Configs</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
