@@ -22,17 +22,6 @@ body{margin:0!important;padding:0!important}
 .docs-contact{background:#0a0e1a;border:1px solid rgba(255,255,255,0.1)}
 .docs-contact li::before{content:'→';color:#6b7280}
 
-/* Back to Home Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
-.back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:0.5rem;padding:1rem 2.5rem;font-size:1.125rem;font-weight:600;color:#1f2937;text-decoration:none;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
-.back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
-.back-home-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(0);transition:left 1.5s ease;animation:none;pointer-events:none}
-.back-home-btn:hover::before{left:100%;animation:shimmer 1.5s infinite}
-.back-home-btn svg{width:18px;height:18px;transition:transform 0.3s ease;position:relative;z-index:1}
-.back-home-btn:hover svg{transform:translateX(-4px)}
-
-@keyframes shimmer{0%{left:-100%}100%{left:100%}}
-
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
 .footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
@@ -68,7 +57,6 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
-  .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -224,13 +212,6 @@ const docsHTML = `
       <li><strong>Success Focus:</strong> Dedicated to your academic achievement, career advancement, and professional growth</li>
     </ul>
   </div>
-  
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      Back to Home
-    </a>
-  </div>
 </div>
 
 <!-- Footer -->
@@ -342,7 +323,6 @@ const docsHTML = `
     // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const sections = document.querySelectorAll('.docs-section');
-      const backHomeContainer = document.querySelector('.back-home-container');
       
       // Add staggered animation to sections
       sections.forEach((section, index) => {
@@ -354,15 +334,6 @@ const docsHTML = `
           section.classList.add('docs-animated');
         }, delay);
       });
-      
-      // Animate back home button after all sections
-      if (backHomeContainer) {
-        const backHomeDelay = 400 + (sections.length * 100) + 200; // Extra 200ms after last section
-        setTimeout(() => {
-          backHomeContainer.style.opacity = '1';
-          backHomeContainer.style.transform = 'translateY(0) scale(1)';
-        }, backHomeDelay);
-      }
     }, 100);
   }
   
@@ -396,7 +367,7 @@ const docsHTML = `
         } else if (progress >= 1) {
           card.style.transform = "scale(1) translateY(0px)";
           card.style.opacity = "1";
-    } else {
+        } else {
           card.style.transform = "scale(0.95) translateY(20px)";
           card.style.opacity = "0.3";
         }
