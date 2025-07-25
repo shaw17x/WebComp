@@ -27,17 +27,6 @@ body{margin:0!important;padding:0!important}
 .tos-important h3{color:#9ca3af}
 .tos-important h2::before{background:linear-gradient(135deg,#6b7280,#9ca3af)}
 
-/* Back to Home Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
-.back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:0.5rem;padding:1rem 2.5rem;font-size:1.125rem;font-weight:600;color:#1f2937;text-decoration:none;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
-.back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
-.back-home-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(0);transition:left 1.5s ease;animation:none;pointer-events:none}
-.back-home-btn:hover::before{left:100%;animation:shimmer 1.5s infinite}
-.back-home-btn svg{width:18px;height:18px;transition:transform 0.3s ease;position:relative;z-index:1}
-.back-home-btn:hover svg{transform:translateX(-4px)}
-
-@keyframes shimmer{0%{left:-100%}100%{left:100%}}
-
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
 .footer-content{max-width:1400px;margin:0 auto;padding:28px 40px}
@@ -73,7 +62,6 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
-  .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -244,13 +232,6 @@ const termsHTML = `
     Tech City, TC 12345<br>
     United States</p>
   </div>
-  
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      Back to Home
-    </a>
-  </div>
 </div>
 
 <!-- Footer -->
@@ -296,7 +277,7 @@ const termsHTML = `
           <a href="https://github.com/steley" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
             <div style="transform:scale(0.8)">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
               </svg>
             </div>
           </a>
@@ -314,23 +295,12 @@ const termsHTML = `
 </footer>
 `;
 
-// Auto-execute function to inject CSS and HTML with duplication prevention
+// Auto-execute function to inject CSS and HTML
 (function() {
-  // Check if terms of service is already loaded to prevent duplication
-  if (document.querySelector('.tos') || document.querySelector('[data-steley-terms-loaded]')) {
-    return; // Already loaded, prevent duplication
-  }
-
-  // Mark as loaded
-  document.documentElement.setAttribute('data-steley-terms-loaded', 'true');
-
-  // Add CSS (check if already exists)
-  if (!document.querySelector('style[data-steley-terms-css]')) {
-    const style = document.createElement('style');
-    style.setAttribute('data-steley-terms-css', 'true');
-    style.textContent = termsCSS;
-    document.head.appendChild(style);
-  }
+  // Add CSS
+  const style = document.createElement('style');
+  style.textContent = termsCSS;
+  document.head.appendChild(style);
   
   // Add HTML when DOM is ready - find main content area
   if (document.readyState === 'loading') {
@@ -342,11 +312,6 @@ const termsHTML = `
   }
   
   function initializeTermsPage() {
-    // Check again to prevent double initialization
-    if (document.querySelector('.tos')) {
-      return;
-    }
-
     // Try to find main content area, otherwise use body
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
@@ -378,7 +343,6 @@ const termsHTML = `
     // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const sections = document.querySelectorAll('.tos-section');
-      const backHomeContainer = document.querySelector('.back-home-container');
       
       // Add staggered animation to sections
       sections.forEach((section, index) => {
@@ -390,15 +354,6 @@ const termsHTML = `
           section.classList.add('tos-animated');
         }, delay);
       });
-      
-      // Animate back home button after all sections
-      if (backHomeContainer) {
-        const backHomeDelay = 400 + (sections.length * 100) + 200; // Extra 200ms after last section
-        setTimeout(() => {
-          backHomeContainer.style.opacity = '1';
-          backHomeContainer.style.transform = 'translateY(0) scale(1)';
-        }, backHomeDelay);
-      }
     }, 100);
   }
   
