@@ -27,16 +27,7 @@ body{margin:0!important;padding:0!important}
 .tos-important h3{color:#9ca3af}
 .tos-important h2::before{background:linear-gradient(135deg,#6b7280,#9ca3af)}
 
-/* Back to Home Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
-.back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:0.5rem;padding:1rem 2.5rem;font-size:1.125rem;font-weight:600;color:#1f2937;text-decoration:none;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
-.back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 10px 25px rgba(107,114,128,0.3)}
-.back-home-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateY(0);transition:left 1.5s ease;animation:none;pointer-events:none}
-.back-home-btn:hover::before{left:100%;animation:shimmer 1.5s infinite}
-.back-home-btn svg{width:18px;height:18px;transition:transform 0.3s ease;position:relative;z-index:1}
-.back-home-btn:hover svg{transform:translateX(-4px)}
 
-@keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
 /* Footer Styles */
 .footer{position:relative;background-color:transparent;border-top:1px solid rgba(255,255,255,0.1);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;opacity:0.3;visibility:visible;transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transform:scale(0.95) translateY(20px);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;margin-top:80px}
@@ -73,7 +64,6 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
-  .back-home-btn{font-size:14px;padding:12px 24px}
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -93,7 +83,7 @@ const termsHTML = `
   <p class="tos-subtitle">Effective Date: January 15, 2025 | Last Updated: January 15, 2025</p>
   
   <div class="tos-section tos-intro">
-    <p>Welcome to Steley. These Terms of Service ("Terms") govern your use of our AI-powered interview assistance platform ("Service"), operated by Steley, Inc. ("we," "us," or "our"). By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of these Terms, you may not access the Service.</p>
+          <p>Welcome to Steley. These Terms of Service ("Terms") govern your use of our AI-powered interview assistance platform ("Service"), operated by Steley, Inc. ("we," "us," or "our"). By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of these Terms, you may not access the Service.</p>
   </div>
   
   <div class="tos-section">
@@ -104,7 +94,7 @@ const termsHTML = `
   
   <div class="tos-section">
     <h2>2. Description of Service</h2>
-    <p>Steley provides AI-powered assistance for interview preparation and real-time support, including:</p>
+          <p>Steley provides AI-powered assistance for interview preparation and real-time support, including:</p>
     <ul>
       <li>Screenshot analysis and question interpretation</li>
       <li>AI-generated responses and solutions</li>
@@ -165,7 +155,7 @@ const termsHTML = `
   <div class="tos-section">
     <h2>6. Intellectual Property Rights</h2>
     <h3>Our Content</h3>
-    <p>The Service and its original content, features, and functionality are owned by Steley, Inc. and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+          <p>The Service and its original content, features, and functionality are owned by Steley, Inc. and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
     <h3>User Content</h3>
     <p>By uploading content to our Service, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and process your content solely for providing the Service. You retain all rights to your content.</p>
     <h3>AI-Generated Content</h3>
@@ -183,13 +173,13 @@ const termsHTML = `
       <li>Any errors in the Service will be corrected</li>
     </ul>
     <h3>Limitation of Liability</h3>
-    <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, STELEY, INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.</strong></p>
+          <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, STELEY, INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.</strong></p>
     <p>Our total liability for any claims under these Terms shall not exceed the amount paid by you to us in the twelve (12) months preceding the claim.</p>
   </div>
   
   <div class="tos-section">
     <h2>8. Indemnification</h2>
-    <p>You agree to indemnify, defend, and hold harmless Steley, Inc., its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with:</p>
+      <p>You agree to indemnify, defend, and hold harmless Steley, Inc., its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with:</p>
     <ul>
       <li>Your access to or use of the Service</li>
       <li>Your violation of these Terms</li>
@@ -222,7 +212,7 @@ const termsHTML = `
   <div class="tos-section">
     <h2>12. General Provisions</h2>
     <h3>Entire Agreement</h3>
-    <p>These Terms constitute the entire agreement between you and Steley, Inc. regarding the Service and supersede all prior agreements and understandings.</p>
+          <p>These Terms constitute the entire agreement between you and Steley, Inc. regarding the Service and supersede all prior agreements and understandings.</p>
     <h3>Severability</h3>
     <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.</p>
     <h3>Waiver</h3>
@@ -235,21 +225,14 @@ const termsHTML = `
     <h2>13. Contact Information</h2>
     <p>If you have any questions about these Terms of Service, please contact us:</p>
     <ul>
-      <li><strong>Email:</strong> legal@steley.ai</li>
-      <li><strong>Support:</strong> support@steley.ai</li>
+              <li><strong>Email:</strong> legal@steley.ai</li>
+        <li><strong>Support:</strong> support@steley.ai</li>
     </ul>
     <h3>Mailing Address:</h3>
-    <p>Steley, Inc.<br>
+          <p>Steley, Inc.<br>
     123 AI Street<br>
     Tech City, TC 12345<br>
     United States</p>
-  </div>
-  
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      Back to Home
-    </a>
   </div>
 </div>
 
@@ -331,25 +314,25 @@ const termsHTML = `
   }
   
   function initializeTermsPage() {
-      // Try to find main content area, otherwise use body
-      const mainContent = document.querySelector('main') || 
-                         document.querySelector('.main-content') || 
-                         document.querySelector('[data-framer-name="Content"]') ||
-                         document.querySelector('.framer-page-content') ||
-                         document.body;
-      
-      // Clear existing content in main area and add terms of service
-      if (mainContent !== document.body) {
-        mainContent.innerHTML = termsHTML;
+    // Try to find main content area, otherwise use body
+    const mainContent = document.querySelector('main') || 
+                       document.querySelector('.main-content') || 
+                       document.querySelector('[data-framer-name="Content"]') ||
+                       document.querySelector('.framer-page-content') ||
+                       document.body;
+    
+    // Clear existing content in main area and add terms of service
+    if (mainContent !== document.body) {
+      mainContent.innerHTML = termsHTML;
+    } else {
+      // If we're using body, insert at the beginning but after header
+      const header = document.querySelector('header') || document.querySelector('nav');
+      if (header) {
+        header.insertAdjacentHTML('afterend', termsHTML);
       } else {
-        // If we're using body, insert at the beginning but after header
-        const header = document.querySelector('header') || document.querySelector('nav');
-        if (header) {
-          header.insertAdjacentHTML('afterend', termsHTML);
-        } else {
-          document.body.insertAdjacentHTML('afterbegin', termsHTML);
-        }
+        document.body.insertAdjacentHTML('afterbegin', termsHTML);
       }
+    }
     
     // Initialize terms section animations
     initializeTermsSectionAnimations();
@@ -362,7 +345,6 @@ const termsHTML = `
     // Wait a bit for DOM to be fully ready
     setTimeout(() => {
       const sections = document.querySelectorAll('.tos-section');
-      const backHomeContainer = document.querySelector('.back-home-container');
       
       // Add staggered animation to sections
       sections.forEach((section, index) => {
@@ -374,15 +356,6 @@ const termsHTML = `
           section.classList.add('tos-animated');
         }, delay);
       });
-      
-      // Animate back home button after all sections
-      if (backHomeContainer) {
-        const backHomeDelay = 400 + (sections.length * 100) + 200; // Extra 200ms after last section
-        setTimeout(() => {
-          backHomeContainer.style.opacity = '1';
-          backHomeContainer.style.transform = 'translateY(0) scale(1)';
-        }, backHomeDelay);
-      }
     }, 100);
   }
   
@@ -416,7 +389,7 @@ const termsHTML = `
         } else if (progress >= 1) {
           card.style.transform = "scale(1) translateY(0px)";
           card.style.opacity = "1";
-    } else {
+        } else {
           card.style.transform = "scale(0.95) translateY(20px)";
           card.style.opacity = "0.3";
         }
