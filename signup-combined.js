@@ -96,7 +96,7 @@ const signupHTML = `
     <div class="auth-header">
       <!-- Logo + Title Container (v2.1 - Cache Bust) -->
       <div style="display: inline-flex; align-items: center; gap: 0; margin-bottom: 0.5rem;">
-        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-right: -4px;" onerror="console.warn('Steley logo failed to load'); this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/shaw17x/WebComp/main/SteleyBlueLogo.png?v=2" alt="Steley Logo" style="width: 40px; height: 40px; object-fit: contain; image-rendering: crisp-edges; flex-shrink: 0; margin-right: -4px;" onerror="this.style.display='none'">
         <h1 class="auth-title" style="margin-bottom: 0;">teley</h1>
       </div>
       <h2 class="auth-subtitle">Join Steley</h2>
@@ -244,7 +244,7 @@ const signupHTML = `
           <a href="https://github.com/steley" target="_blank" rel="noopener noreferrer" class="auth-social-link" aria-label="GitHub">
             <div style="transform:scale(0.8)">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
               </svg>
             </div>
           </a>
@@ -270,15 +270,8 @@ const signupHTML = `
                        location.hash.includes('signup') ||
                        location.hash.includes('sign-up');
   
-  console.log('🚀 NEW v2.1: Signup component starting - Logo+teley mode...');
-  console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', location.pathname);
-  console.log('📍 Hash:', location.hash);
-  console.log('📍 Is signup page?', isSignupPage);
-  
   // Only load if this is actually a signup page
   if (!isSignupPage) {
-    console.log('❌ Not a signup page, skipping...');
     return;
   }
   
@@ -286,7 +279,6 @@ const signupHTML = `
   const style = document.createElement('style');
   style.textContent = signupCSS;
   document.head.appendChild(style);
-  console.log('✅ Signup CSS added');
   
   // Add HTML when DOM is ready
   if (document.readyState === 'loading') {
@@ -298,21 +290,17 @@ const signupHTML = `
   }
   
   function initializeSignupPage() {
-    console.log('🔧 Initializing signup page...');
-    
-    // 🎯 CHECK IF USER IS ALREADY LOGGED IN - REDIRECT IF SO
+    // Check if user is already logged in
     const sessionData = localStorage.getItem('steley_session');
     if (sessionData) {
       try {
         const session = JSON.parse(sessionData);
         if (session.email) {
-          console.log('✅ User already logged in:', session.email);
-          console.log('🔄 Redirecting to home page...');
           window.location.href = '/';
-          return; // Stop signup page initialization
+          return;
         }
       } catch {
-        console.log('⚠️ Invalid session data, continuing with signup');
+        // Continue with signup
       }
     }
     
@@ -322,8 +310,6 @@ const signupHTML = `
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
-    
-    console.log('📍 Main content element:', mainContent.tagName);
     
     // Clear existing content in main area and add signup page
     if (mainContent !== document.body) {
@@ -338,8 +324,6 @@ const signupHTML = `
       }
     }
     
-    console.log('✅ Signup HTML added');
-    
     // Initialize interactions after a short delay to ensure DOM is ready
     setTimeout(() => {
       initializeSignupInteractions();
@@ -347,29 +331,19 @@ const signupHTML = `
   }
   
   function initializeSignupInteractions() {
-    console.log('🔧 Initializing signup interactions...');
-    
     // Form submission
     const form = document.getElementById('signupForm');
     const submitText = document.getElementById('submitText');
     
     if (form) {
-      console.log('✅ Signup form found');
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        console.log('📝 Form submission started');
         
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirmPassword');
         
-        console.log('🔍 Checking form inputs...');
-        console.log('📧 Email input found:', !!emailInput);
-        console.log('🔒 Password input found:', !!passwordInput);
-        console.log('🔒 Confirm password input found:', !!confirmPasswordInput);
-        
         if (!emailInput || !passwordInput || !confirmPasswordInput) {
-          console.error('❌ Required inputs not found');
           return;
         }
         
@@ -377,30 +351,20 @@ const signupHTML = `
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
         
-        console.log('📋 Form data collected:');
-        console.log('📧 Email:', email ? 'PROVIDED' : 'EMPTY');
-        console.log('🔒 Password:', password ? `${password.length} chars` : 'EMPTY');
-        console.log('🔒 Confirm Password:', confirmPassword ? `${confirmPassword.length} chars` : 'EMPTY');
-        
         if (!email || !password || !confirmPassword) {
-          console.error('❌ Empty fields detected');
           alert('Please fill in all fields');
           return;
         }
         
         if (password !== confirmPassword) {
-          console.error('❌ Passwords do not match');
           alert('Passwords do not match');
           return;
         }
         
         if (password.length < 6) {
-          console.error('❌ Password too short');
           alert('Password must be at least 6 characters');
           return;
         }
-        
-        console.log('✅ Form validation passed');
         
         // Show loading state
         if (submitText) {
@@ -410,21 +374,11 @@ const signupHTML = `
               Creating Account...
             </div>
           `;
-          console.log('🔄 Loading state displayed');
         }
         
         try {
-          console.log('🔍 Checking for existing auth client...');
-          console.log('🌐 window.steleyAuth exists:', !!window.steleyAuth);
-          
-          // Initialize auth client directly (no external loading)
-          console.log('🔄 Initializing auth client directly...');
-          
           // Force clear old auth client and create new one
-          console.log('🧹 Clearing existing auth client...');
           window.steleyAuth = null;
-          
-          console.log('🔧 Creating new auth client instance...');
           
           // Initialize auth client directly - no external script loading
           class SteleyAuth {
@@ -444,21 +398,16 @@ const signupHTML = `
             async initialize() {
               if (this.initialized) return;
               try {
-                console.log('🔄 Initializing Supabase auth client...');
                 await this.loadSupabaseScript();
                 this.supabase = window.supabase.createClient(this.config.url, this.config.anonKey);
-                console.log('✅ Supabase client created');
                 const { data: { session } } = await this.supabase.auth.getSession();
                 this.currentUser = session?.user || null;
-                console.log('👤 Current session user:', this.currentUser?.email || 'None');
                 this.supabase.auth.onAuthStateChange((event, session) => {
                   this.currentUser = session?.user || null;
                   this.onAuthStateChange(event, session);
                 });
                 this.initialized = true;
-                console.log('✅ Steley Auth initialized successfully');
               } catch (error) {
-                console.error('❌ Auth initialization failed:', error);
                 throw error;
               }
             }
@@ -466,19 +415,15 @@ const signupHTML = `
             loadSupabaseScript() {
               return new Promise((resolve, reject) => {
                 if (window.supabase) {
-                  console.log('✅ Supabase already loaded');
                   resolve();
                   return;
                 }
-                console.log('📥 Loading Supabase from CDN...');
                 const script = document.createElement('script');
                 script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
                 script.onload = () => {
-                  console.log('✅ Supabase script loaded');
                   resolve();
                 };
                 script.onerror = (error) => {
-                  console.error('❌ Supabase script failed to load:', error);
                   reject(error);
                 };
                 document.head.appendChild(script);
@@ -486,129 +431,99 @@ const signupHTML = `
             }
 
             onAuthStateChange(event, session) {
-              console.log('🔄 Auth state changed:', event, session?.user?.email);
               window.dispatchEvent(new CustomEvent('authStateChanged', {
                 detail: { event, session, user: session?.user }
               }));
             }
 
-                          async signUp(email, password, additionalData = {}) {
-                console.log('🚀 Starting signup process with email:', email);
-                if (!this.initialized) {
-                  console.log('⏳ Auth not initialized, initializing now...');
-                  await this.initialize();
-                }
-                try {
-                  console.log('📝 Calling Supabase signUp with OTP verification...');
-                  const { data, error } = await this.supabase.auth.signUp({
-                    email,
-                    password,
-                    options: {
-                      emailRedirectTo: undefined, // Use OTP instead of links
-                      data: {
-                        created_via: 'website',
-                        verification_method: 'otp',
-                        ...additionalData
-                      }
+            async signUp(email, password, additionalData = {}) {
+              if (!this.initialized) {
+                await this.initialize();
+              }
+              try {
+                const { data, error } = await this.supabase.auth.signUp({
+                  email,
+                  password,
+                  options: {
+                    emailRedirectTo: undefined,
+                    data: {
+                      created_via: 'website',
+                      verification_method: 'otp',
+                      ...additionalData
                     }
-                  });
-                  console.log('📥 Supabase signup response:');
-                  console.log('📥 Data:', data);
-                  console.log('📥 Error:', error);
-                  console.log('📥 User created:', !!data?.user);
-                  console.log('📥 User ID:', data?.user?.id);
-                  
-                  if (error) {
-                    console.error('❌ Supabase signup error:', error);
-                    return { success: false, error: error.message, details: error };
                   }
-                  if (!data?.user) {
-                    console.error('❌ No user returned from signup');
-                    return { success: false, error: 'No user data returned from signup' };
-                  }
-                  
-                  // Check if email verification is needed (no session = needs verification)
-                  if (data.user && !data.session) {
-                    console.log('📧 Email verification required');
-                    return { 
-                      success: true, 
-                      data, 
-                      user: data.user, 
-                      needsVerification: true 
-                    };
-                  }
-                  
-                  console.log('✅ User signup successful with immediate session, user ID:', data.user.id);
-                  console.log('🎉 Signup process completed successfully');
-                  return { success: true, data, user: data.user };
-                } catch (error) {
-                  console.error('💥 Signup process failed with error:');
-                  console.error('💥 Error type:', error.constructor.name);
-                  console.error('💥 Error message:', error.message);
-                  console.error('💥 Error stack:', error.stack);
+                });
+                
+                if (error) {
+                  return { success: false, error: error.message, details: error };
+                }
+                if (!data?.user) {
+                  return { success: false, error: 'No user data returned from signup' };
+                }
+                
+                // Check if email verification is needed (no session = needs verification)
+                if (data.user && !data.session) {
                   return { 
-                    success: false, 
-                    error: error.message || 'Unknown signup error',
-                    details: error 
+                    success: true, 
+                    data, 
+                    user: data.user, 
+                    needsVerification: true 
                   };
                 }
+                
+                return { success: true, data, user: data.user };
+              } catch (error) {
+                return { 
+                  success: false, 
+                  error: error.message || 'Unknown signup error',
+                  details: error 
+                };
               }
+            }
 
-              async verifyEmailOTP(email, token) {
-                console.log('🔐 Starting email verification with OTP:', email);
-                if (!this.initialized) {
-                  await this.initialize();
-                }
-                try {
-                  console.log('📝 Calling Supabase verifyOtp...');
-                  const { data, error } = await this.supabase.auth.verifyOtp({
-                    email,
-                    token,
-                    type: 'email'
-                  });
-                  console.log('📥 Verification response:', { data, error });
-                  if (error) {
-                    console.error('❌ Verification error:', error);
-                    return { success: false, error: error.message };
-                  }
-                  console.log('✅ Email verification successful');
-                  return { success: true, data, user: data.user };
-                } catch (error) {
-                  console.error('💥 Verification failed:', error);
-                  return { success: false, error: error.message || 'Verification failed' };
-                }
+            async verifyEmailOTP(email, token) {
+              if (!this.initialized) {
+                await this.initialize();
               }
+              try {
+                const { data, error } = await this.supabase.auth.verifyOtp({
+                  email,
+                  token,
+                  type: 'email'
+                });
+                if (error) {
+                  return { success: false, error: error.message };
+                }
+                return { success: true, data, user: data.user };
+              } catch (error) {
+                return { success: false, error: error.message || 'Verification failed' };
+              }
+            }
 
-              async resendVerificationCode(email) {
-                console.log('📧 Resending verification code to:', email);
-                if (!this.initialized) {
-                  await this.initialize();
-                }
-                try {
-                  const { error } = await this.supabase.auth.resend({
-                    type: 'signup',
-                    email,
-                    options: {
-                      emailRedirectTo: undefined // Use OTP instead of links
-                    }
-                  });
-                  if (error) {
-                    console.error('❌ Resend error:', error);
-                    return { success: false, error: error.message };
-                  }
-                  console.log('✅ Verification code resent successfully');
-                  return { success: true };
-                } catch (error) {
-                  console.error('💥 Resend failed:', error);
-                  return { success: false, error: error.message || 'Failed to resend code' };
-                }
+            async resendVerificationCode(email) {
+              if (!this.initialized) {
+                await this.initialize();
               }
+              try {
+                const { error } = await this.supabase.auth.resend({
+                  type: 'signup',
+                  email,
+                  options: {
+                    emailRedirectTo: undefined
+                  }
+                });
+                if (error) {
+                  return { success: false, error: error.message };
+                }
+                return { success: true };
+              } catch (error) {
+                return { success: false, error: error.message || 'Failed to resend code' };
+              }
+            }
           }
 
           // Create the global auth instance
           window.steleyAuth = new SteleyAuth();
-          console.log('✅ Auth client created directly');
-          console.log('🔍 Auth client methods:', Object.keys(window.steleyAuth));
           
           // Check if auth client is properly loaded
           if (!window.steleyAuth) {
@@ -619,26 +534,12 @@ const signupHTML = `
             throw new Error('Auth client signUp method not found');
           }
           
-          console.log('🚀 Starting signup process...');
-          console.log('📧 Email for signup:', email);
-          console.log('🔒 Password length:', password.length);
-          
           // Perform real signup
           const result = await window.steleyAuth.signUp(email, password);
           
-          console.log('📥 Signup result received:');
-          console.log('📥 Result object:', result);
-          console.log('📥 Success:', result?.success);
-          console.log('📥 Error:', result?.error);
-          console.log('📥 User:', result?.user ? 'USER DATA RECEIVED' : 'NO USER DATA');
-          
           if (result && result.success) {
-            console.log('✅ Signup successful!');
-            
             // Check if email verification is needed
             if (result.needsVerification) {
-              console.log('📧 Email verification required, showing verification screen');
-              
               // Reset submit button
               if (submitText) {
                 submitText.textContent = 'Create Account';
@@ -650,8 +551,6 @@ const signupHTML = `
             }
             
             // Account created successfully with immediate access
-            console.log('🎉 Account created with immediate access');
-            
             // Show success message briefly
             if (submitText) {
               submitText.innerHTML = `
@@ -659,18 +558,15 @@ const signupHTML = `
                   ✅ Account Created! Logging you in...
                 </div>
               `;
-              console.log('🎉 Success message displayed');
             }
             
             // Store user data for React components to detect
             if (result.user) {
               localStorage.setItem('supabase_user', JSON.stringify(result.user));
-              console.log('💾 User data stored in localStorage');
               
               // Set session data to keep user logged in
               if (result.data.session) {
                 localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
-                console.log('🔐 Session data stored');
               }
               
               // Trigger storage event for React components
@@ -678,7 +574,6 @@ const signupHTML = `
                 key: 'supabase_user',
                 newValue: JSON.stringify(result.user)
               }));
-              console.log('📡 Storage event dispatched');
               
               // Trigger auth state change event
               window.dispatchEvent(new CustomEvent('authStateChanged', {
@@ -688,69 +583,47 @@ const signupHTML = `
                   user: result.user 
                 }
               }));
-              console.log('🔄 Auth state change event dispatched');
             }
             
             // Redirect to home page (logged in) instead of login page
-            console.log('🔄 Redirecting to home page in 2 seconds...');
             setTimeout(() => {
-              console.log('➡️ Redirecting to / (home)');
               window.location.href = '/';
             }, 2000);
             
           } else {
-            console.error('❌ Signup failed');
-            console.error('❌ Error details:', result?.error || 'Unknown error');
-            
             if (submitText) {
               submitText.innerHTML = `
                 <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                   ❌ ${result?.error || 'Signup failed'}
                 </div>
               `;
-              console.log('⚠️ Error message displayed');
             }
             
             // Reset button after 3 seconds
             setTimeout(() => {
               if (submitText) {
                 submitText.textContent = 'Create Account';
-                console.log('🔄 Button reset to normal state');
               }
               const submitButton = document.querySelector('.auth-submit');
               if (submitButton) {
                 submitButton.disabled = false;
-                console.log('🔄 Button re-enabled');
               }
             }, 3000);
           }
         } catch (error) {
-          console.error('💥 Signup process error:');
-          console.error('💥 Full error object:', error);
-          console.error('💥 Error type:', error?.name || 'Unknown');
-          console.error('💥 Error message:', error?.message || 'Unknown error');
-          console.error('💥 Error stack:', error?.stack || 'No stack trace');
-          
           if (submitText) {
             submitText.textContent = 'Create Account';
-            console.log('🔄 Button reset after error');
           }
           
           const errorMessage = error?.message || 'Unknown error occurred';
           alert('Failed to create account. Error: ' + errorMessage);
         }
       });
-    } else {
-      console.error('❌ Signup form not found');
     }
-    
-    console.log('✅ Signup interactions initialized');
   }
 
   // Show verification screen
   function showVerificationScreen(email) {
-    console.log('📧 Showing verification screen for:', email);
-    
     // Hide main signup form
     const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
     const toggleSection = document.querySelector('.auth-toggle');
@@ -803,7 +676,6 @@ const signupHTML = `
         // Auto-submit when all 6 digits are entered
         if (allFilled) {
           const code = Array.from(inputs).map(inp => inp.value).join('');
-          console.log('🔢 Auto-submitting verification code:', code);
           setTimeout(() => verifyCode(email, code), 100);
         }
       });
@@ -887,8 +759,6 @@ const signupHTML = `
 
   // Verify the entered code
   async function verifyCode(email, code) {
-    console.log('🔐 Verifying code for:', email);
-    
     const verifyButton = document.getElementById('verifyButton');
     const verifyButtonText = document.getElementById('verifyButtonText');
     const inputs = document.querySelectorAll('.verification-digit');
@@ -910,93 +780,82 @@ const signupHTML = `
     try {
       const result = await window.steleyAuth.verifyEmailOTP(email, code);
       
-             if (result.success) {
-         console.log('✅ Email verification successful!');
-         
-         // Show success
-         if (verifyButtonText) {
-           verifyButtonText.innerHTML = `
-             <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-               ✅ Email Verified! Logging you in...
-             </div>
-           `;
-         }
-         
-         // Store user data and session
-         if (result.user) {
-           localStorage.setItem('supabase_user', JSON.stringify(result.user));
-           console.log('💾 User data stored after verification');
-           
-           if (result.data.session) {
-             localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
-             console.log('🔐 Session data stored after verification');
-             
-             // Update auth client with new session
-             if (window.steleyAuth && window.steleyAuth.supabase) {
-               console.log('🔄 Updating auth client session...');
-               window.steleyAuth.supabase.auth.setSession(result.data.session);
-               window.steleyAuth.currentUser = result.user;
-               console.log('✅ Auth client updated with verified user session');
-             }
-           }
-           
-           // Set auth tokens in localStorage for persistence across page loads
-           if (result.data.session) {
-             const tokenData = {
-               access_token: result.data.session.access_token,
-               refresh_token: result.data.session.refresh_token,
-               expires_at: result.data.session.expires_at,
-               user: result.user
-             };
-             localStorage.setItem('supabase.auth.token', JSON.stringify(tokenData));
-             console.log('🔑 Auth tokens stored for persistence');
-           }
-           
-           // Trigger auth events
-           window.dispatchEvent(new StorageEvent('storage', {
-             key: 'supabase_user',
-             newValue: JSON.stringify(result.user)
-           }));
-           
-           window.dispatchEvent(new CustomEvent('authStateChanged', {
-             detail: { 
-               event: 'SIGNED_IN', 
-               session: result.data.session, 
-               user: result.user 
-             }
-           }));
-           
-           // Trigger a more specific login success event
-           window.dispatchEvent(new CustomEvent('userLoggedIn', {
-             detail: { 
-               user: result.user,
-               session: result.data.session,
-               method: 'email_verification'
-             }
-           }));
-           console.log('📡 All auth events dispatched');
-         }
-         
-         // Show logged in message
-         setTimeout(() => {
-           if (verifyButtonText) {
-             verifyButtonText.innerHTML = `
-               <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-                 🎉 Welcome! Redirecting...
-               </div>
-             `;
-           }
-         }, 1000);
-         
-         // Redirect to home with longer delay to ensure auth state is set
-         setTimeout(() => {
-           console.log('➡️ Redirecting to home after verification (user should be logged in)');
-           window.location.href = '/';
-         }, 3000);
+      if (result.success) {
+        // Show success
+        if (verifyButtonText) {
+          verifyButtonText.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+              ✅ Email Verified! Logging you in...
+            </div>
+          `;
+        }
+        
+        // Store user data and session
+        if (result.user) {
+          localStorage.setItem('supabase_user', JSON.stringify(result.user));
+          
+          if (result.data.session) {
+            localStorage.setItem('supabase_session', JSON.stringify(result.data.session));
+            
+            // Update auth client with new session
+            if (window.steleyAuth && window.steleyAuth.supabase) {
+              window.steleyAuth.supabase.auth.setSession(result.data.session);
+              window.steleyAuth.currentUser = result.user;
+            }
+          }
+          
+          // Set auth tokens in localStorage for persistence across page loads
+          if (result.data.session) {
+            const tokenData = {
+              access_token: result.data.session.access_token,
+              refresh_token: result.data.session.refresh_token,
+              expires_at: result.data.session.expires_at,
+              user: result.user
+            };
+            localStorage.setItem('supabase.auth.token', JSON.stringify(tokenData));
+          }
+          
+          // Trigger auth events
+          window.dispatchEvent(new StorageEvent('storage', {
+            key: 'supabase_user',
+            newValue: JSON.stringify(result.user)
+          }));
+          
+          window.dispatchEvent(new CustomEvent('authStateChanged', {
+            detail: { 
+              event: 'SIGNED_IN', 
+              session: result.data.session, 
+              user: result.user 
+            }
+          }));
+          
+          // Trigger a more specific login success event
+          window.dispatchEvent(new CustomEvent('userLoggedIn', {
+            detail: { 
+              user: result.user,
+              session: result.data.session,
+              method: 'email_verification'
+            }
+          }));
+        }
+        
+        // Show logged in message
+        setTimeout(() => {
+          if (verifyButtonText) {
+            verifyButtonText.innerHTML = `
+              <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                🎉 Welcome! Redirecting...
+              </div>
+            `;
+          }
+        }, 1000);
+        
+        // Redirect to home with longer delay to ensure auth state is set
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 3000);
         
       } else {
-        console.error('❌ Email verification failed:', result.error);
-        
         // Show error
         if (verifyButtonText) {
           verifyButtonText.innerHTML = `
@@ -1006,20 +865,18 @@ const signupHTML = `
           `;
         }
         
-                 // Reset after 3 seconds
-         setTimeout(() => {
-           if (verifyButtonText) verifyButtonText.textContent = 'Verify Email';
-           inputs.forEach((input) => {
-             input.disabled = false;
-             input.value = '';
-           });
-           if (inputs[0]) inputs[0].focus();
-           if (verifyButton) verifyButton.disabled = true;
-         }, 3000);
+        // Reset after 3 seconds
+        setTimeout(() => {
+          if (verifyButtonText) verifyButtonText.textContent = 'Verify Email';
+          inputs.forEach((input) => {
+            input.disabled = false;
+            input.value = '';
+          });
+          if (inputs[0]) inputs[0].focus();
+          if (verifyButton) verifyButton.disabled = true;
+        }, 3000);
       }
     } catch (error) {
-      console.error('💥 Verification error:', error);
-      
       // Show error
       if (verifyButtonText) {
         verifyButtonText.innerHTML = `
@@ -1044,8 +901,6 @@ const signupHTML = `
 
   // Resend verification code
   async function resendVerificationCode(email) {
-    console.log('📧 Resending verification code to:', email);
-    
     const resendButtonText = document.getElementById('resendButtonText');
     
     if (resendButtonText) {
@@ -1061,7 +916,6 @@ const signupHTML = `
       const result = await window.steleyAuth.resendVerificationCode(email);
       
       if (result.success) {
-        console.log('✅ Verification code resent successfully');
         if (resendButtonText) {
           resendButtonText.textContent = 'Code sent!';
           setTimeout(() => {
@@ -1069,7 +923,6 @@ const signupHTML = `
           }, 2000);
         }
       } else {
-        console.error('❌ Failed to resend code:', result.error);
         if (resendButtonText) {
           resendButtonText.textContent = 'Failed to send';
           setTimeout(() => {
@@ -1078,7 +931,6 @@ const signupHTML = `
         }
       }
     } catch (error) {
-      console.error('💥 Resend error:', error);
       if (resendButtonText) {
         resendButtonText.textContent = 'Failed to send';
         setTimeout(() => {
@@ -1090,8 +942,6 @@ const signupHTML = `
 
   // Hide verification screen and show signup form
   function hideVerificationScreen() {
-    console.log('🔙 Hiding verification screen');
-    
     // Show main signup form
     const signupForm = document.getElementById('signupForm')?.closest('.auth-form-container');
     const toggleSection = document.querySelector('.auth-toggle');
@@ -1112,6 +962,4 @@ const signupHTML = `
       input.disabled = false;
     });
   }
-
-  // Clean up - removed profile dropdown functionality to prevent duplicates
 })(); 
