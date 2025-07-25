@@ -360,25 +360,28 @@ window.toggleFAQ = function(index) {
   }
   
   function initializePricingPage() {
-    // Try to find main content area, otherwise use body
-    const mainContent = document.querySelector('main') || 
-                       document.querySelector('.main-content') || 
-                       document.querySelector('[data-framer-name="Content"]') ||
-                       document.querySelector('.framer-page-content') ||
-                       document.body;
-    
-    // Clear existing content in main area and add pricing content
-    if (mainContent !== document.body) {
-      mainContent.innerHTML = pricingHTML;
-    } else {
-      // If we're using body, insert at the beginning but after header
-      const header = document.querySelector('header') || document.querySelector('nav');
-      if (header) {
-        header.insertAdjacentHTML('afterend', pricingHTML);
-      } else {
-        document.body.insertAdjacentHTML('afterbegin', pricingHTML);
-      }
+    // Check if pricing content already exists
+    if (document.querySelector('.pricing-page')) {
+      return;
     }
+    
+    // Create a new container that won't interfere with React
+    const pricingContainer = document.createElement('div');
+    pricingContainer.innerHTML = pricingHTML;
+    pricingContainer.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 999999;
+      overflow-y: auto;
+      pointer-events: auto;
+    `;
+    
+    // Add to body without replacing anything
+    document.body.appendChild(pricingContainer);
     
     // Initialize pricing section animations
     initializePricingSectionAnimations();
@@ -388,32 +391,42 @@ window.toggleFAQ = function(index) {
   }
   
   function initializePricingSectionAnimations() {
-    // Wait a bit for DOM to be fully ready
-    setTimeout(() => {
-      const pricingCards = document.querySelectorAll('.pricing-card');
-      const faqSection = document.querySelector('.faq-section');
-      
-      // Add staggered animation to pricing cards
-      pricingCards.forEach((card, index) => {
-        const delay = 400 + (index * 100); // Start at 400ms, then add 100ms for each card
-        
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0) scale(1)';
-          card.classList.add('pricing-animated');
-        }, delay);
-      });
-      
-      // Animate FAQ section after pricing cards
-      if (faqSection) {
-        const faqDelay = 400 + (pricingCards.length * 100) + 100; // Extra 100ms after last card
-        setTimeout(() => {
-          faqSection.style.opacity = '1';
-          faqSection.style.transform = 'translateY(0) scale(1)';
-          faqSection.classList.add('pricing-animated');
-        }, faqDelay);
-      }
-    }, 100);
+    console.log('🎬 Making pricing cards visible immediately...');
+    
+    // Find all pricing elements
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    const pricingGrid = document.querySelector('.pricing-grid');
+    const faqSection = document.querySelector('.faq-section');
+    
+    console.log('📊 Found pricing cards:', pricingCards.length);
+    console.log('📊 Found pricing grid:', !!pricingGrid);
+    console.log('❓ Found FAQ section:', !!faqSection);
+    
+    // INSTANT VISIBILITY - No delays
+    pricingCards.forEach((card, index) => {
+      console.log(`💳 Making card ${index + 1} visible...`);
+      card.style.opacity = '1 !important';
+      card.style.transform = 'translateY(0) scale(1) !important';
+      card.classList.add('pricing-animated');
+    });
+    
+    // Make pricing grid visible
+    if (pricingGrid) {
+      console.log('📊 Making pricing grid visible...');
+      pricingGrid.style.opacity = '1 !important';
+      pricingGrid.style.transform = 'translateY(0) scale(1) !important';
+      pricingGrid.classList.add('pricing-animated');
+    }
+    
+    // Make FAQ visible
+    if (faqSection) {
+      console.log('❓ Making FAQ section visible...');
+      faqSection.style.opacity = '1 !important';
+      faqSection.style.transform = 'translateY(0) scale(1) !important';
+      faqSection.classList.add('pricing-animated');
+    }
+    
+    console.log('✅ All pricing elements made visible!');
   }
   
   function initializeFooterAnimation() {
