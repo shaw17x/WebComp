@@ -375,10 +375,16 @@ window.toggleFAQ = function(index) {
       width: 100%;
       height: 100%;
       background: transparent;
-      z-index: 999999;
+      z-index: 1000;
       overflow-y: auto;
-      pointer-events: auto;
+      pointer-events: none;
     `;
+    
+    // Make only the pricing content clickable
+    const pricingPage = pricingContainer.querySelector('.pricing-page');
+    if (pricingPage) {
+      pricingPage.style.pointerEvents = 'auto';
+    }
     
     // Add to body without replacing anything
     document.body.appendChild(pricingContainer);
