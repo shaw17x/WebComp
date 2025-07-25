@@ -263,23 +263,12 @@ const privacyHTML = `
 </footer>
 `;
 
-// Auto-execute function to inject CSS and HTML with duplication prevention
+// Auto-execute function to inject CSS and HTML
 (function() {
-  // Check if privacy policy is already loaded to prevent duplication
-  if (document.querySelector('.pp') || document.querySelector('[data-steley-privacy-loaded]')) {
-    return; // Already loaded, prevent duplication
-  }
-
-  // Mark as loaded
-  document.documentElement.setAttribute('data-steley-privacy-loaded', 'true');
-
-  // Add CSS (check if already exists)
-  if (!document.querySelector('style[data-steley-privacy-css]')) {
-    const style = document.createElement('style');
-    style.setAttribute('data-steley-privacy-css', 'true');
-    style.textContent = privacyCSS;
-    document.head.appendChild(style);
-  }
+  // Add CSS
+  const style = document.createElement('style');
+  style.textContent = privacyCSS;
+  document.head.appendChild(style);
   
   // Add HTML when DOM is ready - find main content area
   if (document.readyState === 'loading') {
@@ -291,11 +280,6 @@ const privacyHTML = `
   }
   
   function initializePrivacyPage() {
-    // Check again to prevent double initialization
-    if (document.querySelector('.pp')) {
-      return;
-    }
-
     // Try to find main content area, otherwise use body
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
