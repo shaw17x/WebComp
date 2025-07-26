@@ -1,4 +1,4 @@
-// Enhanced Subscription Management Page - v4.0 with Real Supabase Integration
+// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v4.0 With Full Modal Functionality
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -18,6 +18,323 @@ const subscriptionCSS = `
   display: flex;
   min-height: 600px;
   overflow: hidden;
+}
+
+/* Modal Overlay */
+.subscription-modal-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.subscription-modal-overlay.active{
+  display: flex;
+}
+
+/* Modal Content */
+.subscription-modal{
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Header */
+.modal-header{
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+.modal-title{
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.modal-close{
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.modal-close:hover{
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Modal Body */
+.modal-body{
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Form Styles */
+.form-group{
+  margin-bottom: 16px;
+}
+
+.form-label{
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
+}
+
+.form-input{
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.form-input:focus{
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.form-input::placeholder{
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-textarea{
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-select{
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+/* Modal Footer */
+.modal-footer{
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  background: rgba(255, 255, 255, 0.01);
+  flex-shrink: 0;
+}
+
+.modal-button{
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 64px;
+  text-align: center;
+}
+
+.modal-button:hover{
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.modal-button.primary{
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: rgba(59, 130, 246, 0.9);
+}
+
+.modal-button.primary:hover{
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #ffffff;
+}
+
+.modal-button.success{
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: rgba(34, 197, 94, 0.9);
+}
+
+.modal-button.danger{
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: rgba(239, 68, 68, 0.9);
+}
+
+/* Data Table Styles */
+.data-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.data-table th,
+.data-table td{
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table th{
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table td{
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.data-table tr:hover{
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Chart Container */
+.chart-container{
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+/* Status Badge */
+.status-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-active{
+  background: rgba(34, 197, 94, 0.2);
+  color: rgba(34, 197, 94, 0.9);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-pending{
+  background: rgba(234, 179, 8, 0.2);
+  color: rgba(234, 179, 8, 0.9);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.status-cancelled{
+  background: rgba(239, 68, 68, 0.2);
+  color: rgba(239, 68, 68, 0.9);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Plan Comparison */
+.plan-comparison{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.plan-card{
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.plan-card:hover{
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.plan-card.current{
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.plan-name{
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.plan-price{
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(59, 130, 246, 0.9);
+  margin: 0 0 12px 0;
+}
+
+.plan-features{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.plan-features li{
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 4px 0;
+  text-align: left;
+}
+
+.plan-features li:before{
+  content: "✓ ";
+  color: rgba(34, 197, 94, 0.8);
+  font-weight: 600;
 }
 
 /* Left Sidebar Navigation - Exact Match */
@@ -239,11 +556,6 @@ const subscriptionCSS = `
   color: #ffffff;
 }
 
-.action-button:disabled{
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .action-button.primary{
   background: rgba(59, 130, 246, 0.2);
   border-color: rgba(59, 130, 246, 0.4);
@@ -254,12 +566,6 @@ const subscriptionCSS = `
   background: rgba(34, 197, 94, 0.2);
   border-color: rgba(34, 197, 94, 0.4);
   color: rgba(34, 197, 94, 0.9);
-}
-
-.action-button.danger{
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: rgba(239, 68, 68, 0.9);
 }
 
 /* Usage Display */
@@ -410,156 +716,31 @@ const subscriptionCSS = `
   to{ transform: rotate(360deg); }
 }
 
-/* Modal Styles */
-.modal-overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  backdrop-filter: blur(8px);
-}
-
-.modal-content{
-  background: rgba(0, 0, 0, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 24px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.modal-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.modal-title{
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-}
-
-.modal-close{
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 20px;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.modal-close:hover{
-  color: #ffffff;
-}
-
-.modal-body{
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.5;
-}
-
-.modal-footer{
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-/* Form Styles */
-.form-group{
-  margin-bottom: 16px;
-}
-
-.form-label{
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 4px;
-}
-
-.form-input{
-  width: 100%;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  font-size: 13px;
-  color: #ffffff;
-  font-family: inherit;
-}
-
-.form-input:focus{
-  outline: none;
-  border-color: rgba(59, 130, 246, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.form-input::placeholder{
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* Alert Styles */
-.alert{
+/* Success/Error Messages */
+.message{
   padding: 12px 16px;
   border-radius: 4px;
-  margin-bottom: 16px;
+  margin: 16px 0;
   font-size: 13px;
+  font-weight: 500;
 }
 
-.alert-success{
+.message.success{
   background: rgba(34, 197, 94, 0.1);
   border: 1px solid rgba(34, 197, 94, 0.3);
   color: rgba(34, 197, 94, 0.9);
 }
 
-.alert-error{
+.message.error{
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: rgba(239, 68, 68, 0.9);
 }
 
-.alert-warning{
-  background: rgba(234, 179, 8, 0.1);
-  border: 1px solid rgba(234, 179, 8, 0.3);
-  color: rgba(234, 179, 8, 0.9);
-}
-
-/* Table Styles */
-.data-table{
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-}
-
-.data-table th,
-.data-table td{
-  padding: 8px 12px;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.data-table th{
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.data-table td{
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+.message.info{
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: rgba(59, 130, 246, 0.9);
 }
 
 /* Responsive Design */
@@ -597,11 +778,23 @@ const subscriptionCSS = `
     padding-left: 20px;
     padding-right: 20px;
   }
+  
+  .subscription-modal{
+    width: 95%;
+    max-height: 85vh;
+  }
 }
 `;
 
 const subscriptionHTML = `
 <div class="subscription-manage-component">
+  <!-- Modal Overlay (Initially Hidden) -->
+  <div class="subscription-modal-overlay" id="modalOverlay">
+    <div class="subscription-modal" id="modalContent">
+      <!-- Modal content will be populated dynamically -->
+    </div>
+  </div>
+
   <!-- Left Sidebar Navigation -->
   <div class="subscription-sidebar">
     <!-- User Info -->
@@ -613,43 +806,43 @@ const subscriptionHTML = `
     <!-- Search -->
     <input type="text" class="sidebar-search" placeholder="Search settings Ctrl+F" id="settingsSearch">
 
-    <!-- Navigation -->
-    <div class="sidebar-nav">
-      <button class="nav-item active" data-page="general">
-        <span class="nav-icon">⚙</span>
-        <span>General</span>
-      </button>
-      
-      <button class="nav-item" data-page="subscription">
-        <span class="nav-icon">∞</span>
-        <span>Subscription</span>
-      </button>
-      
-      <button class="nav-item" data-page="usage">
-        <span class="nav-icon">→</span>
-        <span>Usage</span>
-      </button>
-      
-      <button class="nav-item" data-page="billing">
-        <span class="nav-icon">$</span>
-        <span>Billing</span>
-      </button>
-      
-      <button class="nav-item" data-page="security">
-        <span class="nav-icon">◦</span>
-        <span>Security</span>
-      </button>
-      
-      <button class="nav-item" data-page="preferences">
-        <span class="nav-icon">≫</span>
-        <span>Preferences</span>
-      </button>
-      
-      <button class="nav-item" data-page="support">
-        <span class="nav-icon">?</span>
-        <span>Support</span>
-      </button>
-    </div>
+         <!-- Navigation -->
+     <div class="sidebar-nav">
+       <button class="nav-item active" data-page="general">
+         <span class="nav-icon">⚙</span>
+         <span>General</span>
+       </button>
+       
+       <button class="nav-item" data-page="subscription">
+         <span class="nav-icon">∞</span>
+         <span>Subscription</span>
+       </button>
+       
+       <button class="nav-item" data-page="usage">
+         <span class="nav-icon">→</span>
+         <span>Usage</span>
+       </button>
+       
+       <button class="nav-item" data-page="billing">
+         <span class="nav-icon">$</span>
+         <span>Billing</span>
+       </button>
+       
+       <button class="nav-item" data-page="security">
+         <span class="nav-icon">◦</span>
+         <span>Security</span>
+       </button>
+       
+       <button class="nav-item" data-page="preferences">
+         <span class="nav-icon">≫</span>
+         <span>Preferences</span>
+       </button>
+       
+       <button class="nav-item" data-page="support">
+         <span class="nav-icon">?</span>
+         <span>Support</span>
+       </button>
+     </div>
   </div>
 
   <!-- Right Content Area -->
@@ -661,19 +854,19 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">⚙</span>
-                Manage Account
-              </div>
-              <div class="item-description">Manage your account and billing</div>
-            </div>
-            <button class="action-button" id="manageAccountBtn">Open</button>
-          </div>
-        </div>
-        
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">⚙</span>
+                 Manage Account
+               </div>
+               <div class="item-description">Manage your account and billing</div>
+             </div>
+             <button class="action-button" id="manageAccountBtn">Open</button>
+      </div>
+    </div>
+    
         <div class="content-section">
           <div class="section-header">
             <div class="section-title">Current Plan</div>
@@ -696,31 +889,31 @@ const subscriptionHTML = `
             <div class="section-title">Preferences</div>
           </div>
           
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Auto-Save Screenshots
-              </div>
-              <div class="item-description">Automatically save screenshots to your device</div>
-            </div>
-            <div class="toggle-switch" id="autoSaveToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Privacy Mode
-              </div>
-              <div class="item-description">Enhanced privacy protection during screenshots</div>
-            </div>
-            <div class="toggle-switch enabled" id="privacyToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
+                     <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Auto-Save Screenshots
+               </div>
+               <div class="item-description">Automatically save screenshots to your device</div>
+             </div>
+             <div class="toggle-switch" id="autoSaveToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Privacy Mode
+               </div>
+               <div class="item-description">Enhanced privacy protection during screenshots</div>
+             </div>
+             <div class="toggle-switch enabled" id="privacyToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
         </div>
       </div>
     </div>
@@ -737,47 +930,47 @@ const subscriptionHTML = `
             <div class="section-title">Available Plans</div>
           </div>
           
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Free Plan
-              </div>
-              <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
-              <button class="action-button success" id="freeBtn">Current</button>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Pro Plan
-              </div>
-              <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
-              <button class="action-button primary" id="proBtn">Upgrade</button>
-            </div>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Ultra Plan
-              </div>
-              <div class="item-description">Unlimited usage, all AI models, priority support</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
-              <button class="action-button primary" id="ultraBtn">Upgrade</button>
-            </div>
-          </div>
+                     <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Free Plan
+               </div>
+               <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
+               <button class="action-button success" id="freeBtn">Current</button>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Pro Plan
+               </div>
+               <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
+               <button class="action-button primary" id="proBtn">Upgrade</button>
+             </div>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Ultra Plan
+               </div>
+               <div class="item-description">Unlimited usage, all AI models, priority support</div>
+             </div>
+             <div style="display: flex; align-items: center; gap: 12px;">
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
+               <button class="action-button primary" id="ultraBtn">Upgrade</button>
+             </div>
+           </div>
         </div>
       </div>
     </div>
@@ -794,190 +987,190 @@ const subscriptionHTML = `
             <div class="usage-label">Screenshots Today</div>
             <div class="usage-value" id="screenshotUsage">3</div>
             <div class="usage-limit" id="screenshotLimit">of 10 daily limit</div>
-            <div class="usage-bar">
+        <div class="usage-bar">
               <div class="usage-fill usage-low" id="screenshotBar" style="width: 30%"></div>
-            </div>
-          </div>
+        </div>
+      </div>
           
           <div class="usage-item">
             <div class="usage-label">AI Requests Today</div>
             <div class="usage-value" id="aiUsage">7</div>
             <div class="usage-limit" id="aiLimit">of 10 daily limit</div>
-            <div class="usage-bar">
+        <div class="usage-bar">
               <div class="usage-fill usage-medium" id="aiBar" style="width: 70%"></div>
-            </div>
-          </div>
+        </div>
+      </div>
           
           <div class="usage-item">
             <div class="usage-label">Next Reset</div>
             <div class="usage-value" id="resetTime">23:45</div>
             <div class="usage-limit">Daily limits reset</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
-                View Usage History
-              </div>
-              <div class="item-description">Detailed usage statistics and trends</div>
-            </div>
-            <button class="action-button" id="viewHistoryBtn">View</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
-                Export Usage Data
-              </div>
-              <div class="item-description">Download your usage data as CSV</div>
-            </div>
-            <button class="action-button" id="exportDataBtn">Export</button>
-          </div>
-        </div>
       </div>
     </div>
-    
+  </div>
+
+      <div class="content-body">
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                 View Usage History
+          </div>
+               <div class="item-description">Detailed usage statistics and trends</div>
+             </div>
+             <button class="action-button" id="viewHistoryBtn">View</button>
+        </div>
+        
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                 Export Usage Data
+          </div>
+               <div class="item-description">Download your usage data as CSV</div>
+          </div>
+             <button class="action-button" id="exportDataBtn">Export</button>
+          </div>
+         </div>
+          </div>
+        </div>
+        
     <!-- Billing Page -->
     <div class="content-page" id="billingPage">
       <div class="content-header">
         <h1 class="content-title">Billing</h1>
-      </div>
+        </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">$</span>
-                Payment Method
-              </div>
-              <div class="item-description">Update payment information and billing details</div>
-            </div>
-            <button class="action-button" id="updatePaymentBtn">Update</button>
-          </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">$</span>
+                 Payment Method
+               </div>
+               <div class="item-description">Update payment information and billing details</div>
+             </div>
+             <button class="action-button" id="updatePaymentBtn">Update</button>
+      </div>
 
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
-                Billing History
-              </div>
-              <div class="item-description">View past invoices and payment history</div>
-            </div>
-            <button class="action-button" id="billingHistoryBtn">View</button>
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                 Billing History
           </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
-                Download Receipts
-              </div>
-              <div class="item-description">Download receipts for tax purposes</div>
-            </div>
-            <button class="action-button" id="downloadReceiptsBtn">Download</button>
+               <div class="item-description">View past invoices and payment history</div>
+             </div>
+             <button class="action-button" id="billingHistoryBtn">View</button>
+        </div>
+        
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                 Download Receipts
+          </div>
+               <div class="item-description">Download receipts for tax purposes</div>
+          </div>
+             <button class="action-button" id="downloadReceiptsBtn">Download</button>
+          </div>
+          </div>
           </div>
         </div>
-      </div>
-    </div>
         
     <!-- Security Page -->
     <div class="content-page" id="securityPage">
       <div class="content-header">
         <h1 class="content-title">Security</h1>
-      </div>
+        </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Change Password
-              </div>
-              <div class="item-description">Update your account password</div>
-            </div>
-            <button class="action-button" id="changePasswordBtn">Change</button>
-          </div>
-
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Two-Factor Authentication
-              </div>
-              <div class="item-description">Add extra security to your account</div>
-            </div>
-            <button class="action-button" id="enable2FABtn">Enable</button>
-          </div>
-          
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Active Sessions
-              </div>
-              <div class="item-description">Manage devices and active sessions</div>
-            </div>
-            <button class="action-button" id="manageSessionsBtn">Manage</button>
-          </div>
-        </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Change Password
+               </div>
+               <div class="item-description">Update your account password</div>
+             </div>
+             <button class="action-button" id="changePasswordBtn">Change</button>
       </div>
-    </div>
+
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Two-Factor Authentication
+          </div>
+               <div class="item-description">Add extra security to your account</div>
+             </div>
+             <button class="action-button" id="enable2FABtn">Enable</button>
+        </div>
+        
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Active Sessions
+          </div>
+               <div class="item-description">Manage devices and active sessions</div>
+          </div>
+             <button class="action-button" id="manageSessionsBtn">Manage</button>
+          </div>
+          </div>
+          </div>
+          </div>
 
     <!-- Preferences Page -->
     <div class="content-page" id="preferencesPage">
       <div class="content-header">
         <h1 class="content-title">Preferences</h1>
-      </div>
+        </div>
         
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Theme
-              </div>
-              <div class="item-description">Choose your preferred theme</div>
-            </div>
-            <button class="action-button" id="themeBtn">Dark</button>
-          </div>
-           
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Notifications
-              </div>
-              <div class="item-description">Configure notification preferences</div>
-            </div>
-            <div class="toggle-switch enabled" id="notificationsToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
-
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                Auto-Update
-              </div>
-              <div class="item-description">Automatically update Steley when new versions are available</div>
-            </div>
-            <div class="toggle-switch enabled" id="autoUpdateToggle">
-              <div class="toggle-slider"></div>
-            </div>
-          </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Theme
         </div>
+               <div class="item-description">Choose your preferred theme</div>
       </div>
+             <button class="action-button" id="themeBtn">Dark</button>
+           </div>
+           
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Notifications
+               </div>
+               <div class="item-description">Configure notification preferences</div>
+             </div>
+             <div class="toggle-switch enabled" id="notificationsToggle">
+               <div class="toggle-slider"></div>
     </div>
+  </div>
+
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                 Auto-Update
+               </div>
+               <div class="item-description">Automatically update Steley when new versions are available</div>
+             </div>
+             <div class="toggle-switch enabled" id="autoUpdateToggle">
+               <div class="toggle-slider"></div>
+             </div>
+           </div>
+         </div>
+      </div>
+      </div>
       
     <!-- Support Page -->
     <div class="content-page" id="supportPage">
@@ -986,414 +1179,45 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-        <div class="content-section">
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">?</span>
-                Contact Support
-              </div>
-              <div class="item-description">Get help with your subscription or technical issues</div>
-            </div>
-            <button class="action-button" id="contactSupportBtn">Contact</button>
-          </div>
+                 <div class="content-section">
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">?</span>
+                 Contact Support
+               </div>
+               <div class="item-description">Get help with your subscription or technical issues</div>
+             </div>
+             <button class="action-button" id="contactSupportBtn">Contact</button>
+      </div>
       
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
-                Documentation
-              </div>
-              <div class="item-description">View help articles and user guides</div>
-            </div>
-            <button class="action-button" id="docsBtn">Open</button>
-          </div>
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                 Documentation
+      </div>
+               <div class="item-description">View help articles and user guides</div>
+    </div>
+             <button class="action-button" id="docsBtn">Open</button>
+  </div>
 
-          <div class="settings-item">
-            <div class="item-info">
-              <div class="item-title">
-                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
-                Send Feedback
-              </div>
-              <div class="item-description">Share your thoughts and suggestions</div>
-            </div>
-            <button class="action-button" id="feedbackBtn">Send</button>
-          </div>
-        </div>
+           <div class="settings-item">
+             <div class="item-info">
+               <div class="item-title">
+                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                 Send Feedback
+    </div>
+               <div class="item-description">Share your thoughts and suggestions</div>
+             </div>
+             <button class="action-button" id="feedbackBtn">Send</button>
+           </div>
+         </div>
       </div>
     </div>
   </div>
 </div>
 `;
-
-// Enhanced Supabase Integration Class
-class SubscriptionManager {
-  constructor() {
-    this.supabase = null;
-    this.currentUser = null;
-    this.userLicense = null;
-    this.userProfile = null;
-    this.init();
-  }
-
-  async init() {
-    console.log('🚀 SubscriptionManager initializing...');
-    
-    // Load Supabase if not available
-    if (!window.supabase) {
-      await this.loadSupabase();
-    }
-
-    // Initialize Supabase client
-    const supabaseUrl = 'https://mfrlmxrjhkyuphklzxdt.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcmxteHJqaGt5dXBoa2x6eGR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU0NzE0NzcsImV4cCI6MjA1MTA0NzQ3N30.MQS_Q7VzOgx5VEzUHVLvNFKWW9HTI9Y8t3t1mGOSgAY';
-    
-    this.supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-    console.log('✅ Supabase client initialized');
-
-    // Get current session
-    await this.getCurrentSession();
-  }
-
-  async loadSupabase() {
-    return new Promise((resolve, reject) => {
-      if (window.supabase) {
-        resolve();
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js';
-      script.onload = () => {
-        console.log('✅ Supabase script loaded');
-        resolve();
-      };
-      script.onerror = (error) => {
-        console.error('❌ Failed to load Supabase script:', error);
-        reject(error);
-      };
-      document.head.appendChild(script);
-    });
-  }
-
-  async getCurrentSession() {
-    try {
-      const { data: { session }, error } = await this.supabase.auth.getSession();
-      
-      if (error) {
-        console.error('❌ Error getting session:', error);
-        return null;
-      }
-
-      if (session?.user) {
-        this.currentUser = session.user;
-        console.log('✅ Current user found:', this.currentUser.email);
-        
-        // Load user profile and license
-        await this.loadUserProfile();
-        await this.loadUserLicense();
-        
-        return session;
-      }
-
-      console.log('ℹ️ No active session found');
-      return null;
-    } catch (error) {
-      console.error('❌ Error in getCurrentSession:', error);
-      return null;
-    }
-  }
-
-  async loadUserProfile() {
-    if (!this.currentUser) return null;
-
-    try {
-      const { data, error } = await this.supabase
-        .from('user_profiles')
-        .select('*')
-        .eq('id', this.currentUser.id)
-        .single();
-
-      if (error && error.code !== 'PGRST116') {
-        console.error('❌ Error loading user profile:', error);
-        return null;
-      }
-
-      this.userProfile = data;
-      console.log('✅ User profile loaded:', data);
-      return data;
-    } catch (error) {
-      console.error('❌ Error in loadUserProfile:', error);
-      return null;
-    }
-  }
-
-  async loadUserLicense() {
-    if (!this.currentUser) return null;
-
-    try {
-      const { data, error } = await this.supabase
-        .from('license_records')
-        .select('*')
-        .eq('user_id', this.currentUser.id)
-        .eq('status', 'active')
-        .single();
-
-      if (error && error.code !== 'PGRST116') {
-        console.error('❌ Error loading user license:', error);
-        // Create default FREE license if none exists
-        return await this.createFreeLicense();
-      }
-
-      this.userLicense = data;
-      console.log('✅ User license loaded:', data);
-      return data;
-    } catch (error) {
-      console.error('❌ Error in loadUserLicense:', error);
-      return await this.createFreeLicense();
-    }
-  }
-
-  async createFreeLicense() {
-    if (!this.currentUser) return null;
-
-    try {
-      const licenseKey = `IC-FREE-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
-      const machineId = await this.getMachineId();
-
-      const { data, error } = await this.supabase
-        .from('license_records')
-        .insert({
-          user_id: this.currentUser.id,
-          license_key: licenseKey,
-          tier: 'FREE',
-          machine_id: machineId,
-          status: 'active'
-        })
-        .select()
-        .single();
-
-      if (error) {
-        console.error('❌ Error creating FREE license:', error);
-        return null;
-      }
-
-      this.userLicense = data;
-      console.log('✅ FREE license created:', data);
-      return data;
-    } catch (error) {
-      console.error('❌ Error in createFreeLicense:', error);
-      return null;
-    }
-  }
-
-  async getMachineId() {
-    // Create a simple machine ID based on available browser data
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.textBaseline = 'top';
-    ctx.font = '14px Arial';
-    ctx.fillText('Machine fingerprint', 2, 2);
-    
-    const fingerprint = [
-      navigator.userAgent,
-      navigator.language,
-      screen.width + 'x' + screen.height,
-      new Date().getTimezoneOffset(),
-      canvas.toDataURL()
-    ].join('|');
-
-    // Create a simple hash
-    let hash = 0;
-    for (let i = 0; i < fingerprint.length; i++) {
-      const char = fingerprint.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-    
-    return Math.abs(hash).toString(36);
-  }
-
-  async getUsageStats() {
-    if (!this.currentUser) return null;
-
-    try {
-      const { data, error } = await this.supabase.rpc('get_user_usage_stats', {
-        p_user_id: this.currentUser.id
-      });
-
-      if (error) {
-        console.error('❌ Error getting usage stats:', error);
-        return this.getDefaultUsageStats();
-      }
-
-      console.log('✅ Usage stats loaded:', data[0]);
-      return data[0];
-    } catch (error) {
-      console.error('❌ Error in getUsageStats:', error);
-      return this.getDefaultUsageStats();
-    }
-  }
-
-  getDefaultUsageStats() {
-    return {
-      screenshots_used: 0,
-      screenshots_limit: 10,
-      screenshots_remaining: 10,
-      ai_requests_used: 0,
-      ai_requests_limit: 10,
-      ai_requests_remaining: 10,
-      usage_reset_time: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-      tier: 'FREE'
-    };
-  }
-
-  async updateTier(newTier) {
-    if (!this.currentUser || !this.userLicense) return false;
-
-    try {
-      const { data, error } = await this.supabase
-        .from('license_records')
-        .update({ tier: newTier })
-        .eq('id', this.userLicense.id)
-        .select()
-        .single();
-
-      if (error) {
-        console.error('❌ Error updating tier:', error);
-        return false;
-      }
-
-      this.userLicense = data;
-      console.log('✅ Tier updated:', data);
-      return true;
-    } catch (error) {
-      console.error('❌ Error in updateTier:', error);
-      return false;
-    }
-  }
-
-  async updateUserProfile(updates) {
-    if (!this.currentUser) return false;
-
-    try {
-      const { data, error } = await this.supabase
-        .from('user_profiles')
-        .update(updates)
-        .eq('id', this.currentUser.id)
-        .select()
-        .single();
-
-      if (error) {
-        console.error('❌ Error updating profile:', error);
-        return false;
-      }
-
-      this.userProfile = data;
-      console.log('✅ Profile updated:', data);
-      return true;
-    } catch (error) {
-      console.error('❌ Error in updateUserProfile:', error);
-      return false;
-    }
-  }
-
-  // Export usage data as CSV
-  async exportUsageData() {
-    try {
-      // For now, return demo data
-      // In production, this would query actual usage history
-      const csvData = [
-        'Date,Screenshots,AI Requests,Plan',
-        `${new Date().toISOString().split('T')[0]},${this.userLicense?.daily_screenshots_used || 0},${this.userLicense?.daily_ai_requests_used || 0},${this.userLicense?.tier || 'FREE'}`
-      ].join('\n');
-
-      const blob = new Blob([csvData], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `usage-data-${new Date().toISOString().split('T')[0]}.csv`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-
-      return true;
-    } catch (error) {
-      console.error('❌ Error exporting usage data:', error);
-      return false;
-    }
-  }
-}
-
-// Modal Helper Class
-class ModalManager {
-  static show(title, content, buttons = []) {
-    // Remove existing modal
-    const existingModal = document.querySelector('.modal-overlay');
-    if (existingModal) {
-      existingModal.remove();
-    }
-
-    const modal = document.createElement('div');
-    modal.className = 'modal-overlay';
-    modal.innerHTML = `
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">${title}</h2>
-          <button class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-          ${content}
-        </div>
-        <div class="modal-footer">
-          ${buttons.map(btn => `<button class="action-button ${btn.class || ''}" data-action="${btn.action}">${btn.text}</button>`).join('')}
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    // Handle close
-    modal.querySelector('.modal-close').onclick = () => modal.remove();
-    modal.onclick = (e) => {
-      if (e.target === modal) modal.remove();
-    };
-
-    // Handle button clicks
-    buttons.forEach(btn => {
-      if (btn.handler) {
-        modal.querySelector(`[data-action="${btn.action}"]`).onclick = btn.handler;
-      }
-    });
-
-    return modal;
-  }
-
-  static alert(title, message, type = 'info') {
-    const alertClass = type === 'error' ? 'alert-error' : type === 'success' ? 'alert-success' : type === 'warning' ? 'alert-warning' : '';
-    const content = `<div class="alert ${alertClass}">${message}</div>`;
-    
-    return this.show(title, content, [
-      { text: 'OK', action: 'ok', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  static confirm(title, message, onConfirm) {
-    const content = `<p>${message}</p>`;
-    
-    return this.show(title, content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { 
-        text: 'Confirm', 
-        action: 'confirm', 
-        class: 'primary', 
-        handler: () => {
-          document.querySelector('.modal-overlay').remove();
-          onConfirm();
-        }
-      }
-    ]);
-  }
-}
 
 // Auto-execute function to inject CSS and HTML
 (function() {
@@ -1414,15 +1238,8 @@ class ModalManager {
                             hash === '#manage' ||
                             hash === '#account';
   
-  console.log('🚀 Enhanced subscription management component starting (v4.0 - Real Supabase Integration)...');
-  console.log('📍 Current URL:', location.href);
-  console.log('📍 Pathname:', pathname);
-  console.log('📍 Hash:', hash);
-  console.log('📍 Is subscription page?', isSubscriptionPage);
-  
   // Only load if this is actually a subscription management page
   if (!isSubscriptionPage) {
-    console.log('❌ Not a subscription page, skipping...');
     return;
   }
   
@@ -1430,7 +1247,6 @@ class ModalManager {
   const style = document.createElement('style');
   style.textContent = subscriptionCSS;
   document.head.appendChild(style);
-  console.log('✅ Subscription CSS added');
   
   // Add HTML when DOM is ready
   if (document.readyState === 'loading') {
@@ -1441,27 +1257,20 @@ class ModalManager {
     initializeSubscriptionPage();
   }
   
-  let subscriptionManager;
-  
   function initializeSubscriptionPage() {
-    console.log('🔧 Initializing enhanced subscription page...');
-    
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
-      console.log('✅ Subscription component already loaded');
       return;
     }
     
-    // 🎯 USE EXACT SAME LOGIC AS WORKING SIGNUP PAGE
+    // Use exact same logic as working signup page
     const mainContent = document.querySelector('main') || 
                        document.querySelector('.main-content') || 
                        document.querySelector('[data-framer-name="Content"]') ||
                        document.querySelector('.framer-page-content') ||
                        document.body;
     
-    console.log('📍 Main content element:', mainContent.tagName);
-    
-    // 🚀 EXACT SAME INJECTION LOGIC AS SIGNUP
+    // Exact same injection logic as signup
     if (mainContent !== document.body) {
       mainContent.innerHTML = subscriptionHTML;
     } else {
@@ -1474,53 +1283,79 @@ class ModalManager {
       }
     }
     
-    console.log('✅ Subscription HTML added');
-    
-    // Initialize enhanced subscription functionality
-    initializeEnhancedSubscriptionLogic();
+    // Initialize subscription functionality
+    initializeSubscriptionLogic();
   }
   
-  async function initializeEnhancedSubscriptionLogic() {
-    console.log('🔧 Initializing enhanced subscription logic...');
+  function initializeSubscriptionLogic() {
+    // Check authentication using the same format as ProfileDropdown
+    let userEmail = null;
+    let isAuthenticated = false;
     
-    // Initialize subscription manager
-    subscriptionManager = new SubscriptionManager();
+    // Check multiple localStorage keys (same as ProfileDropdown)
+    const userStr = localStorage.getItem('supabase_user');
+    const sessionStr = localStorage.getItem('steley_session');
     
-    // Wait for initialization
-    await subscriptionManager.init();
-    
-    // Check authentication
-    if (!subscriptionManager.currentUser) {
-      console.log('❌ User not authenticated, redirecting to login');
-      ModalManager.alert('Authentication Required', 'Please log in to access your subscription management.', 'error');
-      setTimeout(() => {
-        window.location.href = '/login';
-      }, 2000);
-      return;
+    // Try to get user email from any available source
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        if (user.email) {
+          userEmail = user.email;
+          isAuthenticated = true;
+        }
+      } catch {
+        // Failed to parse user data
+      }
+    } else if (sessionStr) {
+      try {
+        const session = JSON.parse(sessionStr);
+        
+        // Handle multiple session formats (same as ProfileDropdown)
+        if (session.user && session.user.email) {
+          userEmail = session.user.email;
+          isAuthenticated = true;
+        } else if (session.email && !session.user) {
+          userEmail = session.email;
+          isAuthenticated = true;
+        }
+      } catch {
+        // Failed to parse session data
+      }
     }
     
-    console.log('✅ User authenticated:', subscriptionManager.currentUser.email);
+    if (!isAuthenticated) {
+      alert('Please log in to access your subscription management.');
+        window.location.href = '/login';
+        return;
+      }
+       
+    // Prepare demo user data (since this is a demo without real Supabase)
+      const userData = {
+      email: userEmail,
+      currentPlan: 'FREE',
+      isActive: true,
+        usage: {
+        screenshots: { used: 3, limit: 10 },
+        aiRequests: { used: 7, limit: 10 }
+      },
+      resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
+    };
     
     // Initialize the interface
     initializeNavigation();
-    await updateUserInterface();
-    setupAllEnhancedButtons();
+    updateUserInfo(userData);
+    setupAllButtons(userData);
     setupToggles();
-    setupSearch();
-    
-    console.log('✅ Enhanced subscription functionality initialized');
   }
   
   function initializeNavigation() {
-    console.log('🔧 Setting up navigation...');
-    
     const navItems = document.querySelectorAll('.nav-item');
     const contentPages = document.querySelectorAll('.content-page');
     
     navItems.forEach(item => {
       item.addEventListener('click', function() {
         const targetPage = this.getAttribute('data-page');
-        console.log('📄 Switching to page:', targetPage);
         
         // Update active nav item
         navItems.forEach(nav => nav.classList.remove('active'));
@@ -1532,42 +1367,23 @@ class ModalManager {
         if (targetElement) {
           targetElement.classList.add('active');
         }
-
-        // Load page-specific data
-        loadPageData(targetPage);
       });
     });
-    
-    console.log('✅ Navigation setup complete');
   }
   
-  async function updateUserInterface() {
-    console.log('🔧 Updating user interface...');
+  function updateUserInfo(userData) {
     
-    // Update user info in sidebar
     const userEmailElement = document.getElementById('userEmail');
     const userPlanElement = document.getElementById('userPlan');
-    
-    if (userEmailElement) userEmailElement.textContent = subscriptionManager.currentUser.email;
-    if (userPlanElement) userPlanElement.textContent = (subscriptionManager.userLicense?.tier || 'FREE') + ' Plan';
-    
-    // Update plan info
-    await updatePlanInfo();
-    
-    // Update usage stats
-    await updateUsageInterface();
-    
-    console.log('✅ User interface updated');
-  }
-  
-  async function updatePlanInfo() {
-    const license = subscriptionManager.userLicense;
-    if (!license) return;
-    
     const currentPlanNameElement = document.getElementById('currentPlanName');
     const planBadgeElement = document.getElementById('planBadge');
     const planDescriptionElement = document.getElementById('planDescription');
     
+    // Update user info in sidebar
+    if (userEmailElement) userEmailElement.textContent = userData.email;
+    if (userPlanElement) userPlanElement.textContent = userData.currentPlan + ' Plan';
+    
+    // Update current plan info
     const planConfigs = {
       'FREE': { 
         name: 'Free Plan', 
@@ -1589,7 +1405,7 @@ class ModalManager {
       }
     };
     
-    const config = planConfigs[license.tier] || planConfigs['FREE'];
+    const config = planConfigs[userData.currentPlan] || planConfigs['FREE'];
     
     if (currentPlanNameElement) currentPlanNameElement.textContent = config.name;
     if (planDescriptionElement) planDescriptionElement.textContent = config.description;
@@ -1597,51 +1413,23 @@ class ModalManager {
       planBadgeElement.textContent = config.badge;
       planBadgeElement.className = `plan-badge ${config.badgeClass}`;
     }
-
-    // Update plan buttons
-    updatePlanButtons(license.tier);
-  }
-
-  function updatePlanButtons(currentTier) {
-    const buttons = {
-      'freeBtn': { tier: 'FREE', text: currentTier === 'FREE' ? 'Current' : 'Downgrade', class: currentTier === 'FREE' ? 'success' : 'danger' },
-      'proBtn': { tier: 'PRO', text: currentTier === 'PRO' ? 'Current' : 'Upgrade', class: currentTier === 'PRO' ? 'success' : 'primary' },
-      'ultraBtn': { tier: 'ULTRA', text: currentTier === 'ULTRA' ? 'Current' : 'Upgrade', class: currentTier === 'ULTRA' ? 'success' : 'primary' }
-    };
-
-    Object.entries(buttons).forEach(([buttonId, config]) => {
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.textContent = config.text;
-        button.className = `action-button ${config.class}`;
-        button.disabled = currentTier === config.tier;
-      }
-    });
+    
+    // Update usage stats
+    updateUsageStats(userData.usage, userData.resetTime);
   }
   
-  async function updateUsageInterface() {
-    const usageStats = await subscriptionManager.getUsageStats();
-    if (!usageStats) return;
+  function updateUsageStats(usage, resetTime) {
     
     // Screenshots
     const screenshotUsage = document.getElementById('screenshotUsage');
     const screenshotLimit = document.getElementById('screenshotLimit');
     const screenshotBar = document.getElementById('screenshotBar');
     
-    if (screenshotUsage) screenshotUsage.textContent = usageStats.screenshots_used;
-    if (screenshotLimit) {
-      if (usageStats.screenshots_limit === -1) {
-        screenshotLimit.textContent = 'unlimited';
-      } else {
-        screenshotLimit.textContent = `of ${usageStats.screenshots_limit} daily limit`;
-      }
-    }
+    if (screenshotUsage) screenshotUsage.textContent = usage.screenshots.used;
+    if (screenshotLimit) screenshotLimit.textContent = `of ${usage.screenshots.limit} daily limit`;
     if (screenshotBar) {
-      let percentage = 0;
-      if (usageStats.screenshots_limit > 0) {
-        percentage = (usageStats.screenshots_used / usageStats.screenshots_limit) * 100;
-      }
-      screenshotBar.style.width = `${Math.min(percentage, 100)}%`;
+      const percentage = (usage.screenshots.used / usage.screenshots.limit) * 100;
+      screenshotBar.style.width = `${percentage}%`;
       screenshotBar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
@@ -1650,27 +1438,17 @@ class ModalManager {
     const aiLimit = document.getElementById('aiLimit');
     const aiBar = document.getElementById('aiBar');
     
-    if (aiUsage) aiUsage.textContent = usageStats.ai_requests_used;
-    if (aiLimit) {
-      if (usageStats.ai_requests_limit === -1) {
-        aiLimit.textContent = 'unlimited';
-      } else {
-        aiLimit.textContent = `of ${usageStats.ai_requests_limit} daily limit`;
-      }
-    }
+    if (aiUsage) aiUsage.textContent = usage.aiRequests.used;
+    if (aiLimit) aiLimit.textContent = `of ${usage.aiRequests.limit} daily limit`;
     if (aiBar) {
-      let percentage = 0;
-      if (usageStats.ai_requests_limit > 0) {
-        percentage = (usageStats.ai_requests_used / usageStats.ai_requests_limit) * 100;
-      }
-      aiBar.style.width = `${Math.min(percentage, 100)}%`;
+      const percentage = (usage.aiRequests.used / usage.aiRequests.limit) * 100;
+      aiBar.style.width = `${percentage}%`;
       aiBar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
     // Reset time
     const resetTimeElement = document.getElementById('resetTime');
-    if (resetTimeElement && usageStats.usage_reset_time) {
-      const resetTime = new Date(usageStats.usage_reset_time);
+    if (resetTimeElement && resetTime) {
       const timeString = resetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       resetTimeElement.textContent = timeString;
     }
@@ -1682,631 +1460,63 @@ class ModalManager {
     return 'usage-high';
   }
   
-  function setupAllEnhancedButtons() {
-    console.log('🔧 Setting up all enhanced buttons...');
+  function setupAllButtons(userData) {
     
-    // Plan management buttons
-    setupPlanButtons();
-    
-    // Account management buttons
-    setupAccountButtons();
-    
-    // Usage & billing buttons
-    setupUsageBillingButtons();
-    
-    // Security buttons
-    setupSecurityButtons();
-    
-    // Preferences buttons
-    setupPreferencesButtons();
-    
-    // Support buttons
-    setupSupportButtons();
-    
-    console.log('✅ All enhanced buttons setup complete');
-  }
-
-  function setupPlanButtons() {
-    // Plan upgrade/downgrade buttons
-    ['freeBtn', 'proBtn', 'ultraBtn', 'changePlanBtn'].forEach(buttonId => {
+    // Plan buttons
+    const planButtons = ['freeBtn', 'proBtn', 'ultraBtn'];
+    planButtons.forEach(buttonId => {
       const button = document.getElementById(buttonId);
       if (button) {
         button.addEventListener('click', function() {
           const planType = buttonId.replace('Btn', '').toUpperCase();
-          if (planType === 'CHANGE') {
-            showPlanChangeModal();
-          } else {
-            handlePlanChange(planType);
-          }
+          handlePlanUpgrade(planType, userData);
         });
       }
     });
-  }
-
-  function setupAccountButtons() {
-    // Manage account button
-    const manageAccountBtn = document.getElementById('manageAccountBtn');
-    if (manageAccountBtn) {
-      manageAccountBtn.addEventListener('click', function() {
-        showAccountManagementModal();
-      });
-    }
-  }
-
-  function setupUsageBillingButtons() {
-    // Usage history button
-    const viewHistoryBtn = document.getElementById('viewHistoryBtn');
-    if (viewHistoryBtn) {
-      viewHistoryBtn.addEventListener('click', function() {
-        showUsageHistoryModal();
-      });
-    }
-
-    // Export data button
-    const exportDataBtn = document.getElementById('exportDataBtn');
-    if (exportDataBtn) {
-      exportDataBtn.addEventListener('click', async function() {
-        this.disabled = true;
-        this.innerHTML = '<div class="loading-spinner"></div>Exporting...';
-        
-        const success = await subscriptionManager.exportUsageData();
-        
-        if (success) {
-          ModalManager.alert('Export Successful', 'Your usage data has been downloaded as a CSV file.', 'success');
-        } else {
-          ModalManager.alert('Export Failed', 'There was an error exporting your usage data. Please try again.', 'error');
-        }
-        
-        this.disabled = false;
-        this.innerHTML = 'Export';
-      });
-    }
-
-    // Billing buttons
-    const updatePaymentBtn = document.getElementById('updatePaymentBtn');
-    if (updatePaymentBtn) {
-      updatePaymentBtn.addEventListener('click', function() {
-        showPaymentMethodModal();
-      });
-    }
-
-    const billingHistoryBtn = document.getElementById('billingHistoryBtn');
-    if (billingHistoryBtn) {
-      billingHistoryBtn.addEventListener('click', function() {
-        showBillingHistoryModal();
-      });
-    }
-
-    const downloadReceiptsBtn = document.getElementById('downloadReceiptsBtn');
-    if (downloadReceiptsBtn) {
-      downloadReceiptsBtn.addEventListener('click', function() {
-        showReceiptDownloadModal();
-      });
-    }
-  }
-
-  function setupSecurityButtons() {
-    // Change password button
-    const changePasswordBtn = document.getElementById('changePasswordBtn');
-    if (changePasswordBtn) {
-      changePasswordBtn.addEventListener('click', function() {
-        showChangePasswordModal();
-      });
-    }
-
-    // 2FA button
-    const enable2FABtn = document.getElementById('enable2FABtn');
-    if (enable2FABtn) {
-      enable2FABtn.addEventListener('click', function() {
-        show2FAModal();
-      });
-    }
-
-    // Manage sessions button
-    const manageSessionsBtn = document.getElementById('manageSessionsBtn');
-    if (manageSessionsBtn) {
-      manageSessionsBtn.addEventListener('click', function() {
-        showSessionsModal();
-      });
-    }
-  }
-
-  function setupPreferencesButtons() {
-    // Theme button
-    const themeBtn = document.getElementById('themeBtn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function() {
-        showThemeModal();
-      });
-    }
-  }
-
-  function setupSupportButtons() {
-    // Contact support button
-    const contactSupportBtn = document.getElementById('contactSupportBtn');
-    if (contactSupportBtn) {
-      contactSupportBtn.addEventListener('click', function() {
-        showContactSupportModal();
-      });
-    }
-
-    // Documentation button
-    const docsBtn = document.getElementById('docsBtn');
-    if (docsBtn) {
-      docsBtn.addEventListener('click', function() {
-        window.open('https://docs.ghostpilot.ai', '_blank');
-      });
-    }
-
-    // Feedback button
-    const feedbackBtn = document.getElementById('feedbackBtn');
-    if (feedbackBtn) {
-      feedbackBtn.addEventListener('click', function() {
-        showFeedbackModal();
-      });
-    }
+    
+    // Action buttons with modal functionality
+    const actionButtons = {
+      'manageAccountBtn': () => showManageAccountModal(userData),
+      'changePlanBtn': () => showChangePlanModal(userData),
+      'updatePaymentBtn': () => showUpdatePaymentModal(userData),
+      'viewHistoryBtn': () => showUsageHistoryModal(userData),
+      'billingHistoryBtn': () => showBillingHistoryModal(userData),
+      'downloadReceiptsBtn': () => showDownloadReceiptsModal(userData),
+      'changePasswordBtn': () => showChangePasswordModal(userData),
+      'enable2FABtn': () => show2FAModal(userData),
+      'manageSessionsBtn': () => showManageSessionsModal(userData),
+      'themeBtn': () => showThemeModal(userData),
+      'contactSupportBtn': () => showContactSupportModal(userData),
+      'docsBtn': () => showDocumentationModal(userData),
+      'feedbackBtn': () => showFeedbackModal(userData),
+      'exportDataBtn': () => showExportDataModal(userData)
+    };
+    
+    Object.entries(actionButtons).forEach(([buttonId, handler]) => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener('click', handler);
+      }
+    });
   }
   
   function setupToggles() {
-    console.log('🔧 Setting up toggle switches...');
     
     const toggles = ['autoSaveToggle', 'privacyToggle', 'notificationsToggle', 'autoUpdateToggle'];
     
     toggles.forEach(toggleId => {
       const toggle = document.getElementById(toggleId);
       if (toggle) {
-        toggle.addEventListener('click', async function() {
+        toggle.addEventListener('click', function() {
           this.classList.toggle('enabled');
-          const isEnabled = this.classList.contains('enabled');
-          console.log(`🔧 ${toggleId} toggled:`, isEnabled);
-          
-          // Save preference to database
-          await saveTogglePreference(toggleId, isEnabled);
         });
       }
     });
-    
-    console.log('✅ Toggle switches setup complete');
   }
-
-  function setupSearch() {
-    const searchInput = document.getElementById('settingsSearch');
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        filterSettings(searchTerm);
-      });
-    }
-  }
-
-  function filterSettings(searchTerm) {
-    const settingsItems = document.querySelectorAll('.settings-item');
+  
+  function handlePlanUpgrade(planType, userData) {
     
-    settingsItems.forEach(item => {
-      const title = item.querySelector('.item-title').textContent.toLowerCase();
-      const description = item.querySelector('.item-description').textContent.toLowerCase();
-      
-      if (title.includes(searchTerm) || description.includes(searchTerm)) {
-        item.style.display = 'flex';
-      } else {
-        item.style.display = searchTerm ? 'none' : 'flex';
-      }
-    });
-  }
-
-  async function saveTogglePreference(toggleId, isEnabled) {
-    try {
-      const preferences = JSON.parse(localStorage.getItem('subscription_preferences') || '{}');
-      preferences[toggleId] = isEnabled;
-      localStorage.setItem('subscription_preferences', JSON.stringify(preferences));
-      
-      // Also save to Supabase if available
-      if (subscriptionManager && subscriptionManager.currentUser) {
-        await subscriptionManager.updateUserProfile({
-          preferences: preferences
-        });
-      }
-    } catch (error) {
-      console.error('❌ Error saving toggle preference:', error);
-    }
-  }
-
-  async function loadPageData(page) {
-    console.log('📄 Loading data for page:', page);
-    
-    switch (page) {
-      case 'usage':
-        await updateUsageInterface();
-        break;
-      case 'billing':
-        // Load billing data
-        break;
-      case 'security':
-        // Load security settings
-        break;
-      // Add more cases as needed
-    }
-  }
-
-  // Modal Functions
-  function showPlanChangeModal() {
-    const content = `
-      <div class="alert alert-warning">
-        <strong>Plan Change Information</strong><br>
-        • Upgrades take effect immediately<br>
-        • Downgrades take effect at the end of current billing period<br>
-        • Pro Plan: $19.99/month<br>
-        • Ultra Plan: $99.99/month
-      </div>
-      <p>Select your desired plan from the Subscription tab to proceed with the change.</p>
-    `;
-    
-    ModalManager.show('Change Plan', content, [
-      { text: 'OK', action: 'ok', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showAccountManagementModal() {
-    const content = `
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" value="${subscriptionManager.currentUser?.email || ''}" disabled>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-        <input type="text" class="form-input" value="${subscriptionManager.userProfile?.full_name || ''}" id="fullNameInput">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Username</label>
-        <input type="text" class="form-input" value="${subscriptionManager.userProfile?.username || ''}" id="usernameInput">
-      </div>
-    `;
-    
-    ModalManager.show('Account Management', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { 
-        text: 'Save Changes', 
-        action: 'save', 
-        class: 'primary', 
-        handler: async () => {
-          const fullName = document.getElementById('fullNameInput').value;
-          const username = document.getElementById('usernameInput').value;
-          
-          const success = await subscriptionManager.updateUserProfile({
-            full_name: fullName,
-            username: username
-          });
-          
-          if (success) {
-            ModalManager.alert('Success', 'Account information updated successfully.', 'success');
-          } else {
-            ModalManager.alert('Error', 'Failed to update account information.', 'error');
-          }
-        }
-      }
-    ]);
-  }
-
-  function showUsageHistoryModal() {
-    const content = `
-      <p>Usage history for the past 30 days:</p>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Screenshots</th>
-            <th>AI Requests</th>
-            <th>Plan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>${new Date().toLocaleDateString()}</td>
-            <td>${subscriptionManager.userLicense?.daily_screenshots_used || 0}</td>
-            <td>${subscriptionManager.userLicense?.daily_ai_requests_used || 0}</td>
-            <td>${subscriptionManager.userLicense?.tier || 'FREE'}</td>
-          </tr>
-          <tr>
-            <td colspan="4" style="text-align: center; color: rgba(255,255,255,0.5);">
-              Previous days' data would be loaded from database
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-    
-    ModalManager.show('Usage History', content, [
-      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showPaymentMethodModal() {
-    const content = `
-      <div class="alert alert-warning">
-        This is a demo version. In the production app, this would integrate with Stripe to manage payment methods.
-      </div>
-      <div class="form-group">
-        <label class="form-label">Card Number</label>
-        <input type="text" class="form-input" placeholder="**** **** **** ****" disabled>
-      </div>
-      <div style="display: flex; gap: 12px;">
-        <div class="form-group" style="flex: 1;">
-          <label class="form-label">Expiry</label>
-          <input type="text" class="form-input" placeholder="MM/YY" disabled>
-        </div>
-        <div class="form-group" style="flex: 1;">
-          <label class="form-label">CVC</label>
-          <input type="text" class="form-input" placeholder="123" disabled>
-        </div>
-      </div>
-    `;
-    
-    ModalManager.show('Update Payment Method', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { text: 'Update', action: 'update', class: 'primary', handler: () => {
-        ModalManager.alert('Demo Mode', 'This feature would integrate with Stripe in the production version.', 'warning');
-      }}
-    ]);
-  }
-
-  function showBillingHistoryModal() {
-    const content = `
-      <p>Billing history and invoices:</p>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="4" style="text-align: center; color: rgba(255,255,255,0.5);">
-              No billing history available (Demo mode)
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-    
-    ModalManager.show('Billing History', content, [
-      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showReceiptDownloadModal() {
-    const content = `
-      <div class="alert alert-warning">
-        This is a demo version. In the production app, this would allow you to download receipts and invoices for tax purposes.
-      </div>
-      <p>Available receipts:</p>
-      <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">
-        No receipts available (Demo mode)
-      </div>
-    `;
-    
-    ModalManager.show('Download Receipts', content, [
-      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showChangePasswordModal() {
-    const content = `
-      <div class="form-group">
-        <label class="form-label">Current Password</label>
-        <input type="password" class="form-input" id="currentPassword">
-      </div>
-      <div class="form-group">
-        <label class="form-label">New Password</label>
-        <input type="password" class="form-input" id="newPassword">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Confirm New Password</label>
-        <input type="password" class="form-input" id="confirmPassword">
-      </div>
-    `;
-    
-    ModalManager.show('Change Password', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { 
-        text: 'Change Password', 
-        action: 'change', 
-        class: 'primary', 
-        handler: async () => {
-          const currentPassword = document.getElementById('currentPassword').value;
-          const newPassword = document.getElementById('newPassword').value;
-          const confirmPassword = document.getElementById('confirmPassword').value;
-          
-          if (!currentPassword || !newPassword || !confirmPassword) {
-            ModalManager.alert('Error', 'Please fill in all fields.', 'error');
-            return;
-          }
-          
-          if (newPassword !== confirmPassword) {
-            ModalManager.alert('Error', 'New passwords do not match.', 'error');
-            return;
-          }
-          
-          try {
-            const { error } = await subscriptionManager.supabase.auth.updateUser({
-              password: newPassword
-            });
-            
-            if (error) {
-              ModalManager.alert('Error', 'Failed to change password: ' + error.message, 'error');
-            } else {
-              ModalManager.alert('Success', 'Password changed successfully.', 'success');
-            }
-          } catch (error) {
-            ModalManager.alert('Error', 'An error occurred while changing your password.', 'error');
-          }
-        }
-      }
-    ]);
-  }
-
-  function show2FAModal() {
-    const content = `
-      <div class="alert alert-warning">
-        Two-Factor Authentication setup would be integrated with an authenticator app like Google Authenticator or Authy in the production version.
-      </div>
-      <p>Steps to enable 2FA:</p>
-      <ol style="color: rgba(255,255,255,0.8); line-height: 1.6;">
-        <li>Download an authenticator app</li>
-        <li>Scan the QR code</li>
-        <li>Enter the verification code</li>
-        <li>Save your backup codes</li>
-      </ol>
-    `;
-    
-    ModalManager.show('Two-Factor Authentication', content, [
-      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showSessionsModal() {
-    const content = `
-      <p>Active sessions and devices:</p>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Device</th>
-            <th>Location</th>
-            <th>Last Active</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Current Session</td>
-            <td>Unknown</td>
-            <td>Now</td>
-            <td><span style="color: rgba(34,197,94,0.9);">Current</span></td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-    
-    ModalManager.show('Active Sessions', content, [
-      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
-    ]);
-  }
-
-  function showThemeModal() {
-    const content = `
-      <div class="form-group">
-        <label class="form-label">Select Theme</label>
-        <select class="form-input" id="themeSelect">
-          <option value="dark">Dark (Current)</option>
-          <option value="light">Light</option>
-          <option value="auto">Auto (System)</option>
-        </select>
-      </div>
-      <div class="alert alert-warning">
-        Theme customization would be fully implemented in the production version.
-      </div>
-    `;
-    
-    ModalManager.show('Theme Settings', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { text: 'Apply', action: 'apply', class: 'primary', handler: () => {
-        const theme = document.getElementById('themeSelect').value;
-        ModalManager.alert('Success', `Theme changed to ${theme}. This is a demo - full theme support would be implemented in production.`, 'success');
-      }}
-    ]);
-  }
-
-  function showContactSupportModal() {
-    const content = `
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <select class="form-input" id="supportSubject">
-          <option value="billing">Billing Question</option>
-          <option value="technical">Technical Issue</option>
-          <option value="feature">Feature Request</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-input" rows="5" id="supportMessage" placeholder="Describe your issue or question..."></textarea>
-      </div>
-      <div class="alert alert-warning">
-        In the production version, this would send an email to our support team.
-      </div>
-    `;
-    
-    ModalManager.show('Contact Support', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { 
-        text: 'Send Message', 
-        action: 'send', 
-        class: 'primary', 
-        handler: () => {
-          const subject = document.getElementById('supportSubject').value;
-          const message = document.getElementById('supportMessage').value;
-          
-          if (!message.trim()) {
-            ModalManager.alert('Error', 'Please enter a message.', 'error');
-            return;
-          }
-          
-          ModalManager.alert('Success', 'Your support request has been submitted. We will get back to you within 24 hours.', 'success');
-        }
-      }
-    ]);
-  }
-
-  function showFeedbackModal() {
-    const content = `
-      <div class="form-group">
-        <label class="form-label">Feedback Type</label>
-        <select class="form-input" id="feedbackType">
-          <option value="feature">Feature Request</option>
-          <option value="improvement">Improvement Suggestion</option>
-          <option value="bug">Bug Report</option>
-          <option value="general">General Feedback</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Your Feedback</label>
-        <textarea class="form-input" rows="5" id="feedbackMessage" placeholder="Share your thoughts and suggestions..."></textarea>
-      </div>
-    `;
-    
-    ModalManager.show('Send Feedback', content, [
-      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
-      { 
-        text: 'Send Feedback', 
-        action: 'send', 
-        class: 'primary', 
-        handler: () => {
-          const type = document.getElementById('feedbackType').value;
-          const message = document.getElementById('feedbackMessage').value;
-          
-          if (!message.trim()) {
-            ModalManager.alert('Error', 'Please enter your feedback.', 'error');
-            return;
-          }
-          
-          ModalManager.alert('Success', 'Thank you for your feedback! Your input helps us improve the product.', 'success');
-        }
-      }
-    ]);
-  }
-
-  async function handlePlanChange(planType) {
-    console.log(`🚀 ${planType} plan change requested`);
-    
-    const currentTier = subscriptionManager.userLicense?.tier || 'FREE';
-    
-    if (planType === currentTier) {
-      ModalManager.alert('Plan Change', 'You are already on this plan!', 'warning');
-      return;
-    }
-
+    // Show loading state
     const button = document.getElementById(`${planType.toLowerCase()}Btn`);
     if (!button) return;
     
@@ -2319,47 +1529,688 @@ class ModalManager {
     `;
     button.disabled = true;
     
-    try {
-      if (planType === 'FREE') {
-        // Downgrade confirmation
-        ModalManager.confirm(
-          'Confirm Downgrade',
-          'Are you sure you want to downgrade to the FREE plan? You will lose access to premium features and your usage will be limited.',
-          async () => {
-            const success = await subscriptionManager.updateTier('FREE');
-            if (success) {
-              await updateUserInterface();
-              ModalManager.alert('Success', 'Successfully downgraded to FREE plan.', 'success');
-            } else {
-              ModalManager.alert('Error', 'Failed to downgrade plan. Please contact support.', 'error');
-            }
-          }
-        );
+    // Simulate processing
+    setTimeout(() => {
+      if (planType === userData.currentPlan) {
+        alert('You are already on this plan!');
+      } else if (planType === 'FREE') {
+        const confirmDowngrade = confirm('Are you sure you want to downgrade to the FREE plan? You will lose access to premium features.');
+        if (confirmDowngrade) {
+          alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
+        }
       } else {
-        // Upgrade confirmation
         const prices = { PRO: '$19.99', ULTRA: '$99.99' };
-        ModalManager.confirm(
-          'Confirm Upgrade',
-          `Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`,
-          async () => {
-            // In production, this would redirect to Stripe
-            // For demo, we'll simulate success
-            const success = await subscriptionManager.updateTier(planType);
-            if (success) {
-              await updateUserInterface();
-              ModalManager.alert('Success', `Successfully upgraded to ${planType} plan!`, 'success');
-            } else {
-              ModalManager.alert('Error', 'Failed to upgrade plan. Please contact support.', 'error');
-            }
-          }
-        );
+        const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
+        if (confirmUpgrade) {
+          alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
+        }
       }
-    } finally {
+      
       // Reset button
+      button.innerHTML = originalText;
+      button.disabled = false;
+    }, 2000);
+  }
+
+  // ================== MODAL FUNCTIONS ==================
+
+  function showModal(title, content, actions = []) {
+    const overlay = document.getElementById('modalOverlay');
+    const modal = document.getElementById('modalContent');
+    
+    modal.innerHTML = `
+      <div class="modal-header">
+        <h3 class="modal-title">${title}</h3>
+        <button class="modal-close" onclick="hideModal()">×</button>
+      </div>
+      <div class="modal-body">
+        ${content}
+      </div>
+      <div class="modal-footer">
+        ${actions.map(action => `<button class="modal-button ${action.class || ''}" onclick="${action.onclick}">${action.text}</button>`).join('')}
+        <button class="modal-button" onclick="hideModal()">Cancel</button>
+      </div>
+    `;
+    
+    overlay.classList.add('active');
+    
+    // Close modal when clicking overlay
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) hideModal();
+    });
+  }
+  
+  function hideModal() {
+    const overlay = document.getElementById('modalOverlay');
+    overlay.classList.remove('active');
+  }
+
+  function showMessage(text, type = 'info') {
+    return `<div class="message ${type}">${text}</div>`;
+  }
+
+    function showManageAccountModal(userData) {
+     const content = `
+       <div class="form-group">
+         <label class="form-label">Email Address</label>
+         <input type="email" class="form-input" value="${userData?.email || 'user@example.com'}" id="userEmailInput">
+       </div>
+       <div class="form-group">
+         <label class="form-label">Display Name</label>
+         <input type="text" class="form-input" value="${userData?.email?.split('@')[0] || 'user'}" id="userNameInput">
+       </div>
+      <div class="form-group">
+        <label class="form-label">Timezone</label>
+        <select class="form-input form-select" id="timezoneSelect">
+          <option value="UTC-8">Pacific Time (UTC-8)</option>
+          <option value="UTC-5">Eastern Time (UTC-5)</option>
+          <option value="UTC+0" selected>UTC</option>
+          <option value="UTC+1">Central European Time (UTC+1)</option>
+        </select>
+      </div>
+      ${showMessage('Changes to your email will require verification.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Save Changes', class: 'primary', onclick: 'saveAccountChanges()' }
+    ];
+    
+    showModal('Manage Account', content, actions);
+  }
+
+    function showChangePlanModal(userData) {
+     const plans = [
+       { 
+         id: 'FREE', 
+         name: 'Free Plan', 
+         price: '$0', 
+         features: ['10 screenshots/day', '10 AI requests/day', 'Basic features'],
+         current: (userData?.currentPlan || 'FREE') === 'FREE'
+       },
+       { 
+         id: 'PRO', 
+         name: 'Pro Plan', 
+         price: '$19.99', 
+         features: ['100 screenshots/day', '100 AI requests/day', 'Premium AI models', 'Priority support'],
+         current: (userData?.currentPlan || 'FREE') === 'PRO'
+       },
+       { 
+         id: 'ULTRA', 
+         name: 'Ultra Plan', 
+         price: '$99.99', 
+         features: ['Unlimited usage', 'All AI models', 'Ultra features', 'Dedicated support'],
+         current: (userData?.currentPlan || 'FREE') === 'ULTRA'
+       }
+     ];
+
+    const content = `
+      <div class="plan-comparison">
+        ${plans.map(plan => `
+          <div class="plan-card ${plan.current ? 'current' : ''}" onclick="selectPlan('${plan.id}')">
+            <div class="plan-name">${plan.name}</div>
+            <div class="plan-price">${plan.price}/month</div>
+            <ul class="plan-features">
+              ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            ${plan.current ? '<div class="status-badge status-active">Current Plan</div>' : `<button class="modal-button primary">Select Plan</button>`}
+          </div>
+        `).join('')}
+      </div>
+      ${showMessage('Plan changes take effect immediately. Downgrades will be processed at the end of your billing cycle.', 'info')}
+    `;
+    
+    showModal('Change Subscription Plan', content);
+  }
+
+    function showUsageHistoryModal(userData) {
+     // Demo implementation - userData parameter available for future integration
+     const sampleData = [
+      { date: '2024-01-15', screenshots: 8, aiRequests: 12 },
+      { date: '2024-01-14', screenshots: 5, aiRequests: 7 },
+      { date: '2024-01-13', screenshots: 10, aiRequests: 15 },
+      { date: '2024-01-12', screenshots: 3, aiRequests: 4 },
+      { date: '2024-01-11', screenshots: 7, aiRequests: 9 }
+    ];
+
+    const content = `
+      <div class="chart-container">
+        📊 Usage trends chart would be displayed here
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Screenshots</th>
+            <th>AI Requests</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sampleData.map(row => `
+            <tr>
+              <td>${row.date}</td>
+              <td>${row.screenshots}</td>
+              <td>${row.aiRequests}</td>
+              <td><span class="status-badge status-active">Normal</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+    
+    const actions = [
+      { text: 'Export CSV', class: 'primary', onclick: 'exportUsageData()' }
+    ];
+    
+    showModal('Usage History', content, actions);
+  }
+
+  function showBillingHistoryModal(userData) {
+    const sampleInvoices = [
+      { id: 'INV-001', date: '2024-01-01', amount: '$19.99', status: 'paid' },
+      { id: 'INV-002', date: '2023-12-01', amount: '$19.99', status: 'paid' },
+      { id: 'INV-003', date: '2023-11-01', amount: '$19.99', status: 'paid' }
+    ];
+
+    const content = `
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Invoice</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sampleInvoices.map(invoice => `
+            <tr>
+              <td>${invoice.id}</td>
+              <td>${invoice.date}</td>
+              <td>${invoice.amount}</td>
+              <td><span class="status-badge status-${invoice.status}">${invoice.status.toUpperCase()}</span></td>
+              <td><button class="modal-button" onclick="downloadInvoice('${invoice.id}')">Download</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      ${showMessage('Invoices are automatically generated and sent to your email address.', 'info')}
+    `;
+    
+    showModal('Billing History', content);
+  }
+
+  function showChangePasswordModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm New Password</label>
+        <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+      </div>
+      ${showMessage('Password must be at least 8 characters long and contain letters and numbers.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Update Password', class: 'primary', onclick: 'updatePassword()' }
+    ];
+    
+    showModal('Change Password', content, actions);
+  }
+
+  function show2FAModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Two-Factor Authentication</label>
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 8px 0;">
+          Add an extra layer of security to your account by enabling two-factor authentication.
+        </p>
+      </div>
+      <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 6px; margin: 16px 0;">
+        <div style="font-size: 32px; margin-bottom: 12px;">📱</div>
+        <p style="color: rgba(255,255,255,0.8);">Scan QR code with your authenticator app</p>
+        <div style="width: 120px; height: 120px; background: rgba(255,255,255,0.1); margin: 16px auto; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">
+          QR Code
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Verification Code</label>
+        <input type="text" class="form-input" id="verificationCode" placeholder="Enter 6-digit code">
+      </div>
+    `;
+    
+    const actions = [
+      { text: 'Enable 2FA', class: 'primary', onclick: 'enable2FA()' }
+    ];
+    
+    showModal('Two-Factor Authentication', content, actions);
+  }
+
+  function showManageSessionsModal(userData) {
+    const sampleSessions = [
+      { device: 'Chrome on Windows', location: 'New York, US', lastActive: '2024-01-15 14:30', current: true },
+      { device: 'Safari on iPhone', location: 'New York, US', lastActive: '2024-01-15 09:15', current: false },
+      { device: 'Firefox on Windows', location: 'Los Angeles, US', lastActive: '2024-01-14 16:45', current: false }
+    ];
+
+    const content = `
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Location</th>
+            <th>Last Active</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sampleSessions.map(session => `
+            <tr>
+              <td>${session.device}</td>
+              <td>${session.location}</td>
+              <td>${session.lastActive}</td>
+              <td><span class="status-badge ${session.current ? 'status-active' : 'status-pending'}">${session.current ? 'Current' : 'Active'}</span></td>
+              <td>${session.current ? '<em style="color: rgba(255,255,255,0.5);">This device</em>' : '<button class="modal-button danger" onclick="revokeSession()">Revoke</button>'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      ${showMessage('You can revoke access from any device. This will require re-authentication on that device.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Revoke All Sessions', class: 'danger', onclick: 'revokeAllSessions()' }
+    ];
+    
+    showModal('Manage Sessions', content, actions);
+  }
+
+  function showUpdatePaymentModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Payment Method</label>
+        <div style="padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>💳</span>
+            <span>•••• •••• •••• 4242</span>
+            <span style="color: rgba(255,255,255,0.5);">Expires 12/2025</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Card Number</label>
+        <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="form-group">
+          <label class="form-label">Expiry Date</label>
+          <input type="text" class="form-input" id="expiry" placeholder="MM/YY">
+        </div>
+        <div class="form-group">
+          <label class="form-label">CVC</label>
+          <input type="text" class="form-input" id="cvc" placeholder="123">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cardholder Name</label>
+        <input type="text" class="form-input" id="cardholderName" placeholder="John Doe">
+      </div>
+    `;
+    
+    const actions = [
+      { text: 'Update Payment Method', class: 'primary', onclick: 'updatePaymentMethod()' }
+    ];
+    
+    showModal('Update Payment Method', content, actions);
+  }
+
+  function showDownloadReceiptsModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Select Period</label>
+        <select class="form-input form-select" id="receiptPeriod">
+          <option value="2024">2024 (Current Year)</option>
+          <option value="2023">2023</option>
+          <option value="all">All Available Receipts</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Format</label>
+        <select class="form-input form-select" id="receiptFormat">
+          <option value="pdf">PDF (Recommended)</option>
+          <option value="csv">CSV (Spreadsheet)</option>
+        </select>
+      </div>
+      ${showMessage('Receipts will be downloaded as a ZIP file containing all invoices for the selected period.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Download Receipts', class: 'primary', onclick: 'downloadReceipts()' }
+    ];
+    
+    showModal('Download Receipts', content, actions);
+  }
+
+  function showThemeModal(userData) {
+    const themes = [
+      { id: 'dark', name: 'Dark Theme', current: true },
+      { id: 'light', name: 'Light Theme', current: false },
+      { id: 'auto', name: 'Auto (System)', current: false }
+    ];
+
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Select Theme</label>
+        ${themes.map(theme => `
+          <div style="display: flex; align-items: center; padding: 8px; margin: 4px 0; background: rgba(255,255,255,0.02); border-radius: 4px;">
+            <input type="radio" name="theme" value="${theme.id}" ${theme.current ? 'checked' : ''} style="margin-right: 8px;">
+            <label style="color: rgba(255,255,255,0.8);">${theme.name}</label>
+            ${theme.current ? '<span style="margin-left: auto; color: rgba(34, 197, 94, 0.8); font-size: 12px;">Current</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+      ${showMessage('Theme changes will be applied immediately.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Apply Theme', class: 'primary', onclick: 'applyTheme()' }
+    ];
+    
+    showModal('Theme Settings', content, actions);
+  }
+
+  function showContactSupportModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-input form-select" id="supportSubject">
+          <option value="">Select a topic</option>
+          <option value="billing">Billing & Payments</option>
+          <option value="technical">Technical Issue</option>
+          <option value="feature">Feature Request</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority</label>
+        <select class="form-input form-select" id="supportPriority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input form-textarea" id="supportMessage" placeholder="Describe your issue or question..."></textarea>
+      </div>
+      ${showMessage('Support tickets are typically responded to within 24 hours. Pro and Ultra subscribers receive priority support.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Submit Ticket', class: 'primary', onclick: 'submitSupportTicket()' }
+    ];
+    
+    showModal('Contact Support', content, actions);
+  }
+
+  function showDocumentationModal(userData) {
+    const docSections = [
+      { title: 'Getting Started', description: 'Basic setup and first steps' },
+      { title: 'Features Guide', description: 'Comprehensive feature documentation' },
+      { title: 'API Reference', description: 'Developer API documentation' },
+      { title: 'Troubleshooting', description: 'Common issues and solutions' },
+      { title: 'FAQ', description: 'Frequently asked questions' }
+    ];
+
+    const content = `
+      <div style="margin-bottom: 16px;">
+        <input type="text" class="form-input" placeholder="Search documentation..." id="docSearch">
+      </div>
+      ${docSections.map(section => `
+        <div style="padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; margin: 8px 0; cursor: pointer;" onclick="openDocSection('${section.title}')">
+          <div style="font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 4px;">${section.title}</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.6);">${section.description}</div>
+        </div>
+      `).join('')}
+      ${showMessage('Documentation is also available online at docs.steley.com', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Open Online Docs', class: 'primary', onclick: 'openOnlineDocs()' }
+    ];
+    
+    showModal('Documentation', content, actions);
+  }
+
+  function showFeedbackModal(userData) {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Feedback Type</label>
+        <select class="form-input form-select" id="feedbackType">
+          <option value="general">General Feedback</option>
+          <option value="bug">Bug Report</option>
+          <option value="feature">Feature Request</option>
+          <option value="improvement">Improvement Suggestion</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rating</label>
+        <div style="display: flex; gap: 8px; padding: 8px 0;">
+          ${[1,2,3,4,5].map(star => `<span style="font-size: 24px; cursor: pointer; color: rgba(255,255,255,0.3);" onclick="setRating(${star})">⭐</span>`).join('')}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Feedback</label>
+        <textarea class="form-input form-textarea" id="feedbackMessage" placeholder="Tell us what you think..."></textarea>
+      </div>
+      ${showMessage('Thank you for helping us improve Steley! Your feedback is valuable to us.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Submit Feedback', class: 'primary', onclick: 'submitFeedback()' }
+    ];
+    
+    showModal('Send Feedback', content, actions);
+  }
+
+  function showExportDataModal(userData) {
+    const dataTypes = [
+      { id: 'profile', name: 'Profile Information', description: 'Your account details and preferences' },
+      { id: 'usage', name: 'Usage Statistics', description: 'Historical usage data and analytics' },
+      { id: 'billing', name: 'Billing Information', description: 'Invoices and payment history' },
+      { id: 'settings', name: 'Settings & Preferences', description: 'App settings and configurations' }
+    ];
+
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Select Data to Export</label>
+        ${dataTypes.map(type => `
+          <div style="display: flex; align-items: center; padding: 8px; margin: 4px 0; background: rgba(255,255,255,0.02); border-radius: 4px;">
+            <input type="checkbox" id="${type.id}" checked style="margin-right: 8px;">
+            <div>
+              <div style="color: rgba(255,255,255,0.8); font-weight: 500;">${type.name}</div>
+              <div style="color: rgba(255,255,255,0.5); font-size: 12px;">${type.description}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Export Format</label>
+        <select class="form-input form-select" id="exportFormat">
+          <option value="json">JSON (Recommended)</option>
+          <option value="csv">CSV (Spreadsheet)</option>
+          <option value="pdf">PDF Report</option>
+        </select>
+      </div>
+      ${showMessage('Your data will be compiled and available for download. Large exports may take a few minutes to prepare.', 'info')}
+    `;
+    
+    const actions = [
+      { text: 'Export Data', class: 'primary', onclick: 'exportUserData()' }
+    ];
+    
+    showModal('Export Your Data', content, actions);
+  }
+
+  // ================== MODAL ACTION HANDLERS ==================
+  
+  window.saveAccountChanges = function() {
+    const email = document.getElementById('userEmailInput').value;
+    const name = document.getElementById('userNameInput').value;
+    const timezone = document.getElementById('timezoneSelect').value;
+    
+    // Simulate API call
+    setTimeout(() => {
+      alert('Account updated successfully!');
+      hideModal();
+    }, 1000);
+  };
+
+  window.selectPlan = function(planId) {
+    if (confirm(`Change to ${planId} plan?`)) {
       setTimeout(() => {
-        button.innerHTML = originalText;
-        button.disabled = false;
+        alert(`Plan changed to ${planId}!`);
+        hideModal();
       }, 1000);
     }
-  }
+  };
+
+  window.exportUsageData = function() {
+    setTimeout(() => {
+      alert('Usage data exported successfully!');
+      hideModal();
+    }, 1000);
+  };
+
+  window.downloadInvoice = function(invoiceId) {
+    alert(`Downloading invoice ${invoiceId}...`);
+  };
+
+  window.updatePassword = function() {
+    const current = document.getElementById('currentPassword').value;
+    const newPass = document.getElementById('newPassword').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    
+    if (newPass !== confirm) {
+      alert('Passwords do not match!');
+      return;
+    }
+    
+    setTimeout(() => {
+      alert('Password updated successfully!');
+      hideModal();
+    }, 1000);
+  };
+
+  window.enable2FA = function() {
+    const code = document.getElementById('verificationCode').value;
+    if (code.length === 6) {
+      setTimeout(() => {
+        alert('Two-factor authentication enabled!');
+        hideModal();
+      }, 1000);
+    } else {
+      alert('Please enter a valid 6-digit code.');
+    }
+  };
+
+  window.revokeSession = function() {
+    if (confirm('Revoke this session?')) {
+      alert('Session revoked successfully!');
+    }
+  };
+
+  window.revokeAllSessions = function() {
+    if (confirm('Revoke all other sessions? You will need to re-authenticate on other devices.')) {
+      alert('All sessions revoked successfully!');
+      hideModal();
+    }
+  };
+
+  window.updatePaymentMethod = function() {
+    setTimeout(() => {
+      alert('Payment method updated successfully!');
+      hideModal();
+    }, 1000);
+  };
+
+  window.downloadReceipts = function() {
+    const period = document.getElementById('receiptPeriod').value;
+    const format = document.getElementById('receiptFormat').value;
+    setTimeout(() => {
+      alert(`Receipts for ${period} downloaded as ${format.toUpperCase()}!`);
+      hideModal();
+    }, 1000);
+  };
+
+  window.applyTheme = function() {
+    const theme = document.querySelector('input[name="theme"]:checked').value;
+    setTimeout(() => {
+      alert(`Theme changed to ${theme}!`);
+      hideModal();
+    }, 500);
+  };
+
+  window.submitSupportTicket = function() {
+    const subject = document.getElementById('supportSubject').value;
+    const message = document.getElementById('supportMessage').value;
+    
+    if (!subject || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    
+    setTimeout(() => {
+      alert('Support ticket submitted! You will receive a confirmation email shortly.');
+      hideModal();
+    }, 1000);
+  };
+
+  window.openDocSection = function(section) {
+    alert(`Opening ${section} documentation...`);
+  };
+
+  window.openOnlineDocs = function() {
+    window.open('https://docs.steley.com', '_blank');
+    hideModal();
+  };
+
+  window.setRating = function(rating) {
+    // Update visual feedback for rating
+    const stars = document.querySelectorAll('[onclick^="setRating"]');
+    stars.forEach((star, index) => {
+      star.style.color = index < rating ? '#fbbf24' : 'rgba(255,255,255,0.3)';
+    });
+  };
+
+  window.submitFeedback = function() {
+    const message = document.getElementById('feedbackMessage').value;
+    if (!message.trim()) {
+      alert('Please enter your feedback.');
+      return;
+    }
+    
+    setTimeout(() => {
+      alert('Feedback submitted! Thank you for helping us improve.');
+      hideModal();
+    }, 1000);
+  };
+
+  window.exportUserData = function() {
+    const format = document.getElementById('exportFormat').value;
+    setTimeout(() => {
+      alert(`Data export prepared! Download will begin shortly (${format.toUpperCase()} format).`);
+      hideModal();
+    }, 2000);
+  };
+
 })(); 
