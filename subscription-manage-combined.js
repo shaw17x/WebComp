@@ -1,4 +1,4 @@
-// Steley Subscription Management Page Combined - CSS + HTML Content (Component Only) - v3.0 Program Settings Style
+// Enhanced Subscription Management Page - v4.0 with Real Supabase Integration
 const subscriptionCSS = `
 /* NO BODY STYLING - Let Framer handle the background */
 
@@ -239,6 +239,11 @@ const subscriptionCSS = `
   color: #ffffff;
 }
 
+.action-button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .action-button.primary{
   background: rgba(59, 130, 246, 0.2);
   border-color: rgba(59, 130, 246, 0.4);
@@ -249,6 +254,12 @@ const subscriptionCSS = `
   background: rgba(34, 197, 94, 0.2);
   border-color: rgba(34, 197, 94, 0.4);
   color: rgba(34, 197, 94, 0.9);
+}
+
+.action-button.danger{
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: rgba(239, 68, 68, 0.9);
 }
 
 /* Usage Display */
@@ -399,6 +410,158 @@ const subscriptionCSS = `
   to{ transform: rotate(360deg); }
 }
 
+/* Modal Styles */
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(8px);
+}
+
+.modal-content{
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-title{
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.modal-close{
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modal-close:hover{
+  color: #ffffff;
+}
+
+.modal-body{
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.modal-footer{
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Form Styles */
+.form-group{
+  margin-bottom: 16px;
+}
+
+.form-label{
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
+}
+
+.form-input{
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 13px;
+  color: #ffffff;
+  font-family: inherit;
+}
+
+.form-input:focus{
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-input::placeholder{
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Alert Styles */
+.alert{
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.alert-success{
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: rgba(34, 197, 94, 0.9);
+}
+
+.alert-error{
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(239, 68, 68, 0.9);
+}
+
+.alert-warning{
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: rgba(234, 179, 8, 0.9);
+}
+
+/* Table Styles */
+.data-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.data-table th,
+.data-table td{
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.data-table th{
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-table td{
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* Responsive Design */
 @media (max-width: 768px){
   .subscription-manage-component{
@@ -450,43 +613,43 @@ const subscriptionHTML = `
     <!-- Search -->
     <input type="text" class="sidebar-search" placeholder="Search settings Ctrl+F" id="settingsSearch">
 
-         <!-- Navigation -->
-     <div class="sidebar-nav">
-       <button class="nav-item active" data-page="general">
-         <span class="nav-icon">⚙</span>
-         <span>General</span>
-       </button>
-       
-       <button class="nav-item" data-page="subscription">
-         <span class="nav-icon">∞</span>
-         <span>Subscription</span>
-       </button>
-       
-       <button class="nav-item" data-page="usage">
-         <span class="nav-icon">→</span>
-         <span>Usage</span>
-       </button>
-       
-       <button class="nav-item" data-page="billing">
-         <span class="nav-icon">$</span>
-         <span>Billing</span>
-       </button>
-       
-       <button class="nav-item" data-page="security">
-         <span class="nav-icon">◦</span>
-         <span>Security</span>
-       </button>
-       
-       <button class="nav-item" data-page="preferences">
-         <span class="nav-icon">≫</span>
-         <span>Preferences</span>
-       </button>
-       
-       <button class="nav-item" data-page="support">
-         <span class="nav-icon">?</span>
-         <span>Support</span>
-       </button>
-     </div>
+    <!-- Navigation -->
+    <div class="sidebar-nav">
+      <button class="nav-item active" data-page="general">
+        <span class="nav-icon">⚙</span>
+        <span>General</span>
+      </button>
+      
+      <button class="nav-item" data-page="subscription">
+        <span class="nav-icon">∞</span>
+        <span>Subscription</span>
+      </button>
+      
+      <button class="nav-item" data-page="usage">
+        <span class="nav-icon">→</span>
+        <span>Usage</span>
+      </button>
+      
+      <button class="nav-item" data-page="billing">
+        <span class="nav-icon">$</span>
+        <span>Billing</span>
+      </button>
+      
+      <button class="nav-item" data-page="security">
+        <span class="nav-icon">◦</span>
+        <span>Security</span>
+      </button>
+      
+      <button class="nav-item" data-page="preferences">
+        <span class="nav-icon">≫</span>
+        <span>Preferences</span>
+      </button>
+      
+      <button class="nav-item" data-page="support">
+        <span class="nav-icon">?</span>
+        <span>Support</span>
+      </button>
+    </div>
   </div>
 
   <!-- Right Content Area -->
@@ -498,19 +661,19 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">⚙</span>
-                 Manage Account
-               </div>
-               <div class="item-description">Manage your account and billing</div>
-             </div>
-             <button class="action-button" id="manageAccountBtn">Open</button>
-      </div>
-    </div>
-    
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">⚙</span>
+                Manage Account
+              </div>
+              <div class="item-description">Manage your account and billing</div>
+            </div>
+            <button class="action-button" id="manageAccountBtn">Open</button>
+          </div>
+        </div>
+        
         <div class="content-section">
           <div class="section-header">
             <div class="section-title">Current Plan</div>
@@ -533,31 +696,31 @@ const subscriptionHTML = `
             <div class="section-title">Preferences</div>
           </div>
           
-                     <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Auto-Save Screenshots
-               </div>
-               <div class="item-description">Automatically save screenshots to your device</div>
-             </div>
-             <div class="toggle-switch" id="autoSaveToggle">
-               <div class="toggle-slider"></div>
-             </div>
-           </div>
-           
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Privacy Mode
-               </div>
-               <div class="item-description">Enhanced privacy protection during screenshots</div>
-             </div>
-             <div class="toggle-switch enabled" id="privacyToggle">
-               <div class="toggle-slider"></div>
-             </div>
-           </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Auto-Save Screenshots
+              </div>
+              <div class="item-description">Automatically save screenshots to your device</div>
+            </div>
+            <div class="toggle-switch" id="autoSaveToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Privacy Mode
+              </div>
+              <div class="item-description">Enhanced privacy protection during screenshots</div>
+            </div>
+            <div class="toggle-switch enabled" id="privacyToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -574,47 +737,47 @@ const subscriptionHTML = `
             <div class="section-title">Available Plans</div>
           </div>
           
-                     <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Free Plan
-               </div>
-               <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
-             </div>
-             <div style="display: flex; align-items: center; gap: 12px;">
-               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
-               <button class="action-button success" id="freeBtn">Current</button>
-             </div>
-           </div>
-           
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Pro Plan
-               </div>
-               <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
-             </div>
-             <div style="display: flex; align-items: center; gap: 12px;">
-               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
-               <button class="action-button primary" id="proBtn">Upgrade</button>
-             </div>
-           </div>
-           
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Ultra Plan
-               </div>
-               <div class="item-description">Unlimited usage, all AI models, priority support</div>
-             </div>
-             <div style="display: flex; align-items: center; gap: 12px;">
-               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
-               <button class="action-button primary" id="ultraBtn">Upgrade</button>
-             </div>
-           </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Free Plan
+              </div>
+              <div class="item-description">10 screenshots/day, 10 AI requests/day, basic features</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$0/month</span>
+              <button class="action-button success" id="freeBtn">Current</button>
+            </div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Pro Plan
+              </div>
+              <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
+              <button class="action-button primary" id="proBtn">Upgrade</button>
+            </div>
+          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Ultra Plan
+              </div>
+              <div class="item-description">Unlimited usage, all AI models, priority support</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
+              <button class="action-button primary" id="ultraBtn">Upgrade</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -631,190 +794,190 @@ const subscriptionHTML = `
             <div class="usage-label">Screenshots Today</div>
             <div class="usage-value" id="screenshotUsage">3</div>
             <div class="usage-limit" id="screenshotLimit">of 10 daily limit</div>
-        <div class="usage-bar">
+            <div class="usage-bar">
               <div class="usage-fill usage-low" id="screenshotBar" style="width: 30%"></div>
-        </div>
-      </div>
+            </div>
+          </div>
           
           <div class="usage-item">
             <div class="usage-label">AI Requests Today</div>
             <div class="usage-value" id="aiUsage">7</div>
             <div class="usage-limit" id="aiLimit">of 10 daily limit</div>
-        <div class="usage-bar">
+            <div class="usage-bar">
               <div class="usage-fill usage-medium" id="aiBar" style="width: 70%"></div>
-        </div>
-      </div>
+            </div>
+          </div>
           
           <div class="usage-item">
             <div class="usage-label">Next Reset</div>
             <div class="usage-value" id="resetTime">23:45</div>
             <div class="usage-limit">Daily limits reset</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
-                 View Usage History
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                View Usage History
+              </div>
+              <div class="item-description">Detailed usage statistics and trends</div>
+            </div>
+            <button class="action-button" id="viewHistoryBtn">View</button>
           </div>
-               <div class="item-description">Detailed usage statistics and trends</div>
-             </div>
-             <button class="action-button" id="viewHistoryBtn">View</button>
-        </div>
-        
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
-                 Export Usage Data
-          </div>
-               <div class="item-description">Download your usage data as CSV</div>
-          </div>
-             <button class="action-button" id="exportDataBtn">Export</button>
-          </div>
-         </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                Export Usage Data
+              </div>
+              <div class="item-description">Download your usage data as CSV</div>
+            </div>
+            <button class="action-button" id="exportDataBtn">Export</button>
           </div>
         </div>
-        
+      </div>
+    </div>
+    
     <!-- Billing Page -->
     <div class="content-page" id="billingPage">
       <div class="content-header">
         <h1 class="content-title">Billing</h1>
-        </div>
+      </div>
       
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">$</span>
-                 Payment Method
-               </div>
-               <div class="item-description">Update payment information and billing details</div>
-             </div>
-             <button class="action-button" id="updatePaymentBtn">Update</button>
-      </div>
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">$</span>
+                Payment Method
+              </div>
+              <div class="item-description">Update payment information and billing details</div>
+            </div>
+            <button class="action-button" id="updatePaymentBtn">Update</button>
+          </div>
 
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
-                 Billing History
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                Billing History
+              </div>
+              <div class="item-description">View past invoices and payment history</div>
+            </div>
+            <button class="action-button" id="billingHistoryBtn">View</button>
           </div>
-               <div class="item-description">View past invoices and payment history</div>
-             </div>
-             <button class="action-button" id="billingHistoryBtn">View</button>
-        </div>
-        
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
-                 Download Receipts
-          </div>
-               <div class="item-description">Download receipts for tax purposes</div>
-          </div>
-             <button class="action-button" id="downloadReceiptsBtn">Download</button>
-          </div>
-          </div>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">↓</span>
+                Download Receipts
+              </div>
+              <div class="item-description">Download receipts for tax purposes</div>
+            </div>
+            <button class="action-button" id="downloadReceiptsBtn">Download</button>
           </div>
         </div>
+      </div>
+    </div>
         
     <!-- Security Page -->
     <div class="content-page" id="securityPage">
       <div class="content-header">
         <h1 class="content-title">Security</h1>
-        </div>
+      </div>
       
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Change Password
-               </div>
-               <div class="item-description">Update your account password</div>
-             </div>
-             <button class="action-button" id="changePasswordBtn">Change</button>
-      </div>
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Change Password
+              </div>
+              <div class="item-description">Update your account password</div>
+            </div>
+            <button class="action-button" id="changePasswordBtn">Change</button>
+          </div>
 
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Two-Factor Authentication
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Two-Factor Authentication
+              </div>
+              <div class="item-description">Add extra security to your account</div>
+            </div>
+            <button class="action-button" id="enable2FABtn">Enable</button>
           </div>
-               <div class="item-description">Add extra security to your account</div>
-             </div>
-             <button class="action-button" id="enable2FABtn">Enable</button>
+          
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Active Sessions
+              </div>
+              <div class="item-description">Manage devices and active sessions</div>
+            </div>
+            <button class="action-button" id="manageSessionsBtn">Manage</button>
+          </div>
         </div>
-        
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Active Sessions
-          </div>
-               <div class="item-description">Manage devices and active sessions</div>
-          </div>
-             <button class="action-button" id="manageSessionsBtn">Manage</button>
-          </div>
-          </div>
-          </div>
-          </div>
+      </div>
+    </div>
 
     <!-- Preferences Page -->
     <div class="content-page" id="preferencesPage">
       <div class="content-header">
         <h1 class="content-title">Preferences</h1>
-        </div>
+      </div>
         
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Theme
-        </div>
-               <div class="item-description">Choose your preferred theme</div>
-      </div>
-             <button class="action-button" id="themeBtn">Dark</button>
-           </div>
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Theme
+              </div>
+              <div class="item-description">Choose your preferred theme</div>
+            </div>
+            <button class="action-button" id="themeBtn">Dark</button>
+          </div>
            
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Notifications
-               </div>
-               <div class="item-description">Configure notification preferences</div>
-             </div>
-             <div class="toggle-switch enabled" id="notificationsToggle">
-               <div class="toggle-slider"></div>
-    </div>
-  </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Notifications
+              </div>
+              <div class="item-description">Configure notification preferences</div>
+            </div>
+            <div class="toggle-switch enabled" id="notificationsToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
 
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
-                 Auto-Update
-               </div>
-               <div class="item-description">Automatically update Steley when new versions are available</div>
-             </div>
-             <div class="toggle-switch enabled" id="autoUpdateToggle">
-               <div class="toggle-slider"></div>
-             </div>
-           </div>
-         </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">◦</span>
+                Auto-Update
+              </div>
+              <div class="item-description">Automatically update Steley when new versions are available</div>
+            </div>
+            <div class="toggle-switch enabled" id="autoUpdateToggle">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
+    </div>
       
     <!-- Support Page -->
     <div class="content-page" id="supportPage">
@@ -823,45 +986,414 @@ const subscriptionHTML = `
       </div>
       
       <div class="content-body">
-                 <div class="content-section">
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">?</span>
-                 Contact Support
-               </div>
-               <div class="item-description">Get help with your subscription or technical issues</div>
-             </div>
-             <button class="action-button" id="contactSupportBtn">Contact</button>
-      </div>
+        <div class="content-section">
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">?</span>
+                Contact Support
+              </div>
+              <div class="item-description">Get help with your subscription or technical issues</div>
+            </div>
+            <button class="action-button" id="contactSupportBtn">Contact</button>
+          </div>
       
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
-                 Documentation
-      </div>
-               <div class="item-description">View help articles and user guides</div>
-    </div>
-             <button class="action-button" id="docsBtn">Open</button>
-  </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">≡</span>
+                Documentation
+              </div>
+              <div class="item-description">View help articles and user guides</div>
+            </div>
+            <button class="action-button" id="docsBtn">Open</button>
+          </div>
 
-           <div class="settings-item">
-             <div class="item-info">
-               <div class="item-title">
-                 <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
-                 Send Feedback
-    </div>
-               <div class="item-description">Share your thoughts and suggestions</div>
-             </div>
-             <button class="action-button" id="feedbackBtn">Send</button>
-           </div>
-         </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <div class="item-title">
+                <span style="color: rgba(255,255,255,0.5); margin-right: 8px;">→</span>
+                Send Feedback
+              </div>
+              <div class="item-description">Share your thoughts and suggestions</div>
+            </div>
+            <button class="action-button" id="feedbackBtn">Send</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 `;
+
+// Enhanced Supabase Integration Class
+class SubscriptionManager {
+  constructor() {
+    this.supabase = null;
+    this.currentUser = null;
+    this.userLicense = null;
+    this.userProfile = null;
+    this.init();
+  }
+
+  async init() {
+    console.log('🚀 SubscriptionManager initializing...');
+    
+    // Load Supabase if not available
+    if (!window.supabase) {
+      await this.loadSupabase();
+    }
+
+    // Initialize Supabase client
+    const supabaseUrl = 'https://mfrlmxrjhkyuphklzxdt.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcmxteHJqaGt5dXBoa2x6eGR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU0NzE0NzcsImV4cCI6MjA1MTA0NzQ3N30.MQS_Q7VzOgx5VEzUHVLvNFKWW9HTI9Y8t3t1mGOSgAY';
+    
+    this.supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    console.log('✅ Supabase client initialized');
+
+    // Get current session
+    await this.getCurrentSession();
+  }
+
+  async loadSupabase() {
+    return new Promise((resolve, reject) => {
+      if (window.supabase) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js';
+      script.onload = () => {
+        console.log('✅ Supabase script loaded');
+        resolve();
+      };
+      script.onerror = (error) => {
+        console.error('❌ Failed to load Supabase script:', error);
+        reject(error);
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  async getCurrentSession() {
+    try {
+      const { data: { session }, error } = await this.supabase.auth.getSession();
+      
+      if (error) {
+        console.error('❌ Error getting session:', error);
+        return null;
+      }
+
+      if (session?.user) {
+        this.currentUser = session.user;
+        console.log('✅ Current user found:', this.currentUser.email);
+        
+        // Load user profile and license
+        await this.loadUserProfile();
+        await this.loadUserLicense();
+        
+        return session;
+      }
+
+      console.log('ℹ️ No active session found');
+      return null;
+    } catch (error) {
+      console.error('❌ Error in getCurrentSession:', error);
+      return null;
+    }
+  }
+
+  async loadUserProfile() {
+    if (!this.currentUser) return null;
+
+    try {
+      const { data, error } = await this.supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', this.currentUser.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('❌ Error loading user profile:', error);
+        return null;
+      }
+
+      this.userProfile = data;
+      console.log('✅ User profile loaded:', data);
+      return data;
+    } catch (error) {
+      console.error('❌ Error in loadUserProfile:', error);
+      return null;
+    }
+  }
+
+  async loadUserLicense() {
+    if (!this.currentUser) return null;
+
+    try {
+      const { data, error } = await this.supabase
+        .from('license_records')
+        .select('*')
+        .eq('user_id', this.currentUser.id)
+        .eq('status', 'active')
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('❌ Error loading user license:', error);
+        // Create default FREE license if none exists
+        return await this.createFreeLicense();
+      }
+
+      this.userLicense = data;
+      console.log('✅ User license loaded:', data);
+      return data;
+    } catch (error) {
+      console.error('❌ Error in loadUserLicense:', error);
+      return await this.createFreeLicense();
+    }
+  }
+
+  async createFreeLicense() {
+    if (!this.currentUser) return null;
+
+    try {
+      const licenseKey = `IC-FREE-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+      const machineId = await this.getMachineId();
+
+      const { data, error } = await this.supabase
+        .from('license_records')
+        .insert({
+          user_id: this.currentUser.id,
+          license_key: licenseKey,
+          tier: 'FREE',
+          machine_id: machineId,
+          status: 'active'
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('❌ Error creating FREE license:', error);
+        return null;
+      }
+
+      this.userLicense = data;
+      console.log('✅ FREE license created:', data);
+      return data;
+    } catch (error) {
+      console.error('❌ Error in createFreeLicense:', error);
+      return null;
+    }
+  }
+
+  async getMachineId() {
+    // Create a simple machine ID based on available browser data
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillText('Machine fingerprint', 2, 2);
+    
+    const fingerprint = [
+      navigator.userAgent,
+      navigator.language,
+      screen.width + 'x' + screen.height,
+      new Date().getTimezoneOffset(),
+      canvas.toDataURL()
+    ].join('|');
+
+    // Create a simple hash
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) {
+      const char = fingerprint.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    
+    return Math.abs(hash).toString(36);
+  }
+
+  async getUsageStats() {
+    if (!this.currentUser) return null;
+
+    try {
+      const { data, error } = await this.supabase.rpc('get_user_usage_stats', {
+        p_user_id: this.currentUser.id
+      });
+
+      if (error) {
+        console.error('❌ Error getting usage stats:', error);
+        return this.getDefaultUsageStats();
+      }
+
+      console.log('✅ Usage stats loaded:', data[0]);
+      return data[0];
+    } catch (error) {
+      console.error('❌ Error in getUsageStats:', error);
+      return this.getDefaultUsageStats();
+    }
+  }
+
+  getDefaultUsageStats() {
+    return {
+      screenshots_used: 0,
+      screenshots_limit: 10,
+      screenshots_remaining: 10,
+      ai_requests_used: 0,
+      ai_requests_limit: 10,
+      ai_requests_remaining: 10,
+      usage_reset_time: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+      tier: 'FREE'
+    };
+  }
+
+  async updateTier(newTier) {
+    if (!this.currentUser || !this.userLicense) return false;
+
+    try {
+      const { data, error } = await this.supabase
+        .from('license_records')
+        .update({ tier: newTier })
+        .eq('id', this.userLicense.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('❌ Error updating tier:', error);
+        return false;
+      }
+
+      this.userLicense = data;
+      console.log('✅ Tier updated:', data);
+      return true;
+    } catch (error) {
+      console.error('❌ Error in updateTier:', error);
+      return false;
+    }
+  }
+
+  async updateUserProfile(updates) {
+    if (!this.currentUser) return false;
+
+    try {
+      const { data, error } = await this.supabase
+        .from('user_profiles')
+        .update(updates)
+        .eq('id', this.currentUser.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('❌ Error updating profile:', error);
+        return false;
+      }
+
+      this.userProfile = data;
+      console.log('✅ Profile updated:', data);
+      return true;
+    } catch (error) {
+      console.error('❌ Error in updateUserProfile:', error);
+      return false;
+    }
+  }
+
+  // Export usage data as CSV
+  async exportUsageData() {
+    try {
+      // For now, return demo data
+      // In production, this would query actual usage history
+      const csvData = [
+        'Date,Screenshots,AI Requests,Plan',
+        `${new Date().toISOString().split('T')[0]},${this.userLicense?.daily_screenshots_used || 0},${this.userLicense?.daily_ai_requests_used || 0},${this.userLicense?.tier || 'FREE'}`
+      ].join('\n');
+
+      const blob = new Blob([csvData], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `usage-data-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+
+      return true;
+    } catch (error) {
+      console.error('❌ Error exporting usage data:', error);
+      return false;
+    }
+  }
+}
+
+// Modal Helper Class
+class ModalManager {
+  static show(title, content, buttons = []) {
+    // Remove existing modal
+    const existingModal = document.querySelector('.modal-overlay');
+    if (existingModal) {
+      existingModal.remove();
+    }
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">${title}</h2>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          ${content}
+        </div>
+        <div class="modal-footer">
+          ${buttons.map(btn => `<button class="action-button ${btn.class || ''}" data-action="${btn.action}">${btn.text}</button>`).join('')}
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Handle close
+    modal.querySelector('.modal-close').onclick = () => modal.remove();
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.remove();
+    };
+
+    // Handle button clicks
+    buttons.forEach(btn => {
+      if (btn.handler) {
+        modal.querySelector(`[data-action="${btn.action}"]`).onclick = btn.handler;
+      }
+    });
+
+    return modal;
+  }
+
+  static alert(title, message, type = 'info') {
+    const alertClass = type === 'error' ? 'alert-error' : type === 'success' ? 'alert-success' : type === 'warning' ? 'alert-warning' : '';
+    const content = `<div class="alert ${alertClass}">${message}</div>`;
+    
+    return this.show(title, content, [
+      { text: 'OK', action: 'ok', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  static confirm(title, message, onConfirm) {
+    const content = `<p>${message}</p>`;
+    
+    return this.show(title, content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { 
+        text: 'Confirm', 
+        action: 'confirm', 
+        class: 'primary', 
+        handler: () => {
+          document.querySelector('.modal-overlay').remove();
+          onConfirm();
+        }
+      }
+    ]);
+  }
+}
 
 // Auto-execute function to inject CSS and HTML
 (function() {
@@ -882,7 +1414,7 @@ const subscriptionHTML = `
                             hash === '#manage' ||
                             hash === '#account';
   
-  console.log('🚀 Subscription management component starting (v3.0 - Program Settings Style)...');
+  console.log('🚀 Enhanced subscription management component starting (v4.0 - Real Supabase Integration)...');
   console.log('📍 Current URL:', location.href);
   console.log('📍 Pathname:', pathname);
   console.log('📍 Hash:', hash);
@@ -909,8 +1441,10 @@ const subscriptionHTML = `
     initializeSubscriptionPage();
   }
   
+  let subscriptionManager;
+  
   function initializeSubscriptionPage() {
-    console.log('🔧 Initializing subscription page...');
+    console.log('🔧 Initializing enhanced subscription page...');
     
     // Check if subscription content already exists
     if (document.querySelector('.subscription-manage-component')) {
@@ -942,91 +1476,39 @@ const subscriptionHTML = `
     
     console.log('✅ Subscription HTML added');
     
-    // Initialize subscription functionality
-    initializeSubscriptionLogic();
+    // Initialize enhanced subscription functionality
+    initializeEnhancedSubscriptionLogic();
   }
   
-  function initializeSubscriptionLogic() {
-    console.log('🔧 Initializing subscription logic...');
+  async function initializeEnhancedSubscriptionLogic() {
+    console.log('🔧 Initializing enhanced subscription logic...');
     
-    // 🎯 CHECK AUTHENTICATION USING THE SAME FORMAT AS PROFILEDROPDOWN
-    let userEmail = null;
-    let isAuthenticated = false;
+    // Initialize subscription manager
+    subscriptionManager = new SubscriptionManager();
     
-    // Check multiple localStorage keys (same as ProfileDropdown)
-    const userStr = localStorage.getItem('supabase_user');
-    const sessionStr = localStorage.getItem('steley_session');
-    const supabaseSessionStr = localStorage.getItem('supabase_session');
-    const tokenStr = localStorage.getItem('supabase.auth.token');
+    // Wait for initialization
+    await subscriptionManager.init();
     
-    console.log('🔍 Checking authentication...');
-    console.log('👤 User data:', userStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Steley session:', sessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🔐 Supabase session:', supabaseSessionStr ? 'FOUND' : 'NOT FOUND');
-    console.log('🎫 Token data:', tokenStr ? 'FOUND' : 'NOT FOUND');
-    
-    // Try to get user email from any available source
-    if (userStr) {
-      try {
-        const user = JSON.parse(userStr);
-        if (user.email) {
-          userEmail = user.email;
-          isAuthenticated = true;
-          console.log('✅ User found in user data:', userEmail);
-        }
-      } catch {
-        console.log('❌ Failed to parse user data');
-      }
-    } else if (sessionStr) {
-      try {
-        const session = JSON.parse(sessionStr);
-        console.log('🔍 Session structure:', session);
-        
-        // Handle multiple session formats (same as ProfileDropdown)
-        if (session.user && session.user.email) {
-          userEmail = session.user.email;
-          isAuthenticated = true;
-          console.log('✅ User found in Supabase session format:', userEmail);
-        } else if (session.email && !session.user) {
-          userEmail = session.email;
-          isAuthenticated = true;
-          console.log('✅ User found in login session format:', userEmail);
-        }
-      } catch {
-        console.log('❌ Failed to parse session data');
-      }
+    // Check authentication
+    if (!subscriptionManager.currentUser) {
+      console.log('❌ User not authenticated, redirecting to login');
+      ModalManager.alert('Authentication Required', 'Please log in to access your subscription management.', 'error');
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
+      return;
     }
     
-    if (!isAuthenticated) {
-      console.log('❌ User not authenticated, redirecting to login');
-      alert('Please log in to access your subscription management.');
-        window.location.href = '/login';
-        return;
-      }
-      
-    console.log('✅ User authenticated:', userEmail);
-       
-    // Prepare demo user data (since this is a demo without real Supabase)
-      const userData = {
-      email: userEmail,
-      currentPlan: 'FREE',
-      isActive: true,
-        usage: {
-        screenshots: { used: 3, limit: 10 },
-        aiRequests: { used: 7, limit: 10 }
-      },
-      resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000)
-    };
-    
-    console.log('📊 Using demo user data:', userData);
+    console.log('✅ User authenticated:', subscriptionManager.currentUser.email);
     
     // Initialize the interface
     initializeNavigation();
-    updateUserInfo(userData);
-    setupAllButtons(userData);
+    await updateUserInterface();
+    setupAllEnhancedButtons();
     setupToggles();
+    setupSearch();
     
-    console.log('✅ Subscription functionality initialized');
+    console.log('✅ Enhanced subscription functionality initialized');
   }
   
   function initializeNavigation() {
@@ -1050,26 +1532,42 @@ const subscriptionHTML = `
         if (targetElement) {
           targetElement.classList.add('active');
         }
+
+        // Load page-specific data
+        loadPageData(targetPage);
       });
     });
     
     console.log('✅ Navigation setup complete');
   }
   
-  function updateUserInfo(userData) {
-    console.log('🔧 Updating user info...');
+  async function updateUserInterface() {
+    console.log('🔧 Updating user interface...');
     
+    // Update user info in sidebar
     const userEmailElement = document.getElementById('userEmail');
     const userPlanElement = document.getElementById('userPlan');
+    
+    if (userEmailElement) userEmailElement.textContent = subscriptionManager.currentUser.email;
+    if (userPlanElement) userPlanElement.textContent = (subscriptionManager.userLicense?.tier || 'FREE') + ' Plan';
+    
+    // Update plan info
+    await updatePlanInfo();
+    
+    // Update usage stats
+    await updateUsageInterface();
+    
+    console.log('✅ User interface updated');
+  }
+  
+  async function updatePlanInfo() {
+    const license = subscriptionManager.userLicense;
+    if (!license) return;
+    
     const currentPlanNameElement = document.getElementById('currentPlanName');
     const planBadgeElement = document.getElementById('planBadge');
     const planDescriptionElement = document.getElementById('planDescription');
     
-    // Update user info in sidebar
-    if (userEmailElement) userEmailElement.textContent = userData.email;
-    if (userPlanElement) userPlanElement.textContent = userData.currentPlan + ' Plan';
-    
-    // Update current plan info
     const planConfigs = {
       'FREE': { 
         name: 'Free Plan', 
@@ -1091,7 +1589,7 @@ const subscriptionHTML = `
       }
     };
     
-    const config = planConfigs[userData.currentPlan] || planConfigs['FREE'];
+    const config = planConfigs[license.tier] || planConfigs['FREE'];
     
     if (currentPlanNameElement) currentPlanNameElement.textContent = config.name;
     if (planDescriptionElement) planDescriptionElement.textContent = config.description;
@@ -1099,26 +1597,51 @@ const subscriptionHTML = `
       planBadgeElement.textContent = config.badge;
       planBadgeElement.className = `plan-badge ${config.badgeClass}`;
     }
-    
-    // Update usage stats
-    updateUsageStats(userData.usage, userData.resetTime);
-    
-    console.log('✅ User info updated');
+
+    // Update plan buttons
+    updatePlanButtons(license.tier);
+  }
+
+  function updatePlanButtons(currentTier) {
+    const buttons = {
+      'freeBtn': { tier: 'FREE', text: currentTier === 'FREE' ? 'Current' : 'Downgrade', class: currentTier === 'FREE' ? 'success' : 'danger' },
+      'proBtn': { tier: 'PRO', text: currentTier === 'PRO' ? 'Current' : 'Upgrade', class: currentTier === 'PRO' ? 'success' : 'primary' },
+      'ultraBtn': { tier: 'ULTRA', text: currentTier === 'ULTRA' ? 'Current' : 'Upgrade', class: currentTier === 'ULTRA' ? 'success' : 'primary' }
+    };
+
+    Object.entries(buttons).forEach(([buttonId, config]) => {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.textContent = config.text;
+        button.className = `action-button ${config.class}`;
+        button.disabled = currentTier === config.tier;
+      }
+    });
   }
   
-  function updateUsageStats(usage, resetTime) {
-    console.log('🔧 Updating usage stats...');
+  async function updateUsageInterface() {
+    const usageStats = await subscriptionManager.getUsageStats();
+    if (!usageStats) return;
     
     // Screenshots
     const screenshotUsage = document.getElementById('screenshotUsage');
     const screenshotLimit = document.getElementById('screenshotLimit');
     const screenshotBar = document.getElementById('screenshotBar');
     
-    if (screenshotUsage) screenshotUsage.textContent = usage.screenshots.used;
-    if (screenshotLimit) screenshotLimit.textContent = `of ${usage.screenshots.limit} daily limit`;
+    if (screenshotUsage) screenshotUsage.textContent = usageStats.screenshots_used;
+    if (screenshotLimit) {
+      if (usageStats.screenshots_limit === -1) {
+        screenshotLimit.textContent = 'unlimited';
+      } else {
+        screenshotLimit.textContent = `of ${usageStats.screenshots_limit} daily limit`;
+      }
+    }
     if (screenshotBar) {
-      const percentage = (usage.screenshots.used / usage.screenshots.limit) * 100;
-      screenshotBar.style.width = `${percentage}%`;
+      let percentage = 0;
+      if (usageStats.screenshots_limit > 0) {
+        percentage = (usageStats.screenshots_used / usageStats.screenshots_limit) * 100;
+      }
+      screenshotBar.style.width = `${Math.min(percentage, 100)}%`;
       screenshotBar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
@@ -1127,22 +1650,30 @@ const subscriptionHTML = `
     const aiLimit = document.getElementById('aiLimit');
     const aiBar = document.getElementById('aiBar');
     
-    if (aiUsage) aiUsage.textContent = usage.aiRequests.used;
-    if (aiLimit) aiLimit.textContent = `of ${usage.aiRequests.limit} daily limit`;
+    if (aiUsage) aiUsage.textContent = usageStats.ai_requests_used;
+    if (aiLimit) {
+      if (usageStats.ai_requests_limit === -1) {
+        aiLimit.textContent = 'unlimited';
+      } else {
+        aiLimit.textContent = `of ${usageStats.ai_requests_limit} daily limit`;
+      }
+    }
     if (aiBar) {
-      const percentage = (usage.aiRequests.used / usage.aiRequests.limit) * 100;
-      aiBar.style.width = `${percentage}%`;
+      let percentage = 0;
+      if (usageStats.ai_requests_limit > 0) {
+        percentage = (usageStats.ai_requests_used / usageStats.ai_requests_limit) * 100;
+      }
+      aiBar.style.width = `${Math.min(percentage, 100)}%`;
       aiBar.className = `usage-fill ${getUsageClass(percentage)}`;
     }
     
     // Reset time
     const resetTimeElement = document.getElementById('resetTime');
-    if (resetTimeElement && resetTime) {
+    if (resetTimeElement && usageStats.usage_reset_time) {
+      const resetTime = new Date(usageStats.usage_reset_time);
       const timeString = resetTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       resetTimeElement.textContent = timeString;
     }
-    
-    console.log('✅ Usage stats updated');
   }
   
   function getUsageClass(percentage) {
@@ -1151,50 +1682,169 @@ const subscriptionHTML = `
     return 'usage-high';
   }
   
-  function setupAllButtons(userData) {
-    console.log('🔧 Setting up all buttons...');
+  function setupAllEnhancedButtons() {
+    console.log('🔧 Setting up all enhanced buttons...');
     
-    // Plan buttons
-    const planButtons = ['freeBtn', 'proBtn', 'ultraBtn'];
-    planButtons.forEach(buttonId => {
+    // Plan management buttons
+    setupPlanButtons();
+    
+    // Account management buttons
+    setupAccountButtons();
+    
+    // Usage & billing buttons
+    setupUsageBillingButtons();
+    
+    // Security buttons
+    setupSecurityButtons();
+    
+    // Preferences buttons
+    setupPreferencesButtons();
+    
+    // Support buttons
+    setupSupportButtons();
+    
+    console.log('✅ All enhanced buttons setup complete');
+  }
+
+  function setupPlanButtons() {
+    // Plan upgrade/downgrade buttons
+    ['freeBtn', 'proBtn', 'ultraBtn', 'changePlanBtn'].forEach(buttonId => {
       const button = document.getElementById(buttonId);
       if (button) {
         button.addEventListener('click', function() {
           const planType = buttonId.replace('Btn', '').toUpperCase();
-          handlePlanUpgrade(planType, userData);
+          if (planType === 'CHANGE') {
+            showPlanChangeModal();
+          } else {
+            handlePlanChange(planType);
+          }
         });
       }
     });
-    
-    // Action buttons
-    const actionButtons = {
-      'manageAccountBtn': 'Manage account',
-      'changePlanBtn': 'Change plan',
-      'updatePaymentBtn': 'Update payment method',
-      'viewHistoryBtn': 'View usage history',
-      'billingHistoryBtn': 'View billing history',
-      'downloadReceiptsBtn': 'Download receipts',
-      'changePasswordBtn': 'Change password',
-      'enable2FABtn': 'Enable two-factor authentication',
-      'manageSessionsBtn': 'Manage sessions',
-      'themeBtn': 'Change theme',
-      'contactSupportBtn': 'Contact support',
-      'docsBtn': 'Open documentation',
-      'feedbackBtn': 'Send feedback',
-      'exportDataBtn': 'Export data'
-    };
-    
-    Object.entries(actionButtons).forEach(([buttonId, action]) => {
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener('click', function() {
-          console.log(`🔧 ${action} clicked`);
-          alert(`${action} functionality would be implemented here in a real application!`);
-        });
-      }
-    });
-    
-    console.log('✅ All buttons setup complete');
+  }
+
+  function setupAccountButtons() {
+    // Manage account button
+    const manageAccountBtn = document.getElementById('manageAccountBtn');
+    if (manageAccountBtn) {
+      manageAccountBtn.addEventListener('click', function() {
+        showAccountManagementModal();
+      });
+    }
+  }
+
+  function setupUsageBillingButtons() {
+    // Usage history button
+    const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+    if (viewHistoryBtn) {
+      viewHistoryBtn.addEventListener('click', function() {
+        showUsageHistoryModal();
+      });
+    }
+
+    // Export data button
+    const exportDataBtn = document.getElementById('exportDataBtn');
+    if (exportDataBtn) {
+      exportDataBtn.addEventListener('click', async function() {
+        this.disabled = true;
+        this.innerHTML = '<div class="loading-spinner"></div>Exporting...';
+        
+        const success = await subscriptionManager.exportUsageData();
+        
+        if (success) {
+          ModalManager.alert('Export Successful', 'Your usage data has been downloaded as a CSV file.', 'success');
+        } else {
+          ModalManager.alert('Export Failed', 'There was an error exporting your usage data. Please try again.', 'error');
+        }
+        
+        this.disabled = false;
+        this.innerHTML = 'Export';
+      });
+    }
+
+    // Billing buttons
+    const updatePaymentBtn = document.getElementById('updatePaymentBtn');
+    if (updatePaymentBtn) {
+      updatePaymentBtn.addEventListener('click', function() {
+        showPaymentMethodModal();
+      });
+    }
+
+    const billingHistoryBtn = document.getElementById('billingHistoryBtn');
+    if (billingHistoryBtn) {
+      billingHistoryBtn.addEventListener('click', function() {
+        showBillingHistoryModal();
+      });
+    }
+
+    const downloadReceiptsBtn = document.getElementById('downloadReceiptsBtn');
+    if (downloadReceiptsBtn) {
+      downloadReceiptsBtn.addEventListener('click', function() {
+        showReceiptDownloadModal();
+      });
+    }
+  }
+
+  function setupSecurityButtons() {
+    // Change password button
+    const changePasswordBtn = document.getElementById('changePasswordBtn');
+    if (changePasswordBtn) {
+      changePasswordBtn.addEventListener('click', function() {
+        showChangePasswordModal();
+      });
+    }
+
+    // 2FA button
+    const enable2FABtn = document.getElementById('enable2FABtn');
+    if (enable2FABtn) {
+      enable2FABtn.addEventListener('click', function() {
+        show2FAModal();
+      });
+    }
+
+    // Manage sessions button
+    const manageSessionsBtn = document.getElementById('manageSessionsBtn');
+    if (manageSessionsBtn) {
+      manageSessionsBtn.addEventListener('click', function() {
+        showSessionsModal();
+      });
+    }
+  }
+
+  function setupPreferencesButtons() {
+    // Theme button
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function() {
+        showThemeModal();
+      });
+    }
+  }
+
+  function setupSupportButtons() {
+    // Contact support button
+    const contactSupportBtn = document.getElementById('contactSupportBtn');
+    if (contactSupportBtn) {
+      contactSupportBtn.addEventListener('click', function() {
+        showContactSupportModal();
+      });
+    }
+
+    // Documentation button
+    const docsBtn = document.getElementById('docsBtn');
+    if (docsBtn) {
+      docsBtn.addEventListener('click', function() {
+        window.open('https://docs.ghostpilot.ai', '_blank');
+      });
+    }
+
+    // Feedback button
+    const feedbackBtn = document.getElementById('feedbackBtn');
+    if (feedbackBtn) {
+      feedbackBtn.addEventListener('click', function() {
+        showFeedbackModal();
+      });
+    }
   }
   
   function setupToggles() {
@@ -1205,21 +1855,458 @@ const subscriptionHTML = `
     toggles.forEach(toggleId => {
       const toggle = document.getElementById(toggleId);
       if (toggle) {
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', async function() {
           this.classList.toggle('enabled');
           const isEnabled = this.classList.contains('enabled');
           console.log(`🔧 ${toggleId} toggled:`, isEnabled);
+          
+          // Save preference to database
+          await saveTogglePreference(toggleId, isEnabled);
         });
       }
     });
     
     console.log('✅ Toggle switches setup complete');
   }
-  
-  function handlePlanUpgrade(planType, userData) {
-    console.log(`🚀 ${planType} plan button clicked`);
+
+  function setupSearch() {
+    const searchInput = document.getElementById('settingsSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        filterSettings(searchTerm);
+      });
+    }
+  }
+
+  function filterSettings(searchTerm) {
+    const settingsItems = document.querySelectorAll('.settings-item');
     
-    // Show loading state
+    settingsItems.forEach(item => {
+      const title = item.querySelector('.item-title').textContent.toLowerCase();
+      const description = item.querySelector('.item-description').textContent.toLowerCase();
+      
+      if (title.includes(searchTerm) || description.includes(searchTerm)) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = searchTerm ? 'none' : 'flex';
+      }
+    });
+  }
+
+  async function saveTogglePreference(toggleId, isEnabled) {
+    try {
+      const preferences = JSON.parse(localStorage.getItem('subscription_preferences') || '{}');
+      preferences[toggleId] = isEnabled;
+      localStorage.setItem('subscription_preferences', JSON.stringify(preferences));
+      
+      // Also save to Supabase if available
+      if (subscriptionManager && subscriptionManager.currentUser) {
+        await subscriptionManager.updateUserProfile({
+          preferences: preferences
+        });
+      }
+    } catch (error) {
+      console.error('❌ Error saving toggle preference:', error);
+    }
+  }
+
+  async function loadPageData(page) {
+    console.log('📄 Loading data for page:', page);
+    
+    switch (page) {
+      case 'usage':
+        await updateUsageInterface();
+        break;
+      case 'billing':
+        // Load billing data
+        break;
+      case 'security':
+        // Load security settings
+        break;
+      // Add more cases as needed
+    }
+  }
+
+  // Modal Functions
+  function showPlanChangeModal() {
+    const content = `
+      <div class="alert alert-warning">
+        <strong>Plan Change Information</strong><br>
+        • Upgrades take effect immediately<br>
+        • Downgrades take effect at the end of current billing period<br>
+        • Pro Plan: $19.99/month<br>
+        • Ultra Plan: $99.99/month
+      </div>
+      <p>Select your desired plan from the Subscription tab to proceed with the change.</p>
+    `;
+    
+    ModalManager.show('Change Plan', content, [
+      { text: 'OK', action: 'ok', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showAccountManagementModal() {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" value="${subscriptionManager.currentUser?.email || ''}" disabled>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" value="${subscriptionManager.userProfile?.full_name || ''}" id="fullNameInput">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-input" value="${subscriptionManager.userProfile?.username || ''}" id="usernameInput">
+      </div>
+    `;
+    
+    ModalManager.show('Account Management', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { 
+        text: 'Save Changes', 
+        action: 'save', 
+        class: 'primary', 
+        handler: async () => {
+          const fullName = document.getElementById('fullNameInput').value;
+          const username = document.getElementById('usernameInput').value;
+          
+          const success = await subscriptionManager.updateUserProfile({
+            full_name: fullName,
+            username: username
+          });
+          
+          if (success) {
+            ModalManager.alert('Success', 'Account information updated successfully.', 'success');
+          } else {
+            ModalManager.alert('Error', 'Failed to update account information.', 'error');
+          }
+        }
+      }
+    ]);
+  }
+
+  function showUsageHistoryModal() {
+    const content = `
+      <p>Usage history for the past 30 days:</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Screenshots</th>
+            <th>AI Requests</th>
+            <th>Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${new Date().toLocaleDateString()}</td>
+            <td>${subscriptionManager.userLicense?.daily_screenshots_used || 0}</td>
+            <td>${subscriptionManager.userLicense?.daily_ai_requests_used || 0}</td>
+            <td>${subscriptionManager.userLicense?.tier || 'FREE'}</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: center; color: rgba(255,255,255,0.5);">
+              Previous days' data would be loaded from database
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+    
+    ModalManager.show('Usage History', content, [
+      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showPaymentMethodModal() {
+    const content = `
+      <div class="alert alert-warning">
+        This is a demo version. In the production app, this would integrate with Stripe to manage payment methods.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Card Number</label>
+        <input type="text" class="form-input" placeholder="**** **** **** ****" disabled>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <div class="form-group" style="flex: 1;">
+          <label class="form-label">Expiry</label>
+          <input type="text" class="form-input" placeholder="MM/YY" disabled>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label class="form-label">CVC</label>
+          <input type="text" class="form-input" placeholder="123" disabled>
+        </div>
+      </div>
+    `;
+    
+    ModalManager.show('Update Payment Method', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { text: 'Update', action: 'update', class: 'primary', handler: () => {
+        ModalManager.alert('Demo Mode', 'This feature would integrate with Stripe in the production version.', 'warning');
+      }}
+    ]);
+  }
+
+  function showBillingHistoryModal() {
+    const content = `
+      <p>Billing history and invoices:</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4" style="text-align: center; color: rgba(255,255,255,0.5);">
+              No billing history available (Demo mode)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+    
+    ModalManager.show('Billing History', content, [
+      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showReceiptDownloadModal() {
+    const content = `
+      <div class="alert alert-warning">
+        This is a demo version. In the production app, this would allow you to download receipts and invoices for tax purposes.
+      </div>
+      <p>Available receipts:</p>
+      <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">
+        No receipts available (Demo mode)
+      </div>
+    `;
+    
+    ModalManager.show('Download Receipts', content, [
+      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showChangePasswordModal() {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <input type="password" class="form-input" id="currentPassword">
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" class="form-input" id="newPassword">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm New Password</label>
+        <input type="password" class="form-input" id="confirmPassword">
+      </div>
+    `;
+    
+    ModalManager.show('Change Password', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { 
+        text: 'Change Password', 
+        action: 'change', 
+        class: 'primary', 
+        handler: async () => {
+          const currentPassword = document.getElementById('currentPassword').value;
+          const newPassword = document.getElementById('newPassword').value;
+          const confirmPassword = document.getElementById('confirmPassword').value;
+          
+          if (!currentPassword || !newPassword || !confirmPassword) {
+            ModalManager.alert('Error', 'Please fill in all fields.', 'error');
+            return;
+          }
+          
+          if (newPassword !== confirmPassword) {
+            ModalManager.alert('Error', 'New passwords do not match.', 'error');
+            return;
+          }
+          
+          try {
+            const { error } = await subscriptionManager.supabase.auth.updateUser({
+              password: newPassword
+            });
+            
+            if (error) {
+              ModalManager.alert('Error', 'Failed to change password: ' + error.message, 'error');
+            } else {
+              ModalManager.alert('Success', 'Password changed successfully.', 'success');
+            }
+          } catch (error) {
+            ModalManager.alert('Error', 'An error occurred while changing your password.', 'error');
+          }
+        }
+      }
+    ]);
+  }
+
+  function show2FAModal() {
+    const content = `
+      <div class="alert alert-warning">
+        Two-Factor Authentication setup would be integrated with an authenticator app like Google Authenticator or Authy in the production version.
+      </div>
+      <p>Steps to enable 2FA:</p>
+      <ol style="color: rgba(255,255,255,0.8); line-height: 1.6;">
+        <li>Download an authenticator app</li>
+        <li>Scan the QR code</li>
+        <li>Enter the verification code</li>
+        <li>Save your backup codes</li>
+      </ol>
+    `;
+    
+    ModalManager.show('Two-Factor Authentication', content, [
+      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showSessionsModal() {
+    const content = `
+      <p>Active sessions and devices:</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Location</th>
+            <th>Last Active</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Current Session</td>
+            <td>Unknown</td>
+            <td>Now</td>
+            <td><span style="color: rgba(34,197,94,0.9);">Current</span></td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+    
+    ModalManager.show('Active Sessions', content, [
+      { text: 'Close', action: 'close', class: 'primary', handler: () => document.querySelector('.modal-overlay').remove() }
+    ]);
+  }
+
+  function showThemeModal() {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Select Theme</label>
+        <select class="form-input" id="themeSelect">
+          <option value="dark">Dark (Current)</option>
+          <option value="light">Light</option>
+          <option value="auto">Auto (System)</option>
+        </select>
+      </div>
+      <div class="alert alert-warning">
+        Theme customization would be fully implemented in the production version.
+      </div>
+    `;
+    
+    ModalManager.show('Theme Settings', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { text: 'Apply', action: 'apply', class: 'primary', handler: () => {
+        const theme = document.getElementById('themeSelect').value;
+        ModalManager.alert('Success', `Theme changed to ${theme}. This is a demo - full theme support would be implemented in production.`, 'success');
+      }}
+    ]);
+  }
+
+  function showContactSupportModal() {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-input" id="supportSubject">
+          <option value="billing">Billing Question</option>
+          <option value="technical">Technical Issue</option>
+          <option value="feature">Feature Request</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input" rows="5" id="supportMessage" placeholder="Describe your issue or question..."></textarea>
+      </div>
+      <div class="alert alert-warning">
+        In the production version, this would send an email to our support team.
+      </div>
+    `;
+    
+    ModalManager.show('Contact Support', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { 
+        text: 'Send Message', 
+        action: 'send', 
+        class: 'primary', 
+        handler: () => {
+          const subject = document.getElementById('supportSubject').value;
+          const message = document.getElementById('supportMessage').value;
+          
+          if (!message.trim()) {
+            ModalManager.alert('Error', 'Please enter a message.', 'error');
+            return;
+          }
+          
+          ModalManager.alert('Success', 'Your support request has been submitted. We will get back to you within 24 hours.', 'success');
+        }
+      }
+    ]);
+  }
+
+  function showFeedbackModal() {
+    const content = `
+      <div class="form-group">
+        <label class="form-label">Feedback Type</label>
+        <select class="form-input" id="feedbackType">
+          <option value="feature">Feature Request</option>
+          <option value="improvement">Improvement Suggestion</option>
+          <option value="bug">Bug Report</option>
+          <option value="general">General Feedback</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Feedback</label>
+        <textarea class="form-input" rows="5" id="feedbackMessage" placeholder="Share your thoughts and suggestions..."></textarea>
+      </div>
+    `;
+    
+    ModalManager.show('Send Feedback', content, [
+      { text: 'Cancel', action: 'cancel', handler: () => document.querySelector('.modal-overlay').remove() },
+      { 
+        text: 'Send Feedback', 
+        action: 'send', 
+        class: 'primary', 
+        handler: () => {
+          const type = document.getElementById('feedbackType').value;
+          const message = document.getElementById('feedbackMessage').value;
+          
+          if (!message.trim()) {
+            ModalManager.alert('Error', 'Please enter your feedback.', 'error');
+            return;
+          }
+          
+          ModalManager.alert('Success', 'Thank you for your feedback! Your input helps us improve the product.', 'success');
+        }
+      }
+    ]);
+  }
+
+  async function handlePlanChange(planType) {
+    console.log(`🚀 ${planType} plan change requested`);
+    
+    const currentTier = subscriptionManager.userLicense?.tier || 'FREE';
+    
+    if (planType === currentTier) {
+      ModalManager.alert('Plan Change', 'You are already on this plan!', 'warning');
+      return;
+    }
+
     const button = document.getElementById(`${planType.toLowerCase()}Btn`);
     if (!button) return;
     
@@ -1232,26 +2319,47 @@ const subscriptionHTML = `
     `;
     button.disabled = true;
     
-    // Simulate processing
-    setTimeout(() => {
-      if (planType === userData.currentPlan) {
-        alert('You are already on this plan!');
-      } else if (planType === 'FREE') {
-        const confirmDowngrade = confirm('Are you sure you want to downgrade to the FREE plan? You will lose access to premium features.');
-        if (confirmDowngrade) {
-          alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
-        }
+    try {
+      if (planType === 'FREE') {
+        // Downgrade confirmation
+        ModalManager.confirm(
+          'Confirm Downgrade',
+          'Are you sure you want to downgrade to the FREE plan? You will lose access to premium features and your usage will be limited.',
+          async () => {
+            const success = await subscriptionManager.updateTier('FREE');
+            if (success) {
+              await updateUserInterface();
+              ModalManager.alert('Success', 'Successfully downgraded to FREE plan.', 'success');
+            } else {
+              ModalManager.alert('Error', 'Failed to downgrade plan. Please contact support.', 'error');
+            }
+          }
+        );
       } else {
+        // Upgrade confirmation
         const prices = { PRO: '$19.99', ULTRA: '$99.99' };
-        const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
-        if (confirmUpgrade) {
-          alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
-        }
+        ModalManager.confirm(
+          'Confirm Upgrade',
+          `Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`,
+          async () => {
+            // In production, this would redirect to Stripe
+            // For demo, we'll simulate success
+            const success = await subscriptionManager.updateTier(planType);
+            if (success) {
+              await updateUserInterface();
+              ModalManager.alert('Success', `Successfully upgraded to ${planType} plan!`, 'success');
+            } else {
+              ModalManager.alert('Error', 'Failed to upgrade plan. Please contact support.', 'error');
+            }
+          }
+        );
       }
-      
+    } finally {
       // Reset button
-      button.innerHTML = originalText;
-      button.disabled = false;
-    }, 2000);
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.disabled = false;
+      }, 1000);
+    }
   }
 })(); 
