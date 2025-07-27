@@ -123,12 +123,14 @@ const pricingHTML = `
     <div class="pricing-card">
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
-      <p class="plan-description">Perfect for trying out Steley with basic features.</p>
+      <p class="plan-description">Perfect for testing Ghost Pilot's AI-powered interview assistance.</p>
       <ul class="plan-features">
-        <li>5 AI queries per day</li>
-        <li>Basic screenshot analysis</li>
+        <li>3 screenshots per day</li>
+        <li>3 AI analysis requests per day</li>
+        <li>GPT-4o Mini AI model access</li>
+        <li>Basic screenshot analysis (MCQ, coding, fill-in-blank)</li>
         <li>Standard response time</li>
-        <li>Community support</li>
+        <li>Limited stealth mode</li>
       </ul>
       <a href="#" class="plan-button secondary">Get Started Free</a>
     </div>
