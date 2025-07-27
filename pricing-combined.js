@@ -67,8 +67,6 @@ body{margin:0!important;padding:0!important}
 
 
 
-
-
 @keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
 /* Footer Styles */
@@ -111,6 +109,8 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
+  
+
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -192,17 +192,17 @@ const pricingHTML = `
 
       <div class="faq-item">
         <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
-        <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
+            <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
-        <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
+            <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">How does the AI screenshot analysis work?</h3>
-        <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
+            <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
       </div>
 
       <div class="faq-item">
@@ -212,192 +212,27 @@ const pricingHTML = `
 
       <div class="faq-item">
         <h3 class="faq-question">Can I upgrade or downgrade my plan anytime?</h3>
-        <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
+            <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
-        <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
+            <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What happens if I exceed my daily usage limits?</h3>
-        <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
+            <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">How secure are my screenshots and data?</h3>
-        <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
+            <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What payment methods do you accept?</h3>
-        <p class="faq-answer-text"><strong>All major cards:</strong> Visa • Mastercard • Amex • Discover<br>Processed via <strong>Stripe</strong> (secure, PCI-compliant) • Monthly/annual billing</p>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(2)">
-          <span class="faq-question-text">What platforms and assessment types does Ghost Pilot support?</span>
-          <div id="icon-container-2" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-2" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(3)">
-          <span class="faq-question-text">How does the AI screenshot analysis work?</span>
-          <div id="icon-container-3" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-3" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(4)">
-          <span class="faq-question-text">Which AI models are available in each plan?</span>
-          <div id="icon-container-4" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-4" class="faq-answer">
-          <div class="faq-answer-content">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 20px 0;">
-              <div>
-                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Free</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px; padding: 6px 12px; background: rgba(107,114,128,0.1); border-radius: 6px; text-align: center;">GPT-4o Mini</li>
-                </ul>
-              </div>
-              <div>
-                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Pro</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">GPT-4o</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Claude Sonnet 4</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O1 Mini</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Gemini Pro</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Gemini 2.0 Flash</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Qwen 2.5 VL 72B</li>
-                </ul>
-              </div>
-              <div>
-                <h4 style="color: #9ca3af; font-size: 16px; font-weight: 600; margin-bottom: 12px; text-align: center;">Ultra</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">All Pro Models +</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O3</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Claude Opus 4</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">O1 Pro</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Priority Access</li>
-                  <li style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 6px; padding: 4px 8px; background: rgba(107,114,128,0.1); border-radius: 4px; text-align: center;">Custom Configs</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(5)">
-          <span class="faq-question-text">Can I upgrade or downgrade my plan anytime?</span>
-          <div id="icon-container-5" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-5" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(6)">
-          <span class="faq-question-text">Do you offer refunds if I'm not satisfied?</span>
-          <div id="icon-container-6" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-6" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(7)">
-          <span class="faq-question-text">What happens if I exceed my daily usage limits?</span>
-          <div id="icon-container-7" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-7" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(8)">
-          <span class="faq-question-text">How secure are my screenshots and data?</span>
-          <div id="icon-container-8" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-8" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(9)">
-          <span class="faq-question-text">What payment methods do you accept and how is billing handled?</span>
-          <div id="icon-container-9" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-9" class="faq-answer">
-          <div class="faq-answer-content">
             <p class="faq-answer-text"><strong>All major cards:</strong> Visa • Mastercard • Amex • Discover<br>Processed via <strong>Stripe</strong> (secure, PCI-compliant) • Monthly/annual billing</p>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -470,57 +305,7 @@ const pricingHTML = `
 </footer>
 `;
 
-// FAQ functionality - Home Page Style
-let openFAQ = 0; // First FAQ open by default
-window.toggleFAQ = function(index) {
-  const answer = document.getElementById('answer-' + index);
-  const iconContainer = document.getElementById('icon-container-' + index);
-  
-  // Close previously open FAQ
-  if (openFAQ !== null && openFAQ !== index) {
-    const prevAnswer = document.getElementById('answer-' + openFAQ);
-    const prevIconContainer = document.getElementById('icon-container-' + openFAQ);
-    if (prevAnswer) {
-      prevAnswer.style.height = '0px';
-      prevAnswer.style.opacity = '0';
-      prevAnswer.style.transform = 'translateY(-10px)';
-      prevAnswer.classList.remove('open');
-    }
-    if (prevIconContainer) {
-      prevIconContainer.style.transform = 'rotate(0deg)';
-    }
-  }
-  
-  // Toggle current FAQ
-  if (openFAQ === index) {
-    // Close current FAQ
-    if (answer) {
-      answer.style.height = '0px';
-      answer.style.opacity = '0';
-      answer.style.transform = 'translateY(-10px)';
-      answer.classList.remove('open');
-    }
-    if (iconContainer) {
-      iconContainer.style.transform = 'rotate(0deg)';
-    }
-    openFAQ = null;
-  } else {
-    // Open current FAQ
-    if (answer) {
-      // Get the content height dynamically
-      const content = answer.querySelector('.faq-answer-content');
-      const contentHeight = content ? content.scrollHeight : 120;
-      answer.style.height = contentHeight + 'px';
-      answer.style.opacity = '1';
-      answer.style.transform = 'translateY(0)';
-      answer.classList.add('open');
-    }
-    if (iconContainer) {
-      iconContainer.style.transform = 'rotate(45deg)';
-    }
-    openFAQ = index;
-  }
-};
+
 
 
 
@@ -546,7 +331,7 @@ window.redirectToCheckout = function(planType) {
     // For demo purposes, show alert and simulate redirect
     alert(`🔒 Redirecting to Stripe checkout for ${planNames[planType]}...\n\nDemo Mode: In production, this would open the secure Stripe payment page.`);
     console.log(`Would redirect to: ${checkoutUrls[planType]}`);
-  }
+    }
 };
 
 // Auto-execute function to inject CSS and HTML
