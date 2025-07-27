@@ -11,12 +11,12 @@ body{margin:0!important;padding:0!important}
   
   /* Billing Toggle Switch - Cursor Style */
   .billing-toggle{margin-top:40px;display:flex;justify-content:center;align-items:center}
-  .toggle-container{position:relative;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:4px;display:flex;align-items:stretch;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);min-width:280px}
-  .toggle-option{flex:1;padding:8px 16px;font-size:14px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;z-index:2;border-radius:6px;white-space:nowrap;text-align:center;display:flex;align-items:center;justify-content:center;min-height:36px}
+  .toggle-container{position:relative;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:4px;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);min-width:280px}
+  .toggle-option{padding:8px 16px;font-size:14px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;z-index:2;border-radius:6px;white-space:nowrap;text-align:center;display:flex;align-items:center;justify-content:center;min-height:36px}
   .toggle-option:hover{color:#ffffff}
   .toggle-option.active{color:#ffffff}
   .save-badge{font-size:12px;color:#10b981;font-weight:500;margin-left:4px}
-  .toggle-slider{position:absolute;top:4px;bottom:4px;background:#374151;border-radius:6px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:1;width:calc(50% - 2px);left:4px}
+  .toggle-slider{position:absolute;top:4px;bottom:4px;background:#374151;border-radius:6px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:1;left:4px}
 
   
   /* Header Section */
@@ -493,8 +493,13 @@ window.redirectToCheckout = function(planType) {
     
     if (!toggleOptions.length || !slider) return;
     
-    // Initialize slider position (monthly selected by default)
-    slider.style.transform = 'translateX(0)';
+    // Initialize slider position and size (monthly selected by default)
+    setTimeout(() => {
+      const containerWidth = slider.parentElement.offsetWidth;
+      const sliderWidth = (containerWidth - 8) / 2; // Account for 4px padding on each side
+      slider.style.width = `${sliderWidth}px`;
+      slider.style.transform = 'translateX(0)';
+    }, 100);
     
     toggleOptions.forEach(option => {
       option.addEventListener('click', () => {
@@ -507,10 +512,16 @@ window.redirectToCheckout = function(planType) {
         // Move slider to correct position
         const isFirstOption = option === toggleOptions[0];
         if (slider) {
+          const containerWidth = slider.parentElement.offsetWidth;
+          const sliderWidth = (containerWidth - 8) / 2; // Account for 4px padding on each side
+          
+          // Update slider width to ensure it's always correct
+          slider.style.width = `${sliderWidth}px`;
+          
           if (isFirstOption) {
             slider.style.transform = 'translateX(0)';
           } else {
-            slider.style.transform = 'translateX(calc(100% + 2px))';
+            slider.style.transform = `translateX(${sliderWidth}px)`;
           }
         }
         
@@ -518,6 +529,19 @@ window.redirectToCheckout = function(planType) {
         const billingType = option.getAttribute('data-billing');
         updatePricing(billingType);
       });
+    });
+    
+    // Handle window resize to recalculate slider position
+    window.addEventListener('resize', () => {
+      const activeOption = document.querySelector('.toggle-option.active');
+      if (activeOption && slider) {
+        const containerWidth = slider.parentElement.offsetWidth;
+        const sliderWidth = (containerWidth - 8) / 2;
+        const isFirstOption = activeOption === toggleOptions[0];
+        
+        slider.style.width = `${sliderWidth}px`;
+        slider.style.transform = isFirstOption ? 'translateX(0)' : `translateX(${sliderWidth}px)`;
+      }
     });
   }
   
