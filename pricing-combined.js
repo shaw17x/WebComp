@@ -1,7 +1,7 @@
 // Pricing Page Combined - CSS + HTML Content with Docs-Style Instant Loading
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
-.pricing-page{max-width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
+.pricing-page{max-width:100%;margin:40px auto;padding:20px;position:relative;z-index:999}
 
 /* Header Section */
 .pricing-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards}
@@ -12,7 +12,7 @@ body{margin:0!important;padding:0!important}
 .pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:60px auto;max-width:1300px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:20px auto 60px auto;max-width:1300px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 24px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:240px;width:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
@@ -42,9 +42,9 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
 /* FAQ Section - Compact Pricing Style */
-.faq-section{background:transparent;padding:80px 0;margin:0 auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;width:100%;max-width:none}
+.faq-section{background:transparent;padding:40px 0;margin:0 auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;width:100%;max-width:none}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
+.faq-title{text-align:center;margin-bottom:40px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
 .faq-grid{display:flex;flex-direction:column;gap:16px;max-width:900px;margin:0 auto;padding:0 40px}
 .faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:block;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;cursor:pointer;box-sizing:border-box}
@@ -143,16 +143,6 @@ body{margin:0!important;padding:0!important}
 
 const pricingHTML = `
 <div class="pricing-page">
-  <!-- Header Section with Gray/Silver Background -->
-  <div class="pricing-header">
-    <div class="pricing-badge">
-      <div class="pricing-badge-dot"></div>
-      Steley Pricing
-    </div>
-    <h1 class="pricing-title">Choose Your Plan</h1>
-    <p class="pricing-subtitle">Transparent pricing with no hidden fees. Upgrade or downgrade at any time.</p>
-  </div>
-  
   <!-- Pricing Grid -->
   <div class="pricing-grid">
     <!-- Free Plan -->
