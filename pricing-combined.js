@@ -119,17 +119,17 @@ const pricingHTML = `
   
   <!-- Pricing Grid -->
   <div class="pricing-grid">
-    <!-- Free Plan -->
+        <!-- Free Plan -->
     <div class="pricing-card">
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
-              <p class="plan-description">Start your interview preparation.</p>
-              <ul class="plan-features">
-          <li>3 screenshots/AI requests per day</li>
-          <li>AI-powered interview question analysis & answers</li>
-          <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
-          <li>Standard response time & limited stealth mode</li>
-        </ul>
+      <p class="plan-description">Includes</p>
+      <ul class="plan-features">
+        <li>3 screenshots/AI requests per day</li>
+        <li>AI-powered interview question analysis & answers</li>
+        <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
+        <li>Standard response time & limited stealth mode</li>
+      </ul>
       <a href="#" class="plan-button secondary">Get Started Free</a>
     </div>
 
@@ -137,9 +137,9 @@ const pricingHTML = `
     <div class="pricing-card featured">
       <h3 class="plan-name">Pro</h3>
       <div class="plan-price">$20<span>/month</span></div>
-      <p class="plan-description">Professional-grade interview assistance.</p>
+      <p class="plan-description">Everything in Free, plus</p>
       <ul class="plan-features">
-        <li>100 screenshots/AI requests per day</li>
+        <li>Increased to 100 screenshots/AI requests per day</li>
         <li>Premium AI models (GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro)</li>
         <li>Advanced interview strategies & speech-to-text</li>
         <li>Priority AI processing & cloud sync</li>
@@ -151,7 +151,7 @@ const pricingHTML = `
     <div class="pricing-card best-value">
       <h3 class="plan-name">Ultra</h3>
       <div class="plan-price">$40<span>/month</span></div>
-              <p class="plan-description">Unlimited access with maximum stealth.</p>
+      <p class="plan-description">Everything in Pro, plus</p>
       <ul class="plan-features">
         <li>Unlimited screenshots/AI requests (no daily limits)</li>
         <li>Elite AI models (o3, Claude Opus 4, o1-pro, all premium models)</li>
