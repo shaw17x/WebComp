@@ -41,12 +41,7 @@ const aiModelsCSS = `
 .model-category{margin-bottom:24px}
 .category-title{color:#9ca3af;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding-left:4px}
 
-/* Back Button */
-.back-home-container{text-align:center;margin:60px auto 40px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s forwards}
-.back-home-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#9ca3af 0%,#d1d5db 100%);border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:600;color:#1f2937;text-decoration:none;transition:all 0.3s ease;cursor:pointer;box-shadow:0 4px 15px rgba(107,114,128,0.2)}
-.back-home-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#6b7280 0%,#9ca3af 100%);box-shadow:0 8px 25px rgba(107,114,128,0.3)}
-.back-home-btn svg{width:16px;height:16px;transition:transform 0.3s ease}
-.back-home-btn:hover svg{transform:translateX(-4px)}
+
 
 /* Modal Popup - Matching Your Program's AI Model Selection Styling */
 .model-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.70);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}
@@ -426,15 +421,7 @@ const aiModelsHTML = `
     </div>
   </div>
 
-  <!-- Back to Home Button -->
-  <div class="back-home-container">
-    <a href="/" class="back-home-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-      Back to Home
-    </a>
-  </div>
+
 </div>
 
 <!-- Model Information Modal -->
