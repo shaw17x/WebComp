@@ -14,7 +14,8 @@ body{margin:0!important;padding:0!important}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
 .pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
-.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#6b7280,#9ca3af);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px;letter-spacing:0.5px}
+.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;right:20px;background:linear-gradient(135deg,#ff6b6b 0%,#ff8e53 50%,#ff6b6b 100%);color:#fff;font-size:11px;font-weight:800;padding:8px 16px;border-radius:25px;letter-spacing:0.8px;box-shadow:0 4px 20px rgba(255,107,107,0.4),0 2px 8px rgba(0,0,0,0.2);border:2px solid rgba(255,255,255,0.2);transform:translateY(0);transition:all 0.3s ease;z-index:1010}
+.pricing-card.featured:hover::before{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 30px rgba(255,107,107,0.6),0 4px 15px rgba(0,0,0,0.3)}
 
 .plan-name{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:15px;position:relative;padding-left:15px;z-index:1001}
 .plan-name::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:15px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
