@@ -157,7 +157,7 @@ const pricingHTML = `
     <!-- Ultra Plan -->
     <div class="pricing-card">
       <h3 class="plan-name">Ultra</h3>
-      <div class="plan-price">$99.99<span>/month</span></div>
+      <div class="plan-price">$40<span>/month</span></div>
       <p class="plan-description">For power users with unlimited needs.</p>
       <ul class="plan-features">
         <li>Unlimited screenshots</li>
@@ -188,7 +188,7 @@ const pricingHTML = `
         </button>
         <div id="answer-0" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o Mini access, basic interview coaching, and local processing. Pro ($19.99/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 Mini, Gemini Pro, advanced interview strategies, speech-to-text, and priority AI processing. Ultra ($99.99/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, O1 Pro, maximum stealth technology, unlimited AI processing, API access, and dedicated support.</p>
+            <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($19.99):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Enterprise features</p>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@ const pricingHTML = `
         </button>
         <div id="answer-1" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">No. Ghost Pilot uses advanced stealth technology with kernel-level protection and maximum invisibility features (Ultra plan). Our system is specifically designed to be undetectable by common proctoring software including Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU. The stealth mode operates at the system level to avoid detection.</p>
+            <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
           </div>
         </div>
       </div>
@@ -222,7 +222,7 @@ const pricingHTML = `
         </button>
         <div id="answer-2" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Ghost Pilot works with 500+ platforms including coding interviews (HackerRank, LeetCode, CodeSignal), video interviews (Zoom, Teams, Google Meet), online exams (Canvas, Blackboard, Moodle), proctored tests (Proctorio, ExamSoft), and certification exams (AWS, Google Cloud, Microsoft). It supports interviews, coding assessments, multiple-choice quizzes, essays, and any screen-based assessment.</p>
+            <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
           </div>
         </div>
       </div>
@@ -239,7 +239,7 @@ const pricingHTML = `
         </button>
         <div id="answer-3" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Simply take a screenshot of your assessment question, and Ghost Pilot's AI analyzes the content in under 1 second with 99% accuracy. Our advanced OCR technology reads text, code, mathematical equations, and diagrams. The AI then provides detailed answers, explanations, and step-by-step solutions using your selected AI model (GPT-4o, Claude, O3, etc.).</p>
+            <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
           </div>
         </div>
       </div>
@@ -302,7 +302,7 @@ const pricingHTML = `
         </button>
         <div id="answer-5" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Yes! You can upgrade or downgrade your plan at any time from your settings. Upgrades take effect immediately with prorated billing. Downgrades take effect at your next billing cycle. However, all payments are non-refundable - we recommend starting with our Free plan to test all features before committing to a paid subscription.</p>
+            <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
           </div>
         </div>
       </div>
@@ -319,7 +319,7 @@ const pricingHTML = `
         </button>
         <div id="answer-6" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">No, Ghost Pilot operates under a strict no-refund policy. All sales are final including monthly subscriptions, annual plans, and upgrades. We strongly recommend starting with our Free plan (3 screenshots/day) to thoroughly test all features and ensure the platform meets your needs before purchasing a paid subscription.</p>
+            <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
           </div>
         </div>
       </div>
@@ -336,7 +336,7 @@ const pricingHTML = `
         </button>
         <div id="answer-7" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Free users (3 screenshots/day) and Pro users (100 screenshots/day) will need to wait until limits reset at midnight UTC, or upgrade to a higher tier for immediate access. Ultra users have unlimited usage with no daily restrictions. Usage counters reset every 24 hours, and you can monitor your current usage in the dashboard.</p>
+            <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
           </div>
         </div>
       </div>
@@ -353,7 +353,7 @@ const pricingHTML = `
         </button>
         <div id="answer-8" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Ghost Pilot employs enterprise-grade security with AES-256 encryption, SSL protection, and bank-level security protocols. Screenshots are processed locally when possible and automatically deleted within 24 hours. We never store your assessment content permanently or use your data to train AI models. All payment processing via Stripe is PCI-compliant with secure data handling.</p>
+            <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
           </div>
         </div>
       </div>
@@ -370,7 +370,7 @@ const pricingHTML = `
         </button>
         <div id="answer-9" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">We accept all major credit cards (Visa, Mastercard, American Express, Discover) processed securely through Stripe with full SSL encryption and PCI compliance. Billing is processed monthly or annually in advance. You can manage your subscription and payment methods in your account settings. All transactions are secure and we never store your payment details locally.</p>
+            <p class="faq-answer-text"><strong>All major cards:</strong> Visa • Mastercard • Amex • Discover<br>Processed via <strong>Stripe</strong> (secure, PCI-compliant) • Monthly/annual billing</p>
           </div>
         </div>
       </div>
