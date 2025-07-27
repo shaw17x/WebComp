@@ -71,9 +71,26 @@ const aiModelsCSS = `
   .model-modal{max-width:300px;margin:20px}
   .model-modal-content{padding:12px}
   .model-modal-specs{padding:8px}
+  
+  /* Mobile Footer Responsive */
+  .ai-models-footer > div > div{
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  
+  .ai-models-footer .footer-separator{
+    display: none !important;
+  }
+}
+
+/* Footer Animation Styles */
+.ai-models-footer{
+  animation: footerFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.0s forwards !important;
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes footerFadeIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
@@ -422,7 +439,148 @@ const aiModelsHTML = `
   </div>
 
 
-</div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer
+    data-card-stack
+    class="ai-models-footer"
+    style="
+      position: relative;
+      background-color: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      opacity: 0;
+      visibility: visible;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: scale(0.95) translateY(20px);
+      margin-top: 80px;
+    "
+  >
+    <!-- Main Footer Content -->
+    <div style="max-width: 1400px; margin: 0 auto; padding: 28px 40px;">
+      <!-- Single Row Content -->
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap; gap: 40px;">
+        <!-- Left Side - Copyright -->
+        <div style="display: flex; align-items: center; white-space: nowrap;">
+          <span style="font-size: 14px; font-weight: 400; color: rgba(255, 255, 255, 0.6); letter-spacing: -0.01em;">
+            © Steley 2025
+          </span>
+        </div>
+
+        <span style="color: rgba(255, 255, 255, 0.2); font-size: 18px; line-height: 1; margin: 0 8px;" class="footer-separator">·</span>
+
+        <!-- Center - Navigation Links -->
+        <div style="display: flex; gap: 32px; align-items: center; flex-wrap: nowrap; white-space: nowrap;">
+          <a
+            href="#features"
+            style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s ease; cursor: pointer;"
+            onmouseover="this.style.color='#ffffff'"
+            onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'"
+          >
+            Features
+          </a>
+          <a
+            href="/aimodels"
+            style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s ease; cursor: pointer;"
+            onmouseover="this.style.color='#ffffff'"
+            onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'"
+          >
+            AI Models
+          </a>
+          <a
+            href="/document"
+            style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s ease; cursor: pointer;"
+            onmouseover="this.style.color='#ffffff'"
+            onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'"
+          >
+            Documentation
+          </a>
+        </div>
+
+        <span style="color: rgba(255, 255, 255, 0.2); font-size: 18px; line-height: 1; margin: 0 8px;" class="footer-separator">·</span>
+
+        <!-- Right Side - Legal & Social -->
+        <div style="display: flex; align-items: center; gap: 32px;">
+          <!-- Legal Links -->
+          <div style="display: flex; gap: 24px; align-items: center; white-space: nowrap;">
+            <a
+              href="/privacy-policy"
+              style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s ease; cursor: pointer; font-family: inherit;"
+              onmouseover="this.style.color='#ffffff'"
+              onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/terms-of-service"
+              style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s ease; cursor: pointer; font-family: inherit;"
+              onmouseover="this.style.color='#ffffff'"
+              onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'"
+            >
+              Terms of Service
+            </a>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.2); font-size: 18px; line-height: 1; margin: 0 8px;" class="footer-separator">·</span>
+
+          <!-- Social Links -->
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <!-- Twitter -->
+            <a
+              href="https://twitter.com/steley"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width: 32px; height: 32px; border-radius: 6px; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); transition: all 0.3s ease; cursor: pointer;"
+              onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'; this.style.color='#ffffff'"
+              onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.05)'; this.style.color='rgba(255, 255, 255, 0.6)'"
+              aria-label="Twitter"
+            >
+              <div style="transform: scale(0.8);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                </svg>
+              </div>
+            </a>
+            
+            <!-- GitHub -->
+            <a
+              href="https://github.com/steley"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width: 32px; height: 32px; border-radius: 6px; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); transition: all 0.3s ease; cursor: pointer;"
+              onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'; this.style.color='#ffffff'"
+              onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.05)'; this.style.color='rgba(255, 255, 255, 0.6)'"
+              aria-label="GitHub"
+            >
+              <div style="transform: scale(0.8);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </div>
+            </a>
+            
+            <!-- Discord -->
+            <a
+              href="https://discord.gg/steley"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width: 32px; height: 32px; border-radius: 6px; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); transition: all 0.3s ease; cursor: pointer;"
+              onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'; this.style.color='#ffffff'"
+              onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.05)'; this.style.color='rgba(255, 255, 255, 0.6)'"
+              aria-label="Discord"
+            >
+              <div style="transform: scale(0.8);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0188 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9554 2.4189-2.1568 2.4189Z" />
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 <!-- Model Information Modal -->
 <div class="model-modal-overlay" id="modelModal">
@@ -562,6 +720,11 @@ const aiModelsHTML = `
       setTimeout(() => {
         initializeModalHandlers();
       }, 200);
+      
+      // Initialize footer scroll animation
+      setTimeout(() => {
+        initializeFooterAnimation();
+      }, 300);
     }, 100);
   }
   
@@ -698,6 +861,51 @@ const aiModelsHTML = `
         closeModelModal();
       }
     });
+  }
+  
+  function initializeFooterAnimation() {
+    // Card stack scroll animation for footer
+    const handleScroll = () => {
+      const cards = document.querySelectorAll("[data-card-stack]");
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const cardTop = rect.top;
+        const cardHeight = rect.height;
+
+        // Calculate progress based on scroll position
+        const progress = Math.max(
+          0,
+          Math.min(
+            1,
+            (windowHeight - cardTop) / (windowHeight + cardHeight)
+          )
+        );
+
+        // Apply stacking effect
+        if (progress > 0 && progress < 1) {
+          const scale = 0.95 + progress * 0.05;
+          const translateY = (1 - progress) * 20;
+          const opacity = 0.3 + progress * 0.7;
+
+          card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+          card.style.opacity = opacity.toString();
+        } else if (progress >= 1) {
+          card.style.transform = "scale(1) translateY(0px)";
+          card.style.opacity = "1";
+        } else {
+          card.style.transform = "scale(0.95) translateY(20px)";
+          card.style.opacity = "0.3";
+        }
+      });
+    };
+
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
+    
+    console.log('✅ Footer scroll animation initialized');
   }
   
   function getModelInfo(modelPath) {
