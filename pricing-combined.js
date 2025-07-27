@@ -11,11 +11,12 @@ body{margin:0!important;padding:0!important}
   
   /* Billing Toggle Switch - Cursor Style */
   .billing-toggle{margin-top:40px;display:flex;justify-content:center;align-items:center}
-  .toggle-container{position:relative;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:4px;display:flex;align-items:center;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
-  .toggle-option{padding:8px 20px;font-size:14px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;z-index:2;border-radius:6px;white-space:nowrap}
+  .toggle-container{position:relative;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:4px;display:flex;align-items:stretch;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);min-width:280px}
+  .toggle-option{flex:1;padding:8px 16px;font-size:14px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;z-index:2;border-radius:6px;white-space:nowrap;text-align:center;display:flex;align-items:center;justify-content:center;min-height:36px}
+  .toggle-option:hover{color:#ffffff}
   .toggle-option.active{color:#ffffff}
-  .save-badge{font-size:12px;color:#10b981;font-weight:500}
-  .toggle-slider{position:absolute;top:4px;left:4px;bottom:4px;background:#334155;border-radius:6px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:1;width:calc(50% - 4px)}
+  .save-badge{font-size:12px;color:#10b981;font-weight:500;margin-left:4px}
+  .toggle-slider{position:absolute;top:4px;bottom:4px;background:#374151;border-radius:6px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:1;width:calc(50% - 2px);left:4px}
 
   
   /* Header Section */
@@ -81,7 +82,8 @@ body{margin:0!important;padding:0!important}
   .simple-subtitle{font-size:18px}
   .simple-header{margin-bottom:50px}
   .billing-toggle{margin-top:32px}
-  .toggle-option{padding:6px 16px;font-size:13px}
+  .toggle-container{min-width:260px}
+  .toggle-option{padding:6px 14px;font-size:13px}
   
   .faq-grid{gap:12px;padding:0 32px}
   .faq-section{padding:60px 0}
@@ -95,7 +97,8 @@ body{margin:0!important;padding:0!important}
   .simple-subtitle{font-size:16px}
   .simple-header{margin-bottom:40px}
   .billing-toggle{margin-top:28px}
-  .toggle-option{padding:6px 14px;font-size:12px}
+  .toggle-container{min-width:240px}
+  .toggle-option{padding:6px 12px;font-size:12px}
   .save-badge{font-size:11px}
   
   .faq-grid{padding:0 24px;gap:12px}
@@ -504,7 +507,11 @@ window.redirectToCheckout = function(planType) {
         // Move slider to correct position
         const isFirstOption = option === toggleOptions[0];
         if (slider) {
-          slider.style.transform = isFirstOption ? 'translateX(0)' : 'translateX(100%)';
+          if (isFirstOption) {
+            slider.style.transform = 'translateX(0)';
+          } else {
+            slider.style.transform = 'translateX(calc(100% + 2px))';
+          }
         }
         
         // Update prices based on selection
