@@ -42,38 +42,32 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
 /* FAQ Section - Compact Pricing Style */
-.faq-section{background:transparent;padding:60px 0;margin:40px auto 60px auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:1400px}
+.faq-section{background:transparent;padding:80px 0;margin:0 auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:1200px}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.faq-title{text-align:center;margin-bottom:40px;font-size:36px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:32px;margin-top:0;padding:0 20px}
-.faq-item{background:rgba(26,26,26,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px;transition:all 0.3s ease;display:flex;flex-direction:column;min-height:200px;backdrop-filter:blur(10px)}
-.faq-question{font-size:22px;font-weight:700;color:#ffffff;margin-bottom:20px;line-height:1.3;display:block;background:none;border:none;cursor:default;text-align:left;padding:0;letter-spacing:-0.01em}
-.faq-answer-text{color:#a1a1aa;font-size:16px;line-height:1.65;margin:0;font-weight:400;flex-grow:1;opacity:0.9}
-
-.faq-item:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.15);box-shadow:0 12px 40px rgba(0,0,0,0.4);background:rgba(30,30,30,0.7)}
-
-@media(max-width:1200px){
-  .faq-grid{grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:28px}
-}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:60px 80px;max-width:1000px;margin:0 auto;padding:0 40px}
+.faq-item{margin-bottom:0}
+.faq-question{font-size:18px;font-weight:600;color:#ffffff;margin-bottom:12px;line-height:1.4;display:block}
+.faq-answer-text{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.6;margin:0;font-weight:400}
 
 @media(max-width:900px){
-  .faq-grid{grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:24px;padding:0 16px}
-  .faq-item{padding:28px;min-height:180px}
+  .faq-grid{grid-template-columns:1fr;gap:40px;padding:0 32px}
+  .faq-section{padding:60px 0}
+  .faq-title{margin-bottom:48px;font-size:28px}
 }
 
-@media(max-width:768px){
-  .faq-grid{grid-template-columns:1fr;gap:20px;padding:0 12px}
-  .faq-item{padding:24px;min-height:160px}
-  .faq-question{font-size:20px;margin-bottom:16px}
-  .faq-answer-text{font-size:15px;line-height:1.6}
+@media(max-width:600px){
+  .faq-grid{padding:0 24px}
+  .faq-section{padding:50px 0}
+  .faq-title{margin-bottom:40px;font-size:26px}
+  .faq-question{font-size:17px}
+  .faq-answer-text{font-size:15px}
 }
 
 
 
-/* Background Effects */
-.faq-bg-effect-1{position:absolute;top:20%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px);pointer-events:none}
-.faq-bg-effect-2{position:absolute;bottom:20%;right:10%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 70%);filter:blur(30px);pointer-events:none}
+
 
 @keyframes shimmer{0%{left:-100%}100%{left:100%}}
 
