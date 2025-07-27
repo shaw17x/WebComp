@@ -9,6 +9,15 @@ body{margin:0!important;padding:0!important}
   .simple-title{font-size:48px;font-weight:700;color:#ffffff;margin:0 0 16px 0;line-height:1.1;letter-spacing:-0.02em}
   .simple-subtitle{font-size:20px;color:#94a3b8;margin:0;font-weight:400;line-height:1.4}
   
+  /* Billing Toggle Switch - Cursor Style */
+  .billing-toggle{margin-top:40px;display:flex;justify-content:center;align-items:center}
+  .toggle-container{position:relative;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:4px;display:flex;align-items:center;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+  .toggle-option{padding:8px 20px;font-size:14px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;z-index:2;border-radius:6px;white-space:nowrap}
+  .toggle-option.active{color:#ffffff}
+  .save-badge{font-size:12px;color:#10b981;font-weight:500}
+  .toggle-slider{position:absolute;top:4px;left:4px;bottom:4px;background:#334155;border-radius:6px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:1;width:calc(50% - 4px)}
+
+  
   /* Header Section */
 .pricing-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards}
 
@@ -71,6 +80,8 @@ body{margin:0!important;padding:0!important}
   .simple-title{font-size:40px}
   .simple-subtitle{font-size:18px}
   .simple-header{margin-bottom:50px}
+  .billing-toggle{margin-top:32px}
+  .toggle-option{padding:6px 16px;font-size:13px}
   
   .faq-grid{gap:12px;padding:0 32px}
   .faq-section{padding:60px 0}
@@ -83,6 +94,9 @@ body{margin:0!important;padding:0!important}
   .simple-title{font-size:36px}
   .simple-subtitle{font-size:16px}
   .simple-header{margin-bottom:40px}
+  .billing-toggle{margin-top:28px}
+  .toggle-option{padding:6px 14px;font-size:12px}
+  .save-badge{font-size:11px}
   
   .faq-grid{padding:0 24px;gap:12px}
   .faq-item{padding:16px 20px;margin:0!important}
@@ -161,6 +175,15 @@ body{margin:0!important;padding:0!important}
     <div class="simple-header">
       <h1 class="simple-title">Pricing</h1>
       <p class="simple-subtitle">Choose the plan that works for you</p>
+      
+      <!-- Billing Toggle Switch -->
+      <div class="billing-toggle">
+        <div class="toggle-container">
+          <span class="toggle-option active" data-billing="monthly">MONTHLY</span>
+          <span class="toggle-option" data-billing="yearly">YEARLY <span class="save-badge">(SAVE 20%)</span></span>
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
     </div>
     
     <!-- Pricing Grid -->
@@ -441,6 +464,9 @@ window.redirectToCheckout = function(planType) {
       }
     }
     
+    // Initialize billing toggle
+    initializeBillingToggle();
+    
     // Initialize pricing section animations
     initializePricingSectionAnimations();
     
@@ -456,6 +482,59 @@ window.redirectToCheckout = function(planType) {
         initializeFAQAccordion();
       }
     }, 2000);
+  }
+  
+  function initializeBillingToggle() {
+    const toggleOptions = document.querySelectorAll('.toggle-option');
+    const slider = document.querySelector('.toggle-slider');
+    
+    if (!toggleOptions.length || !slider) return;
+    
+    // Initialize slider position (monthly selected by default)
+    slider.style.transform = 'translateX(0)';
+    
+    toggleOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Remove active class from all options
+        toggleOptions.forEach(opt => opt.classList.remove('active'));
+        
+        // Add active class to clicked option
+        option.classList.add('active');
+        
+        // Move slider to correct position
+        const isFirstOption = option === toggleOptions[0];
+        if (slider) {
+          slider.style.transform = isFirstOption ? 'translateX(0)' : 'translateX(100%)';
+        }
+        
+        // Update prices based on selection
+        const billingType = option.getAttribute('data-billing');
+        updatePricing(billingType);
+      });
+    });
+  }
+  
+  function updatePricing(billingType) {
+    const proPriceElement = document.querySelector('.pricing-card:nth-child(2) .plan-price');
+    const ultraPriceElement = document.querySelector('.pricing-card:nth-child(3) .plan-price');
+    
+    if (billingType === 'yearly') {
+      // 20% discount for yearly
+      if (proPriceElement) {
+        proPriceElement.innerHTML = '$16<span>/month</span>';
+      }
+      if (ultraPriceElement) {
+        ultraPriceElement.innerHTML = '$32<span>/month</span>';
+      }
+    } else {
+      // Monthly pricing
+      if (proPriceElement) {
+        proPriceElement.innerHTML = '$20<span>/month</span>';
+      }
+      if (ultraPriceElement) {
+        ultraPriceElement.innerHTML = '$40<span>/month</span>';
+      }
+    }
   }
   
   function initializePricingSectionAnimations() {
