@@ -46,25 +46,25 @@ body{margin:0!important;padding:0!important}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1000px;margin:0 auto;padding:0 40px;align-items:start}
-.faq-item{background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;margin-bottom:0;display:block;transition:all 0.3s ease;backdrop-filter:blur(10px)}
-.faq-item:hover{border-color:rgba(255,255,255,0.2);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,0.3)}
-.faq-question{font-size:18px;font-weight:600;color:#ffffff;margin-bottom:12px;line-height:1.4;display:block}
-.faq-answer-text{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.6;margin:0;font-weight:400}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto;padding:0 40px;align-items:start}
+.faq-item{background:#1a1a1a;border:1px solid #2d2d2d;border-radius:8px;padding:24px;margin-bottom:0;display:block;transition:all 0.2s ease;position:relative}
+.faq-item:hover{border-color:#404040;background:#1f1f1f}
+.faq-question{font-size:16px;font-weight:600;color:#ffffff;margin-bottom:16px;line-height:1.4;display:block;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.faq-answer-text{color:#a1a1a1;font-size:14px;line-height:1.5;margin:0;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 
 @media(max-width:900px){
-  .faq-grid{grid-template-columns:1fr;gap:20px;padding:0 32px}
+  .faq-grid{grid-template-columns:1fr;gap:12px;padding:0 32px}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
 }
 
 @media(max-width:600px){
-  .faq-grid{padding:0 24px;gap:16px}
-  .faq-item{padding:16px}
+  .faq-grid{padding:0 24px;gap:12px}
+  .faq-item{padding:20px}
   .faq-section{padding:50px 0}
   .faq-title{margin-bottom:40px;font-size:26px}
-  .faq-question{font-size:17px;margin-bottom:10px}
-  .faq-answer-text{font-size:15px}
+  .faq-question{font-size:15px;margin-bottom:12px}
+  .faq-answer-text{font-size:13px}
 }
 
 
