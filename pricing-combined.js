@@ -247,11 +247,11 @@ body{margin:0!important;padding:0!important}
       
       <div class="faq-item">
         <div class="faq-header">
-          <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
+                      <h3 class="faq-question">Is CTRLstealth detectable by proctoring software?</h3>
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
-          <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
+                      <p class="faq-answer-text"><strong>No.</strong> CTRLstealth uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
         </div>
       </div>
 
@@ -287,7 +287,7 @@ body{margin:0!important;padding:0!important}
 
       <div class="faq-item">
         <div class="faq-header">
-          <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
+                      <h3 class="faq-question">What platforms does CTRLstealth support?</h3>
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
