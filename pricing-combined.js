@@ -45,15 +45,18 @@ body{margin:0!important;padding:0!important}
 .faq-section{background:transparent;padding:80px 0;margin:0 auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;width:100%;max-width:none}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
-.faq-highlight{background:#6b7280;color:#1f2937;padding:2px 8px;border-radius:4px;font-weight:700}
 
 .faq-grid{display:flex;flex-direction:column;gap:16px;max-width:1200px;margin:0 auto;padding:0 40px}
-.faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s ease;position:relative;cursor:pointer;box-sizing:border-box}
+.faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:block;transition:all 0.2s ease;position:relative;cursor:pointer;box-sizing:border-box}
 .faq-item:hover{background:#9ca3af;border-color:#6b7280;transform:translateY(-1px)}
+.faq-header{display:flex;align-items:center;justify-content:space-between;width:100%}
 .faq-question{font-size:16px;font-weight:600;color:#1f2937;margin:0!important;line-height:1.4;flex:1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:0!important}
 .faq-plus{font-size:24px;font-weight:300;color:#1f2937;margin-left:16px;transition:transform 0.2s ease}
 .faq-item:hover .faq-plus{transform:rotate(45deg)}
-.faq-answer-text{display:none}
+.faq-item.active .faq-plus{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+.faq-item.active .faq-answer{max-height:200px;padding-top:16px}
+.faq-answer-text{color:#1f2937;font-size:14px;line-height:1.5;margin:0!important;padding:0!important;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 .faq-item *{box-sizing:border-box}
 .faq-item p{margin:0!important;padding:0!important}
 
@@ -62,6 +65,7 @@ body{margin:0!important;padding:0!important}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
   .faq-item{padding:18px 20px}
+  .faq-item.active .faq-answer{max-height:150px}
 }
 
 @media(max-width:600px){
@@ -71,6 +75,7 @@ body{margin:0!important;padding:0!important}
   .faq-title{margin-bottom:40px;font-size:26px}
   .faq-question{font-size:15px}
   .faq-plus{font-size:20px;margin-left:12px}
+  .faq-item.active .faq-answer{max-height:120px}
 }
 
 
@@ -200,72 +205,97 @@ const pricingHTML = `
 
   <!-- FAQ Section -->
   <div class="faq-section">
-    <h1 class="faq-title">Questions you're <span class="faq-highlight">too afraid to ask</span></h1>
+    <h1 class="faq-title">Questions you may have?</h1>
     <div class="faq-grid">
       
       <div class="faq-item">
-        <h3 class="faq-question">What's the difference between Free, Pro, and Ultra plans?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">What's the difference between Free, Pro, and Ultra plans?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">How does the AI screenshot analysis work?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">How does the AI screenshot analysis work?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">Which AI models are available in each plan?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>Free:</strong> GPT-4o Mini, Llama 3.3 70B<br><strong>Pro:</strong> GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro<br><strong>Ultra:</strong> All Pro models + o3, Claude Opus 4, o1-pro, priority access</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">Which AI models are available in each plan?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">Can I upgrade or downgrade my plan anytime?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">Can I upgrade or downgrade my plan anytime?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">What happens if I exceed my daily usage limits?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">How secure are my screenshots and data?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
+        </div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-question">How secure are my screenshots and data?</h3>
-        <span class="faq-plus">+</span>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">What payment methods do you accept?</h3>
-        <span class="faq-plus">+</span>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">Can interviewers detect CTRLpotato?</h3>
-        <span class="faq-plus">+</span>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">Is it ethical to use during interviews?</h3>
-        <span class="faq-plus">+</span>
-      </div>
-
-      <div class="faq-item">
-        <h3 class="faq-question">Will AI answers sound like me?</h3>
-        <span class="faq-plus">+</span>
+        <div class="faq-header">
+          <h3 class="faq-question">What happens if I exceed my daily usage limits?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
+        </div>
       </div>
 
     </div>
@@ -406,7 +436,15 @@ window.redirectToCheckout = function(planType) {
     // Initialize footer scroll animation
     initializeFooterAnimation();
     
-    // FAQ is now static - no initialization needed
+    // Initialize pricing section animations
+    setTimeout(initializePricingSectionAnimations, 100);
+    
+    // Initialize FAQ accordion as fallback
+    setTimeout(() => {
+      if (document.querySelector('.faq-section')) {
+        initializeFAQAccordion();
+      }
+    }, 2000);
   }
   
   function initializePricingSectionAnimations() {
@@ -443,9 +481,30 @@ window.redirectToCheckout = function(planType) {
           faqSection.style.opacity = '1';
           faqSection.style.transform = 'translateY(0) scale(1)';
           faqSection.classList.add('pricing-animated');
+          
+          // Initialize FAQ accordion functionality
+          initializeFAQAccordion();
         }, faqDelay);
       }
     }, 100);
+  }
+  
+  function initializeFAQAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
   }
   
   function initializeFooterAnimation() {
