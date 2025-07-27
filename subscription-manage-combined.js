@@ -967,7 +967,7 @@ const subscriptionHTML = `
                <div class="item-description">Unlimited usage, all AI models, priority support</div>
              </div>
              <div style="display: flex; align-items: center; gap: 12px;">
-               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$99.99/month</span>
+               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$40/month</span>
                <button class="action-button primary" id="ultraBtn">Upgrade</button>
              </div>
            </div>
@@ -1539,7 +1539,7 @@ const subscriptionHTML = `
           alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
         }
       } else {
-        const prices = { PRO: '$19.99', ULTRA: '$99.99' };
+        const prices = { PRO: '$19.99', ULTRA: '$40' };
         const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
         if (confirmUpgrade) {
           alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
@@ -1637,7 +1637,7 @@ const subscriptionHTML = `
        { 
          id: 'ULTRA', 
          name: 'Ultra Plan', 
-         price: '$99.99', 
+                   price: '$40', 
          features: ['Unlimited usage', 'All AI models', 'Ultra features', 'Dedicated support'],
          current: (userData?.currentPlan || 'FREE') === 'ULTRA'
        }
