@@ -25,12 +25,12 @@ body{margin:0!important;padding:0!important}
 
 .plan-name{color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:12px;position:relative;padding-left:12px;z-index:1001}
 .plan-name::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:12px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
-.plan-price{font-size:2.5rem;font-weight:800;color:#9ca3af;margin-bottom:12px;position:relative;z-index:1001;padding-bottom:12px}
+.plan-price{font-size:2.5rem;font-weight:800;color:#9ca3af;margin-bottom:6px;position:relative;z-index:1001;padding-bottom:8px}
 .plan-price::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.1)}
 .plan-price span{font-size:0.9rem;color:#94a3b8;font-weight:400}
-.plan-description{color:#cbd5e1;font-size:0.9rem;margin-bottom:20px;line-height:1.5;position:relative;z-index:1001}
+.plan-description{color:#cbd5e1;font-size:0.9rem;margin-bottom:12px;line-height:1.5;position:relative;z-index:1001}
 
-.plan-features{list-style:none;padding:0;margin:20px 0;position:relative;z-index:1001;flex-grow:1}
+.plan-features{list-style:none;padding:0;margin:12px 0;position:relative;z-index:1001;flex-grow:1}
 .plan-features li{color:#cbd5e1;font-size:0.85rem;margin-bottom:6px;padding-left:16px;position:relative;line-height:1.4;z-index:1001}
 .plan-features li::before{content:'→';position:absolute;left:0;color:#6b7280;font-weight:bold;z-index:1002}
 
@@ -103,18 +103,6 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
   .footer-separator{display:none!important}
-  
-  /* Mobile-friendly AI models table */
-  .faq-answer-content div[style*="grid-template-columns"]{
-    grid-template-columns:1fr!important;
-    gap:15px!important;
-  }
-  .faq-answer-content div[style*="grid-template-columns"] > div{
-    border:1px solid rgba(107,114,128,0.2);
-    border-radius:8px;
-    padding:12px;
-    background:rgba(10,11,15,0.5);
-  }
 }
 
 @keyframes containerEntry{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -201,7 +189,7 @@ const pricingHTML = `
         </button>
         <div id="answer-0" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
+            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o mini access. Pro ($20/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 mini, and advanced features. Ultra ($40/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, and ultra features.</p>
           </div>
         </div>
       </div>
