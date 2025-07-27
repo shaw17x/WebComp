@@ -42,20 +42,25 @@ body{margin:0!important;padding:0!important}
 .plan-button.secondary:hover{background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.6)}
 
 /* FAQ Section - Compact Pricing Style */
-.faq-section{background:linear-gradient(135deg,#0a0b0f 0%,#111318 50%,#0a0b0f 100%);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:50px 40px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:900px;margin-left:auto;margin-right:auto}
+.faq-section{background:transparent;padding:50px 20px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:hidden;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;max-width:1200px;margin-left:auto;margin-right:auto}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:40px;font-size:36px;font-weight:600;color:#ffffff;line-height:1.1;letter-spacing:-0.02em;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.faq-container{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:1px solid rgba(255,255,255,0.1)}
-.faq-question{width:100%;padding:24px 0;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
-.faq-question:hover{transform:translateX(6px)}
-.faq-question-text{font-size:18px;font-weight:500;color:#ffffff;text-align:left;line-height:1.4;padding-right:16px}
-.faq-icon-container{width:20px;height:20px;display:flex;align-items:center;justify-content:center;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
-.faq-icon{width:14px;height:14px;stroke:rgba(255,255,255,0.6);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.faq-answer{overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);height:0;opacity:0;transform:translateY(-10px)}
-.faq-answer.open{opacity:1;transform:translateY(0)}
-.faq-answer-content{padding-bottom:24px;padding-right:36px}
-.faq-answer-text{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0}
+
+.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:24px;margin-top:0}
+.faq-item{background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;transition:all 0.3s ease;display:flex;flex-direction:column;height:100%}
+.faq-question{font-size:20px;font-weight:600;color:#ffffff;margin-bottom:16px;line-height:1.3;display:block;background:none;border:none;cursor:default;text-align:left;padding:0}
+.faq-answer-text{color:#d1d5db;font-size:16px;line-height:1.6;margin:0;font-weight:400;flex-grow:1}
+
+.faq-item:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+
+@media(max-width:768px){
+  .faq-grid{grid-template-columns:1fr;gap:16px}
+  .faq-item{padding:20px}
+  .faq-question{font-size:18px}
+  .faq-answer-text{font-size:15px}
+}
+
+
 
 /* Background Effects */
 .faq-bg-effect-1{position:absolute;top:20%;left:10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,transparent 70%);filter:blur(40px);pointer-events:none}
@@ -175,40 +180,56 @@ const pricingHTML = `
   <!-- FAQ Section -->
   <div class="faq-section">
     <h1 class="faq-title">Pricing Questions</h1>
-    <div class="faq-container">
+    <div class="faq-grid">
       
       <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(0)">
-          <span class="faq-question-text">What's the difference between Free, Pro, and Ultra plans?</span>
-          <div id="icon-container-0" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-0" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o mini access. Pro ($20/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 mini, and advanced features. Ultra ($40/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, and ultra features.</p>
-          </div>
-        </div>
+        <h3 class="faq-question">What's the difference between Free, Pro, and Ultra plans?</h3>
+        <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
       </div>
 
       <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(1)">
-          <span class="faq-question-text">Is Ghost Pilot detectable by proctoring software like Proctorio, ExamSoft, or Respondus?</span>
-          <div id="icon-container-1" class="faq-icon-container">
-            <svg class="faq-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-        </button>
-        <div id="answer-1" class="faq-answer">
-          <div class="faq-answer-content">
-            <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
-          </div>
-        </div>
+        <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
+        <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
+        <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">How does the AI screenshot analysis work?</h3>
+        <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Which AI models are available in each plan?</h3>
+        <p class="faq-answer-text"><strong>Free:</strong> GPT-4o Mini, Llama 3.3 70B<br><strong>Pro:</strong> GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro<br><strong>Ultra:</strong> All Pro models + o3, Claude Opus 4, o1-pro, priority access</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Can I upgrade or downgrade my plan anytime?</h3>
+        <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
+        <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What happens if I exceed my daily usage limits?</h3>
+        <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">How secure are my screenshots and data?</h3>
+        <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">What payment methods do you accept?</h3>
+        <p class="faq-answer-text"><strong>All major cards:</strong> Visa • Mastercard • Amex • Discover<br>Processed via <strong>Stripe</strong> (secure, PCI-compliant) • Monthly/annual billing</p>
       </div>
 
       <div class="faq-item">
