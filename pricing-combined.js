@@ -3,13 +3,13 @@ const pricingCSS = `
 body{margin:0!important;padding:0!important}
 .pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
 
-/* Header Container with Gray/Silver Gradient */
-.pricing-header{background:linear-gradient(135deg,rgba(100,116,139,0.9) 0%,rgba(148,163,184,0.8) 50%,rgba(203,213,225,0.9) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.3);border-radius:24px;padding:60px 40px;margin-bottom:60px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04),inset 0 1px 0 rgba(255,255,255,0.4);opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards;text-align:center}
+/* Header Section */
+.pricing-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards}
 
-.pricing-badge{display:inline-flex;align-items:center;gap:8px;background-color:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:20px;padding:6px 16px;margin-bottom:24px;font-size:12px;font-weight:500;color:#1e293b;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1000}
+.pricing-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(100,116,139,0.9) 0%,rgba(148,163,184,0.8) 50%,rgba(203,213,225,0.9) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:8px 16px;margin-bottom:24px;font-size:12px;font-weight:500;color:#1e293b;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1000;box-shadow:0 1px 3px rgba(0,0,0,0.04),inset 0 1px 0 rgba(255,255,255,0.4)}
 .pricing-badge-dot{width:6px;height:6px;border-radius:50%;background-color:#475569;animation:spin 3s linear infinite}
-.pricing-title{font-size:3rem;font-weight:800;color:#1e293b;text-align:center;margin-bottom:16px;position:relative;z-index:1000;line-height:1.1;letter-spacing:-0.02em}
-.pricing-subtitle{font-size:1.2rem;color:rgba(30,41,59,0.8);font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
+.pricing-title{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,#9ca3af 50%,#6b7280 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:16px;position:relative;z-index:1000;line-height:1.1;letter-spacing:-0.02em}
+.pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch}
