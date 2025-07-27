@@ -14,7 +14,7 @@ body{margin:0!important;padding:0!important}
 /* Pricing Cards - Docs Style */
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:60px auto;max-width:1200px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 24px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:420px;width:100%}
+.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px 20px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:350px;width:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
 .pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
