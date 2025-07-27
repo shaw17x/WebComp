@@ -46,7 +46,7 @@ body{margin:0!important;padding:0!important}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto;padding:0 40px;align-items:start}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:950px;margin:0 auto;padding:0 40px;align-items:start}
 .faq-item{background:#1a1a1a;border:1px solid #2d2d2d;border-radius:8px;padding:24px;margin-bottom:0;display:block;transition:all 0.2s ease;position:relative}
 .faq-item:hover{border-color:#404040;background:#1f1f1f}
 .faq-question{font-size:16px;font-weight:600;color:#ffffff;margin-bottom:16px;line-height:1.4;display:block;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
@@ -142,7 +142,6 @@ const pricingHTML = `
       <ul class="plan-features">
         <li>Limited screenshots</li>
         <li>Limited agent requests</li>
-        <li>Limited tab completions</li>
         <li>Free AI models (GPT-4o Mini, Llama 3.3 70B)</li>
         <li>Limited stealth mode</li>
       </ul>
@@ -157,7 +156,6 @@ const pricingHTML = `
       <ul class="plan-features">
         <li>Extended limits on agent</li>
         <li>30x usage on screenshots</li>
-        <li>Unlimited tab completions</li>
         <li>Access to premium AI models (GPT-4o, Claude Sonnet 4, o1-mini)</li>
         <li>Access to maximum context windows</li>
         <li>Enhanced stealth mode</li>
@@ -173,10 +171,10 @@ const pricingHTML = `
       <ul class="plan-features">
         <li>Unlimited agent requests</li>
         <li>Unlimited screenshots</li>
-        <li>Priority access to new features</li>
         <li>Access to all elite AI models (o3, Claude Opus 4, o1-pro)</li>
         <li>Maximum stealth technology</li>
         <li>API access & dedicated support</li>
+        <li>Priority access to new features</li>
       </ul>
       <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('ULTRA')">Get Ultra</a>
     </div>
