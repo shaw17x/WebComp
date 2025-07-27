@@ -125,10 +125,8 @@ const pricingHTML = `
       <div class="plan-price">$0<span>/month</span></div>
       <p class="plan-description">Perfect for testing Ghost Pilot's AI-powered interview assistance.</p>
       <ul class="plan-features">
-        <li>3 screenshots per day</li>
-        <li>3 AI analysis requests per day</li>
-        <li>GPT-4o Mini AI model access</li>
-        <li>Basic screenshot analysis (MCQ, coding, fill-in-blank)</li>
+        <li>3 screenshots/AI requests per day</li>
+        <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
         <li>Standard response time</li>
         <li>Limited stealth mode</li>
       </ul>
