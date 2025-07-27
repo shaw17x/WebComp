@@ -123,7 +123,7 @@ const pricingHTML = `
     <div class="pricing-card">
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
-              <p class="plan-description">Try before you fly.</p>
+              <p class="plan-description">Start your interview preparation.</p>
               <ul class="plan-features">
           <li>3 screenshots/AI requests per day</li>
           <li>AI-powered interview question analysis & answers</li>
@@ -137,7 +137,7 @@ const pricingHTML = `
     <div class="pricing-card featured">
       <h3 class="plan-name">Pro</h3>
       <div class="plan-price">$20<span>/month</span></div>
-      <p class="plan-description">Interview like a pro, with AI backup.</p>
+      <p class="plan-description">Professional-grade interview assistance.</p>
       <ul class="plan-features">
         <li>100 screenshots/AI requests per day</li>
         <li>Premium AI models (GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro)</li>
@@ -151,7 +151,7 @@ const pricingHTML = `
     <div class="pricing-card best-value">
       <h3 class="plan-name">Ultra</h3>
       <div class="plan-price">$40<span>/month</span></div>
-              <p class="plan-description">Maximum stealth, zero limits.</p>
+              <p class="plan-description">Unlimited access with maximum stealth.</p>
       <ul class="plan-features">
         <li>Unlimited screenshots/AI requests (no daily limits)</li>
         <li>Elite AI models (o3, Claude Opus 4, o1-pro, all premium models)</li>
