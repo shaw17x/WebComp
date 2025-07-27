@@ -137,14 +137,12 @@ const pricingHTML = `
     <div class="pricing-card featured">
       <h3 class="plan-name">Pro</h3>
       <div class="plan-price">$20<span>/month</span></div>
-      <p class="plan-description">Best for professionals and frequent users.</p>
+      <p class="plan-description">Perfect for professionals and frequent interview preparation.</p>
       <ul class="plan-features">
-        <li>Unlimited AI queries</li>
-        <li>Advanced screenshot analysis</li>
-        <li>Priority response time</li>
-        <li>Email support</li>
-        <li>Custom AI models</li>
-        <li>Export capabilities</li>
+        <li>100 screenshots/AI requests per day</li>
+        <li>Premium AI models (GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro)</li>
+        <li>Advanced interview strategies & speech-to-text</li>
+        <li>Priority AI processing & cloud sync</li>
       </ul>
       <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('PRO')">Get Pro</a>
     </div>
@@ -153,14 +151,12 @@ const pricingHTML = `
     <div class="pricing-card best-value">
       <h3 class="plan-name">Ultra</h3>
       <div class="plan-price">$40<span>/month</span></div>
-              <p class="plan-description">For power users with unlimited needs.</p>
+              <p class="plan-description">Maximum stealth for protected environments and unlimited usage.</p>
       <ul class="plan-features">
-        <li>Everything in Pro</li>
-        <li>Unlimited screenshots</li>
-        <li>All premium AI models</li>
-        <li>Priority support</li>
-        <li>API access</li>
-        <li>Advanced stealth mode</li>
+        <li>Unlimited screenshots/AI requests (no daily limits)</li>
+        <li>Elite AI models (o3, Claude Opus 4, o1-pro, all premium models)</li>
+        <li>Maximum stealth technology (bypasses Proctorio & protected environments)</li>
+        <li>API access, white label & dedicated support</li>
       </ul>
       <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('ULTRA')">Get Ultra</a>
     </div>
