@@ -12,9 +12,9 @@ body{margin:0!important;padding:0!important}
 .pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;margin:60px 0;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:40px;margin:60px auto;max-width:1400px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%}
+.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:40px 35px;margin-bottom:30px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
 .pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
@@ -93,8 +93,8 @@ body{margin:0!important;padding:0!important}
 @media(max-width:768px){
   .pricing-page{padding:15px;margin:60px auto}
   .pricing-title{font-size:2rem}
-  .pricing-grid{grid-template-columns:1fr;gap:20px}
-  .pricing-card{padding:20px}
+  .pricing-grid{grid-template-columns:1fr;gap:20px;margin:40px auto}
+  .pricing-card{padding:30px 25px}
   .footer-row{flex-direction:column!important;text-align:center!important;gap:20px!important}
   .footer-nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:16px!important}
   .footer-right{flex-direction:column!important;gap:20px!important}
@@ -120,16 +120,17 @@ const pricingHTML = `
   
   <!-- Pricing Grid -->
   <div class="pricing-grid">
-        <!-- Free Plan -->
+    <!-- Free Plan -->
     <div class="pricing-card">
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
       <p class="plan-description">Includes</p>
       <ul class="plan-features">
-        <li>3 screenshots/AI requests per day</li>
-        <li>AI-powered interview question analysis & answers</li>
-        <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
-        <li>Standard response time & limited stealth mode</li>
+        <li>Limited screenshots</li>
+        <li>Limited agent requests</li>
+        <li>Limited tab completions</li>
+        <li>Free AI models (GPT-4o Mini, Llama 3.3 70B)</li>
+        <li>Limited stealth mode</li>
       </ul>
       <a href="#" class="plan-button secondary">Get Started Free</a>
     </div>
@@ -140,10 +141,12 @@ const pricingHTML = `
       <div class="plan-price">$20<span>/month</span></div>
       <p class="plan-description">Everything in Free, plus</p>
       <ul class="plan-features">
-        <li>Increased to 100 screenshots/AI requests per day</li>
-        <li>Premium AI models (GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro)</li>
-        <li>Advanced interview strategies & speech-to-text</li>
-        <li>Priority AI processing & cloud sync</li>
+        <li>Extended limits on agent</li>
+        <li>30x usage on screenshots</li>
+        <li>Unlimited tab completions</li>
+        <li>Access to premium AI models (GPT-4o, Claude Sonnet 4, o1-mini)</li>
+        <li>Access to maximum context windows</li>
+        <li>Enhanced stealth mode</li>
       </ul>
       <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('PRO')">Get Pro</a>
     </div>
@@ -154,10 +157,12 @@ const pricingHTML = `
       <div class="plan-price">$40<span>/month</span></div>
       <p class="plan-description">Everything in Pro, plus</p>
       <ul class="plan-features">
-        <li>Unlimited screenshots/AI requests (no daily limits)</li>
-        <li>Elite AI models (o3, Claude Opus 4, o1-pro, all premium models)</li>
-        <li>Maximum stealth technology (bypasses Proctorio & protected environments)</li>
-        <li>API access, white label & dedicated support</li>
+        <li>Unlimited agent requests</li>
+        <li>Unlimited screenshots</li>
+        <li>Priority access to new features</li>
+        <li>Access to all elite AI models (o3, Claude Opus 4, o1-pro)</li>
+        <li>Maximum stealth technology</li>
+        <li>API access & dedicated support</li>
       </ul>
       <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('ULTRA')">Get Ultra</a>
     </div>
