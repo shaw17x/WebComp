@@ -1,9 +1,15 @@
 // Pricing Page Combined - CSS + HTML Content with Docs-Style Instant Loading
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
-.pricing-page{max-width:100%;margin:40px auto;padding:20px;position:relative;z-index:999}
-
-/* Header Section */
+  .pricing-page{max-width:100%;margin:40px auto;padding:20px;position:relative;z-index:999}
+  
+  /* Simple Header - Cursor Style */
+  .simple-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(20px);transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
+  .simple-header.pricing-animated{opacity:1;transform:translateY(0)}
+  .simple-title{font-size:48px;font-weight:700;color:#ffffff;margin:0 0 16px 0;line-height:1.1;letter-spacing:-0.02em}
+  .simple-subtitle{font-size:20px;color:#94a3b8;margin:0;font-weight:400;line-height:1.4}
+  
+  /* Header Section */
 .pricing-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards}
 
 .pricing-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(100,116,139,0.9) 0%,rgba(148,163,184,0.8) 50%,rgba(203,213,225,0.9) 100%);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:8px 16px;margin-bottom:24px;font-size:11px;font-weight:800;color:#1e293b;text-transform:uppercase;letter-spacing:0.8px;position:relative;z-index:1000;box-shadow:0 1px 3px rgba(0,0,0,0.04),inset 0 1px 0 rgba(255,255,255,0.4)}
@@ -62,6 +68,10 @@ body{margin:0!important;padding:0!important}
 .faq-item p{margin:0!important;padding:0!important}
 
 @media(max-width:900px){
+  .simple-title{font-size:40px}
+  .simple-subtitle{font-size:18px}
+  .simple-header{margin-bottom:50px}
+  
   .faq-grid{gap:12px;padding:0 32px}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
@@ -70,6 +80,10 @@ body{margin:0!important;padding:0!important}
 }
 
 @media(max-width:600px){
+  .simple-title{font-size:36px}
+  .simple-subtitle{font-size:16px}
+  .simple-header{margin-bottom:40px}
+  
   .faq-grid{padding:0 24px;gap:12px}
   .faq-item{padding:16px 20px;margin:0!important}
   .faq-section{padding:50px 0}
@@ -141,9 +155,15 @@ body{margin:0!important;padding:0!important}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 `;
 
-const pricingHTML = `
-<div class="pricing-page">
-  <!-- Pricing Grid -->
+  const pricingHTML = `
+  <div class="pricing-page">
+    <!-- Simple Header like Cursor -->
+    <div class="simple-header">
+      <h1 class="simple-title">Pricing</h1>
+      <p class="simple-subtitle">Choose the plan that works for you</p>
+    </div>
+    
+    <!-- Pricing Grid -->
   <div class="pricing-grid">
     <!-- Free Plan -->
     <div class="pricing-card">
@@ -441,9 +461,19 @@ window.redirectToCheckout = function(planType) {
   function initializePricingSectionAnimations() {
     // Wait a bit for DOM to be fully ready
     setTimeout(() => {
+      const simpleHeader = document.querySelector('.simple-header');
       const pricingCards = document.querySelectorAll('.pricing-card');
       const pricingGrid = document.querySelector('.pricing-grid');
       const faqSection = document.querySelector('.faq-section');
+      
+      // Animate header first
+      if (simpleHeader) {
+        setTimeout(() => {
+          simpleHeader.style.opacity = '1';
+          simpleHeader.style.transform = 'translateY(0)';
+          simpleHeader.classList.add('pricing-animated');
+        }, 100);
+      }
       
       // Add staggered animation to cards
       pricingCards.forEach((card, index) => {
