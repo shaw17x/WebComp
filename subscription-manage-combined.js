@@ -953,7 +953,7 @@ const subscriptionHTML = `
                <div class="item-description">100 screenshots/day, 100 AI requests/day, premium features</div>
              </div>
              <div style="display: flex; align-items: center; gap: 12px;">
-               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$19.99/month</span>
+                               <span style="font-size: 12px; color: rgba(255,255,255,0.6);">$20/month</span>
                <button class="action-button primary" id="proBtn">Upgrade</button>
              </div>
            </div>
@@ -1539,7 +1539,7 @@ const subscriptionHTML = `
           alert('Downgrade successful! This is a demo - in production, this would update your subscription.');
         }
       } else {
-        const prices = { PRO: '$19.99', ULTRA: '$40' };
+                  const prices = { PRO: '$20', ULTRA: '$40' };
         const confirmUpgrade = confirm(`Upgrade to ${planType} plan for ${prices[planType]}/month?\n\nNote: This is a demo. In production, this would redirect to Stripe checkout.`);
         if (confirmUpgrade) {
           alert('Upgrade successful! This is a demo - in production, this would process payment and update your subscription.');
@@ -1630,7 +1630,7 @@ const subscriptionHTML = `
        { 
          id: 'PRO', 
          name: 'Pro Plan', 
-         price: '$19.99', 
+                   price: '$20', 
          features: ['100 screenshots/day', '100 AI requests/day', 'Premium AI models', 'Priority support'],
          current: (userData?.currentPlan || 'FREE') === 'PRO'
        },
@@ -1707,9 +1707,9 @@ const subscriptionHTML = `
 
   function showBillingHistoryModal(userData) {
     const sampleInvoices = [
-      { id: 'INV-001', date: '2024-01-01', amount: '$19.99', status: 'paid' },
-      { id: 'INV-002', date: '2023-12-01', amount: '$19.99', status: 'paid' },
-      { id: 'INV-003', date: '2023-11-01', amount: '$19.99', status: 'paid' }
+              { id: 'INV-001', date: '2024-01-01', amount: '$20', status: 'paid' },
+        { id: 'INV-002', date: '2023-12-01', amount: '$20', status: 'paid' },
+        { id: 'INV-003', date: '2023-11-01', amount: '$20', status: 'paid' }
     ];
 
     const content = `
