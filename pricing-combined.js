@@ -138,23 +138,23 @@ const pricingHTML = `
         <li>Custom AI models</li>
         <li>Export capabilities</li>
       </ul>
-      <a href="#" class="plan-button">Start Pro Trial</a>
+      <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('PRO')">Start Pro Trial</a>
     </div>
 
-    <!-- Enterprise Plan -->
+    <!-- Ultra Plan -->
     <div class="pricing-card">
-      <h3 class="plan-name">Enterprise</h3>
+      <h3 class="plan-name">Ultra</h3>
       <div class="plan-price">$40<span>/month</span></div>
-      <p class="plan-description">For teams and organizations with advanced needs.</p>
+              <p class="plan-description">For power users with unlimited needs.</p>
       <ul class="plan-features">
         <li>Everything in Pro</li>
-        <li>Team collaboration</li>
-        <li>Advanced security</li>
-        <li>Dedicated support</li>
-        <li>Custom integrations</li>
-        <li>SLA guarantee</li>
+        <li>Unlimited screenshots</li>
+        <li>All premium AI models</li>
+        <li>Priority support</li>
+        <li>API access</li>
+        <li>Advanced stealth mode</li>
       </ul>
-      <a href="#" class="plan-button">Contact Sales</a>
+      <a href="javascript:void(0)" class="plan-button" onclick="redirectToCheckout('ULTRA')">Get Ultra</a>
     </div>
   </div>
 
@@ -175,7 +175,7 @@ const pricingHTML = `
         </button>
         <div id="answer-0" class="faq-answer">
           <div class="faq-answer-content">
-            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o mini access. Pro ($20/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 mini, and advanced features. Ultra ($40/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, and enterprise features.</p>
+            <p class="faq-answer-text">Free gives you 3 screenshots/day with GPT-4o mini access. Pro ($20/month) includes 100 screenshots/day with GPT-4o, Claude Sonnet 4, O1 mini, and advanced features. Ultra ($40/month) offers unlimited usage with all premium AI models including O3, Claude Opus 4, and ultra features.</p>
           </div>
         </div>
       </div>
@@ -396,6 +396,31 @@ function initializeFAQ() {
     }
   }, 100);
 }
+
+// Checkout redirect functionality
+window.redirectToCheckout = function(planType) {
+  const checkoutUrls = {
+    PRO: 'https://billing.stripe.com/p/login/test_pro_plan_steley',
+    ULTRA: 'https://billing.stripe.com/p/login/test_ultra_plan_steley'
+  };
+  
+  const planNames = {
+    PRO: 'Pro ($20/month)',
+    ULTRA: 'Ultra ($40/month)'
+  };
+  
+  // Show confirmation dialog
+  const confirmPurchase = confirm(`Proceed to checkout for ${planNames[planType]}?\n\nYou will be redirected to Stripe secure checkout.`);
+  
+  if (confirmPurchase) {
+    // In production, redirect to actual Stripe checkout
+    // window.location.href = checkoutUrls[planType];
+    
+    // For demo purposes, show alert and simulate redirect
+    alert(`🔒 Redirecting to Stripe checkout for ${planNames[planType]}...\n\nDemo Mode: In production, this would open the secure Stripe payment page.`);
+    console.log(`Would redirect to: ${checkoutUrls[planType]}`);
+  }
+};
 
 // Auto-execute function to inject CSS and HTML
 (function() {
