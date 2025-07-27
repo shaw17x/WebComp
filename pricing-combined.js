@@ -124,12 +124,12 @@ const pricingHTML = `
       <h3 class="plan-name">Free</h3>
       <div class="plan-price">$0<span>/month</span></div>
       <p class="plan-description">Perfect for testing Ghost Pilot's AI-powered interview assistance.</p>
-      <ul class="plan-features">
-        <li>3 screenshots/AI requests per day</li>
-        <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
-        <li>Standard response time</li>
-        <li>Limited stealth mode</li>
-      </ul>
+              <ul class="plan-features">
+          <li>3 screenshots/AI requests per day</li>
+          <li>AI-powered interview question analysis & answers</li>
+          <li>Free AI models (GPT-4o Mini, Llama 3.3 70B, Mistral Small 3, Qwen3 14B)</li>
+          <li>Standard response time & limited stealth mode</li>
+        </ul>
       <a href="#" class="plan-button secondary">Get Started Free</a>
     </div>
 
