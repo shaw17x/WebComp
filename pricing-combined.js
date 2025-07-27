@@ -12,7 +12,7 @@ body{margin:0!important;padding:0!important}
 .pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:60px auto;max-width:1280px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:60px auto;max-width:1350px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px 20px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
@@ -173,7 +173,7 @@ const pricingHTML = `
       <ul class="plan-features">
         <li>Unlimited agent requests</li>
         <li>Unlimited screenshots</li>
-        <li>Full access to all interview & proctoring platforms</li>
+        <li>Bypass all proctoring & interview platforms</li>
         <li>Access to all elite AI models (o3, Claude Opus 4, o1-pro)</li>
         <li>Maximum stealth technology</li>
         <li>API access & dedicated support</li>
