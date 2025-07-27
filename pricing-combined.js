@@ -1,7 +1,7 @@
 // Pricing Page Combined - CSS + HTML Content with Docs-Style Instant Loading
 const pricingCSS = `
 body{margin:0!important;padding:0!important}
-.pricing-page{max-width:1200px;margin:80px auto;padding:20px;position:relative;z-index:999}
+.pricing-page{max-width:100%;margin:80px auto;padding:20px;position:relative;z-index:999}
 
 /* Header Section */
 .pricing-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px) scale(0.95);animation:containerEntry 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards}
@@ -12,9 +12,9 @@ body{margin:0!important;padding:0!important}
 .pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:60px auto;max-width:1600px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin:60px auto;max-width:2000px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 28px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:480px}
+.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:40px 36px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:520px;width:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
 .pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
@@ -46,7 +46,7 @@ body{margin:0!important;padding:0!important}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1100px;margin:0 auto;padding:0 40px;align-items:start}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1400px;margin:0 auto;padding:0 40px;align-items:start}
 .faq-item{background:#1a1a1a;border:1px solid #2d2d2d;border-radius:8px;padding:24px;margin-bottom:0;display:block;transition:all 0.2s ease;position:relative}
 .faq-item:hover{border-color:#404040;background:#1f1f1f}
 .faq-question{font-size:16px;font-weight:600;color:#ffffff;margin-bottom:16px;line-height:1.4;display:block;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
@@ -98,6 +98,10 @@ body{margin:0!important;padding:0!important}
   .footer-nav{display:none}
 }
 
+@media(max-width:1200px){
+  .pricing-grid{max-width:1400px;gap:30px;padding:0 30px}
+}
+
 @media(max-width:1024px){
   .pricing-grid{gap:20px;padding:0 20px}
 }
@@ -108,7 +112,7 @@ body{margin:0!important;padding:0!important}
 }
 
 @media(max-width:768px){
-  .pricing-page{padding:15px;margin:60px auto}
+  .pricing-page{padding:15px;margin:60px auto;max-width:100%}
   .pricing-title{font-size:2rem}
   .pricing-grid{gap:15px;padding:0 15px}
   .pricing-card{padding:20px 16px}
