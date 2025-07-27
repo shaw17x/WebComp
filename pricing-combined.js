@@ -45,28 +45,32 @@ body{margin:0!important;padding:0!important}
 .faq-section{background:transparent;padding:80px 0;margin:0 auto;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);overflow:visible;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;width:100%;max-width:none}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
+.faq-highlight{background:#6b7280;color:#1f2937;padding:2px 8px;border-radius:4px;font-weight:700}
 
-.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1400px;margin:0 auto;padding:0 40px;align-items:stretch}
-.faq-item{background:#1a1a1a;border:1px solid #2d2d2d;border-radius:8px;padding:24px;margin:0!important;display:flex;flex-direction:column;transition:all 0.2s ease;position:relative;height:auto;box-sizing:border-box}
-.faq-item:hover{border-color:#404040;background:#1f1f1f}
-.faq-question{font-size:16px;font-weight:600;color:#ffffff;margin:0 0 16px 0!important;line-height:1.4;display:block;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:0!important}
-.faq-answer-text{color:#a1a1a1;font-size:14px;line-height:1.5;margin:0!important;padding:0!important;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.faq-grid{display:flex;flex-direction:column;gap:16px;max-width:1200px;margin:0 auto;padding:0 40px}
+.faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s ease;position:relative;cursor:pointer;box-sizing:border-box}
+.faq-item:hover{background:#9ca3af;border-color:#6b7280;transform:translateY(-1px)}
+.faq-question{font-size:16px;font-weight:600;color:#1f2937;margin:0!important;line-height:1.4;flex:1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:0!important}
+.faq-plus{font-size:24px;font-weight:300;color:#1f2937;margin-left:16px;transition:transform 0.2s ease}
+.faq-item:hover .faq-plus{transform:rotate(45deg)}
+.faq-answer-text{display:none}
 .faq-item *{box-sizing:border-box}
 .faq-item p{margin:0!important;padding:0!important}
 
 @media(max-width:900px){
-  .faq-grid{grid-template-columns:1fr;gap:16px;padding:0 32px}
+  .faq-grid{gap:12px;padding:0 32px}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
+  .faq-item{padding:18px 20px}
 }
 
 @media(max-width:600px){
-  .faq-grid{padding:0 24px;gap:16px}
-  .faq-item{padding:20px;margin:0!important}
+  .faq-grid{padding:0 24px;gap:12px}
+  .faq-item{padding:16px 20px;margin:0!important}
   .faq-section{padding:50px 0}
   .faq-title{margin-bottom:40px;font-size:26px}
-  .faq-question{font-size:15px;margin:0 0 12px 0}
-  .faq-answer-text{font-size:13px;margin:0;padding:0}
+  .faq-question{font-size:15px}
+  .faq-plus{font-size:20px;margin-left:12px}
 }
 
 
@@ -196,57 +200,72 @@ const pricingHTML = `
 
   <!-- FAQ Section -->
   <div class="faq-section">
-    <h1 class="faq-title">Pricing Questions</h1>
+    <h1 class="faq-title">Questions you're <span class="faq-highlight">too afraid to ask</span></h1>
     <div class="faq-grid">
       
       <div class="faq-item">
         <h3 class="faq-question">What's the difference between Free, Pro, and Ultra plans?</h3>
-        <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">Is Ghost Pilot detectable by proctoring software?</h3>
-            <p class="faq-answer-text"><strong>No.</strong> Ghost Pilot uses kernel-level stealth technology to stay completely undetectable by Proctorio, ExamSoft, Respondus, HonorLock, and ProctorU.</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What platforms does Ghost Pilot support?</h3>
-            <p class="faq-answer-text"><strong>500+ platforms:</strong> HackerRank • LeetCode • Zoom • Teams • Canvas • Blackboard • Proctorio • ExamSoft • AWS/Google/Microsoft certifications. Works with any screen-based assessment.</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">How does the AI screenshot analysis work?</h3>
-            <p class="faq-answer-text"><strong>3 simple steps:</strong><br>1. Take screenshot of question<br>2. AI analyzes in <1 second (99% accuracy)<br>3. Get detailed answers + step-by-step solutions</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">Which AI models are available in each plan?</h3>
-        <p class="faq-answer-text"><strong>Free:</strong> GPT-4o Mini, Llama 3.3 70B<br><strong>Pro:</strong> GPT-4o, Claude Sonnet 4, o1-mini, Gemini Pro<br><strong>Ultra:</strong> All Pro models + o3, Claude Opus 4, o1-pro, priority access</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">Can I upgrade or downgrade my plan anytime?</h3>
-            <p class="faq-answer-text"><strong>Yes!</strong> Upgrades: immediate • Downgrades: next billing cycle<br><strong>No refunds</strong> - try Free plan first to test features.</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
-            <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What happens if I exceed my daily usage limits?</h3>
-            <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">How secure are my screenshots and data?</h3>
-            <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
+        <span class="faq-plus">+</span>
       </div>
 
       <div class="faq-item">
         <h3 class="faq-question">What payment methods do you accept?</h3>
-            <p class="faq-answer-text"><strong>All major cards:</strong> Visa • Mastercard • Amex • Discover<br>Processed via <strong>Stripe</strong> (secure, PCI-compliant) • Monthly/annual billing</p>
+        <span class="faq-plus">+</span>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Can interviewers detect CTRLpotato?</h3>
+        <span class="faq-plus">+</span>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Is it ethical to use during interviews?</h3>
+        <span class="faq-plus">+</span>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Will AI answers sound like me?</h3>
+        <span class="faq-plus">+</span>
       </div>
 
     </div>
