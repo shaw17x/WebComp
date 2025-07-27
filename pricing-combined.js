@@ -522,15 +522,7 @@ window.toggleFAQ = function(index) {
   }
 };
 
-// Initialize FAQ with first item open
-function initializeFAQ() {
-  setTimeout(() => {
-    if (typeof window.toggleFAQ === 'function') {
-      // Open first FAQ by default
-      window.toggleFAQ(0);
-    }
-  }, 100);
-}
+
 
 // Checkout redirect functionality
 window.redirectToCheckout = function(planType) {
@@ -600,8 +592,7 @@ window.redirectToCheckout = function(planType) {
     // Initialize footer scroll animation
     initializeFooterAnimation();
     
-    // Initialize FAQ
-    initializeFAQ();
+    // FAQ is now static - no initialization needed
   }
   
   function initializePricingSectionAnimations() {
