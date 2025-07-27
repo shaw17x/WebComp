@@ -12,9 +12,9 @@ body{margin:0!important;padding:0!important}
 .pricing-subtitle{font-size:1.2rem;color:#94a3b8;font-weight:400;margin:0;text-align:center;position:relative;z-index:1000;line-height:1.4}
 
 /* Pricing Cards - Docs Style */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin:60px auto;max-width:2000px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:60px auto;max-width:1400px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);align-items:stretch;padding:0 40px;width:100%}
 .pricing-grid.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
-.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:40px 36px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:520px;width:100%}
+.pricing-card{background:#0a0e1a;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 28px;margin-bottom:20px;position:relative;z-index:1000;opacity:0;transform:translateY(30px) scale(0.95);transition:all 1.2s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column;height:100%;min-height:480px;width:100%}
 .pricing-card.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .pricing-card:hover{transform:translateY(-5px) scale(1)!important;border-color:rgba(255,255,255,0.2);box-shadow:0 20px 40px rgba(10,14,26,0.3);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
 .pricing-card.featured{border-color:rgba(107,114,128,0.4);background:#0a0e1a}
@@ -46,17 +46,18 @@ body{margin:0!important;padding:0!important}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:flex;flex-direction:column;gap:16px;max-width:1200px;margin:0 auto;padding:0 40px}
-.faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:block;transition:all 0.2s ease;position:relative;cursor:pointer;box-sizing:border-box}
+.faq-grid{display:flex;flex-direction:column;gap:16px;max-width:1000px;margin:0 auto;padding:0 40px}
+.faq-item{background:#6b7280;border:2px solid #4b5563;border-radius:16px;padding:20px 24px;margin:0!important;display:block;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;cursor:pointer;box-sizing:border-box}
 .faq-item:hover{background:#9ca3af;border-color:#6b7280;transform:translateY(-1px)}
-.faq-header{display:flex;align-items:center;justify-content:space-between;width:100%}
+.faq-header{display:flex;align-items:center;justify-content:space-between;width:100%;transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.faq-item:hover .faq-header{transform:translateX(4px)}
 .faq-question{font-size:16px;font-weight:600;color:#1f2937;margin:0!important;line-height:1.4;flex:1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:0!important}
-.faq-plus{font-size:24px;font-weight:300;color:#1f2937;margin-left:16px;transition:transform 0.2s ease}
+.faq-plus{font-size:24px;font-weight:300;color:#1f2937;margin-left:16px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)}
 .faq-item:hover .faq-plus{transform:rotate(45deg)}
 .faq-item.active .faq-plus{transform:rotate(45deg)}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
-.faq-item.active .faq-answer{max-height:200px;padding-top:16px}
-.faq-answer-text{color:#1f2937;font-size:14px;line-height:1.5;margin:0!important;padding:0!important;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.faq-answer{max-height:0;overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);opacity:0;transform:translateY(-10px);padding-bottom:0}
+.faq-item.active .faq-answer{max-height:300px;opacity:1;transform:translateY(0);padding-top:16px;padding-bottom:24px}
+.faq-answer-text{color:#1f2937;font-size:14px;line-height:1.6;margin:0!important;padding:0!important;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 .faq-item *{box-sizing:border-box}
 .faq-item p{margin:0!important;padding:0!important}
 
@@ -65,7 +66,7 @@ body{margin:0!important;padding:0!important}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
   .faq-item{padding:18px 20px}
-  .faq-item.active .faq-answer{max-height:150px}
+  .faq-item.active .faq-answer{max-height:250px}
 }
 
 @media(max-width:600px){
@@ -75,7 +76,7 @@ body{margin:0!important;padding:0!important}
   .faq-title{margin-bottom:40px;font-size:26px}
   .faq-question{font-size:15px}
   .faq-plus{font-size:20px;margin-left:12px}
-  .faq-item.active .faq-answer{max-height:120px}
+  .faq-item.active .faq-answer{max-height:200px}
 }
 
 
@@ -110,11 +111,11 @@ body{margin:0!important;padding:0!important}
 }
 
 @media(max-width:1200px){
-  .pricing-grid{max-width:1400px;gap:30px;padding:0 30px}
+  .pricing-grid{max-width:1200px;gap:28px;padding:0 30px}
 }
 
 @media(max-width:1024px){
-  .pricing-grid{gap:20px;padding:0 20px}
+  .pricing-grid{gap:24px;padding:0 20px}
 }
 
 @media(max-width:900px){
