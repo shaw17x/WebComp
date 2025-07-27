@@ -25,7 +25,8 @@ body{margin:0!important;padding:0!important}
 
 .plan-name{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:15px;position:relative;padding-left:15px;z-index:1001}
 .plan-name::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:15px;background:linear-gradient(135deg,#6b7280,#9ca3af);border-radius:2px;z-index:1002}
-.plan-price{font-size:3rem;font-weight:800;color:#9ca3af;margin-bottom:8px;position:relative;z-index:1001}
+.plan-price{font-size:3rem;font-weight:800;color:#9ca3af;margin-bottom:16px;position:relative;z-index:1001;padding-bottom:16px}
+.plan-price::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.1)}
 .plan-price span{font-size:1rem;color:#94a3b8;font-weight:400}
 .plan-description{color:#cbd5e1;font-size:1rem;margin-bottom:30px;line-height:1.6;position:relative;z-index:1001}
 
