@@ -46,22 +46,22 @@ body{margin:0!important;padding:0!important}
 .faq-section.pricing-animated{opacity:1;transform:translateY(0) scale(1)}
 .faq-title{text-align:center;margin-bottom:60px;font-size:32px;font-weight:600;color:#ffffff;line-height:1.2;letter-spacing:-0.02em}
 
-.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:60px 80px;max-width:1000px;margin:0 auto;padding:0 40px}
-.faq-item{margin-bottom:0}
-.faq-question{font-size:18px;font-weight:600;color:#ffffff;margin-bottom:12px;line-height:1.4;display:block}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 60px;max-width:1000px;margin:0 auto;padding:0 40px;align-items:start}
+.faq-item{margin-bottom:0;display:block}
+.faq-question{font-size:18px;font-weight:600;color:#ffffff;margin-bottom:8px;line-height:1.4;display:block}
 .faq-answer-text{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.6;margin:0;font-weight:400}
 
 @media(max-width:900px){
-  .faq-grid{grid-template-columns:1fr;gap:40px;padding:0 32px}
+  .faq-grid{grid-template-columns:1fr;gap:32px;padding:0 32px}
   .faq-section{padding:60px 0}
   .faq-title{margin-bottom:48px;font-size:28px}
 }
 
 @media(max-width:600px){
-  .faq-grid{padding:0 24px}
+  .faq-grid{padding:0 24px;gap:24px}
   .faq-section{padding:50px 0}
   .faq-title{margin-bottom:40px;font-size:26px}
-  .faq-question{font-size:17px}
+  .faq-question{font-size:17px;margin-bottom:6px}
   .faq-answer-text{font-size:15px}
 }
 
