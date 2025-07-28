@@ -197,7 +197,7 @@ body{margin:0!important;padding:0!important}
       <div class="plan-price">$0<span>/month</span></div>
       <p class="plan-description">Includes</p>
       <ul class="plan-features">
-        <li>Limited screenshots</li>
+        <li>10 screenshots (one-time trial)</li>
         <li>Limited agent requests</li>
         <li>Free AI models (GPT-4o Mini, Llama 3.3 70B)</li>
         <li>Limited stealth mode</li>
@@ -261,7 +261,7 @@ body{margin:0!important;padding:0!important}
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
-          <p class="faq-answer-text"><strong>Free:</strong> 3 screenshots/day • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
+                      <p class="faq-answer-text"><strong>Free:</strong> 10 screenshots (one-time trial) • GPT-4o Mini • Basic features<br><strong>Pro ($20):</strong> 100 screenshots/day • Premium AI models • Advanced features<br><strong>Ultra ($40):</strong> Unlimited everything • All AI models • Ultra features</p>
         </div>
       </div>
 
@@ -311,7 +311,7 @@ body{margin:0!important;padding:0!important}
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
-          <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (3 screenshots/day) to test before upgrading.</p>
+                      <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (10 screenshots trial) to test before upgrading.</p>
         </div>
       </div>
 
