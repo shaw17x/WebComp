@@ -308,11 +308,11 @@ body{margin:0!important;padding:0!important}
 
       <div class="faq-item">
         <div class="faq-header">
-          <h3 class="faq-question">Do you offer refunds if I'm not satisfied?</h3>
+          <h3 class="faq-question">Can I cancel and get a refund? (Refund & Cancelation)</h3>
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
-                      <p class="faq-answer-text">Due to the nature of our program, we do <strong>not offer refunds</strong> on any purchases. Please try out our <strong>Free plan (10 screenshots trial)</strong> to fully test <strong>CTRLstealth</strong> before upgrading to ensure it meets your needs.</p>
+                      <p class="faq-answer-text"><strong>Cancellation:</strong> Yes, you can cancel anytime from your account settings. Cancellations take effect at your next billing cycle.<br><br><strong>Refunds:</strong> Due to the nature of our program, we do <strong>not offer refunds</strong> on any purchases. Please try our <strong>Free plan (10 screenshots trial)</strong> to fully test <strong>CTRLstealth</strong> before upgrading to ensure it meets your needs.</p>
         </div>
       </div>
 
