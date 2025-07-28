@@ -74,7 +74,7 @@ body{margin:0!important;padding:0!important}
 .faq-answer{max-height:0;overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);opacity:0;transform:translateY(-10px);padding-bottom:0}
 .faq-item.active .faq-answer{max-height:300px;opacity:1;transform:translateY(0);padding-top:16px;padding-bottom:24px}
 .faq-answer-text{color:#1f2937;font-size:14px;line-height:1.6;margin:0!important;padding:0!important;font-weight:400;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-.faq-answer-text strong{color:#14b8a6;font-weight:700}
+.faq-answer-text strong{color:#1907B6;font-weight:700}
 .faq-item *{box-sizing:border-box}
 .faq-item p{margin:0!important;padding:0!important}
 
