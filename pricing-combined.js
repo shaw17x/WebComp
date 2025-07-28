@@ -330,7 +330,7 @@ body{margin:0!important;padding:0!important}
 
       <div class="faq-item">
         <div class="faq-header">
-          <h3 class="faq-question">still have questions?</h3>
+          <h3 class="faq-question" style="color:#1f2937 !important;">still have questions?</h3>
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
