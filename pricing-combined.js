@@ -311,7 +311,7 @@ body{margin:0!important;padding:0!important}
           <span class="faq-plus">+</span>
         </div>
         <div class="faq-answer">
-                      <p class="faq-answer-text"><strong>No refunds.</strong> All sales are final.<br>Start with Free plan (10 screenshots trial) to test before upgrading.</p>
+                      <p class="faq-answer-text">Due to the nature of our program, we do not offer refunds on any purchases. Please try out our Free plan (10 screenshots trial) to fully test CTRLstealth before upgrading to ensure it meets your needs.</p>
         </div>
       </div>
 
