@@ -316,15 +316,7 @@ body{margin:0!important;padding:0!important}
         </div>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-header">
-          <h3 class="faq-question">How secure are my screenshots and data?</h3>
-          <span class="faq-plus">+</span>
-        </div>
-        <div class="faq-answer">
-          <p class="faq-answer-text"><strong>Bank-level security:</strong> AES-256 encryption • Screenshots deleted in 24hrs • Never stored permanently • Stripe PCI-compliant payments</p>
-        </div>
-      </div>
+
 
       <div class="faq-item">
         <div class="faq-header">
@@ -333,6 +325,16 @@ body{margin:0!important;padding:0!important}
         </div>
         <div class="faq-answer">
           <p class="faq-answer-text">Wait until midnight UTC for reset, or upgrade for immediate access.<br><strong>Ultra = unlimited</strong> (no restrictions)</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-header">
+          <h3 class="faq-question">still have questions?</h3>
+          <span class="faq-plus">+</span>
+        </div>
+        <div class="faq-answer">
+          <p class="faq-answer-text">Contact our support team and we'll help you get started with <strong>CTRLstealth</strong>.</p>
         </div>
       </div>
 
